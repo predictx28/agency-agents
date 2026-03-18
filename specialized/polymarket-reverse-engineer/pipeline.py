@@ -100,19 +100,26 @@ async def resolve_username_to_wallet(username: str) -> str:
 async def fetch_wallet_trades(wallet_address: str, limit: int = 50_000) -> list[dict]:
     """
     Fetch complete trade history for a wallet from Data API.
-    Paginates automatically until all trades are retrieved.
+    Uses timestamp-based pagination (end param) to bypass the offset=3000 cap.
+    Results are returned DESC by timestamp; each batch uses the oldest timestamp
+    from the previous batch as the next `end` bound.
     """
     trades: list[dict] = []
-    offset = 0
-    page_size = min(limit, 500)
+    seen: set[str] = set()
+    page_size = 500
+    end_ts: Optional[int] = None
 
     async with httpx.AsyncClient(timeout=60) as client:
-        while True:
-            params = {
-                "user":   wallet_address,
-                "limit":  page_size,
-                "offset": offset,
+        while len(trades) < limit:
+            params: dict = {
+                "user":          wallet_address,
+                "limit":         page_size,
+                "sortBy":        "TIMESTAMP",
+                "sortDirection": "DESC",
             }
+            if end_ts is not None:
+                params["end"] = end_ts
+
             resp = await client.get(f"{DATA_API}/activity", params=params)
             resp.raise_for_status()
             page = resp.json()
@@ -123,12 +130,27 @@ async def fetch_wallet_trades(wallet_address: str, limit: int = 50_000) -> list[
             if not page:
                 break
 
-            trades.extend(page)
-            log.info("Fetched %d trades (total so far: %d)", len(page), len(trades))
+            new_records = 0
+            oldest_ts: Optional[int] = None
+            for record in page:
+                tx = record.get("transactionHash") or record.get("txHash") or str(record)
+                if tx not in seen:
+                    seen.add(tx)
+                    trades.append(record)
+                    new_records += 1
+                ts_val = record.get("timestamp")
+                if ts_val is not None:
+                    ts_int = int(ts_val) if not isinstance(ts_val, str) else int(float(ts_val))
+                    if oldest_ts is None or ts_int < oldest_ts:
+                        oldest_ts = ts_int
 
-            if len(page) < page_size or len(trades) >= limit:
+            log.info("Fetched %d new trades (total so far: %d)", new_records, len(trades))
+
+            if new_records == 0 or len(page) < page_size or oldest_ts is None:
                 break
-            offset += page_size
+
+            # Move the window back by 1 second to avoid re-fetching the boundary
+            end_ts = oldest_ts - 1
 
     return trades
 
