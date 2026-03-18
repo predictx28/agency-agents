@@ -83,15 +83,14 @@ async def main() -> None:
 
     bot = PolymarketLPBot(cfg=cfg, executor=executor, risk=risk, monitor=monitor)
 
-    # Graceful shutdown on SIGINT / SIGTERM
-    loop = asyncio.get_running_loop()
-
-    def _shutdown(sig_name: str) -> None:
-        logger.info("Received %s — shutting down gracefully…", sig_name)
+    # Graceful shutdown — add_signal_handler is Unix-only, use signal.signal on Windows
+    def _shutdown(signum, frame) -> None:
+        logger.info("Shutting down gracefully…")
         bot.stop()
 
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        loop.add_signal_handler(sig, lambda s=sig.name: _shutdown(s))
+    signal.signal(signal.SIGINT,  _shutdown)
+    if hasattr(signal, "SIGTERM"):
+        signal.signal(signal.SIGTERM, _shutdown)
 
     await bot.run()
 
