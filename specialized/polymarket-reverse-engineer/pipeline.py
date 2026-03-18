@@ -949,7 +949,7 @@ def generate_report(
     ]
 
     md_path = output_dir / f"report_{TARGET_USERNAME}.md"
-    with open(md_path, "w") as f:
+    with open(md_path, "w", encoding="utf-8") as f:
         f.write("\n".join(md_lines))
     log.info("Markdown report saved → %s", md_path)
 
