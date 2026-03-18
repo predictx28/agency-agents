@@ -48,6 +48,27 @@ class Config:
         default_factory=lambda: float(os.environ.get("MAX_ORDER_USDC", "200.0"))
     )
 
+    # ── Market Allowlist ──────────────────────────────────────
+    # Comma-separated keywords — ALL must appear in the question (case-insensitive).
+    # Leave empty to trade all markets.
+    # Each entry is a pipe-separated OR group, comma separates AND groups.
+    # Example: "bitcoin|btc,5 min|5min" means question must contain
+    # (bitcoin OR btc) AND (5 min OR 5min)
+    #
+    # Set in .env as:
+    #   MARKET_KEYWORDS=bitcoin|btc|solana|sol|xrp|ripple
+    #   MARKET_TIMEFRAMES=5 min|5min|15 min|15min|1 hour|60 min
+    market_keywords: str = field(
+        default_factory=lambda: os.environ.get(
+            "MARKET_KEYWORDS", "bitcoin|btc|solana|sol|xrp|ripple"
+        )
+    )
+    market_timeframes: str = field(
+        default_factory=lambda: os.environ.get(
+            "MARKET_TIMEFRAMES", "5 min|5min|15 min|15min|1 hour|60 min|1hr"
+        )
+    )
+
     # ── Market Filters ────────────────────────────────────────
     # Minimum lifetime volume (volumeNum from Gamma API)
     min_market_volume_usdc: float = field(
@@ -130,6 +151,8 @@ class Config:
             f"  Order fragments:   {self.order_fragments} per price level\n"
             f"  Min order:         ${self.min_order_usdc}\n"
             f"  Market filter:     vol>${self.min_market_volume_usdc:,.0f}, spread<{self.max_spread}\n"
+            f"  Coins:             {self.market_keywords}\n"
+            f"  Timeframes:        {self.market_timeframes}\n"
             f"  Price range:       [{self.min_price}, {self.max_price}]\n"
             f"  Max per market:    {self.max_market_exposure_pct*100:.0f}% of bankroll\n"
             f"  Daily loss limit:  {self.daily_loss_limit_pct*100:.0f}% of bankroll\n"

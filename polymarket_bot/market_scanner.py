@@ -141,4 +141,28 @@ def _passes_filter(mkt: Market, cfg: Config) -> bool:
         return False
     if not (cfg.min_price <= mkt.yes_price <= cfg.max_price):
         return False
+    if not _passes_keyword_filter(mkt.question, cfg):
+        return False
+    return True
+
+
+def _passes_keyword_filter(question: str, cfg: Config) -> bool:
+    """
+    Require the question to match the coin allowlist AND timeframe allowlist.
+    Each config value is a pipe-separated list of OR alternatives.
+    Both must match (AND logic between the two groups).
+    Empty string = no filter (allow all).
+    """
+    q = (question or "").lower()
+
+    if cfg.market_keywords:
+        coin_terms = [t.strip().lower() for t in cfg.market_keywords.split("|") if t.strip()]
+        if coin_terms and not any(t in q for t in coin_terms):
+            return False
+
+    if cfg.market_timeframes:
+        tf_terms = [t.strip().lower() for t in cfg.market_timeframes.split("|") if t.strip()]
+        if tf_terms and not any(t in q for t in tf_terms):
+            return False
+
     return True

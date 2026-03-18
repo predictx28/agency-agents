@@ -79,7 +79,7 @@ mkt_exp = (
     )
 ).reset_index()
 mkt_exp.columns = ["market_id", "net_usdc"]
-mkt_exp["market_short"] = mkt_exp["market_id"].str[:14] + "…"
+mkt_exp["market_short"] = mkt_exp["market_id"].astype(str).str[:14] + "…"
 mkt_exp = mkt_exp.sort_values("net_usdc", ascending=False).head(20)
 
 # ── KPI Row ───────────────────────────────────────────────────
