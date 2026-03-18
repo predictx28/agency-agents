@@ -1,0 +1,138 @@
+"""
+config.py — All bot settings loaded from environment variables.
+
+Copy .env.example to .env, fill in your values, then:
+    source .env && python run_bot.py
+"""
+
+import os
+from dataclasses import dataclass, field
+
+
+@dataclass
+class Config:
+    # ── Wallet ───────────────────────────────────────────────
+    # Your Polymarket trading wallet private key (hex, no 0x prefix)
+    private_key: str = field(
+        default_factory=lambda: os.environ.get("POLYMARKET_PRIVATE_KEY", "")
+    )
+    # Polygon RPC endpoint (free: https://polygon-rpc.com)
+    polygon_rpc: str = field(
+        default_factory=lambda: os.environ.get(
+            "POLYGON_RPC", "https://polygon-rpc.com"
+        )
+    )
+
+    # ── Capital ───────────────────────────────────────────────
+    # Total USDC bankroll the bot may deploy (set this to your wallet balance)
+    bankroll_usdc: float = field(
+        default_factory=lambda: float(os.environ.get("BANKROLL_USDC", "1000"))
+    )
+
+    # ── Sizing (reverse-engineered from target trader) ────────
+    # size_usdc = slope * price + intercept  (per fragment)
+    sizing_slope: float = field(
+        default_factory=lambda: float(os.environ.get("SIZING_SLOPE", "26.74"))
+    )
+    sizing_intercept: float = field(
+        default_factory=lambda: float(os.environ.get("SIZING_INTERCEPT", "-1.59"))
+    )
+    # Number of fragments per price level (observed: ~2)
+    order_fragments: int = field(
+        default_factory=lambda: int(os.environ.get("ORDER_FRAGMENTS", "2"))
+    )
+    min_order_usdc: float = field(
+        default_factory=lambda: float(os.environ.get("MIN_ORDER_USDC", "1.0"))
+    )
+    max_order_usdc: float = field(
+        default_factory=lambda: float(os.environ.get("MAX_ORDER_USDC", "200.0"))
+    )
+
+    # ── Market Filters ────────────────────────────────────────
+    min_market_volume_usdc: float = field(
+        default_factory=lambda: float(
+            os.environ.get("MIN_MARKET_VOLUME_USDC", "10000")
+        )
+    )
+    max_spread: float = field(
+        default_factory=lambda: float(os.environ.get("MAX_SPREAD", "0.05"))
+    )
+    # Only trade if price is in this range (avoid near-resolution extremes)
+    min_price: float = field(
+        default_factory=lambda: float(os.environ.get("MIN_PRICE", "0.03"))
+    )
+    max_price: float = field(
+        default_factory=lambda: float(os.environ.get("MAX_PRICE", "0.97"))
+    )
+
+    # ── Risk Management ───────────────────────────────────────
+    # Maximum % of bankroll in any single market
+    max_market_exposure_pct: float = field(
+        default_factory=lambda: float(
+            os.environ.get("MAX_MARKET_EXPOSURE_PCT", "0.10")
+        )
+    )
+    # Kill switch: halt if daily drawdown exceeds this fraction of bankroll
+    daily_loss_limit_pct: float = field(
+        default_factory=lambda: float(
+            os.environ.get("DAILY_LOSS_LIMIT_PCT", "0.05")
+        )
+    )
+    # Maximum total exposure across all markets
+    max_total_exposure_pct: float = field(
+        default_factory=lambda: float(
+            os.environ.get("MAX_TOTAL_EXPOSURE_PCT", "0.80")
+        )
+    )
+
+    # ── Execution ─────────────────────────────────────────────
+    # Seconds between full market scans
+    scan_interval_sec: int = field(
+        default_factory=lambda: int(os.environ.get("SCAN_INTERVAL_SEC", "60"))
+    )
+    # Seconds between individual order placements (rate limiting)
+    order_delay_sec: float = field(
+        default_factory=lambda: float(os.environ.get("ORDER_DELAY_SEC", "0.5"))
+    )
+
+    # ── Mode ──────────────────────────────────────────────────
+    # "paper" = simulate only, "live" = real orders
+    mode: str = field(
+        default_factory=lambda: os.environ.get("BOT_MODE", "paper")
+    )
+
+    # ── Logging ───────────────────────────────────────────────
+    log_file: str = field(
+        default_factory=lambda: os.environ.get("LOG_FILE", "bot_trades.csv")
+    )
+    log_level: str = field(
+        default_factory=lambda: os.environ.get("LOG_LEVEL", "INFO")
+    )
+
+    def validate(self) -> None:
+        if self.mode == "live" and not self.private_key:
+            raise ValueError(
+                "POLYMARKET_PRIVATE_KEY must be set in environment for live mode."
+            )
+        if self.bankroll_usdc <= 0:
+            raise ValueError("BANKROLL_USDC must be > 0")
+        if self.mode not in ("paper", "live"):
+            raise ValueError("BOT_MODE must be 'paper' or 'live'")
+
+    def summary(self) -> str:
+        return (
+            f"\n{'='*55}\n"
+            f"  Polymarket LP Bot — {self.mode.upper()} MODE\n"
+            f"{'='*55}\n"
+            f"  Bankroll:          ${self.bankroll_usdc:,.2f} USDC\n"
+            f"  Sizing rule:       size = {self.sizing_slope}×price + {self.sizing_intercept}\n"
+            f"  Order fragments:   {self.order_fragments} per price level\n"
+            f"  Min order:         ${self.min_order_usdc}\n"
+            f"  Market filter:     vol>${self.min_market_volume_usdc:,.0f}, spread<{self.max_spread}\n"
+            f"  Price range:       [{self.min_price}, {self.max_price}]\n"
+            f"  Max per market:    {self.max_market_exposure_pct*100:.0f}% of bankroll\n"
+            f"  Daily loss limit:  {self.daily_loss_limit_pct*100:.0f}% of bankroll\n"
+            f"  Scan interval:     {self.scan_interval_sec}s\n"
+            f"  Log file:          {self.log_file}\n"
+            f"{'='*55}"
+        )
