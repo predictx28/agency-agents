@@ -39,6 +39,7 @@ from scipy import stats
 # ──────────────────────────────────────────────────────────────────────────────
 GAMMA_API = "https://gamma-api.polymarket.com"
 CLOB_API  = "https://clob.polymarket.com"
+DATA_API  = "https://data-api.polymarket.com"
 
 TARGET_USERNAME  = "k9Q2mX4L8A7ZP3R"
 TARGET_HANDLE    = f"@{TARGET_USERNAME}"
@@ -98,7 +99,7 @@ async def resolve_username_to_wallet(username: str) -> str:
 
 async def fetch_wallet_trades(wallet_address: str, limit: int = 2000) -> list[dict]:
     """
-    Fetch complete trade history for a wallet from Gamma API.
+    Fetch complete trade history for a wallet from Data API.
     Paginates automatically until all trades are retrieved.
     """
     trades: list[dict] = []
@@ -108,11 +109,11 @@ async def fetch_wallet_trades(wallet_address: str, limit: int = 2000) -> list[di
     async with httpx.AsyncClient(timeout=60) as client:
         while True:
             params = {
-                "maker":  wallet_address,
+                "user":   wallet_address,
                 "limit":  page_size,
                 "offset": offset,
             }
-            resp = await client.get(f"{GAMMA_API}/trades", params=params)
+            resp = await client.get(f"{DATA_API}/activity", params=params)
             resp.raise_for_status()
             page = resp.json()
 
@@ -156,7 +157,7 @@ def normalize_trades(raw_trades: list[dict]) -> pd.DataFrame:
 
             records.append({
                 "timestamp":        ts,
-                "market_id":        str(t.get("market") or t.get("marketId", "")),
+                "market_id":        str(t.get("conditionId") or t.get("market") or t.get("marketId", "")),
                 "question":         str(t.get("title") or t.get("question") or t.get("market", {}).get("question", "") if isinstance(t.get("market"), dict) else t.get("question", "")),
                 "category":         str(t.get("category") or t.get("market", {}).get("category", "") if isinstance(t.get("market"), dict) else t.get("category", "unknown")),
                 "outcome":          str(t.get("outcome", "")),
