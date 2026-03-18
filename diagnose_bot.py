@@ -15,6 +15,11 @@ import asyncio
 import json
 import httpx
 
+def parse_prices(raw_prices):
+    if isinstance(raw_prices, str):
+        return json.loads(raw_prices)
+    return raw_prices or []
+
 GAMMA_API = "https://gamma-api.polymarket.com"
 
 
@@ -65,7 +70,7 @@ async def main():
     MAX_PRICE  = 0.97
 
     for m in all_markets:
-        prices = m.get("outcomePrices", [])
+        prices = parse_prices(m.get("outcomePrices", []))
         if prices and len(prices) >= 2:
             has_prices += 1
         else:
@@ -75,24 +80,25 @@ async def main():
             continue
         active += 1
 
-        # Volume — try multiple field names
-        vol = float(
-            m.get("volume") or m.get("volumeNum") or m.get("volume24hr") or 0
-        )
+        # Volume — use volumeNum (lifetime total)
+        vol = float(m.get("volumeNum") or m.get("volume") or 0)
         if vol >= MIN_VOL:
             vol_pass += 1
         else:
             continue
 
-        # Spread
-        best_ask = m.get("bestAsk")
-        best_bid = m.get("bestBid")
+        # Spread — use spread field directly if available
         yes_price = float(prices[0])
         no_price  = float(prices[1])
-        if best_ask and best_bid:
-            spread = float(best_ask) - float(best_bid)
+        if m.get("spread") is not None:
+            spread = float(m["spread"])
         else:
-            spread = abs(yes_price - (1.0 - no_price))
+            best_ask = m.get("bestAsk")
+            best_bid = m.get("bestBid")
+            if best_ask and best_bid:
+                spread = float(best_ask) - float(best_bid)
+            else:
+                spread = abs(yes_price - (1.0 - no_price))
         if spread <= MAX_SPREAD:
             spread_pass += 1
         else:

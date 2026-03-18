@@ -49,9 +49,10 @@ class Config:
     )
 
     # ── Market Filters ────────────────────────────────────────
+    # Minimum lifetime volume (volumeNum from Gamma API)
     min_market_volume_usdc: float = field(
         default_factory=lambda: float(
-            os.environ.get("MIN_MARKET_VOLUME_USDC", "10000")
+            os.environ.get("MIN_MARKET_VOLUME_USDC", "1000")
         )
     )
     max_spread: float = field(

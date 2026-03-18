@@ -4,6 +4,7 @@ and returns those that pass the liquidity / spread filter.
 """
 
 import asyncio
+import json
 import logging
 from dataclasses import dataclass
 from typing import Optional
@@ -29,6 +30,7 @@ class Market:
     volume_usdc: float
     liquidity_usdc: float
     active: bool
+    clob_token_ids: list = None   # [yes_token_id, no_token_id]
 
     @property
     def up_price(self) -> float:
@@ -44,22 +46,30 @@ def _parse_market(raw: dict) -> Optional[Market]:
     """Parse a raw Gamma API market dict into a Market object."""
     try:
         outcome_prices = raw.get("outcomePrices", [])
+        # API returns outcomePrices as a JSON string e.g. '["0.42", "0.58"]'
+        if isinstance(outcome_prices, str):
+            outcome_prices = json.loads(outcome_prices)
         if not outcome_prices or len(outcome_prices) < 2:
             return None
 
         yes_price = float(outcome_prices[0])
         no_price  = float(outcome_prices[1])
 
-        # Derive spread from best bid/ask if available, else use price gap
-        best_ask = raw.get("bestAsk")
-        best_bid = raw.get("bestBid")
-        if best_ask and best_bid:
-            spread = float(best_ask) - float(best_bid)
+        # Use spread field directly (present in API), fallback to bid/ask diff
+        if raw.get("spread") is not None:
+            spread = float(raw["spread"])
+        elif raw.get("bestAsk") and raw.get("bestBid"):
+            spread = float(raw["bestAsk"]) - float(raw["bestBid"])
         else:
-            spread = abs(yes_price - (1.0 - no_price))  # fallback
+            spread = abs(yes_price - (1.0 - no_price))
 
-        volume    = float(raw.get("volume",    raw.get("volumeNum",    0)) or 0)
-        liquidity = float(raw.get("liquidity", raw.get("liquidityNum", 0)) or 0)
+        volume    = float(raw.get("volumeNum",    raw.get("volume",    0)) or 0)
+        liquidity = float(raw.get("liquidityNum", raw.get("liquidity", 0)) or 0)
+
+        # Parse clobTokenIds (also a JSON string in the API)
+        clob_token_ids = raw.get("clobTokenIds", "[]")
+        if isinstance(clob_token_ids, str):
+            clob_token_ids = json.loads(clob_token_ids)
 
         return Market(
             id=raw["id"],
@@ -71,6 +81,7 @@ def _parse_market(raw: dict) -> Optional[Market]:
             volume_usdc=volume,
             liquidity_usdc=liquidity,
             active=bool(raw.get("active", True)),
+            clob_token_ids=clob_token_ids,
         )
     except (KeyError, TypeError, ValueError) as exc:
         logger.debug("Failed to parse market %s: %s", raw.get("id", "?"), exc)
