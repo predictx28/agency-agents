@@ -195,7 +195,7 @@ st.subheader("Recent Trades")
 display_cols = ["timestamp", "side", "outcome", "price", "fill_price", "size_usdc", "tokens", "market_id"]
 available = [c for c in display_cols if c in df.columns]
 recent = df[available].tail(50).sort_values("timestamp", ascending=False)
-recent["market_id"] = recent["market_id"].str[:20] + "…"
+recent["market_id"] = recent["market_id"].astype(str).str[:20] + "…"
 
 st.dataframe(
     recent.style.apply(
