@@ -51,17 +51,37 @@ class PolymarketLPBot:
         # {condition_id: {"retry_at": float, "token_id": str, "side": str}}
         self._redeem_queue: dict = {}
         self._last_settle_check = 0.0
+        # Market cache: refreshed every market_rescan_sec, traded every scan_interval_sec
+        self._cached_markets: list[Market] = []
+        self._last_full_scan: float = 0.0
+
+    async def _refresh_market_cache(self) -> None:
+        """
+        Fetch the full qualifying market list from Gamma API and cache it.
+        Called at startup and every market_rescan_sec thereafter.
+        The heavy paginated scan only runs here — the trade loop uses the cache.
+        """
+        try:
+            markets = await fetch_markets(self.cfg)
+            self._cached_markets = markets
+            self._last_full_scan = time.time()
+            logger.info("Market rescan: %d qualifying markets cached", len(markets))
+        except Exception as exc:
+            logger.error("Market rescan failed: %s", exc)
+            # Keep the old cache if available
 
     async def run_once(self) -> tuple[int, int, int, dict]:
         """
-        Execute one full scan-and-trade cycle.
-        Returns (markets_scanned, intents_generated, fills_executed, market_prices).
+        Execute one trade burst against the cached market list.
+        Matches the original wallet's 2-second burst cadence:
+          • No per-call delay (fills are instant in paper mode)
+          • Re-enters every qualifying market regardless of existing exposure
+            (exposure cap still enforced by can_trade, but re-entry is not
+            gated by the scan cycle — same market hit every burst)
+        Returns (markets_cached, intents_generated, fills_executed, market_prices).
         """
-        # 1 — Fetch qualifying markets
-        try:
-            markets = await fetch_markets(self.cfg)
-        except Exception as exc:
-            logger.error("Market scan failed: %s", exc)
+        markets = self._cached_markets
+        if not markets:
             return 0, 0, 0, {}
 
         intents_generated = 0
@@ -92,8 +112,6 @@ class PolymarketLPBot:
             fills = await self._execute_intents(intents)
             fills_executed += len([f for f in fills if f.success])
             self.monitor.log_fills(fills)
-
-            await asyncio.sleep(0.1)
 
         return len(markets), intents_generated, fills_executed, market_prices
 
@@ -331,14 +349,21 @@ class PolymarketLPBot:
         return None
 
     async def run(self) -> None:
-        """Main loop: scan → trade → settle → sleep → repeat."""
+        """Main loop: rescan markets every market_rescan_sec, trade every scan_interval_sec."""
         self._running = True
         logger.info("Bot started in %s mode", self.cfg.mode.upper())
+
+        # Initial market load before entering the loop
+        await self._refresh_market_cache()
 
         while self._running:
             if self.risk.halted:
                 logger.critical("Bot halted. Stopping loop.")
                 break
+
+            # Refresh market list on schedule (slow scan, every market_rescan_sec)
+            if time.time() - self._last_full_scan >= self.cfg.market_rescan_sec:
+                await self._refresh_market_cache()
 
             markets_scanned, intents_gen, fills_exec, prices = await self.run_once()
 

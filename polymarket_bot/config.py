@@ -120,13 +120,19 @@ class Config:
     )
 
     # ── Execution ─────────────────────────────────────────────
-    # Seconds between full market scans
+    # Seconds between trade bursts (matched to original wallet: 2s)
     scan_interval_sec: int = field(
-        default_factory=lambda: int(os.environ.get("SCAN_INTERVAL_SEC", "1"))
+        default_factory=lambda: int(os.environ.get("SCAN_INTERVAL_SEC", "2"))
     )
-    # Seconds between individual order placements (rate limiting)
+    # Seconds between full Gamma API market-list refreshes (slow scan)
+    # Trade loop runs every scan_interval_sec against the cached list.
+    market_rescan_sec: int = field(
+        default_factory=lambda: int(os.environ.get("MARKET_RESCAN_SEC", "30"))
+    )
+    # Seconds between individual order placements in live mode (rate limiting).
+    # Paper mode ignores this — all fills are instant.
     order_delay_sec: float = field(
-        default_factory=lambda: float(os.environ.get("ORDER_DELAY_SEC", "0.5"))
+        default_factory=lambda: float(os.environ.get("ORDER_DELAY_SEC", "0.1"))
     )
     # Automatically exit a position when its token price reaches this level
     take_profit_price: float = field(
@@ -173,7 +179,7 @@ class Config:
             f"  Price range:       [{self.min_price}, {self.max_price}]\n"
             f"  Max per market:    {self.max_market_exposure_pct*100:.0f}% of bankroll\n"
             f"  Daily loss limit:  {self.daily_loss_limit_pct*100:.0f}% of bankroll\n"
-            f"  Scan interval:     {self.scan_interval_sec}s\n"
+            f"  Trade interval:    {self.scan_interval_sec}s  (market rescan every {self.market_rescan_sec}s)\n"
             f"  Take profit:       {self.take_profit_price:.2f}\n"
             f"  Log file:          {self.log_file}\n"
             f"{'='*55}"

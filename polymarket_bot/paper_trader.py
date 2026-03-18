@@ -53,8 +53,7 @@ class PaperTrader:
 
     async def execute_buy(self, intent: OrderIntent) -> FillResult:
         """Simulate filling a BUY limit order."""
-        await asyncio.sleep(self.cfg.order_delay_sec)   # rate limiting
-
+        # Paper fills are instant — order_delay_sec only applies in live mode
         allowed, reason = self.risk.can_trade(
             intent.market_id, intent.outcome, intent.size_usdc
         )
@@ -104,8 +103,6 @@ class PaperTrader:
         price: float,
     ) -> FillResult:
         """Simulate filling a SELL limit order."""
-        await asyncio.sleep(self.cfg.order_delay_sec)
-
         fill_price  = self._simulate_fill(price, side="sell")
         size_usdc   = tokens * fill_price
 
