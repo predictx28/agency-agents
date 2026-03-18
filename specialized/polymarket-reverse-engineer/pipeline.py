@@ -97,7 +97,7 @@ async def resolve_username_to_wallet(username: str) -> str:
     )
 
 
-async def fetch_wallet_trades(wallet_address: str, limit: int = 2000) -> list[dict]:
+async def fetch_wallet_trades(wallet_address: str, limit: int = 50_000) -> list[dict]:
     """
     Fetch complete trade history for a wallet from Data API.
     Paginates automatically until all trades are retrieved.
@@ -960,7 +960,7 @@ def generate_report(
 # Main Entry Point
 # ──────────────────────────────────────────────────────────────────────────────
 
-async def run_pipeline(wallet: Optional[str] = None, output_dir: Path = Path("./output")):
+async def run_pipeline(wallet: Optional[str] = None, output_dir: Path = Path("./output"), limit: int = 50_000):
     log.info("=== Polymarket Reverse Engineer — Target: %s ===", TARGET_HANDLE)
 
     # Phase 1: resolve wallet + fetch trades
@@ -969,7 +969,7 @@ async def run_pipeline(wallet: Optional[str] = None, output_dir: Path = Path("./
         wallet = await resolve_username_to_wallet(TARGET_USERNAME)
 
     log.info("Phase 1: Fetching trade history for wallet %s...", wallet)
-    raw_trades = await fetch_wallet_trades(wallet)
+    raw_trades = await fetch_wallet_trades(wallet, limit=limit)
 
     if not raw_trades:
         log.warning("No trades found for wallet %s. Aborting.", wallet)
@@ -1038,9 +1038,10 @@ def main():
     parser.add_argument("--username", default=TARGET_USERNAME)
     parser.add_argument("--wallet",   default=None, help="Override wallet address lookup")
     parser.add_argument("--output-dir", default="./output", type=Path)
+    parser.add_argument("--limit", default=50_000, type=int, help="Max trades to fetch")
     args = parser.parse_args()
 
-    result = asyncio.run(run_pipeline(wallet=args.wallet, output_dir=args.output_dir))
+    result = asyncio.run(run_pipeline(wallet=args.wallet, output_dir=args.output_dir, limit=args.limit))
     if result:
         print("\n" + "=" * 60)
         print("REVERSE ENGINEER COMPLETE")
