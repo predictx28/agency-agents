@@ -8,12 +8,12 @@ class AppErrorBoundary extends React.Component {
   componentDidCatch(error, info) { console.error("App crash:", error, info); }
   render() {
     if (this.state.hasError) return (
-      <div style={{position:"fixed",inset:0,background:"#0F212E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:32,fontFamily:"'Inter',sans-serif"}}>
+      <div style={{position:"fixed",inset:0,background:"#0A1628",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:32,fontFamily:"'Inter',sans-serif"}}>
         <div style={{fontSize:48,marginBottom:16}}>⚠️</div>
         <div style={{color:"#FFFFFF",fontSize:18,fontWeight:700,marginBottom:8}}>Something went wrong</div>
         <div style={{color:"rgba(255,255,255,0.3)",fontSize:12,marginBottom:8,textAlign:"center",maxWidth:320,wordBreak:"break-all"}}>{this.state.error?.message}</div>
         <div style={{color:"rgba(255,255,255,0.15)",fontSize:10,marginBottom:24,textAlign:"center",maxWidth:320,wordBreak:"break-all",fontFamily:"monospace"}}>{this.state.error?.stack?.split('\n').slice(0,3).join(' | ')}</div>
-        <button onClick={()=>{this.setState({hasError:false,error:null});window.location.reload();}} style={{background:"#1fbb7b",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"12px 32px",cursor:"pointer"}}>Reload App</button>
+        <button onClick={()=>{this.setState({hasError:false,error:null});window.location.reload();}} style={{background:"#3B82F6",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"12px 32px",cursor:"pointer"}}>Reload App</button>
       </div>
     );
     return this.props.children;
@@ -41,27 +41,27 @@ const usePredictions = () => useContext(PredictionsContext);
 
 const DARK_THEME = {
   isDark: true,
-  bg:        "#0F212E",
-  bgCard:    "#1A2C38",
-  bgInput:   "#213743",
-  bgSubtle:  "#0B1923",
-  bgSheet:   "#1A2C38",
-  bgOverlay: "#0F212E",
-  bgHover:   "rgba(255,255,255,0.05)",
-  border:    "#213743",
+  bg:        "#0A1628",
+  bgCard:    "#0D1F3C",
+  bgInput:   "#152540",
+  bgSubtle:  "#060D1A",
+  bgSheet:   "#0D1F3C",
+  bgOverlay: "#0A1628",
+  bgHover:   "rgba(59,130,246,0.06)",
+  border:    "#1E3A5F",
   borderSub: "rgba(255,255,255,0.06)",
-  borderMed: "#213743",
+  borderMed: "#1E3A5F",
   text:      "#FFFFFF",
   textSub:   "rgba(255,255,255,0.6)",
   textMuted: "rgba(255,255,255,0.4)",
   textFaint: "rgba(255,255,255,0.2)",
-  navBg:     "#0F212E",
-  navBorder: "#213743",
-  navActive: "#1fbb7b",
-  navInactive:"rgba(255,255,255,0.4)",
-  handleBar: "rgba(255,255,255,0.1)",
-  skeletonBg:"#213743",
-  toggleOff:  "#213743",
+  navBg:     "#070F1E",
+  navBorder: "#1E3A5F",
+  navActive: "#3B82F6",
+  navInactive:"rgba(255,255,255,0.35)",
+  handleBar: "rgba(255,255,255,0.12)",
+  skeletonBg:"#152540",
+  toggleOff:  "#1E3A5F",
 };
 
 const LIGHT_THEME = {
@@ -86,7 +86,7 @@ const LIGHT_THEME = {
   // Nav
   navBg:     "#ffffff",
   navBorder: "#e2e8f0",
-  navActive: "#1fbb7b",
+  navActive: "#3B82F6",
   navInactive:"#94a3b8",
   // Sheet drag handle
   handleBar: "rgba(0,0,0,0.12)",
@@ -104,7 +104,7 @@ const PREDICTIONS = [
   { id:3, title:"Will Elon Musk run for president in 2028? 🇺🇸", category:"POLITICS", yesPct:8, pool:"$5.1M", poolRaw:5100000, bettors:"71.8K", daysLeft:"920d", trend:"-15.0%", trendDir:"down", hot:false, likes:"112K", comments:"45.8K", shares:"22.1K", creator:{name:"PoliticsPulse",handle:"politicspulse",verified:true,avatar:"🏛",color:"#f93d3d"}, img:"https://picsum.photos/seed/politics/800/600", accent:"#f93d3d", chartData:[12,10,9,8,7,9,8,7,6,5,6,7,6,5,8], allTimeHigh:"18%",allTimeLow:"5%",avgVol:"9.3%",volatility:"8.1pts" },
   { id:4, title:"Will the US confirm alien existence before 2027? 👽", category:"CONSPIRACY", yesPct:31, pool:"$3.2M", poolRaw:3200000, bettors:"42.1K", daysLeft:"652d", trend:"+88.0%", trendDir:"up", hot:true, likes:"42.1K", comments:"15.9K", shares:"11.2K", creator:{name:"PoliticsPulse",handle:"politicspulse",verified:true,avatar:"🏛",color:"#7c4dcc"}, img:"https://picsum.photos/seed/space/800/600", accent:"#7c4dcc", chartData:[2,3,4,3,5,6,5,7,8,7,9,10,9,11,12], allTimeHigh:"12%",allTimeLow:"1%",avgVol:"5.8%",volatility:"9.5pts" },
   { id:5, title:"Will OpenAI release GPT-5 before July 2025? 🤖", category:"TECH", yesPct:73, pool:"$6.2M", poolRaw:6200000, bettors:"310.1K", daysLeft:"128d", trend:"+55.0%", trendDir:"up", hot:true, likes:"421K", comments:"198K", shares:"156K", creator:{name:"TechInsider",handle:"techinsider",verified:true,avatar:"🤖",color:"#00c9a7"}, img:"https://picsum.photos/seed/aitech/800/600", accent:"#00c9a7", chartData:[2,4,6,9,11,8,10,13,11,12,10,9,11,12,13], allTimeHigh:"13%",allTimeLow:"2%",avgVol:"8.1%",volatility:"9.2pts" },
-  { id:6, title:"Will the Fed cut rates 3+ times in 2025?", category:"FINANCE", yesPct:51, pool:"$2.1M", poolRaw:2100000, bettors:"92.4K", daysLeft:"280d", trend:"+12.0%", trendDir:"up", hot:false, likes:"104K", comments:"67K", shares:"41K", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#1fbb7b"}, img:"https://picsum.photos/seed/finance/800/600", accent:"#1fbb7b", chartData:[4,5,6,5,7,8,7,6,8,7,6,5,6,7,8], allTimeHigh:"8%",allTimeLow:"1%",avgVol:"4.2%",volatility:"3.5pts" },
+  { id:6, title:"Will the Fed cut rates 3+ times in 2025?", category:"FINANCE", yesPct:51, pool:"$2.1M", poolRaw:2100000, bettors:"92.4K", daysLeft:"280d", trend:"+12.0%", trendDir:"up", hot:false, likes:"104K", comments:"67K", shares:"41K", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#3B82F6"}, img:"https://picsum.photos/seed/finance/800/600", accent:"#3B82F6", chartData:[4,5,6,5,7,8,7,6,8,7,6,5,6,7,8], allTimeHigh:"8%",allTimeLow:"1%",avgVol:"4.2%",volatility:"3.5pts" },
   { id:7, title:"Will Taylor Swift announce a new album in 2025?", category:"ENTERTAINMENT", yesPct:64, pool:"$1.9M", poolRaw:1900000, bettors:"221.0K", daysLeft:"200d", trend:"+31.0%", trendDir:"up", hot:true, likes:"512K", comments:"309K", shares:"201K", creator:{name:"PopCulture",handle:"popculture",verified:false,avatar:"🎤",color:"#F4C430"}, img:"https://picsum.photos/seed/concert/800/600", accent:"#F4C430", chartData:[5,6,7,8,9,8,9,10,11,10,12,13,12,14,13], allTimeHigh:"14%",allTimeLow:"4%",avgVol:"9.0%",volatility:"5.2pts" },
   { id:8, title:"Will Solana flip Ethereum in market cap in 2025?", category:"CRYPTO", yesPct:18, pool:"$1.4M", poolRaw:1400000, bettors:"78.3K", daysLeft:"312d", trend:"+340.0%", trendDir:"up", hot:false, likes:"88K", comments:"44K", shares:"29K", creator:{name:"CryptoOracle",handle:"cryptooracle",verified:true,avatar:"🔮",color:"#5c37a6"}, img:"https://picsum.photos/seed/crypto2/800/600", accent:"#5c37a6", chartData:[1,2,1,2,3,2,3,4,3,2,3,4,5,4,3], allTimeHigh:"5%",allTimeLow:"1%",avgVol:"2.8%",volatility:"7.8pts" },
 ];
@@ -112,7 +112,7 @@ const PREDICTIONS = [
 // More predictions including resolved ones
 const MORE_PREDICTIONS = [
   { id:9,  title:"Will Apple release a foldable iPhone in 2025? 📱", category:"TECH", yesPct:22, pool:"$890K", poolRaw:890000, bettors:"54.1K", daysLeft:"280d", trend:"-5.0%", trendDir:"down", hot:false, likes:"67K", comments:"28K", shares:"14K", creator:{name:"TechInsider",handle:"techinsider",verified:true,avatar:"🤖",color:"#00c9a7"}, img:"https://picsum.photos/seed/iphone/800/600", accent:"#00c9a7", chartData:[3,4,3,4,3,2,3,2,2,3,2,2,3,2,2], allTimeHigh:"8%",allTimeLow:"2%",avgVol:"3.1%",volatility:"2.1pts" },
-  { id:10, title:"Will the S&P 500 hit 7,000 before end of 2025?", category:"FINANCE", yesPct:61, pool:"$3.1M", poolRaw:3100000, bettors:"128.4K", daysLeft:"312d", trend:"+28.0%", trendDir:"up", hot:true, likes:"198K", comments:"87K", shares:"55K", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#1fbb7b"}, img:"https://picsum.photos/seed/stocks/800/600", accent:"#1fbb7b", chartData:[5,6,7,6,8,9,8,9,10,9,11,10,11,12,11], allTimeHigh:"12%",allTimeLow:"4%",avgVol:"7.8%",volatility:"5.0pts" },
+  { id:10, title:"Will the S&P 500 hit 7,000 before end of 2025?", category:"FINANCE", yesPct:61, pool:"$3.1M", poolRaw:3100000, bettors:"128.4K", daysLeft:"312d", trend:"+28.0%", trendDir:"up", hot:true, likes:"198K", comments:"87K", shares:"55K", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#3B82F6"}, img:"https://picsum.photos/seed/stocks/800/600", accent:"#3B82F6", chartData:[5,6,7,6,8,9,8,9,10,9,11,10,11,12,11], allTimeHigh:"12%",allTimeLow:"4%",avgVol:"7.8%",volatility:"5.0pts" },
   { id:11, title:"Will Kanye West release a new album in 2025? 🎵", category:"ENTERTAINMENT", yesPct:44, pool:"$1.2M", poolRaw:1200000, bettors:"89.2K", daysLeft:"250d", trend:"+15.0%", trendDir:"up", hot:false, likes:"312K", comments:"190K", shares:"88K", creator:{name:"PopCulture",handle:"popculture",verified:false,avatar:"🎤",color:"#F4C430"}, img:"https://picsum.photos/seed/music2/800/600", accent:"#F4C430", chartData:[3,4,5,4,5,6,5,4,5,6,5,4,5,4,5], allTimeHigh:"8%",allTimeLow:"2%",avgVol:"4.5%",volatility:"3.8pts" },
   { id:12, title:"Will Ethereum hit $10k by 2026? Ξ", category:"CRYPTO", yesPct:39, pool:"$2.7M", poolRaw:2700000, bettors:"102.3K", daysLeft:"380d", trend:"+62.0%", trendDir:"up", hot:true, likes:"155K", comments:"72K", shares:"41K", creator:{name:"CryptoOracle",handle:"cryptooracle",verified:true,avatar:"🔮",color:"#4e3f9e"}, img:"https://picsum.photos/seed/ethereum/800/600", accent:"#4e3f9e", chartData:[2,3,4,3,5,4,5,6,5,6,7,6,7,8,7], allTimeHigh:"9%",allTimeLow:"2%",avgVol:"5.5%",volatility:"6.2pts" },
 ];
@@ -120,7 +120,7 @@ const MORE_PREDICTIONS = [
 const RESOLVED_PREDICTIONS = [
   { id:101, title:"Will Donald Trump win the 2024 US election? 🇺🇸", category:"POLITICS", outcome:"YES", yesPct:68, noYes:32, pool:"$18.4M", poolRaw:18400000, bettors:"1.2M", resolvedDate:"Nov 6, 2024", creator:{name:"PoliticsPulse",handle:"politicspulse",verified:true,avatar:"🏛",color:"#f93d3d"}, img:"https://picsum.photos/seed/election/600/400", accent:"#f93d3d", userBet:null, payout:null },
   { id:102, title:"Will Bitcoin reach $100k before Jan 2025? ₿", category:"CRYPTO", outcome:"YES", yesPct:71, noYes:29, pool:"$9.2M", poolRaw:9200000, bettors:"412K", resolvedDate:"Dec 5, 2024", creator:{name:"CryptoOracle",handle:"cryptooracle",verified:true,avatar:"🔮",color:"#F4C430"}, img:"https://picsum.photos/seed/bitcoin/600/400", accent:"#F4C430", userBet:"YES", payout:14.20 },
-  { id:103, title:"Will the Fed cut rates in Dec 2024?", category:"FINANCE", outcome:"NO", yesPct:44, noYes:56, pool:"$4.1M", poolRaw:4100000, bettors:"188K", resolvedDate:"Dec 18, 2024", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#1fbb7b"}, img:"https://picsum.photos/seed/finance/600/400", accent:"#1fbb7b", userBet:"NO", payout:8.40 },
+  { id:103, title:"Will the Fed cut rates in Dec 2024?", category:"FINANCE", outcome:"NO", yesPct:44, noYes:56, pool:"$4.1M", poolRaw:4100000, bettors:"188K", resolvedDate:"Dec 18, 2024", creator:{name:"MarketWatch",handle:"marketwatch",verified:false,avatar:"📈",color:"#3B82F6"}, img:"https://picsum.photos/seed/finance/600/400", accent:"#3B82F6", userBet:"NO", payout:8.40 },
 ];
 
 const ALL_PREDICTIONS = [...PREDICTIONS, ...MORE_PREDICTIONS];
@@ -270,7 +270,7 @@ const CATEGORY_ACCENT = {
   POLITICS:      "#f93d3d",
   SPORTS:        "#7c4dcc",
   TECH:          "#00c9a7",
-  FINANCE:       "#1fbb7b",
+  FINANCE:       "#3B82F6",
   ENTERTAINMENT: "#F4C430",
   CONSPIRACY:    "#00E5FF",
 };
@@ -345,10 +345,10 @@ function mapPolymarketMarket(m, idx) {
       handle:   "polymarket",
       verified: true,
       avatar:   "🔮",
-      color:    CATEGORY_ACCENT[category] || "#1fbb7b",
+      color:    CATEGORY_ACCENT[category] || "#3B82F6",
     },
     img,
-    accent:      CATEGORY_ACCENT[category] || "#1fbb7b",
+    accent:      CATEGORY_ACCENT[category] || "#3B82F6",
     chartData,
     allTimeHigh: yesPct+5+"%",
     allTimeLow:  Math.max(1,yesPct-10)+"%",
@@ -565,7 +565,7 @@ const CATEGORY_META = {
   POLITICS:{ icon:"🏛",color:"#f93d3d" },
   CONSPIRACY:{ icon:"👁",color:"#7c4dcc" },
   TECH:   { icon:"⚙️",  color:"#00c9a7" },
-  FINANCE:{ icon:"💹", color:"#1fbb7b" },
+  FINANCE:{ icon:"💹", color:"#3B82F6" },
   ENTERTAINMENT:{ icon:"🎬",color:"#F4C430" },
 };
 
@@ -618,7 +618,7 @@ const CREATOR_PROFILES = {
   sportspulse:  { name:"SportsPulse",  handle:"sportspulse",  verified:true, avatar:"⚽", color:"#7c4dcc", bio:"Professional sports data analyst. Premier League, NFL, NBA covered. Stats don't lie.", followers:"31.4K", following:"201", predictions:41, accuracy:"68%", totalVolume:"$14.2M", joined:"Mar 2023" },
   politicspulse:{ name:"PoliticsPulse",handle:"politicspulse",verified:true, avatar:"🏛", color:"#f93d3d", bio:"Political forecasting. Former pollster. I've called 8/10 major elections since 2020.", followers:"62.1K", following:"88",  predictions:19, accuracy:"74%", totalVolume:"$31.8M", joined:"Aug 2022" },
   techinsider:  { name:"TechInsider",  handle:"techinsider",  verified:true, avatar:"🤖", color:"#00c9a7", bio:"Tech journalist. FAANG insider contacts. I cover AI, hardware, and product launches.", followers:"27.9K", following:"155", predictions:31, accuracy:"65%", totalVolume:"$18.1M", joined:"Jun 2023" },
-  marketwatch:  { name:"MarketWatch",  handle:"marketwatch",  verified:false, avatar:"📈", color:"#1fbb7b", bio:"Finance nerd. Macro trading, Fed watching, rates obsessed. DM for alpha.", followers:"19.3K", following:"290", predictions:28, accuracy:"61%", totalVolume:"$9.7M",  joined:"Nov 2023" },
+  marketwatch:  { name:"MarketWatch",  handle:"marketwatch",  verified:false, avatar:"📈", color:"#3B82F6", bio:"Finance nerd. Macro trading, Fed watching, rates obsessed. DM for alpha.", followers:"19.3K", following:"290", predictions:28, accuracy:"61%", totalVolume:"$9.7M",  joined:"Nov 2023" },
   popculture:   { name:"PopCulture",   handle:"popculture",   verified:false, avatar:"🎤", color:"#F4C430", bio:"Entertainment industry insider. Music, movies, awards. First to break the real news.", followers:"44.7K", following:"512", predictions:22, accuracy:"58%", totalVolume:"$7.2M",  joined:"Feb 2024" },
 };
 
@@ -650,7 +650,7 @@ const LEADERBOARD = [
   { rank:3, user:"degenmode",     profit:2990, wins:22, total:30, badge:"🥉", color:"#C97A28" },
   { rank:4, user:"mr_prediction", profit:1870, wins:19, total:28, badge:"4",  color:"rgba(255,255,255,0.32)" },
   { rank:5, user:"yolo_labs",     profit:1240, wins:15, total:24, badge:"5",  color:"rgba(255,255,255,0.32)" },
-  { rank:6, user:"deus_vult",     profit:980,  wins:13, total:21, badge:"6",  color:"#1fbb7b", isMe:true },
+  { rank:6, user:"deus_vult",     profit:980,  wins:13, total:21, badge:"6",  color:"#3B82F6", isMe:true },
   { rank:7, user:"moonboy99",     profit:760,  wins:11, total:19, badge:"7",  color:"rgba(255,255,255,0.32)" },
   { rank:8, user:"beargang",      profit:640,  wins:10, total:18, badge:"8",  color:"rgba(255,255,255,0.32)" },
 ];
@@ -667,14 +667,14 @@ const fmtPool = n => n>=1e6?"$"+((n/1e6).toFixed(1))+"M":"$"+((n/1e3).toFixed(0)
 // PRED IMAGE — inline SVG, zero network requests
 // ─────────────────────────────────────────────────────────────────────────────
 const PRED_VISUALS = {
-  CRYPTO:        { bg1:"#1a1408", bg2:"#1A2C38", accent:"#F4C430", icon:"₿" },
-  FINANCE:       { bg1:"#0e1a14", bg2:"#0b1310", accent:"#1fbb7b", icon:"$" },
-  POLITICS:      { bg1:"#1a1014", bg2:"#13090d", accent:"#f93d3d", icon:"⚖" },
-  TECH:          { bg1:"#0e1620", bg2:"#0b1019", accent:"#00E5FF", icon:"⬡" },
-  ENTERTAINMENT: { bg1:"#1a1020", bg2:"#130b19", accent:"#F4C430", icon:"★" },
-  SPORTS:        { bg1:"#0e1420", bg2:"#0b1019", accent:"#7c4dcc", icon:"◉" },
-  CONSPIRACY:    { bg1:"#100E06", bg2:"#13100a", accent:"#F4C430", icon:"◈" },
-  ALL:           { bg1:"#1A2C38", bg2:"#0F212E", accent:"rgba(255,255,255,0.42)", icon:"◎" },
+  CRYPTO:        { bg1:"#0E1A2E", bg2:"#0A1628", accent:"#F4C430", icon:"₿" },
+  FINANCE:       { bg1:"#0A1A2E", bg2:"#07101E", accent:"#3B82F6", icon:"$" },
+  POLITICS:      { bg1:"#1A0E1A", bg2:"#0E080E", accent:"#EF4444", icon:"⚖" },
+  TECH:          { bg1:"#0A1A2E", bg2:"#07101E", accent:"#38BDF8", icon:"⬡" },
+  ENTERTAINMENT: { bg1:"#1A0E2A", bg2:"#0E081A", accent:"#A78BFA", icon:"★" },
+  SPORTS:        { bg1:"#0E102A", bg2:"#08091E", accent:"#7C3AED", icon:"◉" },
+  CONSPIRACY:    { bg1:"#0A1A14", bg2:"#06100E", accent:"#10B981", icon:"◈" },
+  ALL:           { bg1:"#0D1F3C", bg2:"#0A1628", accent:"rgba(59,130,246,0.6)", icon:"◎" },
 };
 
 function PredImage({ pred, style={} }) {
@@ -822,9 +822,9 @@ function FullChart({ data, color, isLive=false }) {
       <path d={areaD} fill={"url(#"+gid+")"}/>
       <path d={pathD} fill="none" stroke={color} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
       {/* Current price dot at end */}
-      <circle cx={lx} cy={ly} r="5" fill={color} stroke="#1A2C38" strokeWidth="2"/>
+      <circle cx={lx} cy={ly} r="5" fill={color} stroke="#0F2040" strokeWidth="2"/>
       <line x1={lx} y1={0} x2={lx} y2={H} stroke={color} strokeWidth="1" strokeDasharray="4,3" opacity="0.5"/>
-      <rect x={Math.min(lx-20, W-42)} y={ly-24} width={42} height={17} rx={5} fill="#213743"/>
+      <rect x={Math.min(lx-20, W-42)} y={ly-24} width={42} height={17} rx={5} fill="#1A2D4A"/>
       <text x={Math.min(lx-20, W-42)+21} y={ly-12} fill="#fff" fontSize="9" textAnchor="middle" fontFamily="Inter">{data[data.length-1]}%</text>
       {xLabels.map((m,i)=><text key={i} x={(i/(xLabels.length-1))*W} y={H+20} fill="rgba(255,255,255,0.267)" fontSize="8" textAnchor="middle" fontFamily="Inter">{m}</text>)}
     </svg>
@@ -870,38 +870,40 @@ function CountdownOrDays({ daysLeft, endDateRaw }) {
 
 function YesNoBtn({ label, pct, voted, onClick, size="lg", poolRaw=1000000 }) {
   const isYes=label==="YES", isVoted=voted===label, otherVoted=voted&&!isVoted;
-  const h=size==="sm"?48:60;
+  const h=size==="sm"?44:56;
   const price = Math.max(1, Math.min(99, pct)) / 100;
   const returnPct = Math.round((1 / price - 1) * 0.98 * 100);
-  // Stake-style: solid fills when voted, ghost with strong border when not
-  const yesGrad = "linear-gradient(135deg,#1fbb7b 0%,#149e63 100%)";
-  const noGrad  = "linear-gradient(135deg,#f93d3d 0%,#c42b2b 100%)";
-  const yesBg   = isVoted ? yesGrad : "rgba(31,187,123,0.08)";
-  const noBg    = isVoted ? noGrad  : "rgba(249,61,61,0.08)";
-  const yesBorder = isVoted ? "none" : "1.5px solid rgba(31,187,123,0.35)";
-  const noBorder  = isVoted ? "none" : "1.5px solid rgba(249,61,61,0.35)";
+  // Polymarket-style: green for YES, red for NO
+  const yesGrad = "linear-gradient(135deg,#22C55E 0%,#16A34A 100%)";
+  const noGrad  = "linear-gradient(135deg,#EF4444 0%,#DC2626 100%)";
+  const yesBg   = isVoted ? yesGrad : "rgba(34,197,94,0.10)";
+  const noBg    = isVoted ? noGrad  : "rgba(239,68,68,0.10)";
+  const yesBorder = isVoted ? "none" : "1.5px solid rgba(34,197,94,0.4)";
+  const noBorder  = isVoted ? "none" : "1.5px solid rgba(239,68,68,0.4)";
+  const yesIcon = isVoted ? "✓" : "✓";
+  const noIcon  = isVoted ? "✕" : "✕";
   return (
     <button onClick={onClick} disabled={!!voted} style={{
-      flex:1, height:h, borderRadius:12,
+      flex:1, height:h, borderRadius:10,
       border:isYes?yesBorder:noBorder,
       cursor:voted?"default":"pointer",
       background:isYes?yesBg:noBg,
-      color:isVoted?"#fff":(isYes?"#1fbb7b":"#f93d3d"),
+      color:isVoted?"#fff":(isYes?"#22C55E":"#EF4444"),
       fontFamily:"'Inter',sans-serif",
-      display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", gap:1,
-      boxShadow:isVoted?(isYes?"0 4px 20px rgba(31,187,123,0.4)":"0 4px 20px rgba(249,61,61,0.4)"):"none",
-      opacity:otherVoted?0.25:1, transition:"all 0.18s ease", padding:"0 10px",
+      display:"flex", flexDirection:"row", alignItems:"center", justifyContent:"center", gap:6,
+      boxShadow:isVoted?(isYes?"0 4px 16px rgba(34,197,94,0.35)":"0 4px 16px rgba(239,68,68,0.35)"):"none",
+      opacity:otherVoted?0.3:1, transition:"all 0.18s ease", padding:"0 12px",
       position:"relative", overflow:"hidden",
     }}>
-      {/* Probability fill bar */}
-      <div style={{position:"absolute",bottom:0,left:0,height:2,width:pct+"%",
-        background:isYes?"rgba(31,187,123,0.6)":"rgba(249,61,61,0.6)",
-        borderRadius:"0 2px 0 0",transition:"width 1.2s cubic-bezier(0.4,0,0.2,1)"}}/>
-      <div style={{display:"flex",alignItems:"center",gap:6}}>
-        <span style={{fontSize:size==="sm"?12:14,fontWeight:800,letterSpacing:0.5}}>{label}</span>
-        <span style={{fontSize:size==="sm"?13:15,fontWeight:900}}>{pct}%</span>
+      <span style={{fontSize:size==="sm"?14:16,fontWeight:700,opacity:0.9}}>{isYes?yesIcon:noIcon}</span>
+      <div style={{display:"flex",flexDirection:"column",alignItems:"flex-start",gap:0}}>
+        <span style={{fontSize:size==="sm"?11:12,fontWeight:700,letterSpacing:0.3,lineHeight:1.2}}>{label}</span>
+        <span style={{fontSize:size==="sm"?13:15,fontWeight:900,lineHeight:1.2}}>{pct}%</span>
       </div>
-      {size!=="sm" && <span style={{fontSize:9,opacity:0.6,fontFamily:"'Inter',sans-serif",letterSpacing:0.8,textTransform:"uppercase"}}>{returnPct>0?"+"+returnPct+"% return":"evens"}</span>}
+      {/* Bottom fill bar */}
+      <div style={{position:"absolute",bottom:0,left:0,height:2,width:pct+"%",
+        background:isYes?"rgba(34,197,94,0.7)":"rgba(239,68,68,0.7)",
+        borderRadius:"0 2px 0 0",transition:"width 1.2s cubic-bezier(0.4,0,0.2,1)"}}/>
     </button>
   );
 }
@@ -914,10 +916,10 @@ function Sheet({ children, onClose, title }) {
   return (
     <div style={{position:"absolute",inset:0,zIndex:400,display:"flex",flexDirection:"column",justifyContent:"flex-end"}} onClick={close}>
       <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,0.75)",backdropFilter:"blur(12px)",opacity:vis?1:0,transition:"opacity 0.3s"}}/>
-      <div style={{position:"relative",background:"#1A2C38",borderRadius:"20px 20px 0 0",maxHeight:"92vh",overflowY:"auto",transform:vis?"translateY(0)":"translateY(100%)",transition:"transform 0.35s cubic-bezier(0.22,1,0.36,1)",boxShadow:"0 -4px 40px rgba(0,0,0,0.6), 0 -1px 0 rgba(255,255,255,0.08)"}} onClick={e=>e.stopPropagation()}>
-        <div style={{position:"sticky",top:0,background:"#1A2C38",padding:"12px 20px 10px",zIndex:1,borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
-          <div style={{width:32,height:3,background:"rgba(255,255,255,0.15)",borderRadius:99,margin:"0 auto 12px"}}/>
-          {title && <div style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif",letterSpacing:0.2}}>{title}</div>}
+      <div style={{position:"relative",background:"#0D1F3C",borderRadius:"22px 22px 0 0",maxHeight:"92vh",overflowY:"auto",transform:vis?"translateY(0)":"translateY(100%)",transition:"transform 0.38s cubic-bezier(0.22,1,0.36,1)",boxShadow:"0 -8px 50px rgba(0,0,0,0.8), 0 -1px 0 #1E3A5F",border:"1px solid #1E3A5F",borderBottom:"none"}} onClick={e=>e.stopPropagation()}>
+        <div style={{position:"sticky",top:0,background:"#0D1F3C",padding:"12px 20px 10px",zIndex:1,borderBottom:"1px solid rgba(30,58,95,0.6)"}}>
+          <div style={{width:36,height:4,background:"rgba(59,130,246,0.25)",borderRadius:99,margin:"0 auto 12px"}}/>
+          {title && <div style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif",letterSpacing:0.1}}>{title}</div>}
         </div>
         <div style={{padding:"12px 20px 52px"}}>{children}</div>
       </div>
@@ -929,7 +931,7 @@ function Avatar({ src, emoji, color, size=36 }) {
   return (
     <div style={{
       width:size, height:size, borderRadius:Math.round(size*0.28), flexShrink:0,
-      background:"linear-gradient(135deg, "+(color||"#213743")+"dd, "+(color||"#213743")+"88)",
+      background:"linear-gradient(135deg, "+(color||"#1A2D4A")+"dd, "+(color||"#1A2D4A")+"88)",
       backdropFilter:"blur(12px)",
       border:"1px solid rgba(255,255,255,0.12)",
       boxShadow:"0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)",
@@ -943,19 +945,19 @@ function Avatar({ src, emoji, color, size=36 }) {
   );
 }
 
-function Badge({ children, color="#1fbb7b" }) {
+function Badge({ children, color="#3B82F6" }) {
   return <span style={{background:color+"15",color,borderRadius:6,padding:"3px 9px",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:0.2}}>{children}</span>;
 }
 
 function OverlayHeader({ title, onBack, icon, onSearch, onNotifs, notifCount=0 }) {
   const t = useTheme();
   return (
-    <div style={{display:"flex",alignItems:"center",gap:12,padding:"12px 16px",flexShrink:0,background:"#0F212E",borderBottom:"1px solid rgba(255,255,255,0.07)"}}>
-      <button onClick={onBack} style={{width:34,height:34,borderRadius:8,background:"#213743",border:"1px solid rgba(255,255,255,0.1)",color:"#FFFFFF",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <span style={{fontSize:18,lineHeight:1,color:"rgba(255,255,255,0.8)",fontWeight:400}}>‹</span>
+    <div style={{display:"flex",alignItems:"center",gap:12,padding:"11px 14px",flexShrink:0,background:"#070F1E",borderBottom:"1px solid #1E3A5F"}}>
+      <button onClick={onBack} style={{width:34,height:34,borderRadius:8,background:"rgba(59,130,246,0.1)",border:"1px solid rgba(59,130,246,0.25)",color:"#93C5FD",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M12 5l-7 7 7 7" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
       </button>
       {icon && <div style={{display:"flex",alignItems:"center",justifyContent:"center",opacity:0.8}}>{icon}</div>}
-      <span style={{flex:1,color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif"}}>{title}</span>
+      <span style={{flex:1,color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif",letterSpacing:-0.2}}>{title}</span>
     </div>
   );
 }
@@ -1034,18 +1036,18 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
     return (
       <Sheet onClose={onClose} title="Position Confirmed">
         {/* BetID — shown first, prominent */}
-        <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.25)",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
+        <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.25)",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
           <div style={{color:"rgba(255,255,255,0.35)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:8}}>POSITION ID</div>
           <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}}>
             <div style={{color:"#FFFFFF",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",letterSpacing:1.5}}>{betId}</div>
-            <button onClick={copyLink} style={{background:copied?"#1fbb7b":"rgba(255,255,255,0.08)",border:"1px solid "+(copied?"#1fbb7b":"rgba(255,255,255,0.15)"),borderRadius:99,color:copied?"#fff":"rgba(255,255,255,0.6)",fontSize:11,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.25s",whiteSpace:"nowrap",flexShrink:0}}>
+            <button onClick={copyLink} style={{background:copied?"#3B82F6":"rgba(255,255,255,0.08)",border:"1px solid "+(copied?"#3B82F6":"rgba(255,255,255,0.15)"),borderRadius:99,color:copied?"#fff":"rgba(255,255,255,0.6)",fontSize:11,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.25s",whiteSpace:"nowrap",flexShrink:0}}>
               {copied?"✓ Copied":"Copy"}
             </button>
           </div>
         </div>
 
         <div style={{textAlign:"center",paddingBottom:16}}>
-          <div style={{width:60,height:60,borderRadius:"50%",background:position==="YES"?"rgba(31,187,123,0.15)":"rgba(249,61,61,0.12)",border:"2px solid "+(position==="YES"?"#1fbb7b":"#f93d3d"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,margin:"0 auto 10px"}}>
+          <div style={{width:60,height:60,borderRadius:"50%",background:position==="YES"?"rgba(34,197,94,0.15)":"rgba(249,61,61,0.12)",border:"2px solid "+(position==="YES"?"#22C55E":"#f93d3d"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,margin:"0 auto 10px"}}>
             {position==="YES"?"✅":"❌"}
           </div>
           <div style={{color:"#FFFFFF",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:3}}>${amount.toFixed(2)} · {position}</div>
@@ -1072,14 +1074,14 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
         </div>
 
         {/* Copy direct link row */}
-        <div style={{display:"flex",alignItems:"center",gap:8,background:"#1A2C38",border:"1px solid #213743",borderRadius:12,padding:"10px 14px",marginBottom:16}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:12,padding:"10px 14px",marginBottom:16}}>
           <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>predictswipe.app/bet/{betId}</span>
-          <button onClick={copyLink} style={{background:copied?"#1fbb7b":"#213743",border:"1px solid "+(copied?"#1fbb7b":"#213743"),borderRadius:8,color:copied?"#000":"#6a8090",fontSize:11,fontWeight:700,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>
+          <button onClick={copyLink} style={{background:copied?"#3B82F6":"#1A2D4A",border:"1px solid "+(copied?"#3B82F6":"#1A2D4A"),borderRadius:8,color:copied?"#000":"#6a8090",fontSize:11,fontWeight:700,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>
             {copied?"Copied!":"Copy Link"}
           </button>
         </div>
 
-        <button onClick={onClose} style={{width:"100%",background:"none",border:"1px solid #213743",borderRadius:12,color:"rgba(255,255,255,0.32)",fontSize:13,cursor:"pointer",fontFamily:"'Inter',sans-serif",padding:"12px",letterSpacing:0.5}}>
+        <button onClick={onClose} style={{width:"100%",background:"none",border:"1px solid #1A2D4A",borderRadius:12,color:"rgba(255,255,255,0.32)",fontSize:13,cursor:"pointer",fontFamily:"'Inter',sans-serif",padding:"12px",letterSpacing:0.5}}>
           DONE
         </button>
       </Sheet>
@@ -1090,9 +1092,9 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
       <Sheet onClose={onClose} title="Take a Position">
         {/* Header: position label + market title */}
         <div style={{textAlign:"center",paddingBottom:16}}>
-          <div style={{display:"inline-flex",alignItems:"center",gap:8,background:position==="YES"?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(position==="YES"?"rgba(31,187,123,0.3)":"rgba(249,61,61,0.25)"),borderRadius:99,padding:"6px 18px",marginBottom:12}}>
-            <div style={{width:7,height:7,borderRadius:"50%",background:position==="YES"?"#1fbb7b":"#f93d3d"}}/>
-            <span style={{color:position==="YES"?"#1fbb7b":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:0.5}}>Your Position: {position}</span>
+          <div style={{display:"inline-flex",alignItems:"center",gap:8,background:position==="YES"?"rgba(34,197,94,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(position==="YES"?"rgba(34,197,94,0.3)":"rgba(249,61,61,0.25)"),borderRadius:99,padding:"6px 18px",marginBottom:12}}>
+            <div style={{width:7,height:7,borderRadius:"50%",background:position==="YES"?"#22C55E":"#f93d3d"}}/>
+            <span style={{color:position==="YES"?"#22C55E":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:0.5}}>Your Position: {position}</span>
           </div>
           <div style={{color:"rgba(255,255,255,0.45)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.4,maxWidth:280,margin:"0 auto"}}>{pred.title.slice(0,60)}{pred.title.length>60?"…":""}</div>
         </div>
@@ -1104,7 +1106,7 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
             const disabled = capped <= 0 || balance <= 0;
             const isSelected = amount === capped && !disabled;
             return (
-              <button key={v} onClick={()=>!disabled&&setAmount(capped)} disabled={disabled} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(disabled?"rgba(255,255,255,0.06)":isSelected?"rgba(255,255,255,0.6)":"rgba(31,187,123,0.4)"),background:isSelected?"rgba(255,255,255,0.1)":"transparent",color:disabled?"rgba(255,255,255,0.15)":isSelected?"#ffffff":"rgba(31,187,123,0.85)",fontSize:14,fontWeight:700,cursor:disabled?"not-allowed":"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>
+              <button key={v} onClick={()=>!disabled&&setAmount(capped)} disabled={disabled} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(disabled?"rgba(255,255,255,0.06)":isSelected?"rgba(255,255,255,0.6)":"rgba(59,130,246,0.4)"),background:isSelected?"rgba(255,255,255,0.1)":"transparent",color:disabled?"rgba(255,255,255,0.15)":isSelected?"#ffffff":"rgba(59,130,246,0.85)",fontSize:14,fontWeight:700,cursor:disabled?"not-allowed":"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>
                 ${v}
               </button>
             );
@@ -1123,7 +1125,7 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
         {overMax && !overBalance && <div style={{color:"#F4C430",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:8,paddingLeft:4}}>⚠ Over max bet (${maxBetSetting}) — adjust in Settings</div>}
 
         <div style={{display:"flex",justifyContent:"space-between",marginBottom:16,paddingLeft:4}}>
-          <span style={{color:"rgba(255,255,255,0.3)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Balance: <span style={{color:balance<5?"#f93d3d":"#1fbb7b"}}>${balance.toFixed(2)}</span></span>
+          <span style={{color:"rgba(255,255,255,0.3)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Balance: <span style={{color:balance<5?"#f93d3d":"#3B82F6"}}>${balance.toFixed(2)}</span></span>
           <span style={{color:"rgba(255,255,255,0.3)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Max: ${effectiveMax.toFixed(0)}</span>
         </div>
 
@@ -1133,7 +1135,7 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
             ["Cost",          "$"+Number(amount).toFixed(2),                          "rgba(255,255,255,0.6)"],
             ["Share price",   "$"+sharePrice.toFixed(3)+" ("+sidePct+"% "+position+")", "rgba(255,255,255,0.35)"],
             ["Shares",        shares.toFixed(2)+" shares",                             "rgba(255,255,255,0.5)"],
-            ["Win payout",    "$"+maxPayout.toFixed(2)+" (+$"+potentialWin.toFixed(2)+")", "#1fbb7b"],
+            ["Win payout",    "$"+maxPayout.toFixed(2)+" (+$"+potentialWin.toFixed(2)+")", "#3B82F6"],
             ["Loss",          "-$"+Number(amount).toFixed(2),                          "#f93d3d"],
           ].map(([l,v,c])=>(
             <div key={l} style={{display:"flex",justifyContent:"space-between",padding:"4px 0",borderBottom:"1px solid rgba(255,255,255,0.04)"}}>
@@ -1152,13 +1154,13 @@ function BetModal({ pred, position, onConfirm, onClose, balance, quickBetPresets
 
         <button onClick={handleConfirm} disabled={!canBet} style={{
           width:"100%",
-          background:!canBet?"rgba(255,255,255,0.06)":position==="YES"?"linear-gradient(135deg,#1fbb7b,#149e63)":"linear-gradient(135deg,#f93d3d,#c42b2b)",
+          background:!canBet?"rgba(255,255,255,0.06)":position==="YES"?"linear-gradient(135deg,#3B82F6,#1D6ED8)":"linear-gradient(135deg,#f93d3d,#c42b2b)",
           border:"none",borderRadius:12,
           color:!canBet?"rgba(255,255,255,0.2)":"#fff",
           fontSize:15,fontWeight:800,padding:"16px",
           cursor:canBet?"pointer":"not-allowed",
           fontFamily:"'Inter',sans-serif",
-          boxShadow:canBet?"0 4px 24px "+(position==="YES"?"rgba(31,187,123,0.45)":"rgba(249,61,61,0.4)"):"none",
+          boxShadow:canBet?"0 4px 24px "+(position==="YES"?"rgba(59,130,246,0.5)":"rgba(239,68,68,0.4)"):"none",
           transition:"all 0.2s",letterSpacing:0.3,
         }}>
           {!canBet&&overBalance?"Insufficient Balance":"Confirm Position · "+(position)+" · $"+(Number(amount).toFixed(2))}
@@ -1179,12 +1181,12 @@ function CommentItem({ c, depth=0, likedIds, onLike, onReply }) {
   return (
     <div style={{marginLeft: depth > 0 ? 36 : 0}}>
       <div style={{display:"flex",gap:10,marginBottom:12,position:"relative"}}>
-        {depth > 0 && <div style={{position:"absolute",left:-24,top:0,bottom:-12,width:1,background:"#213743"}}/>}
-        <Avatar emoji={c.avatar||"👤"} color={depth>0?"#213743":"#213743"} size={depth>0?28:34}/>
+        {depth > 0 && <div style={{position:"absolute",left:-24,top:0,bottom:-12,width:1,background:"#1A2D4A"}}/>}
+        <Avatar emoji={c.avatar||"👤"} color={depth>0?"#1A2D4A":"#1A2D4A"} size={depth>0?28:34}/>
         <div style={{flex:1,minWidth:0}}>
           <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:3,flexWrap:"wrap"}}>
-            <span style={{color:c.isMe?"#1fbb7b":"#fff",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>@{c.user}</span>
-            {c.isMe && <span style={{color:"#1fbb7b",fontSize:9,fontFamily:"'Inter',sans-serif",border:"1px solid rgba(31,187,123,0.267)",borderRadius:99,padding:"1px 6px"}}>YOU</span>}
+            <span style={{color:c.isMe?"#3B82F6":"#fff",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>@{c.user}</span>
+            {c.isMe && <span style={{color:"#3B82F6",fontSize:9,fontFamily:"'Inter',sans-serif",border:"1px solid rgba(59,130,246,0.267)",borderRadius:99,padding:"1px 6px"}}>YOU</span>}
             {c.betId && <span style={{color:"#00E5FF",fontSize:9,fontFamily:"'Inter',sans-serif",background:"rgba(0,229,255,0.08)",border:"1px solid rgba(0,229,255,0.133)",borderRadius:99,padding:"1px 6px"}}>🎯 {c.betId}</span>}
             <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{c.ts}</span>
           </div>
@@ -1288,15 +1290,15 @@ function CommentsSheet({
         </div>
       </div>
       {/* Bet ID lookup */}
-      <div style={{background:"#1A2C38",border:"1px solid #213743",borderRadius:12,padding:"10px 12px",marginBottom:16}}>
+      <div style={{background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:12,padding:"10px 12px",marginBottom:16}}>
         <div style={{color:"rgba(255,255,255,0.22)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginBottom:6}}>🔍 FIND A BET BY ID</div>
         <div style={{display:"flex",gap:8}}>
-          <input value={betIdSearch} onChange={e=>setBetIdSearch(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleBetSearch()} placeholder="Paste Bet ID e.g. BET-5-ABC123" style={{flex:1,background:"#1A2C38",border:"1px solid #213743",borderRadius:8,padding:"8px 10px",color:"#FFFFFF",fontSize:12,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
-          <button onClick={handleBetSearch} style={{background:"#1fbb7b",border:"none",borderRadius:8,color:"#fff",fontSize:12,fontWeight:700,padding:"8px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap"}}>Find</button>
+          <input value={betIdSearch} onChange={e=>setBetIdSearch(e.target.value)} onKeyDown={e=>e.key==="Enter"&&handleBetSearch()} placeholder="Paste Bet ID e.g. BET-5-ABC123" style={{flex:1,background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:8,padding:"8px 10px",color:"#FFFFFF",fontSize:12,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
+          <button onClick={handleBetSearch} style={{background:"#3B82F6",border:"none",borderRadius:8,color:"#fff",fontSize:12,fontWeight:700,padding:"8px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap"}}>Find</button>
         </div>
         {searchResult && searchResult!=="NOT_FOUND" && (
-          <div style={{background:"rgba(20,158,99,0.06)",border:"1px solid rgba(31,187,123,0.133)",borderRadius:8,padding:"8px 10px",marginTop:8}}>
-            <div style={{color:"#1fbb7b",fontSize:10,fontFamily:"'Inter',sans-serif",marginBottom:3}}>✓ Found bet by @{searchResult.user}</div>
+          <div style={{background:"rgba(20,158,99,0.06)",border:"1px solid rgba(59,130,246,0.133)",borderRadius:8,padding:"8px 10px",marginTop:8}}>
+            <div style={{color:"#3B82F6",fontSize:10,fontFamily:"'Inter',sans-serif",marginBottom:3}}>✓ Found bet by @{searchResult.user}</div>
             {searchResult.thesis && <div style={{color:"rgba(255,255,255,0.62)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{searchResult.thesis}</div>}
           </div>
         )}
@@ -1311,7 +1313,7 @@ function CommentsSheet({
       }
 
       {/* Sticky compose box at bottom — Instagram/TikTok style */}
-      <div style={{position:"sticky",bottom:0,background:"#0F212E",paddingTop:10,paddingBottom:8,borderTop:"1px solid rgba(255,255,255,0.06)",marginTop:16}}>
+      <div style={{position:"sticky",bottom:0,background:"#0A1628",paddingTop:10,paddingBottom:8,borderTop:"1px solid rgba(255,255,255,0.06)",marginTop:16}}>
         {replyTo && (
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6,padding:"5px 10px",background:"rgba(0,229,255,0.06)",borderRadius:8}}>
             <span style={{color:"#00E5FF",fontSize:11,fontFamily:"'Inter',sans-serif"}}>↩ Replying to @{replyTo.user}</span>
@@ -1319,13 +1321,13 @@ function CommentsSheet({
           </div>
         )}
         <div style={{display:"flex",gap:10,alignItems:"flex-end"}}>
-          <Avatar emoji="⚡" color="#1fbb7b" size={32}/>
+          <Avatar emoji="⚡" color="#3B82F6" size={32}/>
           <div style={{flex:1}}>
             <textarea ref={textRef} value={text} onChange={e=>setText(e.target.value)}
               placeholder={replyTo?"Reply to @"+(replyTo.user)+"...":"Add a comment…"} rows={1}
-              style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:20,padding:"9px 14px",color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.4}}/>
+              style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:20,padding:"9px 14px",color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.4}}/>
           </div>
-          <button onClick={submit} style={{background:text.trim()?"#1fbb7b":"#213743",border:"none",borderRadius:20,color:text.trim()?"#000":"rgba(255,255,255,0.22)",fontSize:12,fontWeight:700,padding:"9px 16px",cursor:text.trim()?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>
+          <button onClick={submit} style={{background:text.trim()?"#3B82F6":"#1A2D4A",border:"none",borderRadius:20,color:text.trim()?"#000":"rgba(255,255,255,0.22)",fontSize:12,fontWeight:700,padding:"9px 16px",cursor:text.trim()?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>
             {replyTo?"Reply":"Post"}
           </button>
         </div>
@@ -1387,11 +1389,11 @@ function DetailSheet({
         </button>
         <div style={{display:"flex",alignItems:"center",gap:6}}>
           <span style={{fontSize:14}}>{CATEGORY_META[pred.category]?.icon||"📊"}</span>
-          <span style={{color:pred.accent||"#1fbb7b",fontSize:11,fontWeight:700,letterSpacing:1.5,fontFamily:"'Inter',sans-serif"}}>{pred.category}</span>
+          <span style={{color:pred.accent||"#3B82F6",fontSize:11,fontWeight:700,letterSpacing:1.5,fontFamily:"'Inter',sans-serif"}}>{pred.category}</span>
         </div>
-        {isLiveChart && <div style={{marginLeft:"auto",background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.3)",borderRadius:20,padding:"2px 8px",display:"flex",alignItems:"center",gap:4}}>
-          <div style={{width:4,height:4,borderRadius:"50%",background:"#1fbb7b",animation:"pulse 1.5s infinite"}}/>
-          <span style={{color:"rgba(31,187,123,0.9)",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>LIVE CHART</span>
+        {isLiveChart && <div style={{marginLeft:"auto",background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.3)",borderRadius:20,padding:"2px 8px",display:"flex",alignItems:"center",gap:4}}>
+          <div style={{width:4,height:4,borderRadius:"50%",background:"#3B82F6",animation:"pulse 1.5s infinite"}}/>
+          <span style={{color:"rgba(59,130,246,0.9)",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>LIVE CHART</span>
         </div>
         }
       </div>
@@ -1402,16 +1404,16 @@ function DetailSheet({
           <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:4}}>Current</div>
           <div style={{display:"flex",alignItems:"baseline",gap:8}}>
             <span style={{color:"#FFFFFF",fontSize:44,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{pred.yesPct}%</span>
-            <span style={{color:"#1fbb7b",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES</span>
+            <span style={{color:"#3B82F6",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES</span>
           </div>
         </div>
-        <div style={{background:trendDir==="up"?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.12)",border:"1px solid "+(trendDir==="up"?"rgba(31,187,123,0.267)":"rgba(249,61,61,0.267)"),borderRadius:10,padding:"8px 14px",textAlign:"right"}}>
-          <div style={{color:trendDir==="up"?"#1fbb7b":"#f93d3d",fontWeight:700,fontSize:15,fontFamily:"'Inter',sans-serif"}}>{trendDir==="up"?"↗":"↘"} {trendLabel}</div>
+        <div style={{background:trendDir==="up"?"rgba(59,130,246,0.12)":"rgba(249,61,61,0.12)",border:"1px solid "+(trendDir==="up"?"rgba(59,130,246,0.267)":"rgba(249,61,61,0.267)"),borderRadius:10,padding:"8px 14px",textAlign:"right"}}>
+          <div style={{color:trendDir==="up"?"#3B82F6":"#f93d3d",fontWeight:700,fontSize:15,fontFamily:"'Inter',sans-serif"}}>{trendDir==="up"?"↗":"↘"} {trendLabel}</div>
           <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2}}>{isLiveChart ? "lifetime change" : "6-month change"}</div>
         </div>
       </div>
-      <div style={{background:"#1A2C38",borderRadius:16,padding:"16px 14px",marginBottom:22,position:"relative"}}>
-        {historyLoading && <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:16,background:"rgba(26,44,56,0.8)",zIndex:2}}>
+      <div style={{background:"#0F2040",borderRadius:16,padding:"16px 14px",marginBottom:22,position:"relative"}}>
+        {historyLoading && <div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",borderRadius:16,background:"rgba(13,31,60,0.8)",zIndex:2}}>
           <span style={{color:"rgba(255,255,255,0.4)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Loading chart...</span>
         </div>
         }
@@ -1419,8 +1421,8 @@ function DetailSheet({
       </div>
       <SectionLabel>KEY STATISTICS</SectionLabel>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:22}}>
-        {[{icon:"↗",c:"#1fbb7b",val:pred.allTimeHigh,label:"All-Time High"},{icon:"↘",c:"#f93d3d",val:pred.allTimeLow,label:"All-Time Low"},{icon:"📊",c:"#7c4dcc",val:pred.avgVol,label:"6M Average"},{icon:"〰",c:"#7c4dcc",val:pred.volatility,label:"Volatility"}].map((s,i)=>(
-          <div key={i} style={{background:"#1A2C38",borderRadius:14,padding:"16px 14px"}}>
+        {[{icon:"↗",c:"#3B82F6",val:pred.allTimeHigh,label:"All-Time High"},{icon:"↘",c:"#f93d3d",val:pred.allTimeLow,label:"All-Time Low"},{icon:"📊",c:"#7c4dcc",val:pred.avgVol,label:"6M Average"},{icon:"〰",c:"#7c4dcc",val:pred.volatility,label:"Volatility"}].map((s,i)=>(
+          <div key={i} style={{background:"#0F2040",borderRadius:14,padding:"16px 14px"}}>
             <div style={{fontSize:20,marginBottom:8,color:s.c}}>{s.icon}</div>
             <div style={{color:"#FFFFFF",fontSize:24,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{s.val}</div>
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{s.label}</div>
@@ -1438,8 +1440,8 @@ function DetailSheet({
       <div style={{marginTop:20,background:"rgba(20,158,99,0.06)",borderRadius:14,padding:"14px 16px"}}>
         <div style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:600,letterSpacing:1.5,marginBottom:8}}>MARKET ID</div>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}}>
-          <span style={{color:"#1fbb7b",fontSize:15,fontWeight:800,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>{betId}</span>
-          <button onClick={copyId} style={{background:copied?"#1fbb7b":"rgba(31,187,123,0.12)",border:"none",borderRadius:10,color:copied?"#000":"#1fbb7b",fontSize:11,fontWeight:700,padding:"7px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",whiteSpace:"nowrap",flexShrink:0}}>
+          <span style={{color:"#3B82F6",fontSize:15,fontWeight:800,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>{betId}</span>
+          <button onClick={copyId} style={{background:copied?"#3B82F6":"rgba(59,130,246,0.12)",border:"none",borderRadius:10,color:copied?"#000":"#3B82F6",fontSize:11,fontWeight:700,padding:"7px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",whiteSpace:"nowrap",flexShrink:0}}>
             {copied?"✓ Copied":"Copy"}
           </button>
         </div>
@@ -1463,7 +1465,7 @@ function BetConfirmed({ position, amount, onDone, betId, pred }) {
   return (
     <div style={{position:"absolute",inset:0,zIndex:500,background:"rgba(0,0,0,0.92)",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:0,animation:"fadeIn 0.2s ease",padding:"0 28px"}}>
       {/* Tick */}
-      <div style={{width:72,height:72,borderRadius:"50%",background:position==="YES"?"rgba(31,187,123,0.2)":"rgba(249,61,61,0.2)",border:"2px solid "+(position==="YES"?"#1fbb7b":"#f93d3d"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",marginBottom:14}}>
+      <div style={{width:72,height:72,borderRadius:"50%",background:position==="YES"?"rgba(34,197,94,0.2)":"rgba(249,61,61,0.2)",border:"2px solid "+(position==="YES"?"#22C55E":"#f93d3d"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)",marginBottom:14}}>
         {position==="YES"?"✅":"❌"}
       </div>
       <div style={{color:"#FFFFFF",fontSize:28,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1,marginBottom:4}}>${Number(amount).toFixed(2)}</div>
@@ -1474,13 +1476,13 @@ function BetConfirmed({ position, amount, onDone, betId, pred }) {
         <div style={{color:"rgba(255,255,255,0.3)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:8}}>POSITION ID</div>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",gap:10}}>
           <div style={{color:"#FFFFFF",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif",letterSpacing:1.5}}>{id}</div>
-          <button onClick={copyId} style={{background:copied?"#1fbb7b":"rgba(255,255,255,0.08)",border:"1px solid "+(copied?"#1fbb7b":"rgba(255,255,255,0.15)"),borderRadius:99,color:copied?"#fff":"rgba(255,255,255,0.55)",fontSize:11,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",whiteSpace:"nowrap",flexShrink:0}}>
+          <button onClick={copyId} style={{background:copied?"#3B82F6":"rgba(255,255,255,0.08)",border:"1px solid "+(copied?"#3B82F6":"rgba(255,255,255,0.15)"),borderRadius:99,color:copied?"#fff":"rgba(255,255,255,0.55)",fontSize:11,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",whiteSpace:"nowrap",flexShrink:0}}>
             {copied?"✓ Copied":"Copy"}
           </button>
         </div>
       </div>
 
-      <button onClick={onDone} style={{width:"100%",background:"linear-gradient(135deg,#1fbb7b,#149e63)",border:"none",borderRadius:10,color:"#fff",fontSize:15,fontWeight:700,padding:"15px",cursor:"pointer",fontFamily:"'Inter',sans-serif",boxShadow:"0 4px 16px rgba(31,187,123,0.4)",letterSpacing:0.3}}>
+      <button onClick={onDone} style={{width:"100%",background:"linear-gradient(135deg,#3B82F6,#1D6ED8)",border:"none",borderRadius:10,color:"#fff",fontSize:15,fontWeight:700,padding:"15px",cursor:"pointer",fontFamily:"'Inter',sans-serif",boxShadow:"0 4px 16px rgba(59,130,246,0.4)",letterSpacing:0.3}}>
         Done
       </button>
     </div>
@@ -1506,7 +1508,7 @@ function FiveMinBadge({ endDate, secsLeft: initialSecs }) {
   const s       = secs % 60;
   const danger  = secs <= 30 && secs > 0;
   const urgent  = secs < 60 && secs > 30;
-  const color   = secs === 0 ? "#f93d3d" : danger ? "#f93d3d" : urgent ? "#F4C430" : "#1fbb7b";
+  const color   = secs === 0 ? "#f93d3d" : danger ? "#f93d3d" : urgent ? "#F4C430" : "#3B82F6";
   // Show PENDING when timer is 0 and price is near 50% (market settling)
   const isPending = secs === 0;
   const pendingColor = "#00E5FF";
@@ -1577,16 +1579,16 @@ function PredCard({ pred, userVote, onVote, following, onFollow, balance, isWatc
   };
 
   return (
-    <div style={{position:"relative",width:"100%",height:"100%",overflow:"hidden",background:"#0F212E"}}>
+    <div style={{position:"relative",width:"100%",height:"100%",overflow:"hidden",background:"#0A1628"}}>
       <PredImage pred={pred} style={{position:"absolute",inset:0,width:"100%",height:"100%"}}/>
       {/* Gradient: strong at bottom for text legibility, fades to clear at top */}
-      <div style={{position:"absolute",inset:0,background:"linear-gradient(to top, rgba(15,33,46,1) 0%, rgba(15,33,46,0.9) 30%, rgba(15,33,46,0.3) 60%, transparent 100%)"}}/>
+      <div style={{position:"absolute",inset:0,background:"linear-gradient(to top, rgba(7,15,30,0.98) 0%, rgba(7,15,30,0.85) 28%, rgba(7,15,30,0.3) 55%, transparent 100%)"}}/>
       {/* Click flash — trailing glow sweep */}
       {flashPos && (
         <div style={{position:"absolute",inset:0,zIndex:5,pointerEvents:"none",
           background:flashPos==="YES"
-            ?"linear-gradient(90deg, transparent 0%, rgba(31,187,123,0.18) 40%, rgba(31,187,123,0.32) 70%, transparent 100%)"
-            :"linear-gradient(270deg, transparent 0%, rgba(249,61,61,0.18) 40%, rgba(249,61,61,0.32) 70%, transparent 100%)",
+            ?"linear-gradient(90deg, transparent 0%, rgba(34,197,94,0.15) 40%, rgba(34,197,94,0.28) 70%, transparent 100%)"
+            :"linear-gradient(270deg, transparent 0%, rgba(239,68,68,0.15) 40%, rgba(239,68,68,0.28) 70%, transparent 100%)",
           animation:"flashSweep 0.5s ease-out forwards"
         }}/>
       )}
@@ -1633,13 +1635,13 @@ function PredCard({ pred, userVote, onVote, following, onFollow, balance, isWatc
         />
 
         {/* Bookmark */}
-        <TikTokAction active={isWatched} activeColor="#1fbb7b"
+        <TikTokAction active={isWatched} activeColor="#3B82F6"
           count={isWatched?"Saved":"Save"} onClick={()=>onToggleWatch&&onToggleWatch(pred.id)}
           icon={
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
               <path d="M6 3h12a1 1 0 011 1v17l-7-4-7 4V4a1 1 0 011-1z"
-                stroke={isWatched?"#1fbb7b":"rgba(255,255,255,0.9)"}
-                fill={isWatched?"rgba(31,187,123,0.15)":"none"}
+                stroke={isWatched?"#3B82F6":"rgba(255,255,255,0.9)"}
+                fill={isWatched?"rgba(59,130,246,0.15)":"none"}
                 strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           }
@@ -1672,7 +1674,7 @@ function PredCard({ pred, userVote, onVote, following, onFollow, balance, isWatc
           {/* Pool + days stacked */}
           <div style={{display:"flex",gap:8,alignItems:"center"}}>
             <div style={{display:"flex",alignItems:"center",gap:4}}>
-              <div style={{width:5,height:5,borderRadius:"50%",background:"#1fbb7b",boxShadow:"0 0 5px #1fbb7b",flexShrink:0}}/>
+              <div style={{width:5,height:5,borderRadius:"50%",background:"#3B82F6",boxShadow:"0 0 5px #3B82F6",flexShrink:0}}/>
               <div style={{display:"flex",flexDirection:"column",gap:1}}>
                 <span style={{color:"rgba(255,255,255,0.65)",fontSize:10,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{pred.pool} Pool</span>
                 <CountdownOrDays daysLeft={pred.daysLeft} endDateRaw={pred.endDate}/>
@@ -1680,7 +1682,7 @@ function PredCard({ pred, userVote, onVote, following, onFollow, balance, isWatc
             </div>
           </div>
           {/* Category pill — next to pool */}
-          <div style={{display:"flex",alignItems:"center",gap:4,background:"rgba(15,33,46,0.55)",borderRadius:20,padding:"3px 10px",backdropFilter:"blur(12px)"}}>
+          <div style={{display:"flex",alignItems:"center",gap:4,background:"rgba(10,22,40,0.55)",borderRadius:20,padding:"3px 10px",backdropFilter:"blur(12px)"}}>
             <span style={{fontSize:11}}>{CATEGORY_META[pred.category]?.icon}</span>
             <span style={{color:"rgba(255,255,255,0.7)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1,fontWeight:700}}>{pred.category}</span>
           </div>
@@ -1696,8 +1698,8 @@ function PredCard({ pred, userVote, onVote, following, onFollow, balance, isWatc
         <h2 style={{color:"#FFFFFF",fontSize:21,fontWeight:800,lineHeight:1.3,fontFamily:"'Inter',sans-serif",marginBottom:12,textShadow:"0 2px 16px rgba(0,0,0,0.9)"}}>{pred.title}</h2>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:14}}>
           <div style={{display:"flex",alignItems:"center",gap:7,background:"rgba(0,0,0,0.5)",backdropFilter:"blur(6px)",borderRadius:20,padding:"5px 12px"}}>
-            <Sparkline data={pred.chartData} color={driftDir===1?"#1fbb7b":driftDir===-1?"#f93d3d":"rgba(255,255,255,0.42)"} width={38} height={13}/>
-            <span style={{color:driftDir===1?"#1fbb7b":driftDir===-1?"#f93d3d":"rgba(255,255,255,0.75)",fontWeight:700,fontSize:12,fontFamily:"'Inter',sans-serif",transition:"color 0.4s"}}>{yesRounded}% YES {driftDir===1?"▲":driftDir===-1?"▼":""}</span>
+            <Sparkline data={pred.chartData} color={driftDir===1?"#22C55E":driftDir===-1?"#EF4444":"rgba(255,255,255,0.42)"} width={38} height={13}/>
+            <span style={{color:driftDir===1?"#22C55E":driftDir===-1?"#EF4444":"rgba(255,255,255,0.75)",fontWeight:700,fontSize:12,fontFamily:"'Inter',sans-serif",transition:"color 0.4s"}}>{yesRounded}% YES {driftDir===1?"▲":driftDir===-1?"▼":""}</span>
           </div>
           <button onClick={()=>setShowDetail(true)} style={{marginLeft:"auto",background:"rgba(255,255,255,0.07)",border:"none",borderRadius:20,color:"rgba(255,255,255,0.5)",fontSize:11,cursor:"pointer",padding:"5px 11px",fontFamily:"'Inter',sans-serif",backdropFilter:"blur(4px)"}}>Details ›</button>
         </div>
@@ -1762,7 +1764,7 @@ function AdCard({ data, onSkip, onOpenPropFirm }) {
       {/* Gold shimmer line */}
       <div style={{position:"absolute",top:0,left:0,right:0,height:2,background:"linear-gradient(90deg,transparent,"+data.accent+",transparent)"}}/>
       <div style={{position:"absolute",top:16,left:16,background:"rgba(255,255,255,0.07)",borderRadius:6,padding:"3px 10px",fontSize:10,color:"rgba(255,255,255,0.32)",letterSpacing:2}}>SPONSORED</div>
-      <button onClick={cd===0?onSkip:undefined} style={{position:"absolute",top:14,right:14,background:"rgba(255,255,255,0.06)",border:"1px solid #213743",borderRadius:8,color:cd>0?"rgba(255,255,255,0.22)":"rgba(255,255,255,0.72)",cursor:cd>0?"default":"pointer",fontSize:12,padding:"5px 13px",fontFamily:"'Inter',sans-serif"}}>
+      <button onClick={cd===0?onSkip:undefined} style={{position:"absolute",top:14,right:14,background:"rgba(255,255,255,0.06)",border:"1px solid #1A2D4A",borderRadius:8,color:cd>0?"rgba(255,255,255,0.22)":"rgba(255,255,255,0.72)",cursor:cd>0?"default":"pointer",fontSize:12,padding:"5px 13px",fontFamily:"'Inter',sans-serif"}}>
         {cd>0?"Skip "+(cd)+"s":"Skip →"}
       </button>
       <div style={{fontSize:90,marginBottom:16,filter:"drop-shadow(0 0 40px "+(data.accent)+"66)"}}>{data.icon}</div>
@@ -1844,34 +1846,34 @@ function InlineSellView({ bet, market, acctId, propAccounts, onSellBet, onBack, 
       <div style={{padding:"0 14px 10px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
         <div style={{color:"#FFFFFF",fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bet?.title||bet?.predId}</div>
         <div style={{display:"flex",gap:8,marginTop:4,alignItems:"center"}}>
-          <span style={{color:bet?.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet?.pos}</span>
+          <span style={{color:bet?.pos==="YES"?"#22C55E":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet?.pos}</span>
           <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{sidePrice}¢ · {totalShares.toFixed(2)} shares</span>
         </div>
       </div>
 
       {confirmed ? (
         <div style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8}}>
-          <div style={{color:"#1fbb7b",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{sellPct<100?"Partial Sold":"Position Sold"}</div>
+          <div style={{color:"#3B82F6",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{sellPct<100?"Partial Sold":"Position Sold"}</div>
           <div style={{color:"rgba(255,255,255,0.4)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>${sellValue.toFixed(2)} returned</div>
-          <button onClick={handleDone} style={{marginTop:12,background:"none",border:"1px solid rgba(31,187,123,0.4)",borderRadius:10,padding:"8px 24px",color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>Done</button>
+          <button onClick={handleDone} style={{marginTop:12,background:"none",border:"1px solid rgba(59,130,246,0.4)",borderRadius:10,padding:"8px 24px",color:"#3B82F6",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>Done</button>
         </div>
       ) : (
         <div style={{flex:1,display:"flex",flexDirection:"column",padding:"10px 14px",gap:12,overflowY:"auto"}}>
           <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:6}}>
             {[25,50,75,100].map(p=>(
-              <button key={p} onClick={()=>setSellPct(p)} style={{background:"none",border:"1px solid "+(sellPct===p?"rgba(31,187,123,0.5)":"rgba(255,255,255,0.1)"),borderRadius:8,padding:"6px 0",color:sellPct===p?"#1fbb7b":"rgba(255,255,255,0.35)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+              <button key={p} onClick={()=>setSellPct(p)} style={{background:"none",border:"1px solid "+(sellPct===p?"rgba(59,130,246,0.5)":"rgba(255,255,255,0.1)"),borderRadius:8,padding:"6px 0",color:sellPct===p?"#3B82F6":"rgba(255,255,255,0.35)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                 {p}%
               </button>
             ))}
           </div>
           <input type="range" min="1" max="100" value={sellPct} onChange={e=>setSellPct(parseInt(e.target.value))}
-            style={{width:"100%",accentColor:"#1fbb7b",cursor:"pointer"}}/>
+            style={{width:"100%",accentColor:"#3B82F6",cursor:"pointer"}}/>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
             {[
               {l:"SHARES",     v:sharesToSell.toFixed(2)+" / "+totalShares.toFixed(2)},
               {l:"SELL VALUE", v:"$"+sellValue.toFixed(2)},
               {l:"COST",       v:"$"+costBasis.toFixed(2)},
-              {l:"P&L",        v:(pnl>=0?"+":"-")+"$"+Math.abs(pnl).toFixed(2), c:pnl>=0?"#1fbb7b":"#f93d3d"},
+              {l:"P&L",        v:(pnl>=0?"+":"-")+"$"+Math.abs(pnl).toFixed(2), c:pnl>=0?"#3B82F6":"#f93d3d"},
             ].map(s=>(
               <div key={s.l} style={{borderBottom:"1px solid rgba(255,255,255,0.06)",paddingBottom:6}}>
                 <div style={{color:s.c||"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{s.v}</div>
@@ -1926,7 +1928,7 @@ function PnlDropdown({ propAccounts, votes, ALL_PREDS, propPnl, pnlColor, onClos
         {[["open","Open ("+openPropBets.length+")"],["closed","Closed ("+closedPropBets.length+")"]].map(([id,label])=>(
           <button key={id} onClick={()=>setPosTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"none",padding:"8px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",fontSize:10,fontWeight:posTab===id?700:500,color:posTab===id?"#FFFFFF":"rgba(255,255,255,0.35)",display:"flex",flexDirection:"column",alignItems:"center",gap:4,transition:"color 0.15s"}}>
               <span>{label}</span>
-              <div style={{width:posTab===id?16:0,height:2,borderRadius:99,background:"#1fbb7b",transition:"width 0.2s cubic-bezier(0.4,0,0.2,1)"}}/>
+              <div style={{width:posTab===id?16:0,height:2,borderRadius:99,background:"#3B82F6",transition:"width 0.2s cubic-bezier(0.4,0,0.2,1)"}}/>
             </button>
         ))}
       </div>}
@@ -1954,7 +1956,7 @@ function PnlDropdown({ propAccounts, votes, ALL_PREDS, propPnl, pnlColor, onClos
               const currVal    = shares * currPrice;
               const livePnl    = parseFloat((currVal - bet.stake).toFixed(2));
               const sellValue  = parseFloat((currVal * 0.99).toFixed(2));
-              const pnlC       = livePnl >= 0 ? "#1fbb7b" : "#f93d3d";
+              const pnlC       = livePnl >= 0 ? "#3B82F6" : "#f93d3d";
               const acct       = (propAccounts||[]).find(a=>(a.bets||[]).some(b=>b.predId===bet.predId));
               return (
                  <div key={i} style={{padding:"8px 14px",borderBottom:"1px solid rgba(255,255,255,0.06)"}}>
@@ -1962,7 +1964,7 @@ function PnlDropdown({ propAccounts, votes, ALL_PREDS, propPnl, pnlColor, onClos
                      <div style={{flex:1,minWidth:0}}>
                        <div style={{color:"#c8dae8",fontSize:11,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bet.title||bet.predId}</div>
                        <div style={{display:"flex",gap:5,marginTop:2,alignItems:"center"}}>
-                         <span style={{color:bet.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet.pos}</span>
+                         <span style={{color:bet.pos==="YES"?"#22C55E":"#f93d3d",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet.pos}</span>
                          <span style={{color:"rgba(255,255,255,0.25)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>${(bet.stake||0).toFixed(2)}</span>
                          {acct?.funded && <span style={{color:"#F4C430",fontSize:8,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>FUNDED</span>}
                          {isResolving && <span style={{color:"#00E5FF",fontSize:8,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:0.5,animation:"pulse 1s infinite"}}>⏳ RESOLVING</span>}
@@ -1997,7 +1999,7 @@ function PnlDropdown({ propAccounts, votes, ALL_PREDS, propPnl, pnlColor, onClos
           <div style={{maxHeight:260,overflowY:"auto"}}>
             {closedPropBets.slice(-8).reverse().map((bet,i) => {
               const pnl  = bet.pnlDelta || 0;
-              const pnlC = bet.won ? "#1fbb7b" : "#f93d3d";
+              const pnlC = bet.won ? "#3B82F6" : "#f93d3d";
               return (
                 <div key={i} style={{padding:"9px 14px",borderBottom:"1px solid rgba(255,255,255,0.04)",display:"flex",justifyContent:"space-between",alignItems:"center",gap:8}}>
                   <div style={{flex:1,minWidth:0}}>
@@ -2068,7 +2070,7 @@ votes, onVote, following, onFollow, balance, watchlist, onToggleWatch, onOpenWal
   const propPnl = parseFloat((resolvedPnl + unrealisedPnl).toFixed(2));
   // openPropBets includes resolving bets (resolved:false) — count stays accurate during settlement
   const openCount    = openPropBets.length;
-  const pnlColor     = propPnl >= 0 ? "#1fbb7b" : "#f93d3d";
+  const pnlColor     = propPnl >= 0 ? "#22C55E" : "#f93d3d";
   const scrollRef = useRef(null);
   const feed = useMemo(()=>buildFeed(mode,following,ALL_PREDS),[mode,following,ALL_PREDS]);
   const hasPropAccount = (propAccounts||[]).length > 0;
@@ -2105,21 +2107,24 @@ votes, onVote, following, onFollow, balance, watchlist, onToggleWatch, onOpenWal
   return (
     <div style={{width:"100%",height:"100%",display:"flex",flexDirection:"column",overflow:"hidden",position:"relative"}}>
 
-      {/* ── TOP HUD — Stake style ── */}
-      <div style={{position:"absolute",top:0,left:0,right:0,zIndex:20,pointerEvents:"none",display:"flex",alignItems:"flex-start",justifyContent:"center",padding:"22px 12px 0",background:"linear-gradient(to bottom,rgba(0,0,0,0.5) 0%,transparent 100%)"}}>
-        {/* Stake-style pill tab switcher */}
-        <div style={{display:"flex",alignItems:"center",gap:2,pointerEvents:"all",background:"rgba(15,33,46,0.7)",backdropFilter:"blur(16px)",borderRadius:12,padding:"3px",border:"1px solid rgba(255,255,255,0.08)"}}>
-          {[["foryou","For You"],["trending","Trending"],["following","Following"]].map(([id,label])=>(
+      {/* ── TOP HUD — Polymarket style ── */}
+      <div style={{position:"absolute",top:0,left:0,right:0,zIndex:20,pointerEvents:"none",display:"flex",alignItems:"flex-start",justifyContent:"center",padding:"18px 12px 0",background:"linear-gradient(to bottom,rgba(7,15,30,0.7) 0%,transparent 100%)"}}>
+        {/* Polymarket-style category pill tabs */}
+        <div style={{display:"flex",alignItems:"center",gap:4,pointerEvents:"all",background:"rgba(10,22,40,0.85)",backdropFilter:"blur(20px)",borderRadius:22,padding:"4px 5px",border:"1px solid rgba(30,58,95,0.8)",boxShadow:"0 4px 20px rgba(0,0,0,0.5)"}}>
+          {[["foryou","For You"],["trending","Live"],["following","Following"]].map(([id,label],i)=>(
             <button key={id} onClick={()=>setMode(id)} style={{
-              background:mode===id?"#1fbb7b":"none",
-              border:"none",padding:"6px 14px",cursor:"pointer",
-              borderRadius:9,
-              transition:"background 0.2s,color 0.2s",
+              background:mode===id?"#3B82F6":"none",
+              border:"none",padding:"5px 13px",cursor:"pointer",
+              borderRadius:18,
+              transition:"all 0.2s cubic-bezier(0.4,0,0.2,1)",
+              display:"flex",alignItems:"center",gap:5,
+              boxShadow:mode===id?"0 2px 8px rgba(59,130,246,0.4)":"none",
             }}>
+              {id==="trending" && <div style={{width:5,height:5,borderRadius:"50%",background:mode===id?"#fff":"#EF4444",boxShadow:mode!==id?"0 0 5px #EF4444":"none",flexShrink:0}}/>}
               <span style={{
                 color:mode===id?"#FFFFFF":"rgba(255,255,255,0.5)",
                 fontSize:12,fontWeight:mode===id?700:500,
-                fontFamily:"'Inter',sans-serif",letterSpacing:0.2,
+                fontFamily:"'Inter',sans-serif",letterSpacing:0.1,
                 whiteSpace:"nowrap",
               }}>{label}</span>
             </button>
@@ -2219,10 +2224,10 @@ votes, onVote, following, onFollow, balance, watchlist, onToggleWatch, onOpenWal
               }
             }}/>}
             {item.type==="empty" && (
-              <div style={{width:"100%",height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,background:"#0F212E",padding:24}}>
+              <div style={{width:"100%",height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,background:"#0A1628",padding:24}}>
                 <div style={{fontSize:56,opacity:0.2}}>👥</div>
                 <h3 style={{color:"#FFFFFF",fontFamily:"'Inter',sans-serif",fontSize:20,fontWeight:800,textAlign:"center"}}>Follow creators<br/>to see their predictions</h3>
-                <button onClick={()=>setMode("foryou")} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Browse For You</button>
+                <button onClick={()=>setMode("foryou")} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Browse For You</button>
               </div>
             )}
           </div>
@@ -2271,65 +2276,65 @@ function HomeCard({
   };
 
   return (
-    <div style={{background:t.bgCard,borderRadius:20,overflow:"hidden",border:"1px solid "+(pred.is5min?(pred.accent||"#F7931A")+"66":t.border),position:"relative",boxShadow:pred.is5min?"0 0 12px "+(pred.accent||"#F7931A")+"22":"none"}}>
-      <div style={{position:"relative",height:190}}>
+    <div style={{background:t.bgCard,borderRadius:16,overflow:"hidden",border:"1px solid "+(pred.is5min?(pred.accent||"#F7931A")+"66":"#1E3A5F"),position:"relative",boxShadow:pred.is5min?"0 0 12px "+(pred.accent||"#F7931A")+"22":"0 2px 16px rgba(0,0,0,0.3)"}}>
+      {/* Image banner */}
+      <div style={{position:"relative",height:175}}>
         <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
-        <div style={{position:"absolute",inset:0,background:"linear-gradient(to top, rgba(15,33,46,0.9) 0%, transparent 55%)"}}/>
-        <div style={{position:"absolute",top:10,left:12,right:12,display:"flex",justifyContent:"space-between"}}>
-          <div style={{display:"flex",alignItems:"center",gap:5,background:"rgba(15,33,46,0.72)",backdropFilter:"blur(4px)",borderRadius:20,padding:"4px 10px"}}>
+        <div style={{position:"absolute",inset:0,background:"linear-gradient(to top, rgba(10,22,40,0.96) 0%, rgba(10,22,40,0.5) 45%, transparent 100%)"}}/>
+        {/* Top badges */}
+        <div style={{position:"absolute",top:10,left:10,right:10,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{display:"flex",alignItems:"center",gap:5,background:"rgba(7,15,30,0.75)",backdropFilter:"blur(8px)",borderRadius:20,padding:"4px 10px",border:"1px solid rgba(30,58,95,0.6)"}}>
             <span style={{fontSize:10}}>{CATEGORY_META[pred.category]?.icon}</span>
-            <span style={{color:"rgba(255,255,255,0.72)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>{pred.category}</span>
+            <span style={{color:"rgba(255,255,255,0.8)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:0.8,fontWeight:600}}>{pred.category}</span>
           </div>
-          {pred.hot&&<div style={{background:"rgba(255,107,53,0.2)",border:"1px solid rgba(244,196,48,0.267)",borderRadius:20,padding:"4px 10px",display:"flex",alignItems:"center",gap:4}}><span style={{fontSize:10}}>🔥</span><span style={{color:"#F4C430",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:700}}>HOT</span></div>}
+          {pred.hot&&<div style={{background:"rgba(244,196,48,0.15)",border:"1px solid rgba(244,196,48,0.3)",borderRadius:20,padding:"4px 10px",display:"flex",alignItems:"center",gap:4}}><span style={{fontSize:10}}>🔥</span><span style={{color:"#F4C430",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:700}}>HOT</span></div>}
         </div>
-        <div style={{position:"absolute",bottom:10,left:12,right:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <div style={{display:"flex",alignItems:"center",gap:5,background:"rgba(15,33,46,0.72)",borderRadius:20,padding:"4px 10px"}}>
-            <Sparkline data={pred.chartData} color="#f93d3d" width={32} height={12}/>
-            <span style={{color:"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{local}% YES</span>
+        {/* Bottom stats on image */}
+        <div style={{position:"absolute",bottom:10,left:10,right:10}}>
+          <h3 style={{color:"#fff",fontSize:14,fontWeight:800,lineHeight:1.3,fontFamily:"'Inter',sans-serif",marginBottom:8,textShadow:"0 1px 4px rgba(0,0,0,0.8)"}}>{pred.title}</h3>
+          <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <div style={{display:"flex",alignItems:"center",gap:6}}>
+              <span style={{color:"#22C55E",fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{local}%</span>
+              <span style={{color:"rgba(255,255,255,0.4)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>chance</span>
+              <Sparkline data={pred.chartData} color="#22C55E" width={36} height={14}/>
+            </div>
+            <button onClick={()=>setShowDetail(true)} style={{background:"rgba(59,130,246,0.2)",border:"1px solid rgba(59,130,246,0.4)",borderRadius:8,color:"#93C5FD",fontSize:10,fontWeight:700,padding:"4px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Details ›</button>
           </div>
-          <button onClick={()=>setShowDetail(true)} style={{background:"rgba(255,255,255,0.1)",border:"none",borderRadius:20,color:"rgba(255,255,255,0.72)",fontSize:10,padding:"4px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",backdropFilter:"blur(4px)"}}>Details ›</button>
         </div>
       </div>
-      <div style={{padding:"14px 14px 16px"}}>
+      {/* Card body */}
+      <div style={{padding:"12px 12px 14px"}}>
+        {/* Creator row */}
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:10}}>
-          <div onClick={()=>onOpenCreator&&onOpenCreator(pred.creator.handle)} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer"}}>
-            <Avatar emoji={pred.creator.avatar} color={pred.creator.color} size={28}/>
-            <div style={{display:"flex",alignItems:"center",gap:4}}>
-              <span style={{color:t.textSub,fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif"}}>@{pred.creator.handle}</span>
-              {pred.creator.verified&&<span style={{color:"#00E5FF",fontSize:11}}>✓</span>}
+          <div onClick={()=>onOpenCreator&&onOpenCreator(pred.creator.handle)} style={{display:"flex",alignItems:"center",gap:7,cursor:"pointer"}}>
+            <Avatar emoji={pred.creator.avatar} color={pred.creator.color} size={26}/>
+            <div style={{display:"flex",alignItems:"center",gap:3}}>
+              <span style={{color:t.textSub,fontSize:11,fontWeight:600,fontFamily:"'Inter',sans-serif"}}>@{pred.creator.handle}</span>
+              {pred.creator.verified&&<span style={{color:"#60A5FA",fontSize:10}}>✓</span>}
             </div>
           </div>
-          <button onClick={()=>onFollow(pred.creator.handle)} style={{background:"transparent",border:"1px solid "+(following?t.border:t.borderMed),borderRadius:20,color:following?t.textFaint:t.textSub,fontSize:11,padding:"4px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
-            {following?"Following":"Follow"}
-          </button>
-        </div>
-        <h3 style={{color:t.text,fontSize:15,fontWeight:800,lineHeight:1.35,fontFamily:"'Inter',sans-serif",marginBottom:12}}>{pred.title}</h3>
-        <div style={{marginBottom:12}}>
-          <div style={{display:"flex",justifyContent:"space-between",marginBottom:5}}>
-            <span style={{color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {local}%</span>
-            <span style={{color:"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>NO {no}%</span>
-          </div>
-          <div style={{height:4,background:"rgba(255,255,255,0.08)",borderRadius:99,overflow:"hidden"}}>
-            <div style={{height:"100%",width:(local)+"%",background:"linear-gradient(90deg,#1fbb7b,#149e63)",borderRadius:99,transition:"width 0.6s ease",boxShadow:"0 0 6px rgba(31,187,123,0.5)"}}/>
+          <div style={{display:"flex",alignItems:"center",gap:8}}>
+            <span style={{color:t.textMuted,fontSize:11,fontFamily:"'Inter',sans-serif"}}>{pred.pool}</span>
+            <button onClick={()=>onFollow(pred.creator.handle)} style={{background:"transparent",border:"1px solid #1E3A5F",borderRadius:14,color:following?"rgba(255,255,255,0.4)":"rgba(255,255,255,0.7)",fontSize:10,padding:"3px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+              {following?"Following":"Follow"}
+            </button>
           </div>
         </div>
-        <div style={{display:"flex",gap:14,marginBottom:12}}>
-          {[["💰",pred.pool],["👥",pred.bettors],["⏱",pred.daysLeft]].map(([i,v])=><span key={v} style={{color:t.textMuted,fontSize:11,fontFamily:"'Inter',sans-serif"}}>{i} {v}</span>)}
-        </div>
-        <div style={{display:"flex",gap:8,marginBottom:14}}>
+        {/* YES/NO bet buttons — Polymarket style */}
+        <div style={{display:"flex",gap:6,marginBottom:10}}>
           <YesNoBtn label="YES" pct={local} voted={userVote?.pos} onClick={()=>!userVote&&setShowBet("YES")} size="sm"/>
           <YesNoBtn label="NO" pct={no} voted={userVote?.pos} onClick={()=>!userVote&&setShowBet("NO")} size="sm"/>
         </div>
-        {/* BIGGER social row */}
-        <div style={{display:"flex",gap:0,borderTop:"1px solid "+(t.borderSub),paddingTop:12}}>
+        {/* Social row */}
+        <div style={{display:"flex",gap:0,borderTop:"1px solid rgba(30,58,95,0.5)",paddingTop:8}}>
           {[
-            {icon:liked?"❤️":"🤍", val:liked?addK(parseNum(pred.likes)+1):pred.likes, action:()=>setLiked(l=>!l), color:liked?"#f93d3d":t.textSub},
-            {icon:"💬", val:pred.comments, action:()=>onOpenComments(pred), color:t.textSub},
-            {icon:"↗", val:pred.shares, action:handleShare, color:t.textSub},
+            {icon:liked?"♥":"♡", val:liked?addK(parseNum(pred.likes)+1):pred.likes, action:()=>setLiked(l=>!l), color:liked?"#EF4444":"rgba(255,255,255,0.4)"},
+            {icon:"◎", val:pred.comments, action:()=>onOpenComments(pred), color:"rgba(255,255,255,0.4)"},
+            {icon:"↗", val:pred.shares, action:handleShare, color:"rgba(255,255,255,0.4)"},
           ].map(({icon,val,action,color})=>(
-            <button key={icon} onClick={action} style={{flex:1,background:"none",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"6px 0"}}>
-              <span style={{fontSize:24}}>{icon}</span>
-              <span style={{color,fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:600}}>{val}</span>
+            <button key={icon} onClick={action} style={{flex:1,background:"none",border:"none",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",gap:4,padding:"5px 0"}}>
+              <span style={{fontSize:14,color}}>{icon}</span>
+              <span style={{color:"rgba(255,255,255,0.35)",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:500}}>{val}</span>
             </button>
           ))}
         </div>
@@ -2358,10 +2363,10 @@ function PropFomoBanner({ onOpenPropFirm, onClose }) {
     >
       <div
         onClick={e=>e.stopPropagation()}
-        style={{width:"100%",maxWidth:430,background:"#11181F",borderRadius:"24px 24px 0 0",border:"1px solid #1F2E3D",padding:"0 0 36px",transform:vis?"translateY(0)":"translateY(100%)",transition:"transform 0.42s cubic-bezier(0.22,1,0.36,1)",overflow:"hidden"}}
+        style={{width:"100%",maxWidth:430,background:"#080D1C",borderRadius:"24px 24px 0 0",border:"1px solid #152033",padding:"0 0 36px",transform:vis?"translateY(0)":"translateY(100%)",transition:"transform 0.42s cubic-bezier(0.22,1,0.36,1)",overflow:"hidden"}}
       >
         {/* Panel header */}
-        <div style={{background:"#16212B",padding:"16px 22px 18px",borderBottom:"1px solid #1F2E3D"}}>
+        <div style={{background:"#0C1930",padding:"16px 22px 18px",borderBottom:"1px solid #152033"}}>
           {/* Drag handle */}
           <div style={{width:36,height:3,background:"rgba(255,255,255,0.1)",borderRadius:99,margin:"0 auto 16px"}}/>
 
@@ -2373,7 +2378,7 @@ function PropFomoBanner({ onOpenPropFirm, onClose }) {
 
           {/* Headline */}
           <div style={{fontSize:26,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1.1,marginBottom:2}}>
-            <span style={{color:"#ffffff"}}>Trade with </span><span style={{color:"#1fbb7b"}}>$10,000</span>
+            <span style={{color:"#ffffff"}}>Trade with </span><span style={{color:"#3B82F6"}}>$10,000</span>
           </div>
           <div style={{color:"rgba(255,255,255,0.5)",fontSize:13,fontFamily:"'Inter',sans-serif",fontWeight:500}}>
             Start from $49
@@ -2404,7 +2409,7 @@ function PropFomoBanner({ onOpenPropFirm, onClose }) {
           {/* CTA */}
           <button
             onClick={()=>{ close(); onOpenPropFirm(); }}
-            style={{width:"100%",height:52,borderRadius:12,background:"#2F7A6D",border:"none",color:"#ffffff",fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:0.3,transition:"opacity 0.2s"}}
+            style={{width:"100%",height:52,borderRadius:12,background:"#1D4ED8",border:"none",color:"#ffffff",fontSize:15,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:0.3,transition:"opacity 0.2s"}}
           >
             Start Funding Challenge →
           </button>
@@ -2461,42 +2466,44 @@ function HomePage({ votes, onVote, following, onFollow, balance, onOpenCreator, 
   const cards = view==="trending" ? filtered : view==="discover" ? discover : followingFeed;
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E",position:"relative"}}>
-      {/* ── STICKY HEADER ── */}
-      <div style={{background:"#0F212E",position:"relative",zIndex:10,flexShrink:0,paddingTop:14}}>
-        {/* Instagram Reels-style tab bar — centred, floating, no borders */}
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",gap:28,padding:"0 0 2px",position:"relative"}}>
-          {[["trending","For You"],["discover","Discover"],["following","Following"]].map(([id,label])=>(
-            <button key={id} onClick={()=>setView(id)} style={{background:"none",border:"none",padding:"8px 0",cursor:"pointer",position:"relative",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
-              <span style={{color:view===id?"#ffffff":"rgba(255,255,255,0.38)",fontSize:14,fontWeight:view===id?700:500,fontFamily:"'Inter',sans-serif",letterSpacing:0.1,transition:"color 0.2s",textShadow:view===id?"0 0 20px rgba(255,255,255,0.25)":"none"}}>
-                {label}
-              </span>
-              {/* Pill underline indicator — only visible on active */}
-              <div style={{width:view===id?20:0,height:2,borderRadius:99,background:"#ffffff",transition:"width 0.25s cubic-bezier(0.4,0,0.2,1)",opacity:view===id?1:0}}/>
-            </button>
-          ))}
-        </div>
-        {/* Category filter — only on Trending */}
-        {view==="trending" && (
-          <div
-            style={{display:"flex",gap:8,overflowX:"auto",padding:"10px 14px 8px",scrollbarWidth:"none",WebkitOverflowScrolling:"touch",touchAction:"pan-x",cursor:"grab",msOverflowStyle:"none"}}
-            onTouchStart={e=>e.stopPropagation()}
-            onTouchMove={e=>e.stopPropagation()}
-            onMouseDown={e=>{
-              const el=e.currentTarget; let startX=e.pageX, scrollX=el.scrollLeft;
-              const onMove=ev=>{el.scrollLeft=scrollX-(ev.pageX-startX);};
-              const onUp=()=>{document.removeEventListener("mousemove",onMove);document.removeEventListener("mouseup",onUp);};
-              document.addEventListener("mousemove",onMove);
-              document.addEventListener("mouseup",onUp);
-            }}
-          >
-            {CATS_LIST.map(c=>(
-              <button key={c.id} onClick={()=>setCat(c.id)} style={{flexShrink:0,background:cat===c.id?"rgba(255,255,255,0.12)":"transparent",border:"1px solid "+(cat===c.id?"rgba(255,255,255,0.35)":"rgba(255,255,255,0.1)"),borderRadius:20,padding:"5px 14px",cursor:"pointer",color:cat===c.id?"rgba(255,255,255,0.92)":"rgba(255,255,255,0.38)",fontSize:11,fontWeight:cat===c.id?700:500,fontFamily:"'Inter',sans-serif",transition:"all 0.2s",userSelect:"none"}}>
-                {c.label}
-              </button>
-            ))}
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628",position:"relative"}}>
+      {/* ── STICKY HEADER — Polymarket style ── */}
+      <div style={{background:"#070F1E",position:"relative",zIndex:10,flexShrink:0}}>
+        {/* Top logo + auth bar */}
+        <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 14px 8px",borderBottom:"1px solid #1E3A5F"}}>
+          <div style={{display:"flex",alignItems:"center",gap:8}}>
+            <div style={{width:30,height:30,background:"linear-gradient(135deg,#3B82F6,#1D6ED8)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,boxShadow:"0 2px 12px rgba(59,130,246,0.5)"}}>⚡</div>
+            <span style={{color:"#FFFFFF",fontWeight:800,fontSize:16,fontFamily:"'Inter',sans-serif",letterSpacing:-0.5}}>PredictSwipe</span>
           </div>
-        )}
+          <div style={{display:"flex",gap:6,alignItems:"center"}}>
+            <button onClick={()=>{}} style={{background:"transparent",border:"1px solid #1E3A5F",borderRadius:8,color:"rgba(255,255,255,0.7)",fontSize:12,fontWeight:600,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Log In</button>
+            <button onClick={()=>{}} style={{background:"#3B82F6",border:"none",borderRadius:8,color:"#fff",fontSize:12,fontWeight:700,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",boxShadow:"0 2px 8px rgba(59,130,246,0.4)"}}>Sign Up</button>
+          </div>
+        </div>
+        {/* Polymarket-style tab bar: LIVE | All | New | Politics | Sports */}
+        <div
+          style={{display:"flex",gap:0,overflowX:"auto",padding:"0 10px",scrollbarWidth:"none",WebkitOverflowScrolling:"touch",msOverflowStyle:"none",borderBottom:"1px solid #1E3A5F"}}
+          onTouchStart={e=>e.stopPropagation()}
+          onTouchMove={e=>e.stopPropagation()}
+        >
+          {/* LIVE tab */}
+          <button onClick={()=>setView("trending")} style={{flexShrink:0,background:"none",border:"none",padding:"10px 12px 8px",cursor:"pointer",position:"relative",display:"flex",alignItems:"center",gap:5}}>
+            <div style={{width:7,height:7,borderRadius:"50%",background:"#EF4444",boxShadow:"0 0 6px #EF4444",flexShrink:0}}/>
+            <span style={{color:view==="trending"?"#FFFFFF":"rgba(255,255,255,0.45)",fontSize:13,fontWeight:view==="trending"?700:500,fontFamily:"'Inter',sans-serif"}}>LIVE</span>
+            {view==="trending" && <div style={{position:"absolute",bottom:0,left:"15%",right:"15%",height:2,borderRadius:"2px 2px 0 0",background:"#3B82F6"}}/>}
+          </button>
+          {/* Category tabs */}
+          {[["trending","All"],["discover","New"],["following","Following"],...CATS_LIST.slice(1,5).map(c=>[c.id,c.label])].map(([id,label],i)=>{
+            const active = i===0?view==="trending":i===1?view==="discover":i===2?view==="following":cat===id;
+            const onClick = i===0?()=>setView("trending"):i===1?()=>setView("discover"):i===2?()=>setView("following"):()=>{setView("trending");setCat(id);};
+            return (
+              <button key={id+i} onClick={onClick} style={{flexShrink:0,background:"none",border:"none",padding:"10px 12px 8px",cursor:"pointer",position:"relative"}}>
+                <span style={{color:active?"#FFFFFF":"rgba(255,255,255,0.45)",fontSize:13,fontWeight:active?700:500,fontFamily:"'Inter',sans-serif"}}>{label}</span>
+                {active && <div style={{position:"absolute",bottom:0,left:"15%",right:"15%",height:2,borderRadius:"2px 2px 0 0",background:"#3B82F6"}}/>}
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {/* ── SCROLLABLE CONTENT — smooth TikTok-style ── */}
@@ -2540,9 +2547,9 @@ function HomePage({ votes, onVote, following, onFollow, balance, onOpenCreator, 
                       const pct = hashtagPcts[idx];
                       const meta = CATEGORY_META[catId]||CATEGORY_META.CRYPTO;
                       return (
-                        <div key={tag} style={{flexShrink:0,background:"#1A2C38",border:"1px solid "+(meta.color)+"22",borderRadius:14,padding:"10px 12px",minWidth:88,cursor:"pointer"}}>
+                        <div key={tag} style={{flexShrink:0,background:"#0F2040",border:"1px solid "+(meta.color)+"22",borderRadius:14,padding:"10px 12px",minWidth:88,cursor:"pointer"}}>
                           <div style={{color:"#FFFFFF",fontSize:11,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:4}}>{tag}</div>
-                          <div style={{height:3,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:4}}>
+                          <div style={{height:3,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:4}}>
                             <div style={{height:"100%",width:(pct)+"%",background:meta.color,borderRadius:99,transition:"width 0.6s ease"}}/>
                           </div>
                           <div style={{color:meta.color,fontSize:9,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{Math.round(pct)}% YES</div>
@@ -2563,7 +2570,7 @@ function HomePage({ votes, onVote, following, onFollow, balance, onOpenCreator, 
                       <div style={{width:54,height:54,borderRadius:"50%",background:c.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,border:"2px solid rgba(255,255,255,0.1)"}}>{c.avatar}</div>
                       <div style={{textAlign:"center"}}>
                         <div style={{color:"#FFFFFF",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap",maxWidth:68}}>@{c.handle}</div>
-                        <div style={{color:"#1fbb7b",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{c.accuracy}</div>
+                        <div style={{color:"#3B82F6",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{c.accuracy}</div>
                       </div>
                     </div>
                   ))}
@@ -2597,12 +2604,12 @@ function HomePage({ votes, onVote, following, onFollow, balance, onOpenCreator, 
                 <div style={{fontSize:56,marginBottom:16,opacity:0.2}}>👥</div>
                 <div style={{color:"#FFFFFF",fontSize:18,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:8}}>No one to follow yet</div>
                 <div style={{color:"rgba(255,255,255,0.22)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:24}}>Follow creators to see their predictions here</div>
-                <button onClick={()=>setView("discover")} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 28px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Discover Creators →</button>
+                <button onClick={()=>setView("discover")} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 28px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Discover Creators →</button>
               </div>
             ) : (
               <div style={{padding:"8px 14px 0"}}>
                 <div style={{display:"flex",alignItems:"center",gap:8,padding:"8px 0 12px"}}>
-                  <div style={{color:"#1fbb7b",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{followingFeed.length} PREDICTIONS FROM PEOPLE YOU FOLLOW</div>
+                  <div style={{color:"#3B82F6",fontSize:10,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{followingFeed.length} PREDICTIONS FROM PEOPLE YOU FOLLOW</div>
                 </div>
                 {followingFeed.map(pred=>(
                   <div key={pred.id} style={{scrollSnapAlign:"start",marginBottom:14}}>
@@ -2643,17 +2650,17 @@ votes, onVote, balance, onOpenCreator }) {
   const trending=ALL_PREDS.filter(p=>p.hot).slice(0,3);
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <h2 style={{fontSize:20,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",marginBottom:14}}>🔍 Search</h2>
         <div style={{position:"relative",marginBottom:12}}>
           <span style={{position:"absolute",left:14,top:"50%",transform:"translateY(-50%)",fontSize:16,opacity:0.3}}>🔍</span>
-          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search predictions, categories, creators..." style={{width:"100%",background:"#213743",border:"1px solid #213743",borderRadius:14,padding:"13px 14px 13px 40px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
+          <input value={q} onChange={e=>setQ(e.target.value)} placeholder="Search predictions, categories, creators..." style={{width:"100%",background:"#1A2D4A",border:"1px solid #1A2D4A",borderRadius:14,padding:"13px 14px 13px 40px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
           {q&&<button onClick={()=>setQ("")} style={{position:"absolute",right:12,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",color:"rgba(255,255,255,0.32)",fontSize:18,cursor:"pointer"}}>✕</button>}
         </div>
         <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:12,scrollbarWidth:"none"}}>
           {CATS_LIST.map(c=>(
-            <button key={c.id} onClick={()=>setActive(c.id)} style={{flexShrink:0,background:active===c.id?c.color:"#213743",border:"1px solid "+(active===c.id?c.color:"rgba(255,255,255,0.42)"),borderRadius:20,padding:"5px 12px",cursor:"pointer",color:active===c.id?"#000":"#6a8090",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:4,transition:"all 0.2s"}}>
+            <button key={c.id} onClick={()=>setActive(c.id)} style={{flexShrink:0,background:active===c.id?c.color:"#1A2D4A",border:"1px solid "+(active===c.id?c.color:"rgba(255,255,255,0.42)"),borderRadius:20,padding:"5px 12px",cursor:"pointer",color:active===c.id?"#000":"#6a8090",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:4,transition:"all 0.2s"}}>
               <span>{c.icon}</span>{c.label}
             </button>
           ))}
@@ -2665,7 +2672,7 @@ votes, onVote, balance, onOpenCreator }) {
           <>
             <SectionLabel>🔥 TRENDING SEARCHES</SectionLabel>
             {["Bitcoin $150k","World Cup 2026","GPT-5 release","Alien disclosure","Fed rate cuts"].map(t=>(
-              <button key={t} onClick={()=>setQ(t)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",background:"none",border:"none",cursor:"pointer",padding:"11px 0",borderBottom:"1px solid #1A2C38"}}>
+              <button key={t} onClick={()=>setQ(t)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",background:"none",border:"none",cursor:"pointer",padding:"11px 0",borderBottom:"1px solid #0F2040"}}>
                 <span style={{fontSize:14,opacity:0.4}}>🔥</span>
                 <span style={{color:"rgba(255,255,255,0.72)",fontSize:14,fontFamily:"'Inter',sans-serif"}}>{t}</span>
               </button>
@@ -2673,7 +2680,7 @@ votes, onVote, balance, onOpenCreator }) {
             <div style={{height:20}}/>
             <SectionLabel>TOP CREATORS</SectionLabel>
             {[...new Map(ALL_PREDS.map(p=>[p.creator.handle,p.creator])).values()].map(c=>(
-              <div key={c.handle} onClick={()=>onOpenCreator&&onOpenCreator(c.handle)} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:"1px solid #1A2C38",cursor:"pointer"}}>
+              <div key={c.handle} onClick={()=>onOpenCreator&&onOpenCreator(c.handle)} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:"1px solid #0F2040",cursor:"pointer"}}>
                 <Avatar emoji={c.avatar} color={c.color} size={42}/>
                 <div style={{flex:1}}>
                   <div style={{display:"flex",alignItems:"center",gap:5}}>
@@ -2694,7 +2701,7 @@ votes, onVote, balance, onOpenCreator }) {
             {results.length===0
               ? <div style={{textAlign:"center",padding:"40px 0",color:"rgba(255,255,255,0.42)",fontFamily:"'Inter',sans-serif",fontSize:13}}>No predictions found</div>
               : results.map(pred=>(
-                <div key={pred.id} onClick={()=>setDetailPred(pred)} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,cursor:"pointer"}}>
+                <div key={pred.id} onClick={()=>setDetailPred(pred)} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,cursor:"pointer"}}>
                   <PredImage pred={pred} style={{width:64,height:64,borderRadius:10}}/>
                   <div style={{flex:1,minWidth:0}}>
                     <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:5}}>
@@ -2707,7 +2714,7 @@ votes, onVote, balance, onOpenCreator }) {
                     </div>
                     <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:6}}>{pred.title}</div>
                     <div style={{display:"flex",gap:10,alignItems:"center"}}>
-                      <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
+                      <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
                       <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>Pool: {pred.pool}</span>
                     </div>
                   </div>
@@ -2737,9 +2744,9 @@ function NotificationsPage({ liveNotifs=[], onMarkRead, setLiveNotifs,
   const dismiss=id=>{setNotifs(ns=>ns.filter(n=>n.id!==id));if(setLiveNotifs)setLiveNotifs(ns=>ns.filter(n=>n.id!==id));};
   const markAll=()=>{setNotifs(ns=>ns.map(n=>({...n,read:true,unread:false})));if(onMarkRead)onMarkRead();};
 
-  const typeColors={ win:"#1fbb7b", follow:"#00E5FF", odds:"#F4C430", resolve:"#7c4dcc", comment:"#7c4dcc" };
+  const typeColors={ win:"#3B82F6", follow:"#00E5FF", odds:"#F4C430", resolve:"#7c4dcc", comment:"#7c4dcc" };
   const ctaMap = {
-    win: {label:"Claim +$8.40", color:"#1fbb7b"},
+    win: {label:"Claim +$8.40", color:"#3B82F6"},
     follow: {label:"Follow back", color:"#00E5FF"},
     odds: {label:"View market", color:"#F4C430"},
     resolve: {label:"See result", color:"#7c4dcc"},
@@ -2754,28 +2761,28 @@ function NotificationsPage({ liveNotifs=[], onMarkRead, setLiveNotifs,
 
   return (
     <div style={{height:"100%",overflowY:"auto",background:t.bgOverlay}}>
-      <div style={{padding:"16px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+      <div style={{padding:"16px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
           <div>
             <span style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>{unreadCount>0?(unreadCount)+" UNREAD":"ALL CAUGHT UP"}</span>
           </div>
-          {unreadCount>0&&<button onClick={markAll} style={{background:"none",border:"1px solid #213743",borderRadius:20,color:"rgba(255,255,255,0.42)",fontSize:11,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Mark all read</button>}
+          {unreadCount>0&&<button onClick={markAll} style={{background:"none",border:"1px solid #1A2D4A",borderRadius:20,color:"rgba(255,255,255,0.42)",fontSize:11,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Mark all read</button>}
         </div>
         {/* Filter tabs */}
-        <div style={{display:"flex",gap:0,background:"#1A2C38",borderRadius:12,padding:3,marginBottom:4}}>
+        <div style={{display:"flex",gap:0,background:"#0F2040",borderRadius:12,padding:3,marginBottom:4}}>
           {[["all","All"],["unread","Unread"],["wins","Wins"]].map(([id,label])=>(
-            <button key={id} onClick={()=>setFilter(id)} style={{flex:1,background:filter===id?"#213743":"transparent",border:"none",borderRadius:10,color:filter===id?"#fff":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,padding:"7px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{label}</button>
+            <button key={id} onClick={()=>setFilter(id)} style={{flex:1,background:filter===id?"#1A2D4A":"transparent",border:"none",borderRadius:10,color:filter===id?"#fff":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,padding:"7px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{label}</button>
           ))}
         </div>
       </div>
       <div style={{padding:"8px 16px 100px"}}>
         {visible.length===0 && <EmptyState icon="🔔" msg={filter==="unread"?"No unread notifications":"No wins yet — keep betting!"}/>}
         {visible.map(n=>(
-          <div key={n.id} onClick={()=>markRead(n.id)} style={{display:"flex",gap:12,padding:"14px 12px",marginBottom:6,borderRadius:16,background:!n.read?"#1A2C38":"transparent",border:!n.read?"1px solid #213743":"1px solid transparent",cursor:"pointer",transition:"all 0.2s",position:"relative"}}>
+          <div key={n.id} onClick={()=>markRead(n.id)} style={{display:"flex",gap:12,padding:"14px 12px",marginBottom:6,borderRadius:16,background:!n.read?"#0F2040":"transparent",border:!n.read?"1px solid #1A2D4A":"1px solid transparent",cursor:"pointer",transition:"all 0.2s",position:"relative"}}>
             {/* dismiss button */}
             <button onClick={e=>{e.stopPropagation();dismiss(n.id);}} style={{position:"absolute",top:8,right:8,background:"none",border:"none",color:"rgba(255,255,255,0.42)",fontSize:14,cursor:"pointer",padding:"2px 6px"}}>✕</button>
 
-            <div style={{width:44,height:44,borderRadius:"50%",background:(typeColors[n.type]||"#213743")+"22",border:"1px solid "+(typeColors[n.type]||"#213743")+"44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>
+            <div style={{width:44,height:44,borderRadius:"50%",background:(typeColors[n.type]||"#1A2D4A")+"22",border:"1px solid "+(typeColors[n.type]||"#1A2D4A")+"44",display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>
               {n.icon}
             </div>
             <div style={{flex:1,paddingRight:20}}>
@@ -2790,7 +2797,7 @@ function NotificationsPage({ liveNotifs=[], onMarkRead, setLiveNotifs,
                 </button>
               )}
             </div>
-            {n.unread&&<div style={{width:7,height:7,borderRadius:"50%",background:"#1fbb7b",flexShrink:0,marginTop:6}}/>}
+            {n.unread&&<div style={{width:7,height:7,borderRadius:"50%",background:"#3B82F6",flexShrink:0,marginTop:6}}/>}
           </div>
         ))}
       </div>
@@ -2832,12 +2839,12 @@ function WalletPage({
 
         {/* Balance hero card */}
         <div style={{background:"linear-gradient(135deg,#0a1f0a,#0d2617)",borderRadius:22,padding:"24px",marginBottom:14,position:"relative",overflow:"hidden"}}>
-          <div style={{position:"absolute",top:-40,right:-40,width:150,height:150,borderRadius:"50%",background:"radial-gradient(circle,rgba(31,187,123,0.12),transparent)"}}/>
+          <div style={{position:"absolute",top:-40,right:-40,width:150,height:150,borderRadius:"50%",background:"radial-gradient(circle,rgba(59,130,246,0.12),transparent)"}}/>
           <div style={{color:"rgba(255,255,255,0.35)",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:600,marginBottom:6,letterSpacing:1}}>AVAILABLE BALANCE</div>
           <div style={{color:"#FFFFFF",fontSize:50,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1,marginBottom:4}}>${balance.toFixed(2)}</div>
-          <div style={{color:"rgba(31,187,123,0.7)",fontSize:12,fontFamily:"'Inter',sans-serif",marginBottom:20}}>Demo credits · No real money</div>
+          <div style={{color:"rgba(59,130,246,0.7)",fontSize:12,fontFamily:"'Inter',sans-serif",marginBottom:20}}>Demo credits · No real money</div>
           <div style={{display:"flex",gap:10}}>
-            <button onClick={()=>{setShowDeposit(true);setDeposited(false);}} style={{flex:1,background:"#1fbb7b",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"13px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Add Funds</button>
+            <button onClick={()=>{setShowDeposit(true);setDeposited(false);}} style={{flex:1,background:"#3B82F6",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"13px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Add Funds</button>
             <button onClick={()=>setShowWithdraw(true)} style={{flex:1,background:"rgba(255,255,255,0.07)",border:"none",borderRadius:14,color:"rgba(255,255,255,0.6)",fontSize:14,fontWeight:700,padding:"13px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Withdraw</button>
           </div>
         </div>
@@ -2845,12 +2852,12 @@ function WalletPage({
         {/* Stats grid */}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
           {[
-            ["Won","$"+totalWon.toFixed(2),"#1fbb7b"],
+            ["Won","$"+totalWon.toFixed(2),"#3B82F6"],
             ["Wagered","$"+totalBet.toFixed(2),"rgba(255,255,255,0.85)"],
-            ["Net P&L",(netPnL>=0?"+":"")+netPnL.toFixed(2),(netPnL>=0?"#1fbb7b":"#f93d3d")],
+            ["Net P&L",(netPnL>=0?"+":"")+netPnL.toFixed(2),(netPnL>=0?"#3B82F6":"#f93d3d")],
             ["Win Rate",realWinRate!==null?(realWinRate+"%"):"—","#F4C430"]
           ].map(([l,v,c])=>(
-            <div key={l} style={{background:"#1A2C38",borderRadius:16,padding:"14px"}}>
+            <div key={l} style={{background:"#0F2040",borderRadius:16,padding:"14px"}}>
               <div style={{color:c,fontSize:22,fontWeight:800,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:5}}>{l}</div>
             </div>
@@ -2864,16 +2871,16 @@ function WalletPage({
             <div onClick={()=>setExpandedTxn(expandedTxn===t.id?null:t.id)}
               style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"12px 0",borderBottom:"1px solid rgba(255,255,255,0.05)",cursor:"pointer"}}>
               <div style={{display:"flex",gap:10,alignItems:"center"}}>
-                <div style={{width:38,height:38,borderRadius:12,background:t.amount>0?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{t.icon}</div>
+                <div style={{width:38,height:38,borderRadius:12,background:t.amount>0?"rgba(59,130,246,0.12)":"rgba(249,61,61,0.1)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{t.icon}</div>
                 <div>
                   <div style={{color:"rgba(255,255,255,0.8)",fontSize:13,fontFamily:"'Inter',sans-serif",maxWidth:200,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{t.note}</div>
                   <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{t.date}</div>
                 </div>
               </div>
-              <span style={{color:t.amount>0?"#1fbb7b":"rgba(249,61,61,0.85)",fontWeight:700,fontFamily:"'Inter',sans-serif",fontSize:14}}>{t.amount>0?"+":""}{t.amount.toFixed(2)}</span>
+              <span style={{color:t.amount>0?"#3B82F6":"rgba(249,61,61,0.85)",fontWeight:700,fontFamily:"'Inter',sans-serif",fontSize:14}}>{t.amount>0?"+":""}{t.amount.toFixed(2)}</span>
             </div>
             {expandedTxn===t.id && (
-              <div style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",margin:"4px 0 8px"}}>
+              <div style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",margin:"4px 0 8px"}}>
                 <div style={{color:"rgba(255,255,255,0.45)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.6}}>{t.detail||"Transaction completed."}</div>
               </div>
             )}
@@ -2889,15 +2896,15 @@ function WalletPage({
             {deposited ? (
               <div style={{textAlign:"center",padding:"20px 0 10px"}}>
                 <div style={{fontSize:56,marginBottom:12}}>🎉</div>
-                <h3 style={{color:"#1fbb7b",fontSize:24,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:8}}>+${depositAmt} Added!</h3>
+                <h3 style={{color:"#3B82F6",fontSize:24,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:8}}>+${depositAmt} Added!</h3>
                 <p style={{color:"rgba(255,255,255,0.4)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:24}}>Your balance has been topped up.</p>
-                <button onClick={()=>setShowDeposit(false)} style={{background:"#1fbb7b",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"14px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
+                <button onClick={()=>setShowDeposit(false)} style={{background:"#3B82F6",border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,padding:"14px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
               </div>
             ) : (<>
               <SectionLabel>Select Amount</SectionLabel>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:20}}>
                 {[10,25,50,100,250,500].map(v=>(
-                  <button key={v} onClick={()=>setDepositAmt(v)} style={{background:depositAmt===v?"rgba(31,187,123,0.15)":"rgba(255,255,255,0.05)",border:depositAmt===v?"1px solid rgba(31,187,123,0.4)":"none",borderRadius:14,padding:"14px 0",color:depositAmt===v?"#1fbb7b":"rgba(255,255,255,0.6)",fontSize:17,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
+                  <button key={v} onClick={()=>setDepositAmt(v)} style={{background:depositAmt===v?"rgba(59,130,246,0.15)":"rgba(255,255,255,0.05)",border:depositAmt===v?"1px solid rgba(59,130,246,0.4)":"none",borderRadius:14,padding:"14px 0",color:depositAmt===v?"#3B82F6":"rgba(255,255,255,0.6)",fontSize:17,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
                 ))}
               </div>
               <PaymentModal
@@ -2965,7 +2972,7 @@ function PropFirmFundedBoard({ onOpenPropFirm }) {
       <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:12}}>
         <div>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
-            <div style={{width:8,height:8,borderRadius:"50%",background:pulse?"#1fbb7b":"#0d8a56",boxShadow:pulse?"0 0 8px #1fbb7b":"none",transition:"all 0.3s"}}/>
+            <div style={{width:8,height:8,borderRadius:"50%",background:pulse?"#3B82F6":"#0d8a56",boxShadow:pulse?"0 0 8px #3B82F6":"none",transition:"all 0.3s"}}/>
             <span style={{color:"#FFFFFF",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>🏦 Funded Traders Board</span>
           </div>
           <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2,marginLeft:16}}>LIVE · Updated {lastUpdated}</div>
@@ -2984,8 +2991,8 @@ function PropFirmFundedBoard({ onOpenPropFirm }) {
         const payoutAmt = (t.pnl * 0.9).toFixed(0);
         const isTop3 = t.rank <= 3;
         return (
-          <div key={t.user} style={{background:isTop3?"linear-gradient(135deg,#0F212E,#1A2C38)":"#1A2C38",borderRadius:14,border:"1px solid "+(isTop3?"rgba(31,187,123,0.133)":"#213743"),padding:"12px 14px",marginBottom:8,display:"grid",gridTemplateColumns:"28px 1fr 70px 60px",gap:8,alignItems:"center",transition:"all 0.4s"}}>
-            <div style={{color:isTop3?"#1fbb7b":"rgba(255,255,255,0.22)",fontSize:isTop3?16:12,fontFamily:"'Inter',sans-serif",fontWeight:700,textAlign:"center"}}>
+          <div key={t.user} style={{background:isTop3?"linear-gradient(135deg,#0A1628,#0F2040)":"#0F2040",borderRadius:14,border:"1px solid "+(isTop3?"rgba(59,130,246,0.133)":"#1A2D4A"),padding:"12px 14px",marginBottom:8,display:"grid",gridTemplateColumns:"28px 1fr 70px 60px",gap:8,alignItems:"center",transition:"all 0.4s"}}>
+            <div style={{color:isTop3?"#3B82F6":"rgba(255,255,255,0.22)",fontSize:isTop3?16:12,fontFamily:"'Inter',sans-serif",fontWeight:700,textAlign:"center"}}>
               {t.rank<=3?["🥇","🥈","🥉"][t.rank-1]:t.rank}
             </div>
             <div>
@@ -2994,13 +3001,13 @@ function PropFirmFundedBoard({ onOpenPropFirm }) {
                 <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>@{t.user}</span>
               </div>
               <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                <span style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",background:"#1A2C38",borderRadius:99,padding:"1px 6px"}}>{t.tier}</span>
+                <span style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",background:"#0F2040",borderRadius:99,padding:"1px 6px"}}>{t.tier}</span>
                 <span style={{color:"rgba(255,255,255,0.32)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>{t.accountType}</span>
                 {t.daysLeft <= 7 && <span style={{color:"#F4C430",fontSize:9,fontFamily:"'Inter',sans-serif"}}>⏱ {t.daysLeft}d left</span>}
               </div>
             </div>
             <div style={{textAlign:"right"}}>
-              <div style={{color:"#1fbb7b",fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif",transition:"color 0.3s"}}>+${Math.round(t.pnl).toLocaleString()}</div>
+              <div style={{color:"#3B82F6",fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif",transition:"color 0.3s"}}>+${Math.round(t.pnl).toLocaleString()}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>{t.wins} wins</div>
             </div>
             <div style={{textAlign:"right"}}>
@@ -3012,9 +3019,9 @@ function PropFirmFundedBoard({ onOpenPropFirm }) {
       })}
 
       {/* CTA footer */}
-      <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:14,border:"1px solid rgba(31,187,123,0.133)",padding:"14px 16px",marginTop:4,display:"flex",alignItems:"center",gap:12}}>
+      <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:14,border:"1px solid rgba(59,130,246,0.133)",padding:"14px 16px",marginTop:4,display:"flex",alignItems:"center",gap:12}}>
         <div style={{flex:1}}>
-          <div style={{color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}>Your name could be here</div>
+          <div style={{color:"#3B82F6",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}>Your name could be here</div>
           <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>Start from $49 · Keep 90% · Leaderboard updated live</div>
         </div>
         <button onClick={onOpenPropFirm} style={{background:"#F4C430",border:"none",borderRadius:99,color:"#0F1720",fontSize:12,fontWeight:900,padding:"9px 16px",cursor:"pointer",fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap",animation:"propGlow 6s ease-in-out infinite"}}>Join →</button>
@@ -3041,7 +3048,7 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
 
   const winRate = Math.round(user.wins / user.total * 100);
   const avgProfit = (user.profit / user.total).toFixed(0);
-  const colors = ["#F4C430","rgba(255,255,255,0.62)","#C97A28","rgba(255,255,255,0.32)","rgba(255,255,255,0.32)","#1fbb7b","rgba(255,255,255,0.32)","rgba(255,255,255,0.32)"];
+  const colors = ["#F4C430","rgba(255,255,255,0.62)","#C97A28","rgba(255,255,255,0.32)","rgba(255,255,255,0.32)","#3B82F6","rgba(255,255,255,0.32)","rgba(255,255,255,0.32)"];
   const rankColor = colors[user.rank-1] || "rgba(255,255,255,0.32)";
 
   const recentBets = ALL_PREDS.slice(0, 3).map((p, i) => ({
@@ -3052,7 +3059,7 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
   }));
 
   const statBlocks = [
-    ["Win Rate", winRate + "%", "#1fbb7b"],
+    ["Win Rate", winRate + "%", "#3B82F6"],
     ["Total Profit", "+$" + user.profit.toLocaleString(), "#F4C430"],
     ["Avg/Bet", "+$" + avgProfit, "#00E5FF"],
     ["Bets", user.total, "rgba(255,255,255,0.4)"],
@@ -3063,7 +3070,7 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
       onClick={close}>
       <div style={{position:"absolute",inset:0,background:"rgba(0,0,0,0.65)",backdropFilter:"blur(8px)",opacity:vis?1:0,transition:"opacity 0.3s"}}/>
       <div onClick={e=>e.stopPropagation()} style={{
-        position:"relative",background:"#0F212E",borderRadius:"28px 28px 0 0",
+        position:"relative",background:"#0A1628",borderRadius:"28px 28px 0 0",
         maxHeight:"85vh",overflowY:"auto",
         transform:vis?"translateY(0)":"translateY(100%)",
         transition:"transform 0.35s cubic-bezier(0.22,1,0.36,1)",
@@ -3092,8 +3099,8 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
           {!user.isMe && (
             <button onClick={()=>onFollow(user.user)} style={{
               padding:"10px 36px",borderRadius:99,
-              background:isFollowing?"transparent":"#1fbb7b",
-              border:"1px solid "+(isFollowing?"rgba(255,255,255,0.2)":"#1fbb7b"),
+              background:isFollowing?"transparent":"#3B82F6",
+              border:"1px solid "+(isFollowing?"rgba(255,255,255,0.2)":"#3B82F6"),
               color:isFollowing?"rgba(255,255,255,0.5)":"#fff",
               fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",
               cursor:"pointer",marginBottom:20,
@@ -3118,10 +3125,10 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
         <div style={{margin:"0 16px 16px",background:"rgba(255,255,255,0.04)",borderRadius:14,padding:"14px"}}>
           <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
             <span style={{color:"rgba(255,255,255,0.5)",fontSize:11,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>WIN RATE</span>
-            <span style={{color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{winRate}%</span>
+            <span style={{color:"#3B82F6",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{winRate}%</span>
           </div>
           <div style={{height:6,background:"rgba(255,255,255,0.08)",borderRadius:99,overflow:"hidden"}}>
-            <div style={{height:"100%",width:winRate+"%",background:"linear-gradient(90deg,#2F805A,#1fbb7b)",borderRadius:99}}/>
+            <div style={{height:"100%",width:winRate+"%",background:"linear-gradient(90deg,#2F805A,#3B82F6)",borderRadius:99}}/>
           </div>
         </div>
 
@@ -3133,16 +3140,16 @@ function LeaderboardUserSheet({ user, onClose, following, onFollow }) {
               <div style={{flex:1,minWidth:0}}>
                 <div style={{color:"#FFFFFF",fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{b.title}</div>
                 <div style={{display:"flex",gap:6,marginTop:3}}>
-                  <span style={{color:b.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{b.pos}</span>
+                  <span style={{color:b.pos==="YES"?"#22C55E":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{b.pos}</span>
                   <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>${b.amount}</span>
                 </div>
               </div>
               <div style={{
-                background:b.result==="WIN"?"rgba(31,187,123,0.15)":b.result==="PENDING"?"rgba(244,196,48,0.1)":"rgba(249,61,61,0.12)",
-                border:"1px solid "+(b.result==="WIN"?"rgba(31,187,123,0.3)":b.result==="PENDING"?"rgba(244,196,48,0.25)":"rgba(249,61,61,0.25)"),
+                background:b.result==="WIN"?"rgba(59,130,246,0.15)":b.result==="PENDING"?"rgba(244,196,48,0.1)":"rgba(249,61,61,0.12)",
+                border:"1px solid "+(b.result==="WIN"?"rgba(59,130,246,0.3)":b.result==="PENDING"?"rgba(244,196,48,0.25)":"rgba(249,61,61,0.25)"),
                 borderRadius:99,padding:"3px 10px",
               }}>
-                <span style={{color:b.result==="WIN"?"#1fbb7b":b.result==="PENDING"?"#F4C430":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{b.result}</span>
+                <span style={{color:b.result==="WIN"?"#3B82F6":b.result==="PENDING"?"#F4C430":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{b.result}</span>
               </div>
             </div>
           ))}
@@ -3191,11 +3198,11 @@ function RankingPage({
   return (
     <>
     <div style={{height:"100%",overflowY:"auto",background:t.bgOverlay}}>
-      <div style={{padding:"22px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+      <div style={{padding:"22px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <h2 style={{fontSize:20,fontWeight:800,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",marginBottom:14}}>Rankings</h2>
         <div style={{display:"flex",gap:6,marginBottom:4}}>
           {["weekly","monthly","alltime"].map(p=>(
-            <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#1fbb7b":"rgba(255,255,255,0.06)",border:"none",borderRadius:20,color:period===p?"#000":"rgba(255,255,255,0.45)",fontSize:12,fontWeight:600,padding:"7px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.18s"}}>
+            <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#3B82F6":"rgba(255,255,255,0.06)",border:"none",borderRadius:20,color:period===p?"#000":"rgba(255,255,255,0.45)",fontSize:12,fontWeight:600,padding:"7px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.18s"}}>
               {p==="alltime"?"All time":p.charAt(0).toUpperCase()+p.slice(1)}
             </button>
           ))}
@@ -3244,7 +3251,7 @@ function RankingPage({
               <div key={r.rank} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
                 <div style={{width:38,height:38,borderRadius:13,background:(colors[i])+"15",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{r.isMe?"😎":"👤"}</div>
                 <span style={{color:"rgba(255,255,255,0.55)",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>@{r.user.slice(0,8)}</span>
-                <span style={{color:"#1fbb7b",fontSize:12,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>+${r.profit.toLocaleString()}</span>
+                <span style={{color:"#3B82F6",fontSize:12,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>+${r.profit.toLocaleString()}</span>
                 <div style={{width:"100%",height:heights[i],background:(colors[i])+"10",borderRadius:"10px 10px 0 0",display:"flex",alignItems:"flex-start",justifyContent:"center",paddingTop:8}}>
                   <span style={{color:colors[i],fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{labels[i]}</span>
                 </div>
@@ -3255,19 +3262,19 @@ function RankingPage({
 
         {/* Leaderboard list */}
         {dynamicBoard.map(r=>(
-          <div key={r.rank} onClick={()=>setSelectedUser(r)} style={{background:r.isMe?"rgba(31,187,123,0.06)":"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12,border:r.isMe?"1px solid rgba(31,187,123,0.18)":"none",cursor:"pointer"}}>
+          <div key={r.rank} onClick={()=>setSelectedUser(r)} style={{background:r.isMe?"rgba(59,130,246,0.06)":"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12,border:r.isMe?"1px solid rgba(59,130,246,0.18)":"none",cursor:"pointer"}}>
             <div style={{width:28,textAlign:"center",fontSize:r.rank<=3?18:13,color:r.rank===1?"#F4C430":r.rank===2?"#C0C0C0":r.rank===3?"#CD7F32":"rgba(255,255,255,0.25)",fontWeight:700,flexShrink:0}}>
               {r.rank<=3?["🥇","🥈","🥉"][r.rank-1]:r.rank}
             </div>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:"flex",alignItems:"center",gap:6}}>
-                <span style={{color:r.isMe?"#1fbb7b":"#fff",fontWeight:700,fontSize:14,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
-                {r.isMe&&<Badge color="#1fbb7b">You</Badge>}
+                <span style={{color:r.isMe?"#3B82F6":"#fff",fontWeight:700,fontSize:14,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
+                {r.isMe&&<Badge color="#3B82F6">You</Badge>}
               </div>
               <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{r.wins}/{r.total} correct · {Math.round(r.wins/r.total*100)}% win rate</div>
             </div>
             <div style={{textAlign:"right",flexShrink:0}}>
-              <div style={{color:"#1fbb7b",fontWeight:800,fontSize:14,fontFamily:"'Inter',sans-serif"}}>+${r.profit.toLocaleString()}</div>
+              <div style={{color:"#3B82F6",fontWeight:800,fontSize:14,fontFamily:"'Inter',sans-serif"}}>+${r.profit.toLocaleString()}</div>
               <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{r.total} bets</div>
             </div>
           </div>
@@ -3321,8 +3328,8 @@ function SellPositionSheet({ pred, vote, onClose }) {
         <div style={{flex:1,minWidth:0}}>
           <div style={{color:"#ffffff",fontSize:13,fontWeight:600,fontFamily:"'Inter',sans-serif",lineHeight:1.3,overflow:"hidden",textOverflow:"ellipsis",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>{pred.title}</div>
           <div style={{display:"flex",gap:8,marginTop:5,alignItems:"center"}}>
-            <div style={{background:vote.pos==="YES"?"rgba(31,187,123,0.15)":"rgba(249,61,61,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(31,187,123,0.3)":"rgba(249,61,61,0.25)"),borderRadius:6,padding:"2px 8px"}}>
-              <span style={{color:vote.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{vote.pos}</span>
+            <div style={{background:vote.pos==="YES"?"rgba(34,197,94,0.15)":"rgba(249,61,61,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(34,197,94,0.3)":"rgba(249,61,61,0.25)"),borderRadius:6,padding:"2px 8px"}}>
+              <span style={{color:vote.pos==="YES"?"#22C55E":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{vote.pos}</span>
             </div>
             <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{currPct}% · {totalShares.toFixed(2)} shares</span>
           </div>
@@ -3334,7 +3341,7 @@ function SellPositionSheet({ pred, vote, onClose }) {
           <div style={{fontSize:48,marginBottom:12}}>✅</div>
           <div style={{color:"#ffffff",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>{sellPct < 100 ? "Partial Sell" : "Position Sold"}</div>
           <div style={{color:"rgba(255,255,255,0.4)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:24}}>${sellValue.toFixed(2)} returned · {sharesToSell.toFixed(2)} shares sold</div>
-          <button onClick={handleDone} style={{width:"100%",background:"none",border:"1px solid rgba(31,187,123,0.4)",borderRadius:14,color:"#1fbb7b",fontSize:15,fontWeight:700,padding:"15px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
+          <button onClick={handleDone} style={{width:"100%",background:"none",border:"1px solid rgba(59,130,246,0.4)",borderRadius:14,color:"#3B82F6",fontSize:15,fontWeight:700,padding:"15px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
         </div>
       ) : (
         <>
@@ -3342,19 +3349,19 @@ function SellPositionSheet({ pred, vote, onClose }) {
           <div style={{background:"rgba(255,255,255,0.04)",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
               <span style={{color:"#FFFFFF",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Shares to sell</span>
-              <span style={{color:"#1fbb7b",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{sharesToSell.toFixed(2)} <span style={{color:"rgba(255,255,255,0.3)",fontSize:10}}>/ {totalShares.toFixed(2)}</span></span>
+              <span style={{color:"#3B82F6",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{sharesToSell.toFixed(2)} <span style={{color:"rgba(255,255,255,0.3)",fontSize:10}}>/ {totalShares.toFixed(2)}</span></span>
             </div>
             {/* Preset buttons */}
             <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:6,marginBottom:12}}>
               {PRESETS.map(p=>(
-                <button key={p} onClick={()=>setSellPct(p)} style={{background:"none",border:"1px solid "+(sellPct===p?"rgba(31,187,123,0.5)":"rgba(255,255,255,0.1)"),borderRadius:8,padding:"6px 0",color:sellPct===p?"#1fbb7b":"rgba(255,255,255,0.35)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+                <button key={p} onClick={()=>setSellPct(p)} style={{background:"none",border:"1px solid "+(sellPct===p?"rgba(59,130,246,0.5)":"rgba(255,255,255,0.1)"),borderRadius:8,padding:"6px 0",color:sellPct===p?"#3B82F6":"rgba(255,255,255,0.35)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                   {p}%
                 </button>
               ))}
             </div>
             {/* Slider */}
             <input type="range" min="1" max="100" value={sellPct} onChange={e=>setSellPct(parseInt(e.target.value))}
-              style={{width:"100%",accentColor:"#1fbb7b",cursor:"pointer"}}
+              style={{width:"100%",accentColor:"#3B82F6",cursor:"pointer"}}
             />
             <div style={{display:"flex",justifyContent:"space-between",marginTop:4}}>
               <span style={{color:"rgba(255,255,255,0.2)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>1%</span>
@@ -3368,7 +3375,7 @@ function SellPositionSheet({ pred, vote, onClose }) {
               {label:"COST BASIS",  val:"$"+costBasis.toFixed(2),                            color:"#c8dae8"},
               {label:"SHARES",      val:sharesToSell.toFixed(2)+" @ "+Math.round(currPct)+"¢", color:"#c8dae8"},
               {label:"SELL VALUE",  val:"$"+sellValue.toFixed(2),                            color:"#ffffff"},
-              {label:"P&L",         val:(pnl>=0?"+":"-")+"$"+Math.abs(pnl).toFixed(2),      color:pnl>=0?"#1fbb7b":"#f93d3d"},
+              {label:"P&L",         val:(pnl>=0?"+":"-")+"$"+Math.abs(pnl).toFixed(2),      color:pnl>=0?"#3B82F6":"#f93d3d"},
               {label:"FEE",         val:"1%",                                                 color:"rgba(255,255,255,0.3)"},
             ].map(s=>(
               <div key={s.label} style={{background:"rgba(255,255,255,0.04)",borderRadius:12,padding:"10px 8px",textAlign:"center"}}>
@@ -3408,7 +3415,7 @@ function PnLHistogram({ days, maxAbs }) {
           const pct    = Math.abs(d.pnl) / maxAbs;
           const h      = Math.max(3, Math.round(pct * barH * 0.9));
           const isPos  = d.pnl >= 0;
-          const color  = isPos ? "#1fbb7b" : "#f93d3d";
+          const color  = isPos ? "#3B82F6" : "#f93d3d";
           const isHov  = hovered === i;
           return (
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",height:"100%",position:"relative",cursor:"pointer"}}
@@ -3418,7 +3425,7 @@ function PnLHistogram({ days, maxAbs }) {
             >
               {/* Tooltip */}
               {isHov && (
-                <div style={{position:"absolute",bottom:"100%",left:"50%",transform:"translateX(-50%)",background:"#213743",border:"1px solid rgba(255,255,255,0.15)",borderRadius:8,padding:"6px 10px",whiteSpace:"nowrap",zIndex:10,marginBottom:4,pointerEvents:"none"}}>
+                <div style={{position:"absolute",bottom:"100%",left:"50%",transform:"translateX(-50%)",background:"#1A2D4A",border:"1px solid rgba(255,255,255,0.15)",borderRadius:8,padding:"6px 10px",whiteSpace:"nowrap",zIndex:10,marginBottom:4,pointerEvents:"none"}}>
                   <div style={{color:color,fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{isPos?"+":"-"}${Math.abs(d.pnl).toFixed(2)}</div>
                   <div style={{color:"rgba(255,255,255,0.4)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:2}}>{d.day}</div>
                 </div>
@@ -3470,18 +3477,18 @@ function PropFirmPnlCard({ propAccounts, onOpenPropFirm, onOpenPropAnalytics }) 
   const maxAbs   = histDays.length ? Math.max(...histDays.map(d=>Math.abs(d.pnl)), 0.01) : 0.01;
 
   return (
-    <div style={{background:"linear-gradient(135deg,#0d1a12,#0F212E)",border:"1px solid rgba(20,158,99,0.2)",borderRadius:16,padding:"16px",marginBottom:16}}>
+    <div style={{background:"linear-gradient(135deg,#0d1a12,#0A1628)",border:"1px solid rgba(20,158,99,0.2)",borderRadius:16,padding:"16px",marginBottom:16}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <span style={{fontSize:16}}>🏦</span>
           <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Prop Firm</span>
-          {funded && <div style={{background:"rgba(20,158,99,0.2)",border:"1px solid rgba(20,158,99,0.4)",borderRadius:20,padding:"2px 8px"}}><span style={{color:"#1fbb7b",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>FUNDED</span></div>}
+          {funded && <div style={{background:"rgba(20,158,99,0.2)",border:"1px solid rgba(20,158,99,0.4)",borderRadius:20,padding:"2px 8px"}}><span style={{color:"#3B82F6",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>FUNDED</span></div>}
         </div>
         <button onClick={onOpenPropFirm} style={{background:"rgba(255,255,255,0.06)",border:"none",borderRadius:10,color:"rgba(255,255,255,0.4)",fontSize:10,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>View →</button>
       </div>
       <div style={{marginBottom:12}}>
         <div style={{color:"rgba(255,255,255,0.4)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:4}}>NET P&L</div>
-        <div style={{color:totalPnl>=0?"#1fbb7b":"#f93d3d",fontSize:32,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1,textShadow:totalPnl>0?"0 0 20px rgba(31,187,123,0.4)":"none"}}>
+        <div style={{color:totalPnl>=0?"#3B82F6":"#f93d3d",fontSize:32,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1,textShadow:totalPnl>0?"0 0 20px rgba(59,130,246,0.4)":"none"}}>
           {totalPnl>=0?"+":"-"}${Math.abs(totalPnl).toFixed(2)}
         </div>
         {acctBal!==null && <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:4}}>Balance: ${acctBal.toLocaleString()}</div>}
@@ -3505,7 +3512,7 @@ function PropFirmPnlCard({ propAccounts, onOpenPropFirm, onOpenPropAnalytics }) 
                 <div style={{color:"rgba(255,255,255,0.72)",fontSize:11,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{bet.title||bet.predId}</div>
                 <div style={{color:"rgba(255,255,255,0.25)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:1}}>{bet.pos} · ${(bet.stake||0).toFixed(2)}</div>
               </div>
-              <div style={{color:bet.won?"#1fbb7b":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",flexShrink:0}}>
+              <div style={{color:bet.won?"#3B82F6":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",flexShrink:0}}>
                 {bet.won?"+":"-"}${Math.abs(pnl).toFixed(2)}
               </div>
             </div>
@@ -3555,8 +3562,8 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
       {/* ── HERO ── */}
       <div style={{position:"relative",paddingBottom:0}}>
         {/* Banner */}
-        <div style={{height:56,background:"linear-gradient(135deg,#0d1a12 0%,#0F212E 60%,#0d0d14 100%)",position:"relative",overflow:"hidden"}}>
-          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 30% 60%,rgba(31,187,123,0.08) 0%,transparent 60%)"}}/>
+        <div style={{height:56,background:"linear-gradient(135deg,#0d1a12 0%,#0A1628 60%,#0d0d14 100%)",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 30% 60%,rgba(59,130,246,0.08) 0%,transparent 60%)"}}/>
         </div>
 
         {/* Avatar row */}
@@ -3575,15 +3582,15 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
           </div>
           {/* Top-right action buttons */}
           <div style={{display:"flex",gap:8,marginBottom:6}}>
-            <button onClick={onOpenSettings} style={{background:"#1A2C38",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
+            <button onClick={onOpenSettings} style={{background:"#0F2040",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="#fff" strokeWidth="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/></svg>
               Settings
             </button>
-            <button onClick={onOpenReferral} style={{background:"#1A2C38",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
+            <button onClick={onOpenReferral} style={{background:"#0F2040",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/><circle cx="9" cy="7" r="4" stroke="#fff" strokeWidth="1.8"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/></svg>
               Referrals
             </button>
-            <button onClick={onOpenPortfolio} style={{background:"#1A2C38",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
+            <button onClick={onOpenPortfolio} style={{background:"#0F2040",border:"1px solid rgba(255,255,255,0.08)",borderRadius:20,color:"#ffffff",fontSize:11,fontWeight:600,padding:"7px 13px",cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5}}>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><rect x="2" y="7" width="20" height="14" rx="2" stroke="#fff" strokeWidth="1.8"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke="#fff" strokeWidth="1.8" strokeLinecap="round"/></svg>
               History
             </button>
@@ -3619,7 +3626,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
 
         {/* ── QUICK ACTIONS ── */}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:16}}>
-          <button onClick={onOpenWatchlist} style={{background:"#1A2C38",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+          <button onClick={onOpenWatchlist} style={{background:"#0F2040",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
             <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.06)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z" stroke="#ffffff" strokeWidth="1.8" strokeLinejoin="round"/></svg>
             </div>
@@ -3628,7 +3635,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
               <div style={{color:"rgba(255,255,255,0.3)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:2}}>WATCHLIST</div>
             </div>
           </button>
-          <button onClick={onOpenResolved} style={{background:"#1A2C38",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
+          <button onClick={onOpenResolved} style={{background:"#0F2040",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left"}}>
             <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.06)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="#ffffff" strokeWidth="1.8"/><path d="M9 12l2 2 4-4" stroke="#ffffff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
             </div>
@@ -3637,7 +3644,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
               <div style={{color:"rgba(255,255,255,0.3)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:2}}>RESOLVED</div>
             </div>
           </button>
-          <button onClick={onOpenRanking} style={{background:"#1A2C38",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left",gridColumn:"1 / -1"}}>
+          <button onClick={onOpenRanking} style={{background:"#0F2040",border:"none",borderRadius:14,padding:"14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,textAlign:"left",gridColumn:"1 / -1"}}>
             <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.06)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="14" width="4" height="8" rx="1" stroke="#ffffff" strokeWidth="1.7"/><rect x="9" y="9" width="4" height="13" rx="1" stroke="#ffffff" strokeWidth="1.7"/><rect x="16" y="4" width="4" height="18" rx="1" stroke="#ffffff" strokeWidth="1.7"/></svg>
             </div>
@@ -3656,14 +3663,14 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
         <button onClick={onOpenPropFirm} style={{width:"100%",background:"linear-gradient(135deg,#1a1500,#1f1800)",border:"1px solid rgba(244,196,48,0.25)",borderRadius:14,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12,marginBottom:16,textAlign:"left",animation:"propGlow 6s ease-in-out infinite"}}>
           <div style={{width:38,height:38,borderRadius:10,background:"rgba(244,196,48,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>🏦</div>
           <div style={{flex:1}}>
-            <div style={{fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}><span style={{color:"#ffffff"}}>Trade with </span><span style={{color:"#1fbb7b"}}>$10,000</span></div>
+            <div style={{fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}><span style={{color:"#ffffff"}}>Trade with </span><span style={{color:"#3B82F6"}}>$10,000</span></div>
             <div style={{color:"rgba(244,196,48,0.5)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>From $49 · Keep 90% · Prediction prop firm</div>
           </div>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(244,196,48,0.6)" strokeWidth="2" strokeLinecap="round"/></svg>
         </button>
 
         {/* ── LEVEL · STREAK · ACHIEVEMENTS (combined panel) ── */}
-        <div style={{background:"#1A2C38",borderRadius:14,padding:"16px",marginBottom:16}}>
+        <div style={{background:"#0F2040",borderRadius:14,padding:"16px",marginBottom:16}}>
           {/* XP Level row */}
           {(()=>{
             const xp = calcXP(votes);
@@ -3719,7 +3726,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
         </div>
 
         {/* ── ADMIN BUTTON ── */}
-        <button onClick={onOpenAdmin} style={{width:"100%",background:"#1A2C38",border:"1px solid rgba(255,255,255,0.06)",borderRadius:14,padding:"13px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12,marginBottom:16,textAlign:"left"}}>
+        <button onClick={onOpenAdmin} style={{width:"100%",background:"#0F2040",border:"1px solid rgba(255,255,255,0.06)",borderRadius:14,padding:"13px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12,marginBottom:16,textAlign:"left"}}>
           <div style={{width:36,height:36,borderRadius:10,background:"rgba(255,255,255,0.05)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.09 6.26L20 9.27l-5 4.73L16.18 21 12 17.77 7.82 21 9 13.99l-5-4.73 5.91-.01L12 2z" stroke="#ffffff" strokeWidth="1.5" strokeLinejoin="round"/></svg>
           </div>
@@ -3731,7 +3738,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
         </button>
 
         {/* ── CONTENT TABS ── */}
-        <div style={{display:"flex",background:"#1A2C38",borderRadius:14,padding:4,marginBottom:16}}>
+        <div style={{display:"flex",background:"#0F2040",borderRadius:14,padding:4,marginBottom:16}}>
           <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",padding:"9px 0",display:"block"}}>Activity</span>
         </div>
 
@@ -3747,7 +3754,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                 const sellValue = parseFloat((staked * (1/entryOdds) * 0.99).toFixed(2));
                 const pnl = sellValue - staked;
                 return (
-                  <div key={pred.id} onClick={()=>setSellPosition({pred,v})} style={{background:"#1A2C38",borderRadius:14,padding:"13px",marginBottom:8,cursor:"pointer",border:"1px solid rgba(255,255,255,0.04)"}}>
+                  <div key={pred.id} onClick={()=>setSellPosition({pred,v})} style={{background:"#0F2040",borderRadius:14,padding:"13px",marginBottom:8,cursor:"pointer",border:"1px solid rgba(255,255,255,0.04)"}}>
                     <div style={{display:"flex",gap:12,alignItems:"center",marginBottom:10}}>
                       <PredImage pred={pred} style={{width:46,height:46,borderRadius:11}}/>
                       <div style={{flex:1,minWidth:0}}>
@@ -3756,8 +3763,8 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                           ${staked.toFixed(2)} staked · {pred.daysLeft} left
                         </div>
                       </div>
-                      <div style={{background:v.pos==="YES"?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(v.pos==="YES"?"rgba(31,187,123,0.2)":"rgba(249,61,61,0.2)"),borderRadius:8,padding:"4px 10px",flexShrink:0}}>
-                        <span style={{color:v.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v.pos}</span>
+                      <div style={{background:v.pos==="YES"?"rgba(34,197,94,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(v.pos==="YES"?"rgba(34,197,94,0.2)":"rgba(249,61,61,0.2)"),borderRadius:8,padding:"4px 10px",flexShrink:0}}>
+                        <span style={{color:v.pos==="YES"?"#22C55E":"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v.pos}</span>
                       </div>
                     </div>
                     <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
@@ -3768,7 +3775,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                         </div>
                         <div>
                           <div style={{color:"rgba(255,255,255,0.3)",fontSize:8,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginBottom:2}}>P&L</div>
-                          <div style={{color:pnl>=0?"#1fbb7b":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{pnl>=0?"+":""}${pnl.toFixed(2)}</div>
+                          <div style={{color:pnl>=0?"#3B82F6":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{pnl>=0?"+":""}${pnl.toFixed(2)}</div>
                         </div>
                       </div>
                       <div style={{background:"rgba(255,255,255,0.07)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:20,padding:"6px 14px",display:"flex",alignItems:"center",gap:5}}>
@@ -3792,7 +3799,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                 const won = Math.random() > 0.4;
                 const amt = (Math.random()*10+1).toFixed(2);
                 return (
-                  <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"13px",marginBottom:8,display:"flex",gap:12,alignItems:"center"}}>
+                  <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"13px",marginBottom:8,display:"flex",gap:12,alignItems:"center"}}>
                     <PredImage pred={pred} style={{width:50,height:50,borderRadius:12}}/>
                     <div style={{flex:1,minWidth:0}}>
                       <div style={{color:"#c8dae8",fontSize:13,fontWeight:600,fontFamily:"'Inter',sans-serif",lineHeight:1.3,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
@@ -3800,8 +3807,8 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                         Resolved · ${amt} staked
                       </div>
                     </div>
-                    <div style={{background:won?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(won?"rgba(31,187,123,0.2)":"rgba(249,61,61,0.2)"),borderRadius:8,padding:"4px 10px",flexShrink:0}}>
-                      <span style={{color:won?"#1fbb7b":"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{won?"WON":"LOST"}</span>
+                    <div style={{background:won?"rgba(59,130,246,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(won?"rgba(59,130,246,0.2)":"rgba(249,61,61,0.2)"),borderRadius:8,padding:"4px 10px",flexShrink:0}}>
+                      <span style={{color:won?"#3B82F6":"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{won?"WON":"LOST"}</span>
                     </div>
                   </div>
                 );
@@ -3839,7 +3846,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                   ts: (votes[p.id]?.placedAt||0) + 1,
                   icon: won ? "🏆" : "❌",
                   text: (won ? "Won" : "Lost")+" bet on "+(p.title||p.id),
-                  c: won ? "#1fbb7b" : "#f93d3d",
+                  c: won ? "#3B82F6" : "#f93d3d",
                 });
               });
               // Prop account bets
@@ -3849,7 +3856,7 @@ votes, balance, following, onOpenSettings, onOpenResolved, onOpenCreator, onOpen
                     ts: (b.placedAt||0) + 1,
                     icon: b.won ? "🏆" : "❌",
                     text: (b.won ? "Prop Won" : "Prop Lost")+" $"+(Math.abs(b.pnlDelta||0)).toFixed(2)+" on "+(b.title||b.predId),
-                    c: b.won ? "#1fbb7b" : "#f93d3d",
+                    c: b.won ? "#3B82F6" : "#f93d3d",
                   });
                 } else {
                   events.push({
@@ -3893,12 +3900,12 @@ function MiniPnLChart({ won, bet }) {
   const pts = data.map((v,i)=>[(i/(data.length-1))*W, H-((v-min)/range)*H]);
   const pathD = pts.map((p,i)=>(i===0?"M":"L")+(p[0].toFixed(1))+","+(p[1].toFixed(1))).join(" ");
   const last = pts[pts.length-1];
-  const color = (won-bet)>=0 ? "#1fbb7b" : "#f93d3d";
+  const color = (won-bet)>=0 ? "#3B82F6" : "#f93d3d";
   return (
     <svg width="100%" viewBox="0 0 280 52" style={{overflow:"visible"}}>
       <path d={(pathD+" L"+W+","+H+" L0,"+H+" Z")} fill={color+"18"}/>
       <path d={pathD} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
-      <circle cx={last[0]} cy={last[1]} r="4" fill={color} stroke="#1A2C38" strokeWidth="2"/>
+      <circle cx={last[0]} cy={last[1]} r="4" fill={color} stroke="#0F2040" strokeWidth="2"/>
     </svg>
   );
 }
@@ -3919,58 +3926,58 @@ function CreatePage() {
   const catMeta=CATEGORY_META[form.category]||CATEGORY_META.CRYPTO;
 
   if(done) return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0A1628"}}>
       <div style={{fontSize:72,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)"}}>🚀</div>
       <h2 style={{color:"#FFFFFF",fontFamily:"'Inter',sans-serif",fontSize:26,fontWeight:900,textAlign:"center"}}>Prediction Live!</h2>
       <p style={{color:"rgba(255,255,255,0.32)",fontFamily:"'Inter',sans-serif",fontSize:12,textAlign:"center",lineHeight:1.6}}>{form.title}</p>
       <div style={{display:"flex",gap:10,marginTop:8}}>
         <Badge color={catMeta.color}>{form.category}</Badge>
-        <Badge color="#1fbb7b">YES {form.startYes}%</Badge>
+        <Badge color="#3B82F6">YES {form.startYes}%</Badge>
         <Badge color="#f93d3d">NO {100-form.startYes}%</Badge>
       </div>
-      <button onClick={()=>{setDone(false);setForm({title:"",category:"CRYPTO",deadline:"",startYes:50,stake:"1.00"});}} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginTop:12}}>Create Another</button>
+      <button onClick={()=>{setDone(false);setForm({title:"",category:"CRYPTO",deadline:"",startYes:50,stake:"1.00"});}} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginTop:12}}>Create Another</button>
     </div>
   );
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
       <div style={{padding:"20px 16px 100px"}}>
         <h2 style={{fontSize:22,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",marginBottom:4}}>➕ Create Prediction</h2>
         <p style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:24,letterSpacing:1}}>LAUNCH YOUR OWN MARKET</p>
 
         <SectionLabel>YOUR QUESTION</SectionLabel>
         <textarea value={form.title} onChange={e=>set("title",e.target.value)} placeholder='e.g. "Will X happen by Y date?"' rows={3}
-          style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:15,fontFamily:"'Inter',sans-serif",resize:"none",marginBottom:20,outline:"none",lineHeight:1.5}}/>
+          style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:15,fontFamily:"'Inter',sans-serif",resize:"none",marginBottom:20,outline:"none",lineHeight:1.5}}/>
 
         <SectionLabel>CATEGORY</SectionLabel>
         <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:20}}>
           {CATS_FOR_CREATE.map(c=>(
-            <button key={c.id} onClick={()=>set("category",c.id)} style={{background:form.category===c.id?c.color:"#213743",border:"1px solid "+(form.category===c.id?c.color:"rgba(255,255,255,0.42)"),borderRadius:20,padding:"7px 14px",cursor:"pointer",color:form.category===c.id?"#000":"rgba(255,255,255,0.42)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5,transition:"all 0.2s"}}>
+            <button key={c.id} onClick={()=>set("category",c.id)} style={{background:form.category===c.id?c.color:"#1A2D4A",border:"1px solid "+(form.category===c.id?c.color:"rgba(255,255,255,0.42)"),borderRadius:20,padding:"7px 14px",cursor:"pointer",color:form.category===c.id?"#000":"rgba(255,255,255,0.42)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",gap:5,transition:"all 0.2s"}}>
               {c.icon} {c.label}
             </button>
           ))}
         </div>
 
         <SectionLabel>RESOLUTION DEADLINE</SectionLabel>
-        <input type="date" value={form.deadline} onChange={e=>set("deadline",e.target.value)} style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:12,padding:"13px 14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",marginBottom:20,outline:"none"}}/>
+        <input type="date" value={form.deadline} onChange={e=>set("deadline",e.target.value)} style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:12,padding:"13px 14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",marginBottom:20,outline:"none"}}/>
 
         <SectionLabel>STARTING YES ODDS: {form.startYes}%</SectionLabel>
-        <input type="range" min={5} max={95} value={form.startYes} onChange={e=>set("startYes",+e.target.value)} style={{width:"100%",accentColor:"#1fbb7b",marginBottom:8}}/>
+        <input type="range" min={5} max={95} value={form.startYes} onChange={e=>set("startYes",+e.target.value)} style={{width:"100%",accentColor:"#3B82F6",marginBottom:8}}/>
         <div style={{display:"flex",justifyContent:"space-between",marginBottom:20}}>
           <span style={{color:"#f93d3d",fontSize:12,fontFamily:"'Inter',sans-serif"}}>NO {100-form.startYes}%</span>
-          <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>YES {form.startYes}%</span>
+          <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>YES {form.startYes}%</span>
         </div>
 
         <SectionLabel>INITIAL LIQUIDITY STAKE</SectionLabel>
         <div style={{display:"flex",gap:8,marginBottom:20}}>
           {["0.50","1.00","5.00","10.00"].map(v=>(
-            <button key={v} onClick={()=>set("stake",v)} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(form.stake===v?"#1fbb7b":"#213743"),background:form.stake===v?"rgba(31,187,123,0.12)":"#1A2C38",color:form.stake===v?"#1fbb7b":"#6a8090",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
+            <button key={v} onClick={()=>set("stake",v)} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(form.stake===v?"#3B82F6":"#1A2D4A"),background:form.stake===v?"rgba(59,130,246,0.12)":"#0F2040",color:form.stake===v?"#3B82F6":"#6a8090",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
           ))}
         </div>
 
         {/* Live preview */}
         {form.title&&(
-          <div style={{background:"#1A2C38",borderRadius:16,border:"1px solid "+(catMeta.color)+"44",padding:"16px",marginBottom:24}}>
+          <div style={{background:"#0F2040",borderRadius:16,border:"1px solid "+(catMeta.color)+"44",padding:"16px",marginBottom:24}}>
             <SectionLabel>PREVIEW</SectionLabel>
             <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
               <span style={{fontSize:12}}>{catMeta.icon}</span>
@@ -3978,17 +3985,17 @@ function CreatePage() {
               {form.deadline&&<span style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",marginLeft:"auto"}}>Resolves {form.deadline}</span>}
             </div>
             <div style={{color:"#FFFFFF",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:12,lineHeight:1.3}}>{form.title}</div>
-            <div style={{height:5,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:6}}>
+            <div style={{height:5,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:6}}>
               <div style={{height:"100%",width:(form.startYes)+"%",background:"linear-gradient(90deg,#2F805A,#2d5c41)",borderRadius:99,transition:"width 0.4s"}}/>
             </div>
             <div style={{display:"flex",justifyContent:"space-between"}}>
-              <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>YES {form.startYes}%</span>
+              <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>YES {form.startYes}%</span>
               <span style={{color:"#f93d3d",fontSize:12,fontFamily:"'Inter',sans-serif"}}>NO {100-form.startYes}%</span>
             </div>
           </div>
         )}
 
-        <button onClick={()=>{ if(!form.title||!form.deadline)return; setDone(true); }} style={{width:"100%",background:form.title&&form.deadline?"#1fbb7b":"#213743",border:"none",borderRadius:14,color:form.title&&form.deadline?"#000":"#213743",fontSize:16,fontWeight:900,padding:"16px",cursor:form.title&&form.deadline?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.3s",boxShadow:form.title&&form.deadline?"0 4px 24px rgba(31,187,123,0.267)":"none"}}>
+        <button onClick={()=>{ if(!form.title||!form.deadline)return; setDone(true); }} style={{width:"100%",background:form.title&&form.deadline?"#3B82F6":"#1A2D4A",border:"none",borderRadius:14,color:form.title&&form.deadline?"#000":"#1A2D4A",fontSize:16,fontWeight:900,padding:"16px",cursor:form.title&&form.deadline?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.3s",boxShadow:form.title&&form.deadline?"0 4px 24px rgba(59,130,246,0.267)":"none"}}>
           {form.title&&form.deadline?"🚀 Launch Prediction":"Fill in all fields to continue"}
         </button>
       </div>
@@ -4090,13 +4097,13 @@ function LiveTicker({ votes={}, onVote, balance=0, watchlist=[], onToggleWatch }
 
   return (
     <>
-    <div style={{background:"#0F212E",borderBottom:"1px solid #1A2C38",overflow:"hidden",height:32,position:"relative",flexShrink:0}}>
+    <div style={{background:"#0A1628",borderBottom:"1px solid #0F2040",overflow:"hidden",height:32,position:"relative",flexShrink:0}}>
       <div style={{display:"flex",alignItems:"center",transform:"translateX("+(-pos)+"px)",transition:"none",whiteSpace:"nowrap",height:"100%"}}>
         {[...items,...items].map((p,i)=>(
-          <div key={i} onClick={()=>setSelectedPred(items[i%items.length])} style={{display:"inline-flex",alignItems:"center",gap:8,padding:"0 20px",height:"100%",borderRight:"1px solid #213743",cursor:"pointer"}}>
+          <div key={i} onClick={()=>setSelectedPred(items[i%items.length])} style={{display:"inline-flex",alignItems:"center",gap:8,padding:"0 20px",height:"100%",borderRight:"1px solid #1A2D4A",cursor:"pointer"}}>
             <span style={{color:CATEGORY_META[p.category]?.color||"rgba(255,255,255,0.42)",fontSize:10}}>{CATEGORY_META[p.category]?.icon}</span>
             <span style={{color:"rgba(255,255,255,0.5)",fontSize:10,fontFamily:"'Inter',sans-serif",maxWidth:120,overflow:"hidden",textOverflow:"ellipsis"}}>{p.title.slice(0,28)}…</span>
-            <span style={{color:dir[i%items.length]>=0?"#1fbb7b":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+            <span style={{color:dir[i%items.length]>=0?"#3B82F6":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
               {ticks[i%items.length].toFixed(1)}% {dir[i%items.length]>=0?"▲":"▼"}
             </span>
           </div>
@@ -4135,27 +4142,27 @@ function ShareSheet({ pred, onClose }) {
   ];
   return (
     <Sheet onClose={onClose} title="📤 Share Prediction">
-      <div style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:20,display:"flex",gap:12}}>
+      <div style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:20,display:"flex",gap:12}}>
         <PredImage pred={pred} style={{width:64,height:64,borderRadius:10}}/>
         <div>
           <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:6}}>{pred.title}</div>
           <div style={{display:"flex",gap:8}}>
-            <Badge color="#1fbb7b">YES {pred.yesPct}%</Badge>
+            <Badge color="#3B82F6">YES {pred.yesPct}%</Badge>
             <Badge color="rgba(255,255,255,0.42)">Pool {pred.pool}</Badge>
           </div>
         </div>
       </div>
       <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:10,marginBottom:20}}>
         {channels.map(c=>(
-          <button key={c.label} onClick={c.action} style={{background:"#1A2C38",border:"1px solid "+(c.color)+"33",borderRadius:14,padding:"14px 10px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:6,transition:"all 0.2s"}}>
+          <button key={c.label} onClick={c.action} style={{background:"#0F2040",border:"1px solid "+(c.color)+"33",borderRadius:14,padding:"14px 10px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:6,transition:"all 0.2s"}}>
             <span style={{fontSize:24}}>{c.icon}</span>
             <span style={{color:"rgba(255,255,255,0.42)",fontSize:10,fontFamily:"'Inter',sans-serif",textAlign:"center"}}>{c.label}</span>
           </button>
         ))}
       </div>
-      <div style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",display:"flex",alignItems:"center",gap:10}}>
+      <div style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",display:"flex",alignItems:"center",gap:10}}>
         <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif",flex:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{url}</span>
-        <button onClick={copy} style={{background:copied?"#1fbb7b":"#213743",border:"none",borderRadius:8,color:copied?"#000":"rgba(255,255,255,0.42)",fontSize:12,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0}}>
+        <button onClick={copy} style={{background:copied?"#3B82F6":"#1A2D4A",border:"none",borderRadius:8,color:copied?"#000":"rgba(255,255,255,0.42)",fontSize:12,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",flexShrink:0}}>
           {copied?"Copied!":"Copy"}
         </button>
       </div>
@@ -4176,15 +4183,15 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
   const isFollowing = following.includes(handle);
 
   if (!creator) return (
-    <div style={{height:"100%",background:"#0F212E",display:"flex",alignItems:"center",justifyContent:"center"}}>
+    <div style={{height:"100%",background:"#0A1628",display:"flex",alignItems:"center",justifyContent:"center"}}>
       <EmptyState icon="👤" msg="Creator not found"/>
     </div>
   );
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
       {/* Back header */}
-      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <button onClick={onClose} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.07)",border:"none",color:"rgba(255,255,255,0.6)",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>
           <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
         </button>
@@ -4192,7 +4199,7 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
       </div>
 
       {/* Hero */}
-      <div style={{position:"relative",height:130,background:"linear-gradient(135deg,"+(creator.color)+"18,#1A2C38)"}}>
+      <div style={{position:"relative",height:130,background:"linear-gradient(135deg,"+(creator.color)+"18,#0F2040)"}}>
         <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 30% 50%, "+(creator.color)+"33,transparent 70%)"}}/>
         <div style={{position:"absolute",bottom:-40,left:16}}>
           <div style={{width:80,height:80,borderRadius:"50%",background:creator.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:34,border:"4px solid #090F14",boxShadow:"0 0 30px "+(creator.color)+"55"}}>
@@ -4200,7 +4207,7 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
           </div>
         </div>
         <div style={{position:"absolute",bottom:12,right:16}}>
-          <button onClick={()=>onFollow(handle)} style={{background:isFollowing?"#213743":"#1fbb7b",border:"1px solid "+(isFollowing?"#213743":"#1fbb7b"),borderRadius:20,color:isFollowing?"rgba(255,255,255,0.42)":"#000",fontSize:14,fontWeight:700,padding:"8px 22px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+          <button onClick={()=>onFollow(handle)} style={{background:isFollowing?"#1A2D4A":"#3B82F6",border:"1px solid "+(isFollowing?"#1A2D4A":"#3B82F6"),borderRadius:20,color:isFollowing?"rgba(255,255,255,0.42)":"#000",fontSize:14,fontWeight:700,padding:"8px 22px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
             {isFollowing?"Following ✓":"Follow"}
           </button>
         </div>
@@ -4218,8 +4225,8 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
 
         {/* Stats */}
         <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:20}}>
-          {[["Followers",creator.followers,creator.color],["Accuracy",creator.accuracy,"#1fbb7b"],["Predictions",creator.predictions,"#fff"],["Volume",creator.totalVolume,"#F4C430"]].map(([l,v,c])=>(
-            <div key={l} style={{background:"#1A2C38",borderRadius:14,padding:"12px 8px",textAlign:"center"}}>
+          {[["Followers",creator.followers,creator.color],["Accuracy",creator.accuracy,"#3B82F6"],["Predictions",creator.predictions,"#fff"],["Volume",creator.totalVolume,"#F4C430"]].map(([l,v,c])=>(
+            <div key={l} style={{background:"#0F2040",borderRadius:14,padding:"12px 8px",textAlign:"center"}}>
               <div style={{color:c,fontSize:15,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.3)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:3}}>{l}</div>
             </div>
@@ -4229,27 +4236,27 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
         {/* Tabs */}
         <div style={{display:"flex",background:"rgba(255,255,255,0.05)",borderRadius:14,padding:4,marginBottom:16}}>
           {[["active","Active"],["resolved","Resolved"]].map(([id,label])=>(
-            <button key={id} onClick={()=>setActiveTab(id)} style={{flex:1,background:activeTab===id?"#213743":"transparent",border:"none",borderRadius:11,color:activeTab===id?"#fff":"rgba(255,255,255,0.35)",fontSize:13,fontWeight:600,padding:"9px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{label}</button>
+            <button key={id} onClick={()=>setActiveTab(id)} style={{flex:1,background:activeTab===id?"#1A2D4A":"transparent",border:"none",borderRadius:11,color:activeTab===id?"#fff":"rgba(255,255,255,0.35)",fontSize:13,fontWeight:600,padding:"9px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{label}</button>
           ))}
         </div>
 
         {activeTab==="active" && preds.map(pred=>{
           const [local,setLocal] = useState(pred.yesPct);
           return (
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,alignItems:"center"}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,alignItems:"center"}}>
               <PredImage pred={pred} style={{width:56,height:56,borderRadius:10}}/>
               <div style={{flex:1,minWidth:0}}>
                 <Badge color={CATEGORY_META[pred.category]?.color||"rgba(255,255,255,0.42)"}>{pred.category}</Badge>
                 <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginTop:6,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
                 <div style={{display:"flex",gap:10,marginTop:4}}>
-                  <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{local}% YES</span>
+                  <span style={{color:"#22C55E",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{local}% YES</span>
                   <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{pred.pool} · {pred.daysLeft}</span>
                 </div>
               </div>
               {!votes[pred.id] && (
-                <button onClick={()=>{onVote(pred.id,"YES",1);setLocal(l=>Math.min(99,l+1));}} style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.267)",borderRadius:99,color:"#1fbb7b",fontSize:11,fontWeight:700,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",flexShrink:0}}>YES</button>
+                <button onClick={()=>{onVote(pred.id,"YES",1);setLocal(l=>Math.min(99,l+1));}} style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.267)",borderRadius:99,color:"#3B82F6",fontSize:11,fontWeight:700,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",flexShrink:0}}>YES</button>
               )}
-              {votes[pred.id] && <Badge color={votes[pred.id].pos==="YES"?"#1fbb7b":"#c42b2b"}>{votes[pred.id].pos}</Badge>}
+              {votes[pred.id] && <Badge color={votes[pred.id].pos==="YES"?"#22C55E":"#c42b2b"}>{votes[pred.id].pos}</Badge>}
             </div>
           );
         })}
@@ -4257,12 +4264,12 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
         {activeTab==="resolved" && (
           resolved.length===0
             ? RESOLVED_PREDICTIONS.map(pred=>(
-              <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,alignItems:"center"}}>
+              <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:10,display:"flex",gap:12,alignItems:"center"}}>
                 <PredImage pred={pred} style={{width:56,height:56,borderRadius:10}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
                   <div style={{display:"flex",gap:8,marginTop:6,alignItems:"center"}}>
-                    <div style={{background:pred.outcome==="YES"?"rgba(31,187,123,0.15)":"rgba(143,60,60,0.15)",border:"1px solid "+(pred.outcome==="YES"?"rgba(31,187,123,0.267)":"rgba(143,60,60,0.267)"),borderRadius:99,padding:"2px 10px",color:pred.outcome==="YES"?"#1fbb7b":"#c42b2b",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+                    <div style={{background:pred.outcome==="YES"?"rgba(34,197,94,0.15)":"rgba(143,60,60,0.15)",border:"1px solid "+(pred.outcome==="YES"?"rgba(34,197,94,0.267)":"rgba(143,60,60,0.267)"),borderRadius:99,padding:"2px 10px",color:pred.outcome==="YES"?"#22C55E":"#c42b2b",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
                       {pred.outcome} ✓
                     </div>
                     <span style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{pred.resolvedDate}</span>
@@ -4271,9 +4278,9 @@ handle, onClose, votes, onVote, balance, following, onFollow }) {
               </div>
             ))
             : resolved.map(pred=>(
-              <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:10}}>
+              <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:10}}>
                 <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:6}}>{pred.title}</div>
-                <Badge color={pred.outcome==="YES"?"#1fbb7b":"#f93d3d"}>{pred.outcome} resolved</Badge>
+                <Badge color={pred.outcome==="YES"?"#22C55E":"#f93d3d"}>{pred.outcome} resolved</Badge>
               </div>
             ))
         )}
@@ -4302,8 +4309,8 @@ function ResolvedPage({ votes, resolvedBets={} }) {
   const allResolved = [...liveResolved, ...RESOLVED_PREDICTIONS];
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <h2 style={{fontSize:22,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",marginBottom:4}}>✅ Resolved</h2>
         <p style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:20,letterSpacing:1}}>{allResolved.length} CLOSED MARKETS</p>
       </div>
@@ -4313,12 +4320,12 @@ function ResolvedPage({ votes, resolvedBets={} }) {
           const userBet = votes[pred.id];
           const won = userBet && userBet.pos === pred.outcome;
           return (
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:20,overflow:"hidden",marginBottom:14,border:"1px solid "+(won?"rgba(31,187,123,0.2)":"#213743")}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:20,overflow:"hidden",marginBottom:14,border:"1px solid "+(won?"rgba(59,130,246,0.2)":"#1A2D4A")}}>
               <div style={{position:"relative",height:160}}>
                 <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
                 <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.9) 0%,transparent 60%)"}}/>
                 {/* Outcome banner */}
-                <div style={{position:"absolute",top:10,left:12,background:pred.outcome==="YES"?"rgba(31,187,123,0.9)":"rgba(143,60,60,0.9)",borderRadius:20,padding:"5px 14px",display:"flex",alignItems:"center",gap:6,backdropFilter:"blur(4px)"}}>
+                <div style={{position:"absolute",top:10,left:12,background:pred.outcome==="YES"?"rgba(34,197,94,0.9)":"rgba(143,60,60,0.9)",borderRadius:20,padding:"5px 14px",display:"flex",alignItems:"center",gap:6,backdropFilter:"blur(4px)"}}>
                   <span style={{color:"#FFFFFF",fontSize:12,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>RESOLVED: {pred.outcome}</span>
                 </div>
                 {won && (
@@ -4337,10 +4344,10 @@ function ResolvedPage({ votes, resolvedBets={} }) {
                 {/* Final odds bar */}
                 <div style={{marginBottom:12}}>
                   <div style={{display:"flex",justifyContent:"space-between",marginBottom:5}}>
-                    <span style={{color:pred.outcome==="YES"?"#1fbb7b":"rgba(255,255,255,0.42)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {pred.yesPct}% {pred.outcome==="YES"&&"✓"}</span>
+                    <span style={{color:pred.outcome==="YES"?"#22C55E":"rgba(255,255,255,0.42)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {pred.yesPct}% {pred.outcome==="YES"&&"✓"}</span>
                     <span style={{color:pred.outcome==="NO"?"#f93d3d":"rgba(255,255,255,0.42)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{pred.outcome==="NO"&&"✓"} NO {pred.noYes}%</span>
                   </div>
-                  <div style={{height:6,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+                  <div style={{height:6,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
                     <div style={{height:"100%",width:(pred.yesPct)+"%",background:pred.outcome==="YES"?"linear-gradient(90deg,#2F805A,#2d5c41)":"linear-gradient(90deg,#4F6475,#3A4F5E)",borderRadius:99,transition:"width 0.6s ease"}}/>
                   </div>
                 </div>
@@ -4353,12 +4360,12 @@ function ResolvedPage({ votes, resolvedBets={} }) {
 
                 {/* User bet result */}
                 {userBet ? (
-                  <div style={{background:won?"rgba(31,187,123,0.1)":"rgba(143,60,60,0.1)",border:"1px solid "+(won?"rgba(31,187,123,0.2)":"rgba(143,60,60,0.2)"),borderRadius:12,padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+                  <div style={{background:won?"rgba(59,130,246,0.1)":"rgba(143,60,60,0.1)",border:"1px solid "+(won?"rgba(59,130,246,0.2)":"rgba(143,60,60,0.2)"),borderRadius:12,padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                     <div>
-                      <div style={{color:won?"#1fbb7b":"#c42b2b",fontWeight:700,fontSize:13,fontFamily:"'Inter',sans-serif"}}>{won?"🏆 You won!":"You lost"}</div>
+                      <div style={{color:won?"#3B82F6":"#c42b2b",fontWeight:700,fontSize:13,fontFamily:"'Inter',sans-serif"}}>{won?"🏆 You won!":"You lost"}</div>
                       <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>Your bet: {userBet.pos} · ${userBet.amount?.toFixed(2)}</div>
                     </div>
-                    {won && pred.payout && <div style={{color:"#1fbb7b",fontWeight:900,fontSize:18,fontFamily:"'Inter',sans-serif"}}>+${pred.payout.toFixed(2)}</div>}
+                    {won && pred.payout && <div style={{color:"#3B82F6",fontWeight:900,fontSize:18,fontFamily:"'Inter',sans-serif"}}>+${pred.payout.toFixed(2)}</div>}
                   </div>
                 ) : (
                   <div style={{color:"rgba(255,255,255,0.42)",fontSize:12,fontFamily:"'Inter',sans-serif",textAlign:"center",padding:"8px 0"}}>You didn't bet on this one</div>
@@ -4427,8 +4434,8 @@ function ProfileSettingsPage({ profileData, onSave, onBack }) {
         {avatarOptions.map(a=>(
           <button key={a} onClick={()=>setAvatar(a)} style={{
             width:48,height:48,borderRadius:14,fontSize:22,
-            background:avatar===a?"rgba(31,187,123,0.2)":"rgba(255,255,255,0.05)",
-            border:"1.5px solid "+(avatar===a?"#1fbb7b":"rgba(255,255,255,0.1)"),
+            background:avatar===a?"rgba(59,130,246,0.2)":"rgba(255,255,255,0.05)",
+            border:"1.5px solid "+(avatar===a?"#3B82F6":"rgba(255,255,255,0.1)"),
             cursor:"pointer",transition:"all 0.15s",
           }}>{a}</button>
         ))}
@@ -4437,7 +4444,7 @@ function ProfileSettingsPage({ profileData, onSave, onBack }) {
       <SettingsInput label="BIO" value={bio} onChange={setBio} placeholder="Tell people about yourself" multiline/>
       <button onClick={()=>onSave({name,bio,avatar})} style={{
         width:"100%",height:50,borderRadius:14,
-        background:"#1fbb7b",border:"none",
+        background:"#3B82F6",border:"none",
         color:"#fff",fontSize:15,fontWeight:700,
         fontFamily:"'Inter',sans-serif",cursor:"pointer",
       }}>Save Changes</button>
@@ -4450,7 +4457,7 @@ function ProfileSettingsPage({ profileData, onSave, onBack }) {
 // ─── Standalone Toggle — used by Settings sub-pages ───────────────────────────
 function Toggle({ value, onChange }) {
   return (
-    <div onClick={()=>onChange(!value)} style={{width:44,height:26,borderRadius:99,background:value?"#1fbb7b":"#213743",position:"relative",cursor:"pointer",transition:"background 0.2s",flexShrink:0}}>
+    <div onClick={()=>onChange(!value)} style={{width:44,height:26,borderRadius:99,background:value?"#3B82F6":"#1A2D4A",position:"relative",cursor:"pointer",transition:"background 0.2s",flexShrink:0}}>
       <div style={{position:"absolute",top:3,left:value?20:3,width:20,height:20,borderRadius:"50%",background:"#fff",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(0,0,0,0.3)"}}/>
     </div>
   );
@@ -4506,9 +4513,9 @@ function ConnectedAccountsPage({ onBack }) {
             </div>
             <button onClick={()=>setConnected(c=>({...c,[key]:!c[key]}))} style={{
               padding:"7px 16px",borderRadius:99,
-              background:connected[key]?"rgba(249,61,61,0.15)":"rgba(31,187,123,0.15)",
-              border:"1px solid "+(connected[key]?"rgba(249,61,61,0.3)":"rgba(31,187,123,0.3)"),
-              color:connected[key]?"#f93d3d":"#1fbb7b",
+              background:connected[key]?"rgba(249,61,61,0.15)":"rgba(59,130,246,0.15)",
+              border:"1px solid "+(connected[key]?"rgba(249,61,61,0.3)":"rgba(59,130,246,0.3)"),
+              color:connected[key]?"#f93d3d":"#3B82F6",
               fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer",
             }}>
               {connected[key]?"Disconnect":"Connect"}
@@ -4554,11 +4561,11 @@ function EmailSettingsPage({ onBack }) {
             <SettingsInput label="NEW EMAIL" value={newEmail} onChange={setNewEmail} placeholder="your@email.com"/>
             <div style={{display:"flex",gap:10}}>
               <button onClick={()=>setEditing(false)} style={{flex:1,height:44,borderRadius:12,background:"transparent",border:"1px solid rgba(255,255,255,0.1)",color:t.textSub,fontSize:14,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>Cancel</button>
-              <button onClick={handleSave} style={{flex:1,height:44,borderRadius:12,background:"#1fbb7b",border:"none",color:"#fff",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>Save</button>
+              <button onClick={handleSave} style={{flex:1,height:44,borderRadius:12,background:"#3B82F6",border:"none",color:"#fff",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>Save</button>
             </div>
           </>
         )}
-        {saved && <div style={{color:"#1fbb7b",fontSize:12,textAlign:"center",marginTop:10,fontFamily:"'Inter',sans-serif"}}>✓ Email updated</div>}
+        {saved && <div style={{color:"#3B82F6",fontSize:12,textAlign:"center",marginTop:10,fontFamily:"'Inter',sans-serif"}}>✓ Email updated</div>}
       </div>
       <div style={{marginTop:16,background:t.bgCard,borderRadius:16,overflow:"hidden"}}>
         {[["Weekly digest","Summary of your predictions"],["Market alerts","Notify when saved markets close"],["Promo emails","News and offers"]].map(([label,sub],i,arr)=>(
@@ -4609,8 +4616,8 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
   };
 
   const Toggle = ({ value, onChange }) => (
-    <div onClick={()=>onChange(!value)} style={{width:44,height:24,borderRadius:99,background:value?"#1fbb7b":t.toggleOff,position:"relative",cursor:"pointer",transition:"background 0.2s",flexShrink:0}}>
-      <div style={{width:20,height:20,borderRadius:"50%",background:"#fff",position:"absolute",top:2,left:value?22:2,transition:"left 0.2s",boxShadow:"0 1px 4px rgba(15,33,46,0.45)"}}/>
+    <div onClick={()=>onChange(!value)} style={{width:44,height:24,borderRadius:99,background:value?"#3B82F6":t.toggleOff,position:"relative",cursor:"pointer",transition:"background 0.2s",flexShrink:0}}>
+      <div style={{width:20,height:20,borderRadius:"50%",background:"#fff",position:"absolute",top:2,left:value?22:2,transition:"left 0.2s",boxShadow:"0 1px 4px rgba(10,22,40,0.45)"}}/>
     </div>
   );
 
@@ -4692,8 +4699,8 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
                 CAPPED BY YOUR BALANCE · ${totalAvailable.toFixed(0)} AVAILABLE
               </div>
             </div>
-            <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:10,padding:"5px 12px"}}>
-              <span style={{color:"#1fbb7b",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${displayMax.toLocaleString()}</span>
+            <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:10,padding:"5px 12px"}}>
+              <span style={{color:"#3B82F6",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${displayMax.toLocaleString()}</span>
             </div>
           </div>
           <input
@@ -4706,7 +4713,7 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
               const capped = Math.min(v, Math.floor(totalAvailable));
               setMaxBetSetting && setMaxBetSetting(Math.max(1, capped));
             }}
-            style={{width:"100%",accentColor:"#1fbb7b",cursor:"pointer",marginBottom:8}}
+            style={{width:"100%",accentColor:"#3B82F6",cursor:"pointer",marginBottom:8}}
           />
           <div style={{display:"flex",justifyContent:"space-between"}}>
             <span style={{color:t.textFaint,fontSize:10,fontFamily:"'Inter',sans-serif"}}>$1</span>
@@ -4724,7 +4731,7 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
         </div>
 
         {/* Quick Bet Presets */}
-        <div style={{background:"#1A2C38",borderRadius:14,padding:"18px 16px",marginBottom:20}}>
+        <div style={{background:"#0F2040",borderRadius:14,padding:"18px 16px",marginBottom:20}}>
           <div style={{marginBottom:12}}>
             <div style={{color:"rgba(255,255,255,0.72)",fontSize:14,fontFamily:"'Inter',sans-serif",fontWeight:700,marginBottom:2}}>Quick Bet Presets</div>
             <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>TAP ANY PRESET TO EDIT · SHOWS IN BET MODAL</div>
@@ -4733,7 +4740,7 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
             {(quickBetPresets.length>0?quickBetPresets:[1,5,10,25]).map((v,i)=>(
               <div key={i}>
                 {editingPreset===i ? (
-                  <div style={{background:"#1A2C38",border:"1px solid #1fbb7b",borderRadius:10,padding:"4px 6px",display:"flex",gap:4,gridColumn:"span 1"}}>
+                  <div style={{background:"#0F2040",border:"1px solid #3B82F6",borderRadius:10,padding:"4px 6px",display:"flex",gap:4,gridColumn:"span 1"}}>
                     <input
                       autoFocus
                       type="number"
@@ -4741,16 +4748,16 @@ function SettingsPage({ onClose, balance, quickBetPresets=[], setQuickBetPresets
                       onChange={e=>setPresetInput(e.target.value)}
                       onKeyDown={e=>{ if(e.key==="Enter") savePreset(i); if(e.key==="Escape") setEditingPreset(null); }}
                       placeholder="$"
-                      style={{flex:1,background:"transparent",border:"none",color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif",outline:"none",width:"100%",minWidth:0}}
+                      style={{flex:1,background:"transparent",border:"none",color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif",outline:"none",width:"100%",minWidth:0}}
                     />
-                    <button onClick={()=>savePreset(i)} style={{background:"#1fbb7b",border:"none",borderRadius:6,color:"#FFFFFF",fontSize:10,padding:"2px 5px",cursor:"pointer",fontFamily:"'Inter',sans-serif",fontWeight:700}}>✓</button>
+                    <button onClick={()=>savePreset(i)} style={{background:"#3B82F6",border:"none",borderRadius:6,color:"#FFFFFF",fontSize:10,padding:"2px 5px",cursor:"pointer",fontFamily:"'Inter',sans-serif",fontWeight:700}}>✓</button>
                   </div>
                 ) : (
                   <button
                     onClick={()=>{ setEditingPreset(i); setPresetInput(String(v)); }}
                     style={{width:"100%",height:44,borderRadius:10,border:"1px solid "+(t.borderMed),background:t.bgSubtle,color:t.textSub,fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:1}}
                   >
-                    <span style={{color:"#1fbb7b"}}>${v}</span>
+                    <span style={{color:"#3B82F6"}}>${v}</span>
                     <span style={{color:t.textFaint,fontSize:8,letterSpacing:0.5}}>EDIT</span>
                   </button>
                 )}
@@ -4837,7 +4844,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
 
   const statCards = [
     { icon:"👥", label:"Total Users",    val:"12,481",    sub:"+142 today",     color:"#00E5FF" },
-    { icon:"🎯", label:"Active Markets", val:ALL_PREDS.length, sub:ALL_PREDS.filter(p=>p.hot).length+" trending", color:"#1fbb7b" },
+    { icon:"🎯", label:"Active Markets", val:ALL_PREDS.length, sub:ALL_PREDS.filter(p=>p.hot).length+" trending", color:"#3B82F6" },
     { icon:"💰", label:"Total Volume",   val:"$"+((totalVolume+284200).toLocaleString()), sub:"All time", color:"#F4C430" },
     { icon:"🏠", label:"House Rake",     val:"$"+((houseRake+14210).toFixed(0)), sub:"5% of volume", color:"#7c4dcc" },
     { icon:"✅", label:"Resolved Bets",  val:resolvedCount + RESOLVED_PREDICTIONS.length, sub:"Win rate: "+(totalBets>0?Math.round(winningBets/Math.max(resolvedCount,1)*100):0)+"%", color:"#00c9a7" },
@@ -4845,10 +4852,10 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
   ];
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:16}}>
-          <div style={{width:28,height:28,background:"#1fbb7b",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>⚡</div>
+          <div style={{width:28,height:28,background:"#3B82F6",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>⚡</div>
           <div>
             <h2 style={{fontSize:18,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",lineHeight:1}}>Admin Dashboard</h2>
             <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>PREDICTSWIPE · INTERNAL</div>
@@ -4856,7 +4863,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
         </div>
         <div style={{display:"flex",gap:8,marginBottom:4,overflowX:"auto"}}>
           {["overview","markets","users","revenue"].map(t=>(
-            <button key={t} onClick={()=>setActiveTab(t)} style={{background:activeTab===t?"#1fbb7b":"#213743",border:"none",borderRadius:20,color:activeTab===t?"#000":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,textTransform:"uppercase",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>{t}</button>
+            <button key={t} onClick={()=>setActiveTab(t)} style={{background:activeTab===t?"#3B82F6":"#1A2D4A",border:"none",borderRadius:20,color:activeTab===t?"#000":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,textTransform:"uppercase",transition:"all 0.2s",flexShrink:0,whiteSpace:"nowrap"}}>{t}</button>
           ))}
         </div>
       </div>
@@ -4872,7 +4879,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
         {activeTab==="overview"&&(<>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:20}}>
             {statCards.map(s=>(
-              <div key={s.label} style={{background:"#1A2C38",borderRadius:14,padding:"14px"}}>
+              <div key={s.label} style={{background:"#0F2040",borderRadius:14,padding:"14px"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
                   <span style={{fontSize:20}}>{s.icon}</span>
                   <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{s.sub}</span>
@@ -4885,7 +4892,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
 
           {/* Real activity chart */}
           <SectionLabel>DAILY BETS (LAST 7 DAYS)</SectionLabel>
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"16px",marginBottom:20}}>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"16px",marginBottom:20}}>
             <div style={{display:"flex",alignItems:"flex-end",gap:6,height:80,marginBottom:8}}>
               {dailyBets.map((count,i) => {
                 const maxCount = Math.max(...dailyBets, 1);
@@ -4904,16 +4911,16 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
           {/* Recent bets */}
           <SectionLabel>RECENT ACTIVITY</SectionLabel>
           {[
-            { user:"@satoshi_x",  action:"Bet YES $50 on BTC $150k",      time:"2m ago",  color:"#1fbb7b" },
+            { user:"@satoshi_x",  action:"Bet YES $50 on BTC $150k",      time:"2m ago",  color:"#3B82F6" },
             { user:"@moonboy99",  action:"Bet NO $10 on Fed rate cuts",    time:"4m ago",  color:"#f93d3d" },
             { user:"@alpha_trader",action:"New account created",           time:"7m ago",  color:"#00E5FF" },
-            { user:"@degenmode",  action:"Bet YES $25 on Argentina WC",    time:"12m ago", color:"#1fbb7b" },
+            { user:"@degenmode",  action:"Bet YES $25 on Argentina WC",    time:"12m ago", color:"#3B82F6" },
             { user:"@yolo_labs",  action:"Withdrew $124.50",               time:"18m ago", color:"#F4C430" },
           ].map((a,i)=>(
-            <div key={i} style={{display:"flex",gap:10,padding:"10px 0",borderBottom:"1px solid #1A2C38",alignItems:"center"}}>
+            <div key={i} style={{display:"flex",gap:10,padding:"10px 0",borderBottom:"1px solid #0F2040",alignItems:"center"}}>
               <div style={{width:8,height:8,borderRadius:"50%",background:a.color,flexShrink:0}}/>
               <div style={{flex:1}}>
-                <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{a.user}</span>
+                <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{a.user}</span>
                 <span style={{color:"#6a8090",fontSize:12,fontFamily:"'Inter',sans-serif"}}> {a.action}</span>
               </div>
               <span style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",flexShrink:0}}>{a.time}</span>
@@ -4923,19 +4930,19 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
 
         {/* MARKETS */}
         {activeTab==="markets"&&(<>
-          <button onClick={()=>setActiveTab("create")} style={{width:"100%",background:"linear-gradient(135deg,rgba(31,187,123,0.12),rgba(31,187,123,0.06))",border:"1px solid rgba(31,187,123,0.25)",borderRadius:14,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12,marginBottom:16,textAlign:"left"}}>
-            <div style={{width:38,height:38,borderRadius:12,background:"#1fbb7b",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
+          <button onClick={()=>setActiveTab("create")} style={{width:"100%",background:"linear-gradient(135deg,rgba(59,130,246,0.12),rgba(59,130,246,0.06))",border:"1px solid rgba(59,130,246,0.25)",borderRadius:14,padding:"14px 16px",cursor:"pointer",display:"flex",alignItems:"center",gap:12,marginBottom:16,textAlign:"left"}}>
+            <div style={{width:38,height:38,borderRadius:12,background:"#3B82F6",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#000" strokeWidth="2.2" strokeLinecap="round"/></svg>
             </div>
             <div style={{flex:1}}>
-              <div style={{color:"#1fbb7b",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Create New Market</div>
-              <div style={{color:"rgba(31,187,123,0.5)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:1}}>Publish a new prediction market</div>
+              <div style={{color:"#3B82F6",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Create New Market</div>
+              <div style={{color:"rgba(59,130,246,0.5)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:1}}>Publish a new prediction market</div>
             </div>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(31,187,123,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 18l6-6-6-6" stroke="rgba(59,130,246,0.5)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/></svg>
           </button>
           <SectionLabel>ALL ACTIVE MARKETS</SectionLabel>
           {ALL_PREDS.map(pred=>(
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:8}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:8}}>
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:6}}>
                 <div style={{flex:1,marginRight:8}}>
                   <div style={{display:"flex",gap:6,marginBottom:4}}>
@@ -4946,16 +4953,16 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
                 </div>
                 <div style={{display:"flex",gap:6,flexShrink:0}}>
                   {!resolvedPreds.includes(pred.id) ? (
-                    <button onClick={()=>setResolveId(pred.id)} style={{background:"rgba(20,158,99,0.1)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:8,color:"#1fbb7b",fontSize:10,padding:"4px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Resolve</button>
+                    <button onClick={()=>setResolveId(pred.id)} style={{background:"rgba(20,158,99,0.1)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:8,color:"#3B82F6",fontSize:10,padding:"4px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Resolve</button>
                   ) : (
-                    <Badge color="#1fbb7b">Resolved</Badge>
+                    <Badge color="#3B82F6">Resolved</Badge>
                   )}
                 </div>
               </div>
               <div style={{display:"flex",gap:12}}>
                 <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>Pool: {pred.pool}</span>
                 <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>Bettors: {pred.bettors}</span>
-                <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {pred.yesPct}%</span>
+                <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {pred.yesPct}%</span>
               </div>
             </div>
           ))}
@@ -4965,7 +4972,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
         {activeTab==="users"&&(<>
           <SectionLabel>TOP CREATORS BY VOLUME</SectionLabel>
           {Object.values(CREATOR_PROFILES).map((c,i)=>(
-            <div key={c.handle} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
+            <div key={c.handle} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
               <div style={{width:36,height:36,borderRadius:"50%",background:c.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{c.avatar}</div>
               <div style={{flex:1}}>
                 <div style={{display:"flex",alignItems:"center",gap:6}}>
@@ -4975,7 +4982,7 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
                 <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:1}}>{c.followers} followers · {c.accuracy} accuracy</div>
               </div>
               <div style={{textAlign:"right"}}>
-                <div style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{c.totalVolume}</div>
+                <div style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{c.totalVolume}</div>
                 <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>volume</div>
               </div>
             </div>
@@ -4984,19 +4991,19 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
 
         {/* REVENUE */}
         {activeTab==="revenue"&&(<>
-          <div style={{background:"linear-gradient(135deg,#0a1f0a,#0d2617)",borderRadius:16,border:"1px solid rgba(31,187,123,0.133)",padding:"20px",marginBottom:20}}>
+          <div style={{background:"linear-gradient(135deg,#0a1f0a,#0d2617)",borderRadius:16,border:"1px solid rgba(59,130,246,0.133)",padding:"20px",marginBottom:20}}>
             <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginBottom:8}}>TOTAL REVENUE (ALL TIME)</div>
-            <div style={{color:"#1fbb7b",fontSize:44,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>${(houseRake+14210+propRevenue).toFixed(0)}</div>
+            <div style={{color:"#3B82F6",fontSize:44,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>${(houseRake+14210+propRevenue).toFixed(0)}</div>
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:12,fontFamily:"'Inter',sans-serif",marginTop:6}}>5% rake on ${(totalVolume+284200).toLocaleString()} total volume + prop fees</div>
           </div>
           <SectionLabel>REVENUE BREAKDOWN</SectionLabel>
           {[
-            ["Rake (5%)", "$"+(houseRake+14210).toFixed(0),"#1fbb7b", Math.round((houseRake+14210)/(houseRake+14210+propRevenue+3200+1340)*100)+"%"],
+            ["Rake (5%)", "$"+(houseRake+14210).toFixed(0),"#3B82F6", Math.round((houseRake+14210)/(houseRake+14210+propRevenue+3200+1340)*100)+"%"],
             ["Prop Firm Fees","$"+(propRevenue+4820).toFixed(0),"#F4C430", Math.round((propRevenue+4820)/(houseRake+14210+propRevenue+3200+1340)*100)+"%"],
             ["Ad Revenue","$3,200","#F4C430","—"],
             ["Premium Subs","$1,340","#7c4dcc","—"],
           ].map(([l,v,c,pct])=>(
-            <div key={l} style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:8,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <div key={l} style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:8,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <div style={{display:"flex",alignItems:"center",gap:10}}>
                 <div style={{width:10,height:10,borderRadius:"50%",background:c,boxShadow:"0 0 8px "+(c)}}/>
                 <span style={{color:"rgba(255,255,255,0.72)",fontSize:14,fontFamily:"'Inter',sans-serif"}}>{l}</span>
@@ -5018,10 +5025,10 @@ votes, balance, resolvedBets={}, propAccounts=[] }) {
               const pred = ALL_PREDS.find(p=>p.id===resolveId);
               if (!pred) return null;
               return (<>
-                <div style={{background:"#1A2C38",borderRadius:12,padding:"14px",marginBottom:20}}>
+                <div style={{background:"#0F2040",borderRadius:12,padding:"14px",marginBottom:20}}>
                   <div style={{color:"rgba(255,255,255,0.72)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.4}}>{pred.title}</div>
                   <div style={{display:"flex",gap:8,marginTop:10}}>
-                    <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {pred.yesPct}%</span>
+                    <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {pred.yesPct}%</span>
                     <span style={{color:"#f93d3d",fontSize:12,fontFamily:"'Inter',sans-serif",fontWeight:700}}>NO {100-pred.yesPct}%</span>
                     <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Pool: {pred.pool}</span>
                   </div>
@@ -5066,11 +5073,11 @@ watchlist, onRemove, votes, onVote, balance, onOpenCreator, onClose }) {
   };
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="🔖 Watchlist" onBack={onClose}/>
       <div style={{padding:"8px 16px 4px",display:"flex",justifyContent:"space-between",alignItems:"center",flexShrink:0}}>
         {watched.length > 0
-          ? <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,background:"rgba(20,158,99,0.1)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:20,padding:"3px 10px"}}>{watched.length} SAVED</span>
+          ? <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,background:"rgba(20,158,99,0.1)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:20,padding:"3px 10px"}}>{watched.length} SAVED</span>
           : <span/>}
         <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>TAP 🔔 FOR ALERTS</span>
       </div>
@@ -5088,16 +5095,16 @@ watchlist, onRemove, votes, onVote, balance, onOpenCreator, onClose }) {
           {watched.map(pred => {
             const yp = getPct(pred);
             const vote = votes[pred.id];
-            const trendColor = pred.trendDir==="up" ? "#1fbb7b" : "#f93d3d";
+            const trendColor = pred.trendDir==="up" ? "#3B82F6" : "#f93d3d";
             const hasAlert = alerts[pred.id];
             return (
-              <div key={pred.id} style={{background:"#1A2C38",borderRadius:20,overflow:"hidden",marginBottom:14,border:"1px solid "+(hasAlert?"rgba(31,187,123,0.2)":"#213743"),position:"relative"}}>
+              <div key={pred.id} style={{background:"#0F2040",borderRadius:20,overflow:"hidden",marginBottom:14,border:"1px solid "+(hasAlert?"rgba(59,130,246,0.2)":"#1A2D4A"),position:"relative"}}>
                 {/* Image strip */}
                 <div style={{position:"relative",height:120}}>
                   <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
                   <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.88) 0%,transparent 60%)"}}/>
                   {/* Remove btn */}
-                  <button onClick={()=>onRemove(pred.id)} style={{position:"absolute",top:10,right:10,background:"rgba(15,33,46,0.72)",border:"none",borderRadius:"50%",width:32,height:32,color:"rgba(255,255,255,0.42)",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(4px)"}}>✕</button>
+                  <button onClick={()=>onRemove(pred.id)} style={{position:"absolute",top:10,right:10,background:"rgba(10,22,40,0.72)",border:"none",borderRadius:"50%",width:32,height:32,color:"rgba(255,255,255,0.42)",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",backdropFilter:"blur(4px)"}}>✕</button>
                   {/* Alert indicator */}
                   {hasAlert && <div style={{position:"absolute",top:10,left:12,background:"rgba(20,158,99,0.85)",borderRadius:20,padding:"3px 10px",backdropFilter:"blur(4px)"}}><span style={{color:"#000",fontSize:10,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>🔔 ALERT SET</span></div>}
                   {/* Odds badge */}
@@ -5125,11 +5132,11 @@ watchlist, onRemove, votes, onVote, balance, onOpenCreator, onClose }) {
                   <h3 style={{color:"#FFFFFF",fontSize:14,fontWeight:800,lineHeight:1.35,fontFamily:"'Inter',sans-serif",marginBottom:10}}>{pred.title}</h3>
 
                   {/* Odds bar */}
-                  <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:8}}>
+                  <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:8}}>
                     <div style={{height:"100%",width:(yp)+"%",background:"linear-gradient(90deg,#2F805A,#2d5c41)",borderRadius:99,transition:"width 0.6s ease"}}/>
                   </div>
                   <div style={{display:"flex",justifyContent:"space-between",marginBottom:12}}>
-                    <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {yp}%</span>
+                    <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>YES {yp}%</span>
                     <div style={{display:"flex",gap:8}}>
                       <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>💰 {pred.pool}</span>
                       <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>⏱ {pred.daysLeft}</span>
@@ -5140,8 +5147,8 @@ watchlist, onRemove, votes, onVote, balance, onOpenCreator, onClose }) {
                   {/* Actions row */}
                   <div style={{display:"flex",gap:8}}>
                     {vote ? (
-                      <div style={{flex:1,height:42,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(31,187,123,0.15)":"rgba(143,60,60,0.15)",border:"1px solid "+(vote.pos==="YES"?"rgba(31,187,123,0.267)":"rgba(143,60,60,0.267)")}}>
-                        <span style={{color:vote.pos==="YES"?"#1fbb7b":"#c42b2b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+                      <div style={{flex:1,height:42,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(34,197,94,0.15)":"rgba(143,60,60,0.15)",border:"1px solid "+(vote.pos==="YES"?"rgba(34,197,94,0.267)":"rgba(143,60,60,0.267)")}}>
+                        <span style={{color:vote.pos==="YES"?"#22C55E":"#c42b2b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
                           {vote.pos} · ${vote.amount?.toFixed(2)||"1.00"}
                         </span>
                       </div>
@@ -5151,7 +5158,7 @@ watchlist, onRemove, votes, onVote, balance, onOpenCreator, onClose }) {
                         <YesNoBtn label="NO" pct={100-yp} voted={null} onClick={()=>handleBet(pred,"NO")} size="sm"/>
                       </>
                     )}
-                    <button onClick={()=>setShowAlert(pred)} style={{width:42,height:42,borderRadius:"50%",background:hasAlert?"rgba(31,187,123,0.15)":"#213743",border:"1px solid "+(hasAlert?"rgba(31,187,123,0.267)":"#213743"),fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>🔔</button>
+                    <button onClick={()=>setShowAlert(pred)} style={{width:42,height:42,borderRadius:"50%",background:hasAlert?"rgba(59,130,246,0.15)":"#1A2D4A",border:"1px solid "+(hasAlert?"rgba(59,130,246,0.267)":"#1A2D4A"),fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>🔔</button>
                   </div>
                 </div>
               </div>
@@ -5212,7 +5219,7 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
   }, [pred.id]);
 
   const chartData = historyData || pred.chartData || [50];
-  const chartColor = yp >= 50 ? "#1fbb7b" : "#f93d3d";
+  const chartColor = yp >= 50 ? "#3B82F6" : "#f93d3d";
 
   const stats = [
     ["💰 Pool",    pred.pool],
@@ -5230,7 +5237,7 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
         onClick={e=>e.stopPropagation()}
         style={{
           position:"relative",
-          background:"#0F212E",
+          background:"#0A1628",
           borderRadius:"28px 28px 0 0",
           maxHeight:"88vh",
           overflowY:"auto",
@@ -5247,7 +5254,7 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
         {/* Hero image */}
         <div style={{height:180,position:"relative",overflow:"hidden",margin:"0 16px",borderRadius:18}}>
           <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
-          <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(15,33,46,0.9) 0%,transparent 60%)"}}/>
+          <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(10,22,40,0.9) 0%,transparent 60%)"}}/>
           <div style={{position:"absolute",bottom:12,left:14,right:14}}>
             <div style={{display:"flex",gap:6,marginBottom:6}}>
               <Badge color={CATEGORY_META[pred.category]?.color||"rgba(255,255,255,0.42)"}>{pred.category}</Badge>
@@ -5255,7 +5262,7 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
             </div>
           </div>
           {/* Save button */}
-          <button onClick={()=>onToggleWatch(pred.id)} style={{position:"absolute",top:10,right:10,display:"flex",alignItems:"center",gap:5,padding:"5px 11px 5px 9px",background:isWatched?"rgba(31,187,123,0.85)":"rgba(15,33,46,0.6)",border:"1px solid "+(isWatched?"rgba(31,187,123,0.6)":"rgba(255,255,255,0.18)"),borderRadius:99,cursor:"pointer"}}>
+          <button onClick={()=>onToggleWatch(pred.id)} style={{position:"absolute",top:10,right:10,display:"flex",alignItems:"center",gap:5,padding:"5px 11px 5px 9px",background:isWatched?"rgba(59,130,246,0.85)":"rgba(10,22,40,0.6)",border:"1px solid "+(isWatched?"rgba(59,130,246,0.6)":"rgba(255,255,255,0.18)"),borderRadius:99,cursor:"pointer"}}>
             <svg width="12" height="14" viewBox="0 0 12 15" fill="none">
               <path d="M1 1h10v13l-5-3.5L1 14V1z" fill={isWatched?"#fff":"none"} stroke={isWatched?"#fff":"rgba(255,255,255,0.8)"} strokeWidth="1.5" strokeLinejoin="round"/>
             </svg>
@@ -5280,11 +5287,11 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
           {/* Probability bar */}
           <div style={{background:"rgba(255,255,255,0.04)",borderRadius:14,padding:"14px",marginBottom:16}}>
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
-              <span style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {yp}%</span>
+              <span style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {yp}%</span>
               <span style={{color:"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>NO {100-yp}%</span>
             </div>
             <div style={{height:8,background:"rgba(255,255,255,0.08)",borderRadius:99,overflow:"hidden",marginBottom:8}}>
-              <div style={{height:"100%",width:yp+"%",background:"linear-gradient(90deg,#2F805A,#1fbb7b)",borderRadius:99,transition:"width 0.6s ease"}}/>
+              <div style={{height:"100%",width:yp+"%",background:"linear-gradient(90deg,#2F805A,#3B82F6)",borderRadius:99,transition:"width 0.6s ease"}}/>
             </div>
             <div style={{display:"flex",justifyContent:"space-between"}}>
               <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>+{Math.round((1/Math.max(0.01,yp/100)-1)*0.98*100)}% return</span>
@@ -5302,8 +5309,8 @@ function MarketDetailSheet({ pred, votes, onVote, balance, isWatched, onToggleWa
 
           {/* Bet buttons */}
           {vote ? (
-            <div style={{height:52,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(31,187,123,0.1)":"rgba(249,61,61,0.1)",border:"1px solid "+(vote.pos==="YES"?"rgba(31,187,123,0.25)":"rgba(249,61,61,0.25)")}}>
-              <span style={{color:vote.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+            <div style={{height:52,borderRadius:14,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(34,197,94,0.1)":"rgba(249,61,61,0.1)",border:"1px solid "+(vote.pos==="YES"?"rgba(34,197,94,0.25)":"rgba(249,61,61,0.25)")}}>
+              <span style={{color:vote.pos==="YES"?"#22C55E":"#f93d3d",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
                 {vote.pos==="YES"?"✓":"✕"} Bet {vote.pos} · ${vote.amount?.toFixed(2)}
               </span>
             </div>
@@ -5365,14 +5372,14 @@ function MarketsPage({
   return (
     <div style={{height:"100%",overflowY:"auto",background:t.bgOverlay}}>
       {/* Sticky header */}
-      <div style={{padding:"28px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+      <div style={{padding:"28px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
           <div>
             <h2 style={{fontSize:20,fontWeight:800,color:"#FFFFFF",fontFamily:"'Inter',sans-serif",lineHeight:1}}>Markets</h2>
             <p style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:3}}>{sorted.length} active · ${(totalPool/1e6).toFixed(1)}M pool</p>
           </div>
           <div style={{background:"rgba(20,158,99,0.1)",borderRadius:12,padding:"6px 12px"}}>
-              <span style={{color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Live</span>
+              <span style={{color:"#3B82F6",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Live</span>
             </div>
         </div>
 
@@ -5402,7 +5409,7 @@ function MarketsPage({
           const isWatched = watchlist.includes(pred.id);
           const yp = pred.yesPct;
           return (
-            <div key={pred.id} onClick={()=>setDetailPred(pred)} style={{background:"#1A2C38",borderRadius:18,marginBottom:10,overflow:"hidden",cursor:"pointer"}}>
+            <div key={pred.id} onClick={()=>setDetailPred(pred)} style={{background:"#0F2040",borderRadius:18,marginBottom:10,overflow:"hidden",cursor:"pointer"}}>
               {/* Image header */}
               <div style={{position:"relative",height:120}}>
                 <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
@@ -5420,11 +5427,11 @@ function MarketsPage({
                     display:"flex",alignItems:"center",gap:5,
                     padding:"5px 11px 5px 9px",
                     background:isWatched
-                      ?"rgba(31,187,123,0.85)"
-                      :"rgba(15,33,46,0.55)",
+                      ?"rgba(59,130,246,0.85)"
+                      :"rgba(10,22,40,0.55)",
                     backdropFilter:"blur(12px)",
                     WebkitBackdropFilter:"blur(12px)",
-                    border:"1px solid "+(isWatched?"rgba(31,187,123,0.6)":"rgba(255,255,255,0.18)"),
+                    border:"1px solid "+(isWatched?"rgba(59,130,246,0.6)":"rgba(255,255,255,0.18)"),
                     borderRadius:99,
                     cursor:"pointer",
                     transition:"all 0.2s cubic-bezier(0.34,1.56,0.64,1)",
@@ -5463,8 +5470,8 @@ function MarketsPage({
 
                 {/* Bet buttons */}
                 {vote ? (
-                  <div onClick={e=>e.stopPropagation()} style={{height:44,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(31,187,123,0.1)":"rgba(143,60,60,0.1)"}}>
-                    <span style={{color:vote.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+                  <div onClick={e=>e.stopPropagation()} style={{height:44,borderRadius:12,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(34,197,94,0.1)":"rgba(143,60,60,0.1)"}}>
+                    <span style={{color:vote.pos==="YES"?"#22C55E":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
                       {vote.pos==="YES"?"✓":"✕"} Bet {vote.pos} · ${vote.amount?.toFixed(2)}
                     </span>
                   </div>
@@ -5506,29 +5513,29 @@ function ReferralPage({ onClose }) {
   const copy = () => { navigator.clipboard?.writeText(code).catch(()=>{}); setCopied(true); setTimeout(()=>setCopied(false),2000); };
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",position:"sticky",top:0,background:"#0F212E",zIndex:10,borderBottom:"1px solid #1A2C38"}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",position:"sticky",top:0,background:"#0A1628",zIndex:10,borderBottom:"1px solid #0F2040"}}>
         <button onClick={onClose} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",color:"#FFFFFF",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span></button>
         <span style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif"}}>🎁 Invite & Earn</span>
       </div>
 
       <div style={{padding:"20px 16px 100px"}}>
         {/* Hero */}
-        <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:22,padding:"24px",marginBottom:20,border:"1px solid rgba(31,187,123,0.133)",textAlign:"center",position:"relative",overflow:"hidden"}}>
-          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 50% 0%,rgba(31,187,123,0.094),transparent 70%)"}}/>
+        <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:22,padding:"24px",marginBottom:20,border:"1px solid rgba(59,130,246,0.133)",textAlign:"center",position:"relative",overflow:"hidden"}}>
+          <div style={{position:"absolute",inset:0,background:"radial-gradient(ellipse at 50% 0%,rgba(59,130,246,0.094),transparent 70%)"}}/>
           <div style={{fontSize:56,marginBottom:12}}>🎁</div>
           <h2 style={{color:"#FFFFFF",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8}}>Invite friends,<br/>earn credits</h2>
           <p style={{color:"#6a8090",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.6,marginBottom:20}}>
-            You get <span style={{color:"#1fbb7b",fontWeight:700}}>$2</span> when a friend signs up.<br/>
-            You get <span style={{color:"#1fbb7b",fontWeight:700}}>$5</span> when they place their first bet.
+            You get <span style={{color:"#3B82F6",fontWeight:700}}>$2</span> when a friend signs up.<br/>
+            You get <span style={{color:"#3B82F6",fontWeight:700}}>$5</span> when they place their first bet.
           </p>
           {/* Code block */}
-          <div style={{background:"rgba(0,0,0,0.5)",borderRadius:14,padding:"14px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",border:"1px solid rgba(31,187,123,0.267)"}}>
+          <div style={{background:"rgba(0,0,0,0.5)",borderRadius:14,padding:"14px 20px",display:"flex",alignItems:"center",justifyContent:"space-between",border:"1px solid rgba(59,130,246,0.267)"}}>
             <div>
               <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginBottom:4}}>YOUR CODE</div>
-              <div style={{color:"#1fbb7b",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif",letterSpacing:4}}>{code}</div>
+              <div style={{color:"#3B82F6",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif",letterSpacing:4}}>{code}</div>
             </div>
-            <button onClick={copy} style={{background:copied?"#1fbb7b":"rgba(31,187,123,0.15)",border:"1px solid "+(copied?"#1fbb7b":"rgba(31,187,123,0.267)"),borderRadius:12,color:copied?"#000":"#1fbb7b",fontSize:13,fontWeight:700,padding:"10px 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+            <button onClick={copy} style={{background:copied?"#3B82F6":"rgba(59,130,246,0.15)",border:"1px solid "+(copied?"#3B82F6":"rgba(59,130,246,0.267)"),borderRadius:12,color:copied?"#000":"#3B82F6",fontSize:13,fontWeight:700,padding:"10px 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
               {copied?"Copied!":"Copy"}
             </button>
           </div>
@@ -5538,7 +5545,7 @@ function ReferralPage({ onClose }) {
         <SectionLabel>SHARE VIA</SectionLabel>
         <div style={{display:"grid",gridTemplateColumns:"repeat(4,1fr)",gap:8,marginBottom:24}}>
           {[["🐦","Twitter"],["💬","WhatsApp"],["✈️","Telegram"],["📤","More"]].map(([icon,label])=>(
-            <button key={label} style={{background:"#1A2C38",borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
+            <button key={label} style={{background:"#0F2040",borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:6}}>
               <span style={{fontSize:22}}>{icon}</span>
               <span style={{color:"#6a8090",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{label}</span>
             </button>
@@ -5547,8 +5554,8 @@ function ReferralPage({ onClose }) {
 
         {/* Earnings summary */}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:20}}>
-          {[["Total Earned","$"+(totalEarned.toFixed(2)),"#1fbb7b"],["Pending","$"+(pendingEarned.toFixed(2)),"#F4C430"]].map(([l,v,c])=>(
-            <div key={l} style={{background:"#1A2C38",borderRadius:14,padding:"16px"}}>
+          {[["Total Earned","$"+(totalEarned.toFixed(2)),"#3B82F6"],["Pending","$"+(pendingEarned.toFixed(2)),"#F4C430"]].map(([l,v,c])=>(
+            <div key={l} style={{background:"#0F2040",borderRadius:14,padding:"16px"}}>
               <div style={{color:c,fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:4,letterSpacing:1}}>{l.toUpperCase()}</div>
             </div>
@@ -5559,11 +5566,11 @@ function ReferralPage({ onClose }) {
         <SectionLabel>YOUR REFERRALS ({referrals.length})</SectionLabel>
         {referrals.map(r => {
           const isClaimed = claimed.includes(r.user);
-          const statusColor = r.status==="bet_placed"?"#1fbb7b":r.status==="signed_up"?"#00E5FF":"#6a8090";
+          const statusColor = r.status==="bet_placed"?"#3B82F6":r.status==="signed_up"?"#00E5FF":"#6a8090";
           const statusLabel = r.status==="bet_placed"?"Bet placed":r.status==="signed_up"?"Signed up":"Pending";
           return (
-            <div key={r.user} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 0",borderBottom:"1px solid #1A2C38"}}>
-              <div style={{width:40,height:40,borderRadius:"50%",background:"#213743",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>👤</div>
+            <div key={r.user} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 0",borderBottom:"1px solid #0F2040"}}>
+              <div style={{width:40,height:40,borderRadius:"50%",background:"#1A2D4A",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>👤</div>
               <div style={{flex:1}}>
                 <div style={{color:"#FFFFFF",fontSize:14,fontWeight:600,fontFamily:"'Inter',sans-serif"}}>{r.user}</div>
                 <div style={{display:"flex",alignItems:"center",gap:6,marginTop:2}}>
@@ -5573,12 +5580,12 @@ function ReferralPage({ onClose }) {
                 </div>
               </div>
               {r.reward && !isClaimed && (
-                <button onClick={()=>setClaimed(c=>[...c,r.user])} style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.267)",borderRadius:20,color:"#1fbb7b",fontSize:12,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+                <button onClick={()=>setClaimed(c=>[...c,r.user])} style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.267)",borderRadius:20,color:"#3B82F6",fontSize:12,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                   Claim +${r.reward.toFixed(2)}
                 </button>
               )}
               {r.reward && isClaimed && (
-                <Badge color="#1fbb7b">Claimed ✓</Badge>
+                <Badge color="#3B82F6">Claimed ✓</Badge>
               )}
               {!r.reward && (
                 <span style={{color:"rgba(255,255,255,0.42)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>—</span>
@@ -5604,15 +5611,15 @@ function ProfileEditor({ onClose, onSave }) {
   const [website, setWebsite] = useState("discord.gg/deusvult");
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",position:"sticky",top:0,background:"#0F212E",zIndex:10,borderBottom:"1px solid #1A2C38"}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"14px 16px",position:"sticky",top:0,background:"#0A1628",zIndex:10,borderBottom:"1px solid #0F2040"}}>
         <div style={{display:"flex",alignItems:"center",gap:10}}>
           <button onClick={onClose} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
             <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
           </button>
           <span style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif"}}>Edit Profile</span>
         </div>
-        <button onClick={()=>{ onSave({name,bio,avatar,location,website}); onClose(); }} style={{background:"#1fbb7b",border:"none",borderRadius:20,color:"#fff",fontSize:13,fontWeight:800,padding:"7px 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+        <button onClick={()=>{ onSave({name,bio,avatar,location,website}); onClose(); }} style={{background:"#3B82F6",border:"none",borderRadius:20,color:"#fff",fontSize:13,fontWeight:800,padding:"7px 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
           Save
         </button>
       </div>
@@ -5622,14 +5629,14 @@ function ProfileEditor({ onClose, onSave }) {
         <SectionLabel>AVATAR</SectionLabel>
         <div style={{display:"flex",flexWrap:"wrap",gap:10,marginBottom:24}}>
           {AVATAR_OPTIONS.map(a => (
-            <button key={a} onClick={()=>setAvatar(a)} style={{width:52,height:52,borderRadius:14,background:avatar===a?"rgba(31,187,123,0.15)":"#1A2C38",border:"2px solid "+(avatar===a?"#1fbb7b":"#213743"),fontSize:26,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s"}}>
+            <button key={a} onClick={()=>setAvatar(a)} style={{width:52,height:52,borderRadius:14,background:avatar===a?"rgba(59,130,246,0.15)":"#0F2040",border:"2px solid "+(avatar===a?"#3B82F6":"#1A2D4A"),fontSize:26,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",transition:"all 0.15s"}}>
               {a}
             </button>
           ))}
         </div>
 
         {/* Preview */}
-        <div style={{background:"#1A2C38",borderRadius:16,padding:"16px",marginBottom:24,display:"flex",alignItems:"center",gap:14}}>
+        <div style={{background:"#0F2040",borderRadius:16,padding:"16px",marginBottom:24,display:"flex",alignItems:"center",gap:14}}>
           <div style={{width:60,height:60,borderRadius:"50%",background:"linear-gradient(135deg,#2F805A,#2d5c41)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:28,border:"3px solid #090F14"}}>{avatar}</div>
           <div>
             <div style={{color:"#FFFFFF",fontWeight:900,fontSize:18,fontFamily:"'Inter',sans-serif"}}>@{name}</div>
@@ -5648,7 +5655,7 @@ function ProfileEditor({ onClose, onSave }) {
             <div style={{position:"relative"}}>
               <span style={{position:"absolute",left:12,top:"50%",transform:"translateY(-50%)",color:"rgba(255,255,255,0.32)",fontSize:14,fontFamily:"'Inter',sans-serif"}}>{f.prefix}</span>
               <input value={f.value} onChange={e=>f.setter(e.target.value)} placeholder={f.placeholder}
-                style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:12,padding:"13px 14px 13px 34px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
+                style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:12,padding:"13px 14px 13px 34px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
             </div>
           </div>
         ))}
@@ -5656,7 +5663,7 @@ function ProfileEditor({ onClose, onSave }) {
         <div style={{marginBottom:24}}>
           <SectionLabel>BIO</SectionLabel>
           <textarea value={bio} onChange={e=>setBio(e.target.value)} rows={3} maxLength={160}
-            style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:12,padding:"13px 14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.5}}/>
+            style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:12,padding:"13px 14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.5}}/>
           <div style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",textAlign:"right",marginTop:4}}>{bio.length}/160</div>
         </div>
       </div>
@@ -5683,13 +5690,13 @@ function DailyChallengeBanner({ onBet }) {
   }, []);
 
   return (
-    <div style={{background:"linear-gradient(135deg,#0F212E,#1A2C38)",borderRadius:18,border:"1px solid rgba(31,187,123,0.2)",padding:"16px",marginBottom:16,position:"relative",overflow:"hidden"}}>
-      <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"radial-gradient(circle,rgba(31,187,123,0.094),transparent)"}}/>
+    <div style={{background:"linear-gradient(135deg,#0A1628,#0F2040)",borderRadius:18,border:"1px solid rgba(59,130,246,0.2)",padding:"16px",marginBottom:16,position:"relative",overflow:"hidden"}}>
+      <div style={{position:"absolute",top:-20,right:-20,width:80,height:80,borderRadius:"50%",background:"radial-gradient(circle,rgba(59,130,246,0.094),transparent)"}}/>
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-        <div style={{background:"#1fbb7b",borderRadius:8,padding:"3px 8px"}}>
+        <div style={{background:"#3B82F6",borderRadius:8,padding:"3px 8px"}}>
           <span style={{color:"#000",fontSize:10,fontWeight:900,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>DAILY</span>
         </div>
-        <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif"}}>⚡ PREDICTION OF THE DAY</span>
+        <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif"}}>⚡ PREDICTION OF THE DAY</span>
         <div style={{marginLeft:"auto",display:"flex",alignItems:"center",gap:4}}>
           <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>⏱</span>
           <span style={{color:"#F4C430",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{time}</span>
@@ -5697,13 +5704,13 @@ function DailyChallengeBanner({ onBet }) {
       </div>
       <p style={{color:"rgba(255,255,255,0.72)",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:10}}>{DAILY_CHALLENGE.pred.title}</p>
       <div style={{display:"flex",alignItems:"center",gap:10}}>
-        <div style={{display:"flex",alignItems:"center",gap:5,background:"rgba(15,33,46,0.55)",borderRadius:20,padding:"5px 10px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:5,background:"rgba(10,22,40,0.55)",borderRadius:20,padding:"5px 10px"}}>
           <span style={{color:"#F4C430",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>🎁 +${DAILY_CHALLENGE.bonus.toFixed(2)} bonus</span>
         </div>
         <div style={{display:"flex",alignItems:"center",gap:4}}>
           <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Streak:</span>
           {Array.from({length:7}).map((_,i)=>(
-            <div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<DAILY_CHALLENGE.streak?"#1fbb7b":"#213743",transition:"background 0.2s"}}/>
+            <div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<DAILY_CHALLENGE.streak?"#3B82F6":"#1A2D4A",transition:"background 0.2s"}}/>
           ))}
         </div>
       </div>
@@ -5722,10 +5729,10 @@ function AchievementToast({ achievement, onDone }) {
   useEffect(() => { const t = setTimeout(onDone, 3200); return () => clearTimeout(t); }, []);
   return (
     <div style={{position:"fixed",top:60,left:"50%",transform:"translateX(-50%)",zIndex:200,animation:"slideDown 0.4s cubic-bezier(0.34,1.56,0.64,1)",maxWidth:360,width:"90%",pointerEvents:"none"}}>
-      <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",border:"1px solid rgba(31,187,123,0.267)",borderRadius:18,padding:"14px 18px",display:"flex",alignItems:"center",gap:14,boxShadow:"0 8px 40px rgba(31,187,123,0.25)"}}>
-        <div style={{width:52,height:52,borderRadius:16,background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.267)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,flexShrink:0,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.1s both"}}>{achievement.icon}</div>
+      <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",border:"1px solid rgba(59,130,246,0.267)",borderRadius:18,padding:"14px 18px",display:"flex",alignItems:"center",gap:14,boxShadow:"0 8px 40px rgba(59,130,246,0.25)"}}>
+        <div style={{width:52,height:52,borderRadius:16,background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.267)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:26,flexShrink:0,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.1s both"}}>{achievement.icon}</div>
         <div>
-          <div style={{color:"#1fbb7b",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginBottom:3}}>ACHIEVEMENT UNLOCKED</div>
+          <div style={{color:"#3B82F6",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginBottom:3}}>ACHIEVEMENT UNLOCKED</div>
           <div style={{color:"#FFFFFF",fontSize:15,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{achievement.label}</div>
           <div style={{color:"rgba(255,255,255,0.32)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{achievement.desc}</div>
         </div>
@@ -5764,10 +5771,10 @@ onClose, votes, onVote, balance }) {
   };
 
   if (confirmed) return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0A1628"}}>
       <div style={{fontSize:72,animation:"popIn 0.4s cubic-bezier(0.34,1.56,0.64,1)"}}>🎰</div>
       <h2 style={{color:"#FFFFFF",fontFamily:"'Inter',sans-serif",fontSize:24,fontWeight:900,textAlign:"center"}}>Parlay Placed!</h2>
-      <div style={{background:"#1A2C38",borderRadius:16,border:"1px solid rgba(31,187,123,0.2)",padding:"20px",width:"100%",maxWidth:320}}>
+      <div style={{background:"#0F2040",borderRadius:16,border:"1px solid rgba(59,130,246,0.2)",padding:"20px",width:"100%",maxWidth:320}}>
         <div style={{display:"flex",justifyContent:"space-between",marginBottom:12}}>
           <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>STAKE</span>
           <span style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>${stake.toFixed(2)}</span>
@@ -5776,17 +5783,17 @@ onClose, votes, onVote, balance }) {
           <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>MULTIPLIER</span>
           <span style={{color:"#F4C430",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{multiplier.toFixed(2)}x</span>
         </div>
-        <div style={{display:"flex",justifyContent:"space-between",borderTop:"1px solid #213743",paddingTop:12}}>
+        <div style={{display:"flex",justifyContent:"space-between",borderTop:"1px solid #1A2D4A",paddingTop:12}}>
           <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>POTENTIAL WIN</span>
-          <span style={{color:"#1fbb7b",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>+${profit.toFixed(2)}</span>
+          <span style={{color:"#3B82F6",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>+${profit.toFixed(2)}</span>
         </div>
       </div>
-      <button onClick={onClose} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginTop:8}}>Done</button>
+      <button onClick={onClose} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginTop:8}}>Done</button>
     </div>
   );
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="🎰 Parlay Builder" onBack={onClose}/>
 
       <div style={{flex:1,overflowY:"auto",padding:"16px"}}>
@@ -5794,11 +5801,11 @@ onClose, votes, onVote, balance }) {
         {legs.length > 0 && (<>
           <SectionLabel>YOUR LEGS ({legs.length}/5)</SectionLabel>
           {legs.map(({ pred, pos }) => (
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,border:"1px solid "+(pos==="YES"?"rgba(31,187,123,0.2)":"rgba(143,60,60,0.2)"),padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:10}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:14,border:"1px solid "+(pos==="YES"?"rgba(34,197,94,0.2)":"rgba(143,60,60,0.2)"),padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:10}}>
               <PredImage pred={pred} style={{width:44,height:44,borderRadius:8}}/>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{color:"rgba(255,255,255,0.72)",fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
-                <div style={{color:pos==="YES"?"#1fbb7b":"#c42b2b",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2,fontWeight:700}}>{pos} · {pos==="YES"?pred.yesPct:100-pred.yesPct}%</div>
+                <div style={{color:pos==="YES"?"#22C55E":"#c42b2b",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2,fontWeight:700}}>{pos} · {pos==="YES"?pred.yesPct:100-pred.yesPct}%</div>
               </div>
               <button onClick={()=>removeLeg(pred.id)} style={{background:"none",border:"none",color:"rgba(255,255,255,0.22)",fontSize:18,cursor:"pointer",padding:"4px",flexShrink:0}}>✕</button>
             </div>
@@ -5807,9 +5814,9 @@ onClose, votes, onVote, balance }) {
 
         {/* Payout summary */}
         {legs.length >= 2 && (
-          <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:16,border:"1px solid rgba(31,187,123,0.133)",padding:"16px",marginBottom:20}}>
+          <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:16,border:"1px solid rgba(59,130,246,0.133)",padding:"16px",marginBottom:20}}>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:14}}>
-              {[["Legs",legs.length,"#fff"],["Multiplier",(multiplier.toFixed(2))+"x","#F4C430"],["Win","$"+(profit.toFixed(2)),"#1fbb7b"]].map(([l,v,c])=>(
+              {[["Legs",legs.length,"#fff"],["Multiplier",(multiplier.toFixed(2))+"x","#F4C430"],["Win","$"+(profit.toFixed(2)),"#3B82F6"]].map(([l,v,c])=>(
                 <div key={l} style={{textAlign:"center"}}>
                   <div style={{color:c,fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{v}</div>
                   <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginTop:2}}>{l.toUpperCase()}</div>
@@ -5819,10 +5826,10 @@ onClose, votes, onVote, balance }) {
             <SectionLabel>STAKE</SectionLabel>
             <div style={{display:"flex",gap:8,marginBottom:12}}>
               {[1,2,5,10,25].map(v=>(
-                <button key={v} onClick={()=>setStake(v)} style={{flex:1,height:38,borderRadius:10,border:"1px solid "+(stake===v?"#1fbb7b":"#213743"),background:stake===v?"rgba(31,187,123,0.12)":"#1A2C38",color:stake===v?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
+                <button key={v} onClick={()=>setStake(v)} style={{flex:1,height:38,borderRadius:10,border:"1px solid "+(stake===v?"#3B82F6":"#1A2D4A"),background:stake===v?"rgba(59,130,246,0.12)":"#0F2040",color:stake===v?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
               ))}
             </div>
-            <button onClick={confirm} disabled={balance<stake} style={{width:"100%",height:48,borderRadius:99,background:balance>=stake?"#1fbb7b":"#213743",border:"none",color:balance>=stake?"#000":"#213743",fontSize:15,fontWeight:900,cursor:balance>=stake?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+            <button onClick={confirm} disabled={balance<stake} style={{width:"100%",height:48,borderRadius:99,background:balance>=stake?"#3B82F6":"#1A2D4A",border:"none",color:balance>=stake?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:balance>=stake?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
               {balance>=stake?"🎰 Place Parlay · $"+(stake.toFixed(2)):"Insufficient balance"}
             </button>
           </div>
@@ -5832,7 +5839,7 @@ onClose, votes, onVote, balance }) {
         {legs.length < 5 && (<>
           <SectionLabel>ADD A LEG {legs.length===0?"— PICK YOUR FIRST":"— PICK ANOTHER"}</SectionLabel>
           {available.slice(0,8).map(pred => (
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:8}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:8}}>
               <div style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:10}}>
                 <PredImage pred={pred} style={{width:48,height:48,borderRadius:10}}/>
                 <div style={{flex:1}}>
@@ -5842,7 +5849,7 @@ onClose, votes, onVote, balance }) {
                 </div>
               </div>
               <div style={{display:"flex",gap:8}}>
-                <button onClick={()=>addLeg(pred,"YES")} style={{flex:1,height:38,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.267)",color:"#1fbb7b",fontSize:12,fontWeight:800,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>✓ YES {pred.yesPct}%</button>
+                <button onClick={()=>addLeg(pred,"YES")} style={{flex:1,height:38,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.267)",color:"#3B82F6",fontSize:12,fontWeight:800,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>✓ YES {pred.yesPct}%</button>
                 <button onClick={()=>addLeg(pred,"NO")} style={{flex:1,height:38,borderRadius:99,background:"rgba(143,60,60,0.12)",border:"1px solid rgba(143,60,60,0.267)",color:"#c42b2b",fontSize:12,fontWeight:800,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>✕ NO {100-pred.yesPct}%</button>
               </div>
             </div>
@@ -5912,7 +5919,7 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
   const pts = pnlPoints.map((v,i) => [(i/(pnlPoints.length-1))*W, H-((v-pMin)/pRange)*(H-4)+2]);
   const pathD = pts.map((p,i)=>(i===0?"M":"L")+(p[0].toFixed(1))+","+(p[1].toFixed(1))).join(" ");
   const lastPt = pts[pts.length-1];
-  const curveColor = netPnL >= 0 ? "#1fbb7b" : "#f93d3d";
+  const curveColor = netPnL >= 0 ? "#3B82F6" : "#f93d3d";
 
   // Best/worst bets sorted by actual P&L
   const sortedBets = [...resolvedVoted].sort((a,b) => {
@@ -5922,16 +5929,16 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
   });
 
   return (
-    <div style={{height:"100%",overflowY:"auto",background:"#0F212E"}}>
-      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10}}>
+    <div style={{height:"100%",overflowY:"auto",background:"#0A1628"}}>
+      <div style={{padding:"20px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}}>
           <div>
             <h2 style={{fontSize:22,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif"}}>📈 Portfolio</h2>
             <p style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginTop:2}}>{voted.length} ACTIVE POSITION{voted.length!==1?"S":""}</p>
           </div>
-          <div style={{display:"flex",gap:0,background:"#1A2C38",borderRadius:20,padding:3}}>
+          <div style={{display:"flex",gap:0,background:"#0F2040",borderRadius:20,padding:3}}>
             {["7d","30d","all"].map(p=>(
-              <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#1fbb7b":"transparent",border:"none",borderRadius:99,color:period===p?"#000":"rgba(255,255,255,0.32)",fontSize:11,fontWeight:700,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{p.toUpperCase()}</button>
+              <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#3B82F6":"transparent",border:"none",borderRadius:99,color:period===p?"#000":"rgba(255,255,255,0.32)",fontSize:11,fontWeight:700,padding:"5px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>{p.toUpperCase()}</button>
             ))}
           </div>
         </div>
@@ -5939,7 +5946,7 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
 
       <div style={{padding:"0 16px 100px"}}>
         {/* Hero P&L */}
-        <div style={{background:"linear-gradient(135deg,#0F212E,#1A2C38)",borderRadius:20,border:"1px solid "+(curveColor)+"22",padding:"20px",marginBottom:16}}>
+        <div style={{background:"linear-gradient(135deg,#0A1628,#0F2040)",borderRadius:20,border:"1px solid "+(curveColor)+"22",padding:"20px",marginBottom:16}}>
           <div style={{marginBottom:14}}>
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginBottom:6}}>NET P&L</div>
             <div style={{display:"flex",alignItems:"baseline",gap:10}}>
@@ -5959,9 +5966,9 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
             <path d={pathD} fill="none" stroke={curveColor} strokeWidth="2.5" strokeLinejoin="round" strokeLinecap="round"/>
             {/* Zero line */}
             {pMin < 0 && pMax > 0 && (
-              <line x1="0" y1={H-((0-pMin)/pRange)*(H-4)+2} x2={W} y2={H-((0-pMin)/pRange)*(H-4)+2} stroke="#213743" strokeWidth="1" strokeDasharray="4 4"/>
+              <line x1="0" y1={H-((0-pMin)/pRange)*(H-4)+2} x2={W} y2={H-((0-pMin)/pRange)*(H-4)+2} stroke="#1A2D4A" strokeWidth="1" strokeDasharray="4 4"/>
             )}
-            <circle cx={lastPt[0]} cy={lastPt[1]} r="5" fill={curveColor} stroke="#1A2C38" strokeWidth="2"/>
+            <circle cx={lastPt[0]} cy={lastPt[1]} r="5" fill={curveColor} stroke="#0F2040" strokeWidth="2"/>
           </svg>
         </div>
 
@@ -5969,11 +5976,11 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
           {[
             ["Total Wagered","$"+(totalBet.toFixed(2)),"rgba(255,255,255,0.42)"],
-            ["Total Won","$"+(totalWon.toFixed(2)),"#1fbb7b"],
+            ["Total Won","$"+(totalWon.toFixed(2)),"#3B82F6"],
             ["Win Rate",(winRate)+"%","#F4C430"],
             ["Correct",(wins)+"/"+(voted.length),"#7c4dcc"],
           ].map(([label,val,color])=>(
-            <div key={label} style={{background:"#1A2C38",borderRadius:14,padding:"14px"}}>
+            <div key={label} style={{background:"#0F2040",borderRadius:14,padding:"14px"}}>
               <div style={{color,fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{val}</div>
               <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:4,letterSpacing:1}}>{label.toUpperCase()}</div>
             </div>
@@ -5983,7 +5990,7 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
         {/* Category exposure */}
         {catBreakdown.length > 0 && (<>
           <SectionLabel>EXPOSURE BY CATEGORY</SectionLabel>
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:16}}>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:16}}>
             {catBreakdown.map(({cat,meta,count,vol}) => (
               <div key={cat} style={{marginBottom:10}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
@@ -5994,7 +6001,7 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
                   </div>
                   <span style={{color:meta.color,fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>${vol.toFixed(2)}</span>
                 </div>
-                <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+                <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
                   <div style={{height:"100%",width:((vol/totalCatVol)*100)+"%",background:meta.color,borderRadius:99,transition:"width 0.6s ease"}}/>
                 </div>
               </div>
@@ -6010,18 +6017,18 @@ function PortfolioPage({ votes, balance, resolvedBets={} }) {
             const isGood = v.pos==="YES" ? pred.yesPct>50 : pred.yesPct<50;
             const mockPnL = isGood ? (v.amount||1)*7.2 : -(v.amount||1);
             return (
-              <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,border:"1px solid "+(isGood?"rgba(31,187,123,0.133)":"rgba(143,60,60,0.133)"),padding:"12px 14px",marginBottom:8,display:"flex",gap:12,alignItems:"center"}}>
+              <div key={pred.id} style={{background:"#0F2040",borderRadius:14,border:"1px solid "+(isGood?"rgba(59,130,246,0.133)":"rgba(143,60,60,0.133)"),padding:"12px 14px",marginBottom:8,display:"flex",gap:12,alignItems:"center"}}>
                 <PredImage pred={pred} style={{width:52,height:52,borderRadius:10}}/>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{color:"#c8dae8",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
                   <div style={{display:"flex",alignItems:"center",gap:8,marginTop:4}}>
-                    <Badge color={v.pos==="YES"?"#1fbb7b":"#c42b2b"}>{v.pos}</Badge>
-                    <Sparkline data={pred.chartData} color={isGood?"#1fbb7b":"#f93d3d"} width={28} height={9}/>
-                    <span style={{color:isGood?"#1fbb7b":"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
+                    <Badge color={v.pos==="YES"?"#22C55E":"#c42b2b"}>{v.pos}</Badge>
+                    <Sparkline data={pred.chartData} color={isGood?"#3B82F6":"#f93d3d"} width={28} height={9}/>
+                    <span style={{color:isGood?"#3B82F6":"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
                   </div>
                 </div>
                 <div style={{textAlign:"right",flexShrink:0}}>
-                  <div style={{color:isGood?"#1fbb7b":"#f93d3d",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{isGood?"+":""}{mockPnL.toFixed(2)}</div>
+                  <div style={{color:isGood?"#3B82F6":"#f93d3d",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{isGood?"+":""}{mockPnL.toFixed(2)}</div>
                   <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>${v.amount?.toFixed(2)} bet</div>
                 </div>
               </div>
@@ -6046,7 +6053,7 @@ const TAKES_DATA = [
   { id:5, user:"@cryptooracle", avatar:"🔮", color:"#F4C430", time:"31m", text:"Solana flipping ETH market cap in 2025 is more likely than people think. The devs are shipping like crazy and fees are basically zero", reactions:{fire:99,skull:77,brain:55}, cat:"CRYPTO", pred:8 },
   { id:6, user:"@techinsider", avatar:"🤖", color:"#00c9a7", time:"45m", text:"GPT-5 before July? OpenAI is behind schedule, Altman said 'ambitious goals.' I'm fading this one. NO position all the way 🎯", reactions:{fire:41,skull:66,brain:233}, cat:"TECH", pred:5 },
   { id:7, user:"@yolo_labs", avatar:"💀", color:"#f93d3d", time:"1h", text:"Put my whole stack on the alien disclosure bet. The UAP hearings were NOT nothing. Government is prepping the narrative 👽", reactions:{fire:501,skull:88,brain:12}, cat:"CONSPIRACY", pred:4 },
-  { id:8, user:"@marketwatch", avatar:"📈", color:"#1fbb7b", time:"2h", text:"S&P 500 at 7k by EOY? With earnings season this strong and rate cuts still on table, probably yes. Boring but right 📊", reactions:{fire:34,skull:8,brain:156}, cat:"FINANCE", pred:null },
+  { id:8, user:"@marketwatch", avatar:"📈", color:"#3B82F6", time:"2h", text:"S&P 500 at 7k by EOY? With earnings season this strong and rate cuts still on table, probably yes. Boring but right 📊", reactions:{fire:34,skull:8,brain:156}, cat:"FINANCE", pred:null },
 ];
 
 function HotTakesPage({
@@ -6072,7 +6079,7 @@ onOpenCreator, profileData }) {
     const t = {
       id: Date.now(),
       user:"@"+(profileData?.name||"you").replace(/\s/g,"_").toLowerCase(),
-      avatar: profileData?.avatar||"⚡", color:"#1fbb7b",
+      avatar: profileData?.avatar||"⚡", color:"#3B82F6",
       time:"now", text:newTake, reactions:{fire:0,skull:0,brain:0}, cat:catFilter==="ALL"?"CRYPTO":catFilter, pred:null,
       isMe: true,
     };
@@ -6081,15 +6088,15 @@ onOpenCreator, profileData }) {
   };
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
-      <div style={{padding:"16px 16px 0",position:"sticky",top:0,background:"#0F212E",zIndex:10,flexShrink:0}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
+      <div style={{padding:"16px 16px 0",position:"sticky",top:0,background:"#0A1628",zIndex:10,flexShrink:0}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
           <h2 style={{fontSize:20,fontWeight:900,color:"#FFFFFF",fontFamily:"'Inter',sans-serif"}}>🔥 Hot Takes</h2>
-          <button onClick={()=>setComposing(true)} style={{background:"#1fbb7b",border:"none",borderRadius:20,color:"#fff",fontSize:12,fontWeight:800,padding:"7px 16px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>+ Take</button>
+          <button onClick={()=>setComposing(true)} style={{background:"#3B82F6",border:"none",borderRadius:20,color:"#fff",fontSize:12,fontWeight:800,padding:"7px 16px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>+ Take</button>
         </div>
         <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:12,scrollbarWidth:"none"}}>
           {["ALL",...Object.keys(CATEGORY_META).filter(k=>k!=="ALL")].map(cat => (
-            <button key={cat} onClick={()=>setCatFilter(cat)} style={{flexShrink:0,background:catFilter===cat?(CATEGORY_META[cat]?.color||"#1fbb7b"):"#213743",border:"1px solid "+(catFilter===cat?(CATEGORY_META[cat]?.color||"#1fbb7b"):"#213743"),borderRadius:20,padding:"5px 12px",color:catFilter===cat?"#000":"rgba(255,255,255,0.32)",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer",transition:"all 0.2s",whiteSpace:"nowrap"}}>
+            <button key={cat} onClick={()=>setCatFilter(cat)} style={{flexShrink:0,background:catFilter===cat?(CATEGORY_META[cat]?.color||"#3B82F6"):"#1A2D4A",border:"1px solid "+(catFilter===cat?(CATEGORY_META[cat]?.color||"#3B82F6"):"#1A2D4A"),borderRadius:20,padding:"5px 12px",color:catFilter===cat?"#000":"rgba(255,255,255,0.32)",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer",transition:"all 0.2s",whiteSpace:"nowrap"}}>
               {cat==="ALL"?"ALL":CATEGORY_META[cat]?.icon+" "+cat}
             </button>
           ))}
@@ -6099,7 +6106,7 @@ onOpenCreator, profileData }) {
       <div style={{flex:1,overflowY:"auto"}}>
         {/* Compose modal */}
         {composing && (
-          <div style={{padding:"12px 16px",background:"#1A2C38",borderBottom:"1px solid #213743"}}>
+          <div style={{padding:"12px 16px",background:"#0F2040",borderBottom:"1px solid #1A2D4A"}}>
             <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
               <div style={{width:40,height:40,borderRadius:"50%",background:"linear-gradient(135deg,#2F805A,#2d5c41)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>⚡</div>
               <div style={{flex:1}}>
@@ -6108,8 +6115,8 @@ onOpenCreator, profileData }) {
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginTop:8}}>
                   <span style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{newTake.length}/280</span>
                   <div style={{display:"flex",gap:8}}>
-                    <button onClick={()=>setComposing(false)} style={{background:"none",border:"1px solid #213743",borderRadius:20,color:"rgba(255,255,255,0.32)",fontSize:12,padding:"6px 14px",cursor:"pointer"}}>Cancel</button>
-                    <button onClick={post} style={{background:newTake.trim()?"#1fbb7b":"#213743",border:"none",borderRadius:20,color:newTake.trim()?"#000":"#213743",fontSize:12,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>Post</button>
+                    <button onClick={()=>setComposing(false)} style={{background:"none",border:"1px solid #1A2D4A",borderRadius:20,color:"rgba(255,255,255,0.32)",fontSize:12,padding:"6px 14px",cursor:"pointer"}}>Cancel</button>
+                    <button onClick={post} style={{background:newTake.trim()?"#3B82F6":"#1A2D4A",border:"none",borderRadius:20,color:newTake.trim()?"#000":"#1A2D4A",fontSize:12,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>Post</button>
                   </div>
                 </div>
               </div>
@@ -6120,7 +6127,7 @@ onOpenCreator, profileData }) {
         {filtered.map(take => {
           const pred = take.pred ? ALL_PREDS.find(p=>p.id===take.pred) : null;
           return (
-            <div key={take.id} style={{padding:"16px",borderBottom:"1px solid #1A2C38"}}>
+            <div key={take.id} style={{padding:"16px",borderBottom:"1px solid #0F2040"}}>
               <div style={{display:"flex",gap:12}}>
                 <button onClick={()=>onOpenCreator&&onOpenCreator(take.user.replace("@",""))} style={{background:"none",border:"none",cursor:"pointer",padding:0,flexShrink:0}}>
                   <div style={{width:42,height:42,borderRadius:"50%",background:take.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,border:"2px solid transparent"}}>{take.avatar}</div>
@@ -6135,16 +6142,16 @@ onOpenCreator, profileData }) {
 
                   {/* Linked prediction */}
                   {pred && (
-                    <div style={{background:"#1A2C38",borderRadius:12,padding:"10px 12px",marginBottom:10,display:"flex",gap:10,alignItems:"center"}}>
+                    <div style={{background:"#0F2040",borderRadius:12,padding:"10px 12px",marginBottom:10,display:"flex",gap:10,alignItems:"center"}}>
                       <PredImage pred={pred} style={{width:40,height:40,borderRadius:8}}/>
                       <div style={{flex:1,minWidth:0}}>
                         <div style={{color:"rgba(255,255,255,0.42)",fontSize:11,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{pred.title}</div>
                         <div style={{display:"flex",alignItems:"center",gap:6,marginTop:3}}>
-                          <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
+                          <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{pred.yesPct}% YES</span>
                           <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>· {pred.pool}</span>
                         </div>
                       </div>
-                      <Sparkline data={pred.chartData} color="#1fbb7b" width={32} height={12}/>
+                      <Sparkline data={pred.chartData} color="#3B82F6" width={32} height={12}/>
                     </div>
                   )}
 
@@ -6154,9 +6161,9 @@ onOpenCreator, profileData }) {
                       const key = (take.id)+"-"+(type);
                       const active = !!reacted[key];
                       return (
-                        <button key={type} onClick={()=>react(take.id,type)} style={{background:active?"rgba(31,187,123,0.1)":"#1A2C38",border:"1px solid "+(active?"rgba(31,187,123,0.267)":"#213743"),borderRadius:20,padding:"5px 10px",cursor:"pointer",display:"flex",alignItems:"center",gap:5,transition:"all 0.15s"}}>
+                        <button key={type} onClick={()=>react(take.id,type)} style={{background:active?"rgba(59,130,246,0.1)":"#0F2040",border:"1px solid "+(active?"rgba(59,130,246,0.267)":"#1A2D4A"),borderRadius:20,padding:"5px 10px",cursor:"pointer",display:"flex",alignItems:"center",gap:5,transition:"all 0.15s"}}>
                           <span style={{fontSize:13}}>{emoji}</span>
-                          <span style={{color:active?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{take.reactions[type]}</span>
+                          <span style={{color:active?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{take.reactions[type]}</span>
                         </button>
                       );
                     })}
@@ -6192,11 +6199,11 @@ cat, onClose, votes, onVote, balance, watchlist, onToggleWatch }) {
   };
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       {/* Hero header */}
-      <div style={{background:"linear-gradient(135deg, "+(meta.color)+"18, #1A2C38)",borderBottom:"1px solid "+(meta.color)+"22",padding:"14px 16px",flexShrink:0}}>
+      <div style={{background:"linear-gradient(135deg, "+(meta.color)+"18, #0F2040)",borderBottom:"1px solid "+(meta.color)+"22",padding:"14px 16px",flexShrink:0}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:12}}>
-          <button onClick={onClose} style={{background:"rgba(15,33,46,0.55)",border:"1px solid "+(meta.color)+"33",borderRadius:"50%",width:34,height:34,color:meta.color,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+          <button onClick={onClose} style={{background:"rgba(10,22,40,0.55)",border:"1px solid "+(meta.color)+"33",borderRadius:"50%",width:34,height:34,color:meta.color,fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <div style={{width:44,height:44,borderRadius:14,background:(meta.color)+"20",border:"1px solid "+(meta.color)+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>{meta.icon}</div>
           <div>
             <h2 style={{color:"#FFFFFF",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{cat.charAt(0)+cat.slice(1).toLowerCase()}</h2>
@@ -6209,7 +6216,7 @@ cat, onClose, votes, onVote, balance, watchlist, onToggleWatch }) {
             ["Hot Markets",hotCount],
             ["Avg Odds",(Math.round(preds.reduce((s,p)=>s+p.yesPct,0)/Math.max(preds.length,1)))+"% YES"],
           ].map(([l,v])=>(
-            <div key={l} style={{flex:1,background:"rgba(15,33,46,0.55)",borderRadius:12,padding:"10px 12px",backdropFilter:"blur(4px)"}}>
+            <div key={l} style={{flex:1,background:"rgba(10,22,40,0.55)",borderRadius:12,padding:"10px 12px",backdropFilter:"blur(4px)"}}>
               <div style={{color:meta.color,fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.22)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginTop:2}}>{l.toUpperCase()}</div>
             </div>
@@ -6222,21 +6229,21 @@ cat, onClose, votes, onVote, balance, watchlist, onToggleWatch }) {
           const vote = votes[pred.id];
           const isWatched = watchlist.includes(pred.id);
           return (
-            <div key={pred.id} style={{background:"#1A2C38",borderRadius:16,overflow:"hidden",marginBottom:12}}>
+            <div key={pred.id} style={{background:"#0F2040",borderRadius:16,overflow:"hidden",marginBottom:12}}>
               <div style={{position:"relative",height:120}}>
                 <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
                 <div style={{position:"absolute",inset:0,background:"linear-gradient(to top,rgba(0,0,0,0.88),transparent 60%)"}}/>
                 {pred.hot && <div style={{position:"absolute",top:10,left:12,background:"rgba(255,107,53,0.9)",borderRadius:20,padding:"3px 10px"}}><span style={{color:"#FFFFFF",fontSize:10,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>🔥 HOT</span></div>}
                 <button onClick={()=>onToggleWatch(pred.id)} style={{position:"absolute",top:8,right:10,background:"rgba(0,0,0,0.5)",border:"none",borderRadius:"50%",width:30,height:30,fontSize:15,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",opacity:isWatched?1:0.5}}>🔖</button>
                 <div style={{position:"absolute",bottom:8,left:12,display:"flex",alignItems:"center",gap:6}}>
-                  <span style={{color:pred.trendDir==="up"?"#1fbb7b":"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,background:"rgba(15,33,46,0.72)",padding:"3px 8px",borderRadius:20}}>
+                  <span style={{color:pred.trendDir==="up"?"#3B82F6":"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700,background:"rgba(10,22,40,0.72)",padding:"3px 8px",borderRadius:20}}>
                     {pred.trendDir==="up"?"↗":"↘"} {pred.trend}
                   </span>
                 </div>
               </div>
               <div style={{padding:"12px 14px 14px"}}>
                 <h3 style={{color:"#FFFFFF",fontSize:13,fontWeight:800,lineHeight:1.35,fontFamily:"'Inter',sans-serif",marginBottom:8}}>{pred.title}</h3>
-                <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:8}}>
+                <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:8}}>
                   <div style={{height:"100%",width:(pred.yesPct)+"%",background:"linear-gradient(90deg,"+(meta.color)+","+(meta.color)+"aa)",borderRadius:99}}/>
                 </div>
                 <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
@@ -6247,8 +6254,8 @@ cat, onClose, votes, onVote, balance, watchlist, onToggleWatch }) {
                   </div>
                 </div>
                 {vote ? (
-                  <div style={{height:38,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(31,187,123,0.12)":"rgba(143,60,60,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(31,187,123,0.2)":"rgba(143,60,60,0.2)")}}>
-                    <span style={{color:vote.pos==="YES"?"#1fbb7b":"#c42b2b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Bet {vote.pos} · ${vote.amount?.toFixed(2)}</span>
+                  <div style={{height:38,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(34,197,94,0.12)":"rgba(143,60,60,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(34,197,94,0.2)":"rgba(143,60,60,0.2)")}}>
+                    <span style={{color:vote.pos==="YES"?"#22C55E":"#c42b2b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Bet {vote.pos} · ${vote.amount?.toFixed(2)}</span>
                   </div>
                 ) : (
                   <div style={{display:"flex",gap:8}}>
@@ -6284,49 +6291,49 @@ function PriceAlertModal({ pred, onClose }) {
         <p style={{color:"rgba(255,255,255,0.32)",fontFamily:"'Inter',sans-serif",fontSize:12,lineHeight:1.6}}>
           You'll be notified when<br/>
           <span style={{color:"#FFFFFF",fontWeight:700}}>{pred.title.slice(0,40)}…</span><br/>
-          goes <span style={{color:direction==="above"?"#1fbb7b":"#f93d3d",fontWeight:700}}>{direction} {threshold}% YES</span>
+          goes <span style={{color:direction==="above"?"#3B82F6":"#f93d3d",fontWeight:700}}>{direction} {threshold}% YES</span>
         </p>
-        <button onClick={onClose} style={{marginTop:20,background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
+        <button onClick={onClose} style={{marginTop:20,background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:800,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
       </div>
     </Sheet>
   );
 
   return (
     <Sheet onClose={onClose} title="🔔 Set Price Alert">
-      <div style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:20,display:"flex",gap:12,alignItems:"center"}}>
+      <div style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:20,display:"flex",gap:12,alignItems:"center"}}>
         <PredImage pred={pred} style={{width:60,height:60,borderRadius:10}}/>
         <div>
           <div style={{color:"rgba(255,255,255,0.72)",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:4}}>{pred.title.slice(0,55)}…</div>
-          <div style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif",fontWeight:700}}>Currently {pred.yesPct}% YES</div>
+          <div style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif",fontWeight:700}}>Currently {pred.yesPct}% YES</div>
         </div>
       </div>
 
       <SectionLabel>ALERT DIRECTION</SectionLabel>
       <div style={{display:"flex",gap:8,marginBottom:20}}>
         {["above","below"].map(d=>(
-          <button key={d} onClick={()=>setDirection(d)} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(direction===d?(d==="above"?"#1fbb7b":"#f93d3d"):"#213743"),background:direction===d?(d==="above"?"rgba(31,187,123,0.12)":"rgba(143,60,60,0.12)"):"#1A2C38",color:direction===d?(d==="above"?"#1fbb7b":"#f93d3d"):"rgba(255,255,255,0.32)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>
+          <button key={d} onClick={()=>setDirection(d)} style={{flex:1,height:44,borderRadius:12,border:"1px solid "+(direction===d?(d==="above"?"#3B82F6":"#f93d3d"):"#1A2D4A"),background:direction===d?(d==="above"?"rgba(59,130,246,0.12)":"rgba(143,60,60,0.12)"):"#0F2040",color:direction===d?(d==="above"?"#3B82F6":"#f93d3d"):"rgba(255,255,255,0.32)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>
             {d==="above"?"↑ Above":"↓ Below"}
           </button>
         ))}
       </div>
 
       <SectionLabel>THRESHOLD: {threshold}% YES</SectionLabel>
-      <input type="range" min={1} max={99} value={threshold} onChange={e=>setThreshold(+e.target.value)} style={{width:"100%",accentColor:"#1fbb7b",marginBottom:6}}/>
+      <input type="range" min={1} max={99} value={threshold} onChange={e=>setThreshold(+e.target.value)} style={{width:"100%",accentColor:"#3B82F6",marginBottom:6}}/>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:20}}>
         <span style={{color:"#f93d3d",fontSize:12,fontFamily:"'Inter',sans-serif"}}>1%</span>
-        <span style={{color:"#1fbb7b",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{threshold}%</span>
-        <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>99%</span>
+        <span style={{color:"#3B82F6",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{threshold}%</span>
+        <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>99%</span>
       </div>
 
-      <div style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:20}}>
+      <div style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:20}}>
         <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.5}}>
-          Alert fires when odds move <span style={{color:direction==="above"?"#1fbb7b":"#f93d3d",fontWeight:700}}>{direction} {threshold}%</span>
+          Alert fires when odds move <span style={{color:direction==="above"?"#3B82F6":"#f93d3d",fontWeight:700}}>{direction} {threshold}%</span>
           {" "}(currently <span style={{color:"#FFFFFF"}}>{pred.yesPct}%</span>)
           {" "}— {Math.abs(pred.yesPct-threshold)}% away
         </div>
       </div>
 
-      <button onClick={()=>setSet(true)} style={{width:"100%",height:52,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+      <button onClick={()=>setSet(true)} style={{width:"100%",height:52,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
         🔔 Activate Alert
       </button>
     </Sheet>
@@ -6354,7 +6361,7 @@ const TOURNAMENT_DATA = {
     { rank: 1, user: "crypto_oracle", avatar: "🔮", color: "#F4C430", score: 4820, correct: 7, total: 8 },
     { rank: 2, user: "alpha_trader", avatar: "🦅", color: "#00E5FF", score: 4210, correct: 6, total: 8 },
     { rank: 3, user: "moonboy99", avatar: "🌙", color: "#7c4dcc", score: 3990, correct: 6, total: 9 },
-    { rank: 4, user: "deus_vult", avatar: "⚡", color: "#1fbb7b", score: 3640, correct: 5, total: 7, isMe: true },
+    { rank: 4, user: "deus_vult", avatar: "⚡", color: "#3B82F6", score: 3640, correct: 5, total: 7, isMe: true },
     { rank: 5, user: "satoshi_x", avatar: "₿", color: "#F4C430", score: 3200, correct: 5, total: 8 },
     { rank: 6, user: "degenmode", avatar: "🎲", color: "#F4C430", score: 2980, correct: 4, total: 7 },
     { rank: 7, user: "yolo_labs", avatar: "💀", color: "#f93d3d", score: 2750, correct: 4, total: 8 },
@@ -6399,18 +6406,18 @@ onClose, votes, onVote, balance, onAddBalance }) {
 
   return (
     <>
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="🏆 Tournament" onBack={onClose}/>
 
       {/* Hero banner */}
-      <div style={{background:"linear-gradient(135deg,#100E06,#1A2C38)",borderBottom:"1px solid rgba(244,196,48,0.133)",padding:"16px",flexShrink:0}}>
+      <div style={{background:"linear-gradient(135deg,#100E06,#0F2040)",borderBottom:"1px solid rgba(244,196,48,0.133)",padding:"16px",flexShrink:0}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:12}}>
           <div>
             <h2 style={{color:"#FFFFFF",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>{TOURNAMENT_DATA.title}</h2>
             <p style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{TOURNAMENT_DATA.subtitle}</p>
           </div>
           {joined
-            ? <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.267)",borderRadius:20,padding:"6px 14px"}}><span style={{color:"#1fbb7b",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ ENTERED</span></div>
+            ? <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.267)",borderRadius:20,padding:"6px 14px"}}><span style={{color:"#3B82F6",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ ENTERED</span></div>
             : <button onClick={()=>setConfirmJoin(true)} style={{background:"#F4C430",border:"none",borderRadius:20,color:"#000",fontSize:13,fontWeight:900,padding:"8px 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Join $5</button>
           }
         </div>
@@ -6418,7 +6425,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
         {/* Countdown */}
         <div style={{display:"flex",gap:8,marginBottom:12}}>
           {[[hrs,"HRS"],[mins,"MIN"],[secs,"SEC"]].map(([v,l])=>(
-            <div key={l} style={{flex:1,background:"rgba(15,33,46,0.55)",borderRadius:12,padding:"10px 0",textAlign:"center"}}>
+            <div key={l} style={{flex:1,background:"rgba(10,22,40,0.55)",borderRadius:12,padding:"10px 0",textAlign:"center"}}>
               <div style={{color:"#F4C430",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{pad(v)}</div>
               <div style={{color:"rgba(255,255,255,0.22)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:2,marginTop:2}}>{l}</div>
             </div>
@@ -6431,10 +6438,10 @@ onClose, votes, onVote, balance, onAddBalance }) {
             <div style={{color:"#F4C430",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${TOURNAMENT_DATA.prizePool.toLocaleString()}</div>
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2,letterSpacing:1}}>PRIZE POOL</div>
           </div>
-          <div style={{flex:1,background:"rgba(15,33,46,0.45)",borderRadius:12,padding:"10px 12px"}}>
+          <div style={{flex:1,background:"rgba(10,22,40,0.45)",borderRadius:12,padding:"10px 12px"}}>
             <div style={{color:"#FFFFFF",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{TOURNAMENT_DATA.participants.toLocaleString()}</div>
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2,letterSpacing:1}}>PLAYERS</div>
-            <div style={{height:3,background:"#213743",borderRadius:99,marginTop:6,overflow:"hidden"}}>
+            <div style={{height:3,background:"#1A2D4A",borderRadius:99,marginTop:6,overflow:"hidden"}}>
               <div style={{height:"100%",width:(fillPct)+"%",background:"#F4C430",borderRadius:99}}/>
             </div>
           </div>
@@ -6442,7 +6449,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
       </div>
 
       {/* Sub-nav */}
-      <div style={{display:"flex",background:"#0F212E",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+      <div style={{display:"flex",background:"#0A1628",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         {[["overview","Overview"],["leaderboard","Leaderboard"],["predictions","Markets"]].map(([id,label])=>(
           <button key={id} onClick={()=>setTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(tab===id?"#F4C430":"transparent"),color:tab===id?"#F4C430":"rgba(255,255,255,0.22)",fontSize:12,fontWeight:700,padding:"12px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,transition:"all 0.2s"}}>
             {label.toUpperCase()}
@@ -6455,14 +6462,14 @@ onClose, votes, onVote, balance, onAddBalance }) {
         {tab==="overview" && (<>
           {/* My rank card */}
           {joined && myRank && (
-            <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:16,border:"1px solid rgba(31,187,123,0.2)",padding:"16px",marginBottom:16,display:"flex",alignItems:"center",gap:14}}>
-              <div style={{width:48,height:48,borderRadius:16,background:"#1fbb7b",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,fontWeight:900,color:"#000",fontFamily:"'Inter',sans-serif"}}>#{myRank.rank}</div>
+            <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:16,border:"1px solid rgba(59,130,246,0.2)",padding:"16px",marginBottom:16,display:"flex",alignItems:"center",gap:14}}>
+              <div style={{width:48,height:48,borderRadius:16,background:"#3B82F6",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,fontWeight:900,color:"#000",fontFamily:"'Inter',sans-serif"}}>#{myRank.rank}</div>
               <div style={{flex:1}}>
                 <div style={{color:"#FFFFFF",fontSize:16,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>Your Current Rank</div>
                 <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{myRank.score.toLocaleString()} pts · {myRank.correct}/{myRank.total} correct</div>
               </div>
               <div style={{textAlign:"right"}}>
-                <div style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Top 1%</div>
+                <div style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Top 1%</div>
                 <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>↑ 2 spots</div>
               </div>
             </div>
@@ -6471,7 +6478,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
           {/* Prize structure */}
           <SectionLabel>PRIZE STRUCTURE</SectionLabel>
           {TOURNAMENT_DATA.prizes.map(p => (
-            <div key={p.place} style={{background:"#1A2C38",borderRadius:14,border:"1px solid "+(p.color)+"22",padding:"14px 16px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
+            <div key={p.place} style={{background:"#0F2040",borderRadius:14,border:"1px solid "+(p.color)+"22",padding:"14px 16px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
               <span style={{fontSize:28}}>{p.icon}</span>
               <div style={{flex:1}}>
                 <div style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{p.label}</div>
@@ -6483,7 +6490,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
 
           {/* Rules */}
           <SectionLabel>HOW IT WORKS</SectionLabel>
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"16px"}}>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"16px"}}>
             {[
               ["1️⃣","Bet on the 5 tournament markets — each correct prediction earns points"],
               ["2️⃣","Points = (bet amount × accuracy bonus × speed bonus)"],
@@ -6500,15 +6507,15 @@ onClose, votes, onVote, balance, onAddBalance }) {
 
         {tab==="leaderboard" && (<>
           {TOURNAMENT_DATA.leaderboard.map((r, i) => (
-            <div key={r.rank} style={{background:r.isMe?"#1A2C38":"#1A2C38",borderRadius:14,border:r.isMe?"1px solid rgba(31,187,123,0.2)":"1px solid #213743",padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
+            <div key={r.rank} style={{background:r.isMe?"#0F2040":"#0F2040",borderRadius:14,border:r.isMe?"1px solid rgba(59,130,246,0.2)":"1px solid #1A2D4A",padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
               <div style={{width:32,textAlign:"center",fontSize:i<3?22:14,color:["#F4C430","rgba(255,255,255,0.42)","#C97A28"][i]||"rgba(255,255,255,0.22)",fontFamily:"'Inter',sans-serif",fontWeight:700}}>
                 {i<3?["🥇","🥈","🥉"][i]:r.rank}
               </div>
               <div style={{width:38,height:38,borderRadius:"50%",background:r.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>{r.avatar}</div>
               <div style={{flex:1}}>
                 <div style={{display:"flex",alignItems:"center",gap:6}}>
-                  <span style={{color:r.isMe?"#1fbb7b":"#fff",fontWeight:700,fontSize:14,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
-                  {r.isMe&&<Badge color="#1fbb7b">YOU</Badge>}
+                  <span style={{color:r.isMe?"#3B82F6":"#fff",fontWeight:700,fontSize:14,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
+                  {r.isMe&&<Badge color="#3B82F6">YOU</Badge>}
                 </div>
                 <div style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:2}}>{r.correct}/{r.total} correct · {Math.round(r.correct/r.total*100)}%</div>
               </div>
@@ -6521,13 +6528,13 @@ onClose, votes, onVote, balance, onAddBalance }) {
         </>)}
 
         {tab==="predictions" && (<>
-          <div style={{background:"#0F212E",borderRadius:12,border:"1px solid rgba(31,187,123,0.133)",padding:"12px 14px",marginBottom:16}}>
-            <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>⚡ Bet on these 5 markets to earn tournament points</span>
+          <div style={{background:"#0A1628",borderRadius:12,border:"1px solid rgba(59,130,246,0.133)",padding:"12px 14px",marginBottom:16}}>
+            <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>⚡ Bet on these 5 markets to earn tournament points</span>
           </div>
           {TOURNAMENT_DATA.predictions.map(pred => {
             const vote = votes[pred.id];
             return (
-              <div key={pred.id} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:10}}>
+              <div key={pred.id} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:10}}>
                 <div style={{display:"flex",gap:10,alignItems:"flex-start",marginBottom:10}}>
                   <PredImage pred={pred} style={{width:52,height:52,borderRadius:10}}/>
                   <div style={{flex:1}}>
@@ -6537,8 +6544,8 @@ onClose, votes, onVote, balance, onAddBalance }) {
                   </div>
                 </div>
                 {vote
-                  ? <div style={{height:38,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(31,187,123,0.12)":"rgba(143,60,60,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(31,187,123,0.2)":"rgba(143,60,60,0.2)")}}>
-                      <span style={{color:vote.pos==="YES"?"#1fbb7b":"#c42b2b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ {vote.pos} — ${vote.amount?.toFixed(2)} bet</span>
+                  ? <div style={{height:38,borderRadius:99,display:"flex",alignItems:"center",justifyContent:"center",background:vote.pos==="YES"?"rgba(34,197,94,0.12)":"rgba(143,60,60,0.12)",border:"1px solid "+(vote.pos==="YES"?"rgba(34,197,94,0.2)":"rgba(143,60,60,0.2)")}}>
+                      <span style={{color:vote.pos==="YES"?"#22C55E":"#c42b2b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ {vote.pos} — ${vote.amount?.toFixed(2)} bet</span>
                     </div>
                   : <div style={{display:"flex",gap:8}}>
                       <YesNoBtn label="YES" pct={pred.yesPct} voted={null} onClick={()=>onVote(pred.id,"YES",2)} size="sm"/>
@@ -6554,15 +6561,15 @@ onClose, votes, onVote, balance, onAddBalance }) {
       {/* Join confirmation sheet */}
       {confirmJoin && (
         <Sheet onClose={()=>setConfirmJoin(false)} title="🏆 Join Tournament">
-          <div style={{background:"#0F212E",borderRadius:14,padding:"16px",marginBottom:20,border:"1px solid rgba(31,187,123,0.133)"}}>
-            <div style={{color:"#1fbb7b",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:4}}>ENTRY FEE: $5.00</div>
+          <div style={{background:"#0A1628",borderRadius:14,padding:"16px",marginBottom:20,border:"1px solid rgba(59,130,246,0.133)"}}>
+            <div style={{color:"#3B82F6",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:4}}>ENTRY FEE: $5.00</div>
             <div style={{color:"rgba(255,255,255,0.42)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.5}}>You'll be entered into the Weekly Crypto Championship. Bet on 5 markets to earn points and compete for ${TOURNAMENT_DATA.prizePool.toLocaleString()} in prizes.</div>
           </div>
           <div style={{display:"flex",justifyContent:"space-between",marginBottom:20}}>
             <span style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Your balance</span>
             <span style={{color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",fontWeight:700}}>${balance.toFixed(2)}</span>
           </div>
-          <button onClick={doJoin} disabled={balance<5} style={{width:"100%",height:52,borderRadius:99,background:balance>=5?"#F4C430":"#213743",border:"none",color:balance>=5?"#000":"#213743",fontSize:15,fontWeight:900,cursor:balance>=5?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+          <button onClick={doJoin} disabled={balance<5} style={{width:"100%",height:52,borderRadius:99,background:balance>=5?"#F4C430":"#1A2D4A",border:"none",color:balance>=5?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:balance>=5?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
             {balance>=5?"🏆 Enter for $5":"Insufficient balance"}
           </button>
         </Sheet>
@@ -6570,7 +6577,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
     </div>
 
     {showPayTournament && (
-      <div style={{position:"fixed",inset:0,zIndex:200,background:"#0F212E",display:"flex",flexDirection:"column"}}>
+      <div style={{position:"fixed",inset:0,zIndex:200,background:"#0A1628",display:"flex",flexDirection:"column"}}>
         <div style={{display:"flex",alignItems:"center",gap:12,padding:"14px 16px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
           <button onClick={()=>setShowPayTournament(false)} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
             <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
@@ -6596,7 +6603,7 @@ onClose, votes, onVote, balance, onAddBalance }) {
 // XP / LEVEL SYSTEM  (used in ProfilePage)
 const XP_LEVELS = [
   { level:1, label:"Rookie",   minXp:0,    color:"rgba(255,255,255,0.42)" },
-  { level:2, label:"Bettor",   minXp:100,  color:"#1fbb7b" },
+  { level:2, label:"Bettor",   minXp:100,  color:"#3B82F6" },
   { level:3, label:"Analyst",  minXp:300,  color:"#00E5FF" },
   { level:4, label:"Shark",    minXp:600,  color:"#F4C430" },
   { level:5, label:"Oracle",   minXp:1000, color:"#7c4dcc" },
@@ -6616,7 +6623,7 @@ function XPBar({ votes }) {
   const pct = next ? Math.min(100, ((xp - cur.minXp) / (next.minXp - cur.minXp)) * 100) : 100;
 
   return (
-    <div style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
+    <div style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
         <div style={{display:"flex",alignItems:"center",gap:8}}>
           <div style={{background:(cur.color)+"22",border:"1px solid "+(cur.color)+"44",borderRadius:10,padding:"3px 10px"}}>
@@ -6625,7 +6632,7 @@ function XPBar({ votes }) {
         </div>
         <span style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{xp} XP{next?" / "+(next.minXp):""}</span>
       </div>
-      <div style={{height:6,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+      <div style={{height:6,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
         <div style={{height:"100%",width:(pct)+"%",background:"linear-gradient(90deg,"+(cur.color)+","+(next?.color||cur.color)+")",borderRadius:99,transition:"width 0.8s ease"}}/>
       </div>
       {next && <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:6}}>{next.minXp-xp} XP to {next.label}</div>}
@@ -6642,7 +6649,7 @@ function StreakTracker({ streak=4 }) {
   const todayIdx = today === 0 ? 6 : today - 1;
 
   return (
-    <div style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
+    <div style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:16}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
         <div>
           <span style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>🔥 Daily Streak</span>
@@ -6658,10 +6665,10 @@ function StreakTracker({ streak=4 }) {
           const isToday = i === todayIdx;
           return (
             <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:5}}>
-              <div style={{width:"100%",height:32,borderRadius:8,background:filled?"linear-gradient(135deg,#F4C430,#e67e22)":isToday?"#213743":"#1A2C38",border:"1px solid "+(filled?"rgba(244,196,48,0.267)":isToday?"#213743":"#1A2C38"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>
+              <div style={{width:"100%",height:32,borderRadius:8,background:filled?"linear-gradient(135deg,#F4C430,#e67e22)":isToday?"#1A2D4A":"#0F2040",border:"1px solid "+(filled?"rgba(244,196,48,0.267)":isToday?"#1A2D4A":"#0F2040"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:12}}>
                 {filled?"🔥":""}
               </div>
-              <span style={{color:isToday?"#fff":filled?"#F4C430":"#213743",fontSize:9,fontFamily:"'Inter',sans-serif",fontWeight:isToday?700:400}}>{d}</span>
+              <span style={{color:isToday?"#fff":filled?"#F4C430":"#1A2D4A",fontSize:9,fontFamily:"'Inter',sans-serif",fontWeight:isToday?700:400}}>{d}</span>
             </div>
           );
         })}
@@ -6687,12 +6694,12 @@ function ShareCardModal({ pred, onClose }) {
   return (
     <Sheet onClose={onClose} title="📤 Share Prediction">
       {/* Card preview */}
-      <div style={{borderRadius:20,overflow:"hidden",marginBottom:20,boxShadow:"0 8px 40px rgba(15,33,46,0.72)"}}>
+      <div style={{borderRadius:20,overflow:"hidden",marginBottom:20,boxShadow:"0 8px 40px rgba(10,22,40,0.72)"}}>
         <div style={{position:"relative",height:160}}>
           <PredImage pred={pred} style={{width:"100%",height:"100%"}}/>
           <div style={{position:"absolute",inset:0,background:"linear-gradient(to bottom,rgba(0,0,0,0.2),rgba(0,0,0,0.9))"}}/>
           <div style={{position:"absolute",top:12,left:14,display:"flex",gap:6,alignItems:"center"}}>
-            <div style={{width:28,height:28,borderRadius:8,background:"#1fbb7b",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>⚡</div>
+            <div style={{width:28,height:28,borderRadius:8,background:"#3B82F6",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>⚡</div>
             <span style={{color:"#FFFFFF",fontWeight:900,fontSize:14,fontFamily:"'Inter',sans-serif"}}>PredictSwipe</span>
           </div>
           <div style={{position:"absolute",top:12,right:14}}>
@@ -6703,16 +6710,16 @@ function ShareCardModal({ pred, onClose }) {
           <div style={{position:"absolute",bottom:0,left:0,right:0,padding:"14px"}}>
             <p style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:8}}>{pred.title}</p>
             <div style={{display:"flex",gap:8}}>
-              <div style={{flex:pred.yesPct,background:"#1fbb7b",borderRadius:99,height:6}}/>
+              <div style={{flex:pred.yesPct,background:"#3B82F6",borderRadius:99,height:6}}/>
               <div style={{flex:100-pred.yesPct,background:"#f93d3d",borderRadius:99,height:6}}/>
             </div>
             <div style={{display:"flex",justifyContent:"space-between",marginTop:5}}>
-              <span style={{color:"#1fbb7b",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {pred.yesPct}%</span>
+              <span style={{color:"#3B82F6",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>YES {pred.yesPct}%</span>
               <span style={{color:"#f93d3d",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>NO {100-pred.yesPct}%</span>
             </div>
           </div>
         </div>
-        <div style={{background:"#1A2C38",padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+        <div style={{background:"#0F2040",padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div>
             <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>💰 {pred.pool} · ⏱ {pred.daysLeft}</span>
           </div>
@@ -6734,7 +6741,7 @@ function ShareCardModal({ pred, onClose }) {
           </button>
         ))}
       </div>
-      <button onClick={copy} style={{width:"100%",height:48,borderRadius:99,background:copied?"#1fbb7b":"#213743",border:"1px solid "+(copied?"#1fbb7b":"#213743"),color:copied?"#000":"rgba(255,255,255,0.72)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+      <button onClick={copy} style={{width:"100%",height:48,borderRadius:99,background:copied?"#3B82F6":"#1A2D4A",border:"1px solid "+(copied?"#3B82F6":"#1A2D4A"),color:copied?"#000":"rgba(255,255,255,0.72)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
         {copied?"✓ Copied to clipboard!":"📋 Copy Link & Text"}
       </button>
     </Sheet>
@@ -6764,30 +6771,30 @@ function CreatePageV2({ onClose, onPublish }) {
   };
 
   if (published) return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0A1628"}}>
       <div style={{fontSize:72,animation:"popIn 0.5s cubic-bezier(0.34,1.56,0.64,1)"}}>🚀</div>
       <h2 style={{color:"#FFFFFF",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",textAlign:"center"}}>Market Live!</h2>
       <p style={{color:"rgba(255,255,255,0.32)",fontSize:14,fontFamily:"'Inter',sans-serif",textAlign:"center",lineHeight:1.6,maxWidth:280}}>Your prediction is now live. Share it to build up the pool!</p>
-      <div style={{background:"#1A2C38",borderRadius:16,border:"1px solid rgba(31,187,123,0.2)",padding:"16px",width:"100%",maxWidth:320}}>
+      <div style={{background:"#0F2040",borderRadius:16,border:"1px solid rgba(59,130,246,0.2)",padding:"16px",width:"100%",maxWidth:320}}>
         <div style={{color:"rgba(255,255,255,0.72)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.5,marginBottom:10}}>{title}</div>
         <div style={{display:"flex",gap:8}}>
           <Badge color={CATEGORY_META[category]?.color||"rgba(255,255,255,0.42)"}>{category}</Badge>
           <Badge color="rgba(255,255,255,0.22)">{days}d</Badge>
         </div>
       </div>
-      <button onClick={onClose} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
+      <button onClick={onClose} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
     </div>
   );
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
-      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         <button onClick={step>1?()=>setStep(s=>s-1):onClose} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",color:"#FFFFFF",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span></button>
         <span style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif"}}>Create Market</span>
         {/* Progress dots */}
         <div style={{marginLeft:"auto",display:"flex",gap:6}}>
           {[1,2,3].map(s=>(
-            <div key={s} style={{width:s===step?20:7,height:7,borderRadius:99,background:s<=step?"#1fbb7b":"#213743",transition:"all 0.3s"}}/>
+            <div key={s} style={{width:s===step?20:7,height:7,borderRadius:99,background:s<=step?"#3B82F6":"#1A2D4A",transition:"all 0.3s"}}/>
           ))}
         </div>
       </div>
@@ -6801,16 +6808,16 @@ function CreatePageV2({ onClose, onPublish }) {
 
           <SectionLabel>QUESTION</SectionLabel>
           <textarea value={title} onChange={e=>setTitle(e.target.value)} placeholder='e.g. "Will Bitcoin hit $150k before end of 2025?"' rows={3} maxLength={180}
-            style={{width:"100%",background:"#1A2C38",border:"1px solid "+(title.length>10?"rgba(31,187,123,0.267)":"#213743"),borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.5,marginBottom:4}}/>
+            style={{width:"100%",background:"#0F2040",border:"1px solid "+(title.length>10?"rgba(59,130,246,0.267)":"#1A2D4A"),borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",resize:"none",outline:"none",lineHeight:1.5,marginBottom:4}}/>
           <div style={{display:"flex",justifyContent:"space-between",marginBottom:20}}>
-            <span style={{color:title.length>10?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{title.length>10?"✓ Good length":"Min 10 characters"}</span>
+            <span style={{color:title.length>10?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{title.length>10?"✓ Good length":"Min 10 characters"}</span>
             <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{title.length}/180</span>
           </div>
 
           <SectionLabel>CATEGORY</SectionLabel>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8,marginBottom:20}}>
             {Object.entries(CATEGORY_META).filter(([k])=>k!=="ALL").map(([id,{icon,color}])=>(
-              <button key={id} onClick={()=>setCategory(id)} style={{background:category===id?(color)+"18":"#1A2C38",border:"1px solid "+(category===id?color:"#213743"),borderRadius:12,padding:"12px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:8,transition:"all 0.15s"}}>
+              <button key={id} onClick={()=>setCategory(id)} style={{background:category===id?(color)+"18":"#0F2040",border:"1px solid "+(category===id?color:"#1A2D4A"),borderRadius:12,padding:"12px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:8,transition:"all 0.15s"}}>
                 <span style={{fontSize:18}}>{icon}</span>
                 <span style={{color:category===id?color:"#6a8090",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{id.charAt(0)+id.slice(1).toLowerCase()}</span>
               </button>
@@ -6820,9 +6827,9 @@ function CreatePageV2({ onClose, onPublish }) {
           <SectionLabel>RESOLUTION DATE</SectionLabel>
           <input type="date" value={endDate} onChange={e=>setEndDate(e.target.value)}
             min={new Date(Date.now()+86400000*2).toISOString().split("T")[0]}
-            style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none",marginBottom:20}}/>
+            style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:14,padding:"14px",color:"#FFFFFF",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none",marginBottom:20}}/>
 
-          <button onClick={()=>setStep(2)} disabled={!canNext1} style={{width:"100%",height:52,borderRadius:99,background:canNext1?"#1fbb7b":"#213743",border:"none",color:canNext1?"#000":"#213743",fontSize:15,fontWeight:900,cursor:canNext1?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+          <button onClick={()=>setStep(2)} disabled={!canNext1} style={{width:"100%",height:52,borderRadius:99,background:canNext1?"#3B82F6":"#1A2D4A",border:"none",color:canNext1?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:canNext1?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
             Next → Settings
           </button>
         </>)}
@@ -6834,8 +6841,8 @@ function CreatePageV2({ onClose, onPublish }) {
           <SectionLabel>ANSWER LABELS</SectionLabel>
           <div style={{display:"flex",gap:10,marginBottom:20}}>
             <div style={{flex:1}}>
-              <div style={{color:"#1fbb7b",fontSize:10,fontFamily:"'Inter',sans-serif",marginBottom:6,letterSpacing:1}}>YES OPTION</div>
-              <input value={yesLabel} onChange={e=>setYesLabel(e.target.value)} style={{width:"100%",background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:12,padding:"12px",color:"#1fbb7b",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
+              <div style={{color:"#3B82F6",fontSize:10,fontFamily:"'Inter',sans-serif",marginBottom:6,letterSpacing:1}}>YES OPTION</div>
+              <input value={yesLabel} onChange={e=>setYesLabel(e.target.value)} style={{width:"100%",background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:12,padding:"12px",color:"#3B82F6",fontSize:14,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
             </div>
             <div style={{flex:1}}>
               <div style={{color:"#f93d3d",fontSize:10,fontFamily:"'Inter',sans-serif",marginBottom:6,letterSpacing:1}}>NO OPTION</div>
@@ -6846,7 +6853,7 @@ function CreatePageV2({ onClose, onPublish }) {
           <SectionLabel>SEED POOL (YOUR BET)</SectionLabel>
           <div style={{display:"flex",gap:8,marginBottom:8}}>
             {[1,5,10,25,50].map(v=>(
-              <button key={v} onClick={()=>setPool(v)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(pool===v?"#1fbb7b":"#213743"),background:pool===v?"rgba(31,187,123,0.12)":"#1A2C38",color:pool===v?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
+              <button key={v} onClick={()=>setPool(v)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(pool===v?"#3B82F6":"#1A2D4A"),background:pool===v?"rgba(59,130,246,0.12)":"#0F2040",color:pool===v?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
             ))}
           </div>
           <p style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:20}}>This seeds the prize pool and sets initial odds at 50/50</p>
@@ -6854,13 +6861,13 @@ function CreatePageV2({ onClose, onPublish }) {
           <SectionLabel>INITIAL STAKE AMOUNT</SectionLabel>
           <div style={{display:"flex",gap:8,marginBottom:20}}>
             {[0.5,1,2,5].map(v=>(
-              <button key={v} onClick={()=>setStake(v)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(stake===v?"#1fbb7b":"#213743"),background:stake===v?"rgba(31,187,123,0.12)":"#1A2C38",color:stake===v?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
+              <button key={v} onClick={()=>setStake(v)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(stake===v?"#3B82F6":"#1A2D4A"),background:stake===v?"rgba(59,130,246,0.12)":"#0F2040",color:stake===v?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>${v}</button>
             ))}
           </div>
 
           <div style={{display:"flex",gap:10}}>
-            <button onClick={()=>setStep(1)} style={{flex:1,height:52,borderRadius:99,background:"#1A2C38",border:"1px solid #213743",color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Back</button>
-            <button onClick={()=>setStep(3)} style={{flex:2,height:52,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Preview →</button>
+            <button onClick={()=>setStep(1)} style={{flex:1,height:52,borderRadius:99,background:"#0F2040",border:"1px solid #1A2D4A",color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Back</button>
+            <button onClick={()=>setStep(3)} style={{flex:2,height:52,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Preview →</button>
           </div>
         </>)}
 
@@ -6870,8 +6877,8 @@ function CreatePageV2({ onClose, onPublish }) {
           <p style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif",marginBottom:20}}>This is how it'll appear in the feed</p>
 
           {/* Card preview */}
-          <div style={{background:"#1A2C38",borderRadius:20,overflow:"hidden",marginBottom:20,border:"1px solid #213743"}}>
-            <div style={{background:"linear-gradient(135deg,"+(CATEGORY_META[category]?.color||"#1fbb7b")+"22,#1A2C38)",height:100,display:"flex",alignItems:"center",justifyContent:"center",fontSize:52}}>
+          <div style={{background:"#0F2040",borderRadius:20,overflow:"hidden",marginBottom:20,border:"1px solid #1A2D4A"}}>
+            <div style={{background:"linear-gradient(135deg,"+(CATEGORY_META[category]?.color||"#3B82F6")+"22,#0F2040)",height:100,display:"flex",alignItems:"center",justifyContent:"center",fontSize:52}}>
               {CATEGORY_META[category]?.icon||"❓"}
             </div>
             <div style={{padding:"14px"}}>
@@ -6880,17 +6887,17 @@ function CreatePageV2({ onClose, onPublish }) {
                 <Badge color="rgba(255,255,255,0.22)">{days}d left</Badge>
               </div>
               <h3 style={{color:"#FFFFFF",fontSize:15,fontWeight:800,lineHeight:1.4,fontFamily:"'Inter',sans-serif",marginBottom:12}}>{title||"Your prediction title here..."}</h3>
-              <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:8}}>
+              <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:8}}>
                 <div style={{height:"100%",width:"50%",background:"linear-gradient(90deg,#2F805A,#2d5c41)",borderRadius:99}}/>
               </div>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:12}}>
-                <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{yesLabel} 50%</span>
+                <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{yesLabel} 50%</span>
                 <span style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>💰 ${pool} pool</span>
                 <span style={{color:"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>{noLabel} 50%</span>
               </div>
               <div style={{display:"flex",gap:8}}>
-                <div style={{flex:1,height:42,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.267)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-                  <span style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ {yesLabel}</span>
+                <div style={{flex:1,height:42,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.267)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  <span style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✓ {yesLabel}</span>
                 </div>
                 <div style={{flex:1,height:42,borderRadius:99,background:"rgba(143,60,60,0.12)",border:"1px solid rgba(143,60,60,0.267)",display:"flex",alignItems:"center",justifyContent:"center"}}>
                   <span style={{color:"#c42b2b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✕ {noLabel}</span>
@@ -6899,13 +6906,13 @@ function CreatePageV2({ onClose, onPublish }) {
             </div>
           </div>
 
-          <div style={{background:"#0F212E",borderRadius:12,border:"1px solid rgba(31,187,123,0.133)",padding:"12px 14px",marginBottom:20}}>
-            <span style={{color:"#1fbb7b",fontSize:12,fontFamily:"'Inter',sans-serif"}}>⚡ Publishing will seed the pool with ${pool} from your balance</span>
+          <div style={{background:"#0A1628",borderRadius:12,border:"1px solid rgba(59,130,246,0.133)",padding:"12px 14px",marginBottom:20}}>
+            <span style={{color:"#3B82F6",fontSize:12,fontFamily:"'Inter',sans-serif"}}>⚡ Publishing will seed the pool with ${pool} from your balance</span>
           </div>
 
           <div style={{display:"flex",gap:10}}>
-            <button onClick={()=>setStep(2)} style={{flex:1,height:52,borderRadius:99,background:"#1A2C38",border:"1px solid #213743",color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Edit</button>
-            <button onClick={publish} style={{flex:2,height:52,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>🚀 Publish Market</button>
+            <button onClick={()=>setStep(2)} style={{flex:1,height:52,borderRadius:99,background:"#0F2040",border:"1px solid #1A2D4A",color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Edit</button>
+            <button onClick={publish} style={{flex:2,height:52,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>🚀 Publish Market</button>
           </div>
         </>)}
       </div>
@@ -6925,7 +6932,7 @@ function CreatePageV2({ onClose, onPublish }) {
 // rebillDays: auto-rebill if not passed within this many days
 const PROP_TIERS = [
   {
-    id:"test_1k", tier:"PredictTest", color:"#1fbb7b", icon:"🎯",
+    id:"test_1k", tier:"PredictTest", color:"#3B82F6", icon:"🎯",
     price:49, balance:1000, label:"$1K Account",
     profitTarget:500, maxLoss:300, maxBet:100, consistency:40, split:90,
     activationFee:149, noActivationAddon:49,
@@ -6933,7 +6940,7 @@ const PROP_TIERS = [
     highlights:["$500 profit target","$300 max loss","$100 max bet size","90% profit split","40% consistency rule","28-day window · auto-rebill"],
   },
   {
-    id:"test_5k", tier:"PredictTest", color:"#1fbb7b", icon:"🎯",
+    id:"test_5k", tier:"PredictTest", color:"#3B82F6", icon:"🎯",
     price:79, balance:5000, label:"$5K Account",
     profitTarget:2500, maxLoss:1000, maxBet:500, consistency:40, split:90,
     activationFee:149, noActivationAddon:49,
@@ -6942,7 +6949,7 @@ const PROP_TIERS = [
     popular:true,
   },
   {
-    id:"test_10k", tier:"PredictTest", color:"#1fbb7b", icon:"🎯",
+    id:"test_10k", tier:"PredictTest", color:"#3B82F6", icon:"🎯",
     price:116, balance:10000, label:"$10K Account",
     profitTarget:5000, maxLoss:2000, maxBet:1000, consistency:40, split:90,
     activationFee:149, noActivationAddon:49,
@@ -6980,7 +6987,7 @@ const PROP_LEADERBOARD = [
   {rank:1, user:"crypto_oracle", avatar:"🔮", color:"#F4C430", accuracy:78, profit:4820, payouts:6, tier:"PredictLive"},
   {rank:2, user:"alpha_trader",  avatar:"🦅", color:"#00E5FF", accuracy:74, profit:3960, payouts:5, tier:"PredictElite"},
   {rank:3, user:"moonboy99",     avatar:"🌙", color:"#7c4dcc", accuracy:71, profit:3410, payouts:4, tier:"PredictElite"},
-  {rank:4, user:"deus_vult",     avatar:"⚡", color:"#1fbb7b", accuracy:68, profit:2890, payouts:3, tier:"Funded", isMe:true},
+  {rank:4, user:"deus_vult",     avatar:"⚡", color:"#3B82F6", accuracy:68, profit:2890, payouts:3, tier:"Funded", isMe:true},
   {rank:5, user:"satoshi_x",     avatar:"₿",  color:"#F4C430", accuracy:65, profit:2340, payouts:2, tier:"Funded"},
   {rank:6, user:"degenmode",     avatar:"🎲", color:"#F4C430", accuracy:63, profit:1980, payouts:2, tier:"Funded"},
   {rank:7, user:"techinsider",   avatar:"🤖", color:"#00c9a7", accuracy:62, profit:1430, payouts:1, tier:"Funded"},
@@ -7038,14 +7045,14 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
   ];
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="🏦 PredictSwipe Prop" onBack={onClose}/>
 
       {/* Hero */}
-      <div style={{background:"linear-gradient(160deg,#1A2C38 0%,#090F14 70%)",padding:"20px 16px 18px",flexShrink:0,borderBottom:"1px solid #1A2C38"}}>
+      <div style={{background:"linear-gradient(160deg,#0F2040 0%,#090F14 70%)",padding:"20px 16px 18px",flexShrink:0,borderBottom:"1px solid #0F2040"}}>
         <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12,flexWrap:"wrap"}}>
-          <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:20,padding:"4px 12px"}}>
-            <span style={{color:"#1fbb7b",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>🌍 WORLD'S FIRST</span>
+          <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:20,padding:"4px 12px"}}>
+            <span style={{color:"#3B82F6",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>🌍 WORLD'S FIRST</span>
           </div>
           <div style={{background:"rgba(244,196,48,0.1)",border:"1px solid rgba(244,196,48,0.2)",borderRadius:20,padding:"4px 12px"}}>
             <span style={{color:"#F4C430",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>BETA OPEN</span>
@@ -7056,7 +7063,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
         </div>
         <h1 style={{color:"#FFFFFF",fontSize:26,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1.2,marginBottom:8}}>
           Get Funded.<br/>
-          <span style={{color:"#1fbb7b"}}>Keep 90%</span> of profits.
+          <span style={{color:"#3B82F6"}}>Keep 90%</span> of profits.
         </h1>
         <p style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.5,marginBottom:14}}>
           The world's first prediction market prop firm. Prove your edge on a $1K–$10K simulated account, earn real payouts at 90% split, and stack profits across up to 5 accounts with copy trading.
@@ -7064,7 +7071,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:8,marginBottom:16}}>
           {[["$49","From"],["90%","Split"],["5","Max Accs"],["$10K","Max Balance"]].map(([v,l])=>(
             <div key={l} style={{background:"rgba(0,0,0,0.45)",borderRadius:12,padding:"10px 6px",textAlign:"center"}}>
-              <div style={{color:"#1fbb7b",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{v}</div>
+              <div style={{color:"#3B82F6",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:3,letterSpacing:0.5}}>{l.toUpperCase()}</div>
             </div>
           ))}
@@ -7073,16 +7080,16 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
           ? <button onClick={onOpenChallenge} style={{width:"100%",height:50,borderRadius:99,background:"linear-gradient(135deg,#2F805A,#2d5c41)",border:"none",color:"#000",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
               📊 View My Accounts →
             </button>
-          : <button onClick={onGetFunded} style={{width:"100%",height:50,borderRadius:99,background:"linear-gradient(135deg,#2F805A,#2d5c41)",border:"none",color:"#000",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif",boxShadow:"0 4px 24px rgba(31,187,123,0.267)"}}>
+          : <button onClick={onGetFunded} style={{width:"100%",height:50,borderRadius:99,background:"linear-gradient(135deg,#2F805A,#2d5c41)",border:"none",color:"#000",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif",boxShadow:"0 4px 24px rgba(59,130,246,0.267)"}}>
               🚀 Get Funded — From $49 →
             </button>
         }
       </div>
 
       {/* Tabs */}
-      <div style={{display:"flex",background:"#0F212E",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+      <div style={{display:"flex",background:"#0A1628",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         {[["overview","Overview"],["compare","Compare"],["how","How It Works"],["faq","FAQ"]].map(([id,label])=>(
-          <button key={id} onClick={()=>setTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(tab===id?"#1fbb7b":"transparent"),color:tab===id?"#1fbb7b":"rgba(255,255,255,0.22)",fontSize:10,fontWeight:700,padding:"11px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,transition:"all 0.2s"}}>
+          <button key={id} onClick={()=>setTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(tab===id?"#3B82F6":"transparent"),color:tab===id?"#3B82F6":"rgba(255,255,255,0.22)",fontSize:10,fontWeight:700,padding:"11px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,transition:"all 0.2s"}}>
             {label.toUpperCase()}
           </button>
         ))}
@@ -7096,7 +7103,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
             <SectionLabel>CHOOSE YOUR PATH</SectionLabel>
 
             {/* PredictTest card */}
-            <div style={{background:"#1A2C38",borderRadius:18,border:"1px solid #213743",overflow:"hidden",marginBottom:12}}>
+            <div style={{background:"#0F2040",borderRadius:18,border:"1px solid #1A2D4A",overflow:"hidden",marginBottom:12}}>
               <div style={{height:3,background:"linear-gradient(90deg,#2F805A,#2d5c41)"}}/>
               <div style={{padding:"16px"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10}}>
@@ -7104,14 +7111,14 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
                     <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:4}}>
                       <span style={{fontSize:22}}>🎯</span>
                       <span style={{color:"#FFFFFF",fontSize:17,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>PredictTest</span>
-                      <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:20,padding:"2px 8px"}}>
-                        <span style={{color:"#1fbb7b",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>EVALUATION</span>
+                      <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:20,padding:"2px 8px"}}>
+                        <span style={{color:"#3B82F6",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>EVALUATION</span>
                       </div>
                     </div>
                     <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>Prove your edge. Earn your funded account.</div>
                   </div>
                   <div style={{textAlign:"right",flexShrink:0,marginLeft:8}}>
-                    <div style={{color:"#1fbb7b",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>$49</div>
+                    <div style={{color:"#3B82F6",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>$49</div>
                     <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>FROM</div>
                   </div>
                 </div>
@@ -7119,8 +7126,8 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
                 {/* Pricing grid */}
                 <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6,marginBottom:12}}>
                   {[["$1K Acc","$49 fee","$500 target"],["$5K Acc","$79 fee","$2,500 target"],["$10K Acc","$116 fee","$5,000 target"]].map(([acc,fee,tgt])=>(
-                    <div key={acc} style={{background:"rgba(20,158,99,0.06)",border:"1px solid rgba(31,187,123,0.133)",borderRadius:10,padding:"8px 6px",textAlign:"center"}}>
-                      <div style={{color:"#1fbb7b",fontSize:12,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{acc}</div>
+                    <div key={acc} style={{background:"rgba(20,158,99,0.06)",border:"1px solid rgba(59,130,246,0.133)",borderRadius:10,padding:"8px 6px",textAlign:"center"}}>
+                      <div style={{color:"#3B82F6",fontSize:12,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{acc}</div>
                       <div style={{color:"#FFFFFF",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif",marginTop:2}}>{fee}</div>
                       <div style={{color:"rgba(255,255,255,0.32)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:1}}>{tgt}</div>
                     </div>
@@ -7129,7 +7136,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
 
                 <div style={{display:"flex",gap:6,marginBottom:12,flexWrap:"wrap"}}>
                   {["90% profit split","40% consistency rule","28-day window","Auto-rebills if not passed","$149 activation on pass (or waive for $49)"].map(t=>(
-                    <div key={t} style={{background:"#213743",borderRadius:99,padding:"3px 9px"}}>
+                    <div key={t} style={{background:"#1A2D4A",borderRadius:99,padding:"3px 9px"}}>
                       <span style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>✓ {t}</span>
                     </div>
                   ))}
@@ -7141,14 +7148,14 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
                   <span style={{color:"rgba(255,255,255,0.42)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>$300 · $1,000 · $2,000</span>
                 </div>
 
-                <button onClick={onGetFunded} style={{width:"100%",height:44,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.267)",color:"#1fbb7b",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+                <button onClick={onGetFunded} style={{width:"100%",height:44,borderRadius:99,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.267)",color:"#3B82F6",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                   Choose Account Size →
                 </button>
               </div>
             </div>
 
             {/* PredictDirect card */}
-            <div style={{background:"#1A2C38",borderRadius:18,border:"1px solid rgba(244,196,48,0.133)",overflow:"hidden",marginBottom:12}}>
+            <div style={{background:"#0F2040",borderRadius:18,border:"1px solid rgba(244,196,48,0.133)",overflow:"hidden",marginBottom:12}}>
               <div style={{height:3,background:"linear-gradient(90deg,#F4C430,#e67e22)"}}/>
               <div style={{padding:"16px"}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:10}}>
@@ -7181,7 +7188,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
 
                 <div style={{display:"flex",gap:6,marginBottom:12,flexWrap:"wrap"}}>
                   {["No evaluation needed","Funded from Day 1","90% profit split","20% consistency rule","8 min active days for payout"].map(t=>(
-                    <div key={t} style={{background:"#213743",borderRadius:99,padding:"3px 9px"}}>
+                    <div key={t} style={{background:"#1A2D4A",borderRadius:99,padding:"3px 9px"}}>
                       <span style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>✓ {t}</span>
                     </div>
                   ))}
@@ -7199,7 +7206,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
             </div>
 
             {/* Copy Trader feature card */}
-            <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:18,border:"1px solid rgba(124,77,204,0.2)",overflow:"hidden",marginBottom:12}}>
+            <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:18,border:"1px solid rgba(124,77,204,0.2)",overflow:"hidden",marginBottom:12}}>
               <div style={{height:3,background:"linear-gradient(90deg,#7c4dcc,#7c3aed)"}}/>
               <div style={{padding:"14px 16px",display:"flex",alignItems:"flex-start",gap:14}}>
                 <div style={{width:46,height:46,borderRadius:14,background:"rgba(124,77,204,0.15)",border:"1px solid rgba(124,77,204,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>🔗</div>
@@ -7225,7 +7232,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
             </div>
 
             {/* PredictElite teaser */}
-            <div style={{background:"linear-gradient(135deg,#1a1500,#1A2C38)",borderRadius:18,border:"1px solid rgba(244,196,48,0.2)",overflow:"hidden",marginBottom:20}}>
+            <div style={{background:"linear-gradient(135deg,#1a1500,#0F2040)",borderRadius:18,border:"1px solid rgba(244,196,48,0.2)",overflow:"hidden",marginBottom:20}}>
               <div style={{height:3,background:"linear-gradient(90deg,#F4C430,#ca8a04)"}}/>
               <div style={{padding:"14px 16px",display:"flex",alignItems:"center",gap:14}}>
                 <span style={{fontSize:28}}>🏆</span>
@@ -7244,15 +7251,15 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
               ["crypto_oracle","🔮","#F4C430","$1,240","PredictDirect $5K","yesterday"],
               ["alpha_trader","🦅","#00E5FF","$890","PredictTest $10K","2 days ago"],
               ["moonboy99","🌙","#7c4dcc","$620","PredictDirect $1K","3 days ago"],
-              ["deus_vult","⚡","#1fbb7b","$2,100","3× Copy Accounts","4 days ago"],
+              ["deus_vult","⚡","#3B82F6","$2,100","3× Copy Accounts","4 days ago"],
             ].map(([user,av,col,amt,tier,when])=>(
-              <div key={user} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:"1px solid #1A2C38"}}>
+              <div key={user} style={{display:"flex",alignItems:"center",gap:12,padding:"10px 0",borderBottom:"1px solid #0F2040"}}>
                 <div style={{width:36,height:36,borderRadius:"50%",background:col+"33",border:"1px solid "+(col)+"55",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{av}</div>
                 <div style={{flex:1,minWidth:0}}>
                   <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>@{user}</div>
                   <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{tier} · {when}</div>
                 </div>
-                <div style={{color:"#1fbb7b",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif",flexShrink:0}}>{amt}</div>
+                <div style={{color:"#3B82F6",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif",flexShrink:0}}>{amt}</div>
               </div>
             ))}
           </div>
@@ -7264,23 +7271,23 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
             <SectionLabel>ACCOUNT COMPARISON</SectionLabel>
 
             {/* Full comparison table */}
-            <div style={{background:"#1A2C38",borderRadius:16,overflow:"hidden",marginBottom:16}}>
+            <div style={{background:"#0F2040",borderRadius:16,overflow:"hidden",marginBottom:16}}>
               {/* Header */}
-              <div style={{display:"grid",gridTemplateColumns:"1.4fr 1fr 1fr 1fr",background:"#0F212E",borderBottom:"1px solid #213743"}}>
+              <div style={{display:"grid",gridTemplateColumns:"1.4fr 1fr 1fr 1fr",background:"#0A1628",borderBottom:"1px solid #1A2D4A"}}>
                 {["","$1K","$5K","$10K"].map((h,i)=>(
                   <div key={i} style={{padding:"10px 8px",textAlign:i>0?"center":"left"}}>
-                    <span style={{color:i>0?"#1fbb7b":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{h}</span>
+                    <span style={{color:i>0?"#3B82F6":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{h}</span>
                   </div>
                 ))}
               </div>
               {COMPARE.map(([label,...vals],i)=>(
-                <div key={label} style={{display:"grid",gridTemplateColumns:"1.4fr 1fr 1fr 1fr",borderBottom:i<COMPARE.length-1?"1px solid #1A2C38":"none",background:i%2===0?"rgba(255,255,255,0.01)":"transparent"}}>
+                <div key={label} style={{display:"grid",gridTemplateColumns:"1.4fr 1fr 1fr 1fr",borderBottom:i<COMPARE.length-1?"1px solid #0F2040":"none",background:i%2===0?"rgba(255,255,255,0.01)":"transparent"}}>
                   <div style={{padding:"10px 8px"}}>
                     <span style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{label}</span>
                   </div>
                   {vals.map((v,j)=>(
                     <div key={j} style={{padding:"10px 8px",textAlign:"center"}}>
-                      <span style={{color:label==="Max Loss"?"#f93d3d":label==="Profit Split"?"#1fbb7b":"#fff",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v}</span>
+                      <span style={{color:label==="Max Loss"?"#f93d3d":label==="Profit Split"?"#3B82F6":"#fff",fontSize:11,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v}</span>
                     </div>
                   ))}
                 </div>
@@ -7292,7 +7299,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:16}}>
               {[
                 {
-                  name:"PredictTest",color:"#1fbb7b",icon:"🎯",type:"EVALUATION",
+                  name:"PredictTest",color:"#3B82F6",icon:"🎯",type:"EVALUATION",
                   pros:["Lower entry cost","Waive activation for $49","Rebills if you want to keep trying"],
                   cons:["Must hit profit target","$149 activation fee on pass","28-day deadline pressure"],
                 },
@@ -7302,7 +7309,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
                   cons:["Higher upfront cost","8 min active days for first payout","20% consistency required"],
                 },
               ].map(({name,color,icon,type,pros,cons})=>(
-                <div key={name} style={{background:"#1A2C38",borderRadius:16,border:"1px solid "+(color)+"22",padding:"14px 12px"}}>
+                <div key={name} style={{background:"#0F2040",borderRadius:16,border:"1px solid "+(color)+"22",padding:"14px 12px"}}>
                   <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:10}}>
                     <span style={{fontSize:18}}>{icon}</span>
                     <div>
@@ -7313,7 +7320,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
                   <div style={{marginBottom:8}}>
                     {pros.map(p=>(
                       <div key={p} style={{display:"flex",gap:5,marginBottom:4,alignItems:"flex-start"}}>
-                        <span style={{color:"#1fbb7b",fontSize:10,flexShrink:0,marginTop:1}}>✓</span>
+                        <span style={{color:"#3B82F6",fontSize:10,flexShrink:0,marginTop:1}}>✓</span>
                         <span style={{color:"rgba(255,255,255,0.42)",fontSize:10,fontFamily:"'Inter',sans-serif",lineHeight:1.4}}>{p}</span>
                       </div>
                     ))}
@@ -7332,7 +7339,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
 
             {/* Copy trader explainer */}
             <SectionLabel>COPY TRADER — STACK PROFITS</SectionLabel>
-            <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:16,border:"1px solid rgba(124,77,204,0.2)",padding:"16px",marginBottom:16}}>
+            <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:16,border:"1px solid rgba(124,77,204,0.2)",padding:"16px",marginBottom:16}}>
               <div style={{color:"#7c4dcc",fontSize:14,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:6}}>How profit stacking works</div>
               <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.6,marginBottom:12}}>
                 Buy up to 5 accounts and connect them with the Copy Trader. When you place a bet on your lead account, it's instantly replicated across all follower accounts — proportional to each account's max bet.
@@ -7367,7 +7374,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
               ["6️⃣","Graduate to PredictLive","After 6 successful payouts across your funded accounts, you're eligible for PredictLive — real-capital trading with the same 90% split."],
             ].map(([icon,title,desc],i)=>(
               <div key={i} style={{display:"flex",gap:14,marginBottom:20,alignItems:"flex-start"}}>
-                <div style={{width:44,height:44,borderRadius:14,background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.133)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>{icon}</div>
+                <div style={{width:44,height:44,borderRadius:14,background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.133)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>{icon}</div>
                 <div>
                   <div style={{color:"#FFFFFF",fontSize:14,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:4}}>{title}</div>
                   <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.6}}>{desc}</div>
@@ -7408,7 +7415,7 @@ function PropFirmLanding({ onClose, onGetFunded, onOpenChallenge, propAccount })
               ["How are payouts processed?","Via ACH bank transfer (2–3 days), PayPal (same-day for Elite), or USDC stablecoin (instant). Minimum payout is $25."],
               ["Is the funded balance real money?","No — like all prop firms, the challenge and funded phases use simulated capital. Payouts are real and come from PredictSwipe's revenue pool. PredictLive (after 6 payouts) uses actual capital."],
             ].map(([q,a],i)=>(
-              <div key={i} style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:10}}>
+              <div key={i} style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:10}}>
                 <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:6}}>{q}</div>
                 <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.5}}>{a}</div>
               </div>
@@ -7469,21 +7476,21 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
   };
 
   if (atLimit) return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:16,padding:24,background:"#0A1628"}}>
       <div style={{fontSize:64}}>🔒</div>
       <h2 style={{color:"#FFFFFF",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif",textAlign:"center"}}>Account Limit Reached</h2>
       <p style={{color:"rgba(255,255,255,0.32)",fontSize:14,fontFamily:"'Inter',sans-serif",textAlign:"center",lineHeight:1.6,maxWidth:280}}>
         You already have <span style={{color:"#F4C430",fontWeight:700}}>5 active accounts</span> — the maximum. Close or complete an existing account before opening a new one.
       </p>
-      <button onClick={onClose} style={{background:"#213743",border:"1px solid #213743",borderRadius:99,color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+      <button onClick={onClose} style={{background:"#1A2D4A",border:"1px solid #1A2D4A",borderRadius:99,color:"rgba(255,255,255,0.42)",fontSize:14,fontWeight:700,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
         ← Back to Accounts
       </button>
     </div>
   );
 
   if (paid) return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
-      <div style={{padding:"14px 16px",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
+      <div style={{padding:"14px 16px",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         <button onClick={onClose} style={{background:"none",border:"none",color:"rgba(255,255,255,0.4)",fontSize:13,fontFamily:"'Inter',sans-serif",cursor:"pointer",display:"flex",alignItems:"center",gap:6}}>
           <span style={{fontSize:18,lineHeight:1}}>‹</span> Back
         </button>
@@ -7495,26 +7502,26 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
       </h2>
       <p style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",textAlign:"center",lineHeight:1.6,maxWidth:280}}>
         Your <span style={{color:selected.color,fontWeight:700}}>{selected.tier}</span> {selected.label} is now live.
-        {noActAddon && isTest && <span style={{color:"#1fbb7b"}}> No activation fee on pass! 🎯</span>}
+        {noActAddon && isTest && <span style={{color:"#3B82F6"}}> No activation fee on pass! 🎯</span>}
       </p>
-      <div style={{background:"#1A2C38",borderRadius:18,border:"1px solid "+(selected.color)+"33",padding:16,width:"100%",maxWidth:320}}>
+      <div style={{background:"#0F2040",borderRadius:18,border:"1px solid "+(selected.color)+"33",padding:16,width:"100%",maxWidth:320}}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
           {[
-            ["Balance","$"+(selected.balance.toLocaleString()),"#1fbb7b"],
+            ["Balance","$"+(selected.balance.toLocaleString()),"#3B82F6"],
             ["Profit Target", selected.profitTarget?"$"+(selected.profitTarget.toLocaleString()):"Funded","#F4C430"],
             ["Max Loss","$"+(selected.maxLoss.toLocaleString()),"#f93d3d"],
             ["Profit Split",(selected.split)+"%","#7c4dcc"],
             ["Max Bet","$"+(selected.maxBet),"#fff"],
             ["Consistency",(selected.consistency)+"%","#00E5FF"],
           ].map(([l,v,c])=>(
-            <div key={l} style={{textAlign:"center",background:"rgba(15,33,46,0.45)",borderRadius:10,padding:"8px 6px"}}>
+            <div key={l} style={{textAlign:"center",background:"rgba(10,22,40,0.45)",borderRadius:10,padding:"8px 6px"}}>
               <div style={{color:c,fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{l.toUpperCase()}</div>
             </div>
           ))}
         </div>
       </div>
-      <button onClick={onClose} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+      <button onClick={onClose} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"13px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
         📊 Open Dashboard →
       </button>
       </div>
@@ -7524,14 +7531,14 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
   const stepLabel = ["","Choose Account","Add-ons","Confirm"][step] || "Confirm";
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       {/* Header */}
-      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+      <div style={{display:"flex",alignItems:"center",gap:10,padding:"14px 16px",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         <button onClick={step>1?()=>setStep(s=> s===3 && !isTest ? 1 : s-1):onClose} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",color:"#FFFFFF",fontSize:16,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span></button>
         <span style={{color:"#FFFFFF",fontWeight:700,fontSize:16,fontFamily:"'Inter',sans-serif"}}>{stepLabel}</span>
         <div style={{marginLeft:"auto",display:"flex",gap:5,alignItems:"center"}}>
           {[1,2,3].map(s=>(
-            <div key={s} style={{width:s===step?20:7,height:7,borderRadius:99,background:s<=step?"#1fbb7b":"#213743",transition:"all 0.3s"}}/>
+            <div key={s} style={{width:s===step?20:7,height:7,borderRadius:99,background:s<=step?"#3B82F6":"#1A2D4A",transition:"all 0.3s"}}/>
           ))}
         </div>
       </div>
@@ -7550,11 +7557,11 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
         {/* ── STEP 1: Choose Tier ── */}
         {step===1 && (<>
           <SectionLabel>🎯 EVALUATION ACCOUNTS — PREDICTTEST</SectionLabel>
-          <div style={{background:"rgba(20,158,99,0.05)",border:"1px solid rgba(31,187,123,0.133)",borderRadius:12,padding:"10px 12px",marginBottom:12}}>
-            <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif"}}>✓ 90% PROFIT SPLIT · 40% CONSISTENCY RULE · 28-DAY WINDOW · AUTO-REBILL</span>
+          <div style={{background:"rgba(20,158,99,0.05)",border:"1px solid rgba(59,130,246,0.133)",borderRadius:12,padding:"10px 12px",marginBottom:12}}>
+            <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif"}}>✓ 90% PROFIT SPLIT · 40% CONSISTENCY RULE · 28-DAY WINDOW · AUTO-REBILL</span>
           </div>
           {PROP_TIERS.filter(t=>t.tier==="PredictTest").map(tier=>(
-            <div key={tier.id} onClick={()=>setSelected(tier)} style={{background:selected?.id===tier.id?"rgba(31,187,123,0.08)":"#1A2C38",borderRadius:16,border:"2px solid "+(selected?.id===tier.id?"#1fbb7b":"#213743"),padding:"14px 16px",marginBottom:10,cursor:"pointer",position:"relative",transition:"all 0.15s"}}>
+            <div key={tier.id} onClick={()=>setSelected(tier)} style={{background:selected?.id===tier.id?"rgba(59,130,246,0.08)":"#0F2040",borderRadius:16,border:"2px solid "+(selected?.id===tier.id?"#3B82F6":"#1A2D4A"),padding:"14px 16px",marginBottom:10,cursor:"pointer",position:"relative",transition:"all 0.15s"}}>
               {tier.popular && <div style={{position:"absolute",top:-8,right:16,background:"#F4C430",borderRadius:99,padding:"2px 10px"}}><span style={{color:"#000",fontSize:9,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>MOST POPULAR</span></div>}
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
                 <div>
@@ -7562,21 +7569,21 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
                   <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2}}>EVALUATION · REBILLS EVERY 28 DAYS IF NOT PASSED</div>
                 </div>
                 <div style={{textAlign:"right"}}>
-                  <div style={{color:"#1fbb7b",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${tier.price}</div>
+                  <div style={{color:"#3B82F6",fontSize:22,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${tier.price}</div>
                   <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>+ $149 ACT. ON PASS</div>
                 </div>
               </div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
-                {[["Profit Target","$"+(tier.profitTarget.toLocaleString()),"#1fbb7b"],["Max Loss","$"+(tier.maxLoss.toLocaleString()),"#f93d3d"],["Max Bet","$"+(tier.maxBet),"#fff"]].map(([l,v,c])=>(
-                  <div key={l} style={{background:"rgba(15,33,46,0.55)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
+                {[["Profit Target","$"+(tier.profitTarget.toLocaleString()),"#3B82F6"],["Max Loss","$"+(tier.maxLoss.toLocaleString()),"#f93d3d"],["Max Bet","$"+(tier.maxBet),"#fff"]].map(([l,v,c])=>(
+                  <div key={l} style={{background:"rgba(10,22,40,0.55)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
                     <div style={{color:c,fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{v}</div>
                     <div style={{color:"rgba(255,255,255,0.42)",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{l.toUpperCase()}</div>
                   </div>
                 ))}
               </div>
               {selected?.id===tier.id && <div style={{marginTop:8,display:"flex",alignItems:"center",gap:6}}>
-                <div style={{width:16,height:16,borderRadius:"50%",background:"#1fbb7b",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10}}>✓</div>
-                <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif"}}>SELECTED</span>
+                <div style={{width:16,height:16,borderRadius:"50%",background:"#3B82F6",display:"flex",alignItems:"center",justifyContent:"center",fontSize:10}}>✓</div>
+                <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif"}}>SELECTED</span>
               </div>
               }
             </div>
@@ -7587,7 +7594,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
             <span style={{color:"#F4C430",fontSize:11,fontFamily:"'Inter',sans-serif"}}>✓ 90% SPLIT · 20% CONSISTENCY RULE · FUNDED DAY 1 · 8 MIN ACTIVE DAYS FOR PAYOUT</span>
           </div>
           {PROP_TIERS.filter(t=>t.tier==="PredictDirect").map(tier=>(
-            <div key={tier.id} onClick={()=>setSelected(tier)} style={{background:selected?.id===tier.id?"rgba(244,196,48,0.08)":"#1A2C38",borderRadius:16,border:"2px solid "+(selected?.id===tier.id?"#F4C430":"#213743"),padding:"14px 16px",marginBottom:10,cursor:"pointer",transition:"all 0.15s"}}>
+            <div key={tier.id} onClick={()=>setSelected(tier)} style={{background:selected?.id===tier.id?"rgba(244,196,48,0.08)":"#0F2040",borderRadius:16,border:"2px solid "+(selected?.id===tier.id?"#F4C430":"#1A2D4A"),padding:"14px 16px",marginBottom:10,cursor:"pointer",transition:"all 0.15s"}}>
               {tier.popular && <div style={{position:"absolute",top:-8,right:16,background:"#F4C430",borderRadius:99,padding:"2px 10px"}}><span style={{color:"#000",fontSize:9,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>MOST POPULAR</span></div>}
               <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
                 <div>
@@ -7601,7 +7608,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
               </div>
               <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:6}}>
                 {[["Min Days","8 active","#00E5FF"],["Max Loss","$"+(tier.maxLoss.toLocaleString()),"#f93d3d"],["Max Bet","$"+(tier.maxBet),"#fff"]].map(([l,v,c])=>(
-                  <div key={l} style={{background:"rgba(15,33,46,0.55)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
+                  <div key={l} style={{background:"rgba(10,22,40,0.55)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
                     <div style={{color:c,fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{v}</div>
                     <div style={{color:"rgba(255,255,255,0.42)",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{l.toUpperCase()}</div>
                   </div>
@@ -7615,15 +7622,15 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
             </div>
           ))}
 
-          <button onClick={()=>selected&&setStep(isTest?2:3)} disabled={!selected} style={{width:"100%",height:52,borderRadius:99,background:selected?selected.color:"#213743",border:"none",color:selected?"#000":"#213743",fontSize:15,fontWeight:900,cursor:selected?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",marginTop:8}}>
+          <button onClick={()=>selected&&setStep(isTest?2:3)} disabled={!selected} style={{width:"100%",height:52,borderRadius:99,background:selected?selected.color:"#1A2D4A",border:"none",color:selected?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:selected?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s",marginTop:8}}>
             {selected?"Continue → $"+(selected.price):"Select an account to continue"}
           </button>
         </>)}
 
         {/* ── STEP 2: Activation Fee Add-on (PredictTest only) ── */}
         {step===2 && selected && isTest && (<>
-          <div style={{background:"linear-gradient(135deg,#0F212E,#0F212E)",borderRadius:16,border:"1px solid rgba(31,187,123,0.2)",padding:16,marginBottom:20}}>
-            <div style={{color:"#1fbb7b",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>🎉 Pass your challenge. What happens next?</div>
+          <div style={{background:"linear-gradient(135deg,#0A1628,#0A1628)",borderRadius:16,border:"1px solid rgba(59,130,246,0.2)",padding:16,marginBottom:20}}>
+            <div style={{color:"#3B82F6",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>🎉 Pass your challenge. What happens next?</div>
             <div style={{color:"#6a8090",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.6}}>
               Once you hit the <span style={{color:"#FFFFFF",fontWeight:700}}>${ selected.profitTarget.toLocaleString()} profit target</span>, you claim your funded account.
               There's an activation fee to do this — but you can eliminate it upfront.
@@ -7633,7 +7640,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
           <SectionLabel>ACTIVATION FEE OPTIONS</SectionLabel>
 
           {/* Option A: Pay later */}
-          <div onClick={()=>setNoActAddon(false)} style={{background:!noActAddon?"rgba(31,187,123,0.06)":"#1A2C38",borderRadius:16,border:"2px solid "+(!noActAddon?"#1fbb7b":"#213743"),padding:"16px",marginBottom:10,cursor:"pointer",transition:"all 0.15s"}}>
+          <div onClick={()=>setNoActAddon(false)} style={{background:!noActAddon?"rgba(59,130,246,0.06)":"#0F2040",borderRadius:16,border:"2px solid "+(!noActAddon?"#3B82F6":"#1A2D4A"),padding:"16px",marginBottom:10,cursor:"pointer",transition:"all 0.15s"}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:8}}>
               <div>
                 <div style={{color:"#FFFFFF",fontSize:15,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:2}}>Pay on Pass</div>
@@ -7646,7 +7653,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
             </div>
             <div style={{display:"flex",gap:6}}>
               {["Pay $149 only if you pass","Nothing extra upfront","Standard path"].map(t=>(
-                <div key={t} style={{background:"#213743",borderRadius:99,padding:"3px 8px"}}>
+                <div key={t} style={{background:"#1A2D4A",borderRadius:99,padding:"3px 8px"}}>
                   <span style={{color:"#6a8090",fontSize:9,fontFamily:"'Inter',sans-serif"}}>{t}</span>
                 </div>
               ))}
@@ -7654,7 +7661,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
           </div>
 
           {/* Option B: Pay upfront (waive on pass) */}
-          <div onClick={()=>setNoActAddon(true)} style={{background:noActAddon?"rgba(244,196,48,0.08)":"#1A2C38",borderRadius:16,border:"2px solid "+(noActAddon?"#F4C430":"#213743"),padding:"16px",marginBottom:20,cursor:"pointer",transition:"all 0.15s",position:"relative"}}>
+          <div onClick={()=>setNoActAddon(true)} style={{background:noActAddon?"rgba(244,196,48,0.08)":"#0F2040",borderRadius:16,border:"2px solid "+(noActAddon?"#F4C430":"#1A2D4A"),padding:"16px",marginBottom:20,cursor:"pointer",transition:"all 0.15s",position:"relative"}}>
             <div style={{position:"absolute",top:-8,right:16,background:"#F4C430",borderRadius:99,padding:"2px 10px"}}>
               <span style={{color:"#000",fontSize:9,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>RECOMMENDED</span>
             </div>
@@ -7665,19 +7672,19 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
               </div>
               <div style={{textAlign:"right",flexShrink:0,marginLeft:12}}>
                 <div style={{color:"#F4C430",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>+$49</div>
-                <div style={{color:"#1fbb7b",fontSize:9,fontFamily:"'Inter',sans-serif"}}>SAVE $100</div>
+                <div style={{color:"#3B82F6",fontSize:9,fontFamily:"'Inter',sans-serif"}}>SAVE $100</div>
               </div>
             </div>
             <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
               {["No activation fee on pass","Save $100 total","Immediate activation"].map(t=>(
-                <div key={t} style={{background:noActAddon?"rgba(244,196,48,0.1)":"#213743",borderRadius:99,padding:"3px 8px"}}>
+                <div key={t} style={{background:noActAddon?"rgba(244,196,48,0.1)":"#1A2D4A",borderRadius:99,padding:"3px 8px"}}>
                   <span style={{color:noActAddon?"#F4C430":"#6a8090",fontSize:9,fontFamily:"'Inter',sans-serif"}}>✓ {t}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:20}}>
+          <div style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:20}}>
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
               <span style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>{selected.label} challenge fee</span>
               <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>${selected.price}</span>
@@ -7692,21 +7699,21 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
               <span style={{color:"rgba(255,255,255,0.25)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>$149*</span>
             </div>
             }
-            <div style={{height:1,background:"#213743",margin:"8px 0"}}/>
+            <div style={{height:1,background:"#1A2D4A",margin:"8px 0"}}/>
             <div style={{display:"flex",justifyContent:"space-between"}}>
               <span style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Due now</span>
-              <span style={{color:"#1fbb7b",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${totalCost}</span>
+              <span style={{color:"#3B82F6",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${totalCost}</span>
             </div>
           </div>
 
-          <button onClick={()=>setStep(3)} style={{width:"100%",height:52,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+          <button onClick={()=>setStep(3)} style={{width:"100%",height:52,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
             Continue to Payment →
           </button>
         </>)}
 
         {/* ── STEP 3: Confirm & Pay ── */}
         {step===3 && selected && (<>
-          <div style={{background:"linear-gradient(135deg,#0F212E,#1A2C38)",borderRadius:18,border:"1px solid "+(selected.color)+"33",padding:16,marginBottom:16}}>
+          <div style={{background:"linear-gradient(135deg,#0A1628,#0F2040)",borderRadius:18,border:"1px solid "+(selected.color)+"33",padding:16,marginBottom:16}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
               <div>
                 <div style={{color:"#FFFFFF",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{selected.tier}</div>
@@ -7724,7 +7731,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
                 ["Consistency",(selected.consistency)+"%"],
                 ["Split",(selected.split)+"%"],
               ].map(([l,v])=>(
-                <div key={l} style={{background:"rgba(15,33,46,0.45)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
+                <div key={l} style={{background:"rgba(10,22,40,0.45)",borderRadius:8,padding:"7px 6px",textAlign:"center"}}>
                   <div style={{color:selected.color,fontSize:13,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{v}</div>
                   <div style={{color:"rgba(255,255,255,0.42)",fontSize:8,fontFamily:"'Inter',sans-serif",marginTop:1}}>{l.toUpperCase()}</div>
                 </div>
@@ -7734,7 +7741,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
 
           <SectionLabel>WHAT'S INCLUDED</SectionLabel>
           {selected.highlights.map((h,i)=>(
-            <div key={i} style={{display:"flex",gap:10,alignItems:"center",padding:"7px 0",borderBottom:"1px solid #1A2C38"}}>
+            <div key={i} style={{display:"flex",gap:10,alignItems:"center",padding:"7px 0",borderBottom:"1px solid #0F2040"}}>
               <span style={{color:selected.color,fontSize:13}}>✓</span>
               <span style={{color:"#777",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{h}</span>
             </div>
@@ -7743,19 +7750,19 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
           <SectionLabel>PAYMENT METHOD</SectionLabel>
           <div style={{display:"flex",gap:8,marginBottom:16}}>
             {[["card","💳 Card"],["paypal","🅿️ PayPal"],["crypto","₿ Crypto"]].map(([id,label])=>(
-              <button key={id} onClick={()=>setPayMethod(id)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(payMethod===id?"#1fbb7b":"#213743"),background:payMethod===id?"rgba(31,187,123,0.1)":"#1A2C38",color:payMethod===id?"#1fbb7b":"rgba(255,255,255,0.32)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>{label}</button>
+              <button key={id} onClick={()=>setPayMethod(id)} style={{flex:1,height:40,borderRadius:10,border:"1px solid "+(payMethod===id?"#3B82F6":"#1A2D4A"),background:payMethod===id?"rgba(59,130,246,0.1)":"#0F2040",color:payMethod===id?"#3B82F6":"rgba(255,255,255,0.32)",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.15s"}}>{label}</button>
             ))}
           </div>
 
           {/* Discount code */}
           <SectionLabel>DISCOUNT CODE</SectionLabel>
           {appliedCode ? (
-            <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.25)",borderRadius:14,padding:"12px 14px",marginBottom:16,display:"flex",alignItems:"center",gap:10}}>
+            <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.25)",borderRadius:14,padding:"12px 14px",marginBottom:16,display:"flex",alignItems:"center",gap:10}}>
               <div style={{width:32,height:32,borderRadius:10,background:"rgba(20,158,99,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#1fbb7b" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M20 6L9 17l-5-5" stroke="#3B82F6" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
               </div>
               <div style={{flex:1,minWidth:0}}>
-                <div style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{appliedCode.code} · -{appliedCode.pct}% off</div>
+                <div style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{appliedCode.code} · -{appliedCode.pct}% off</div>
                 <div style={{color:"rgba(255,255,255,0.35)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:1}}>{appliedCode.label}</div>
               </div>
               <button onClick={removeDiscount} style={{background:"none",border:"none",color:"rgba(255,255,255,0.3)",fontSize:18,cursor:"pointer",lineHeight:1,padding:"2px 4px",flexShrink:0}}>×</button>
@@ -7770,21 +7777,21 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
                   placeholder="Enter code (e.g. DEUS20)"
                   style={{flex:1,background:"rgba(255,255,255,0.06)",border:"1px solid "+(discountError?"rgba(249,61,61,0.5)":"rgba(255,255,255,0.1)"),borderRadius:12,padding:"12px 14px",color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",outline:"none",letterSpacing:1}}
                 />
-                <button onClick={applyDiscount} style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.25)",borderRadius:12,color:"#1fbb7b",fontSize:13,fontWeight:700,padding:"0 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap",flexShrink:0}}>Apply</button>
+                <button onClick={applyDiscount} style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.25)",borderRadius:12,color:"#3B82F6",fontSize:13,fontWeight:700,padding:"0 18px",cursor:"pointer",fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap",flexShrink:0}}>Apply</button>
               </div>
               {discountError && <div style={{color:"#f93d3d",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:6,paddingLeft:2}}>{discountError}</div>}
             </div>
           )}
 
-          <div style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:16}}>
+          <div style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:16}}>
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
               <span style={{color:"rgba(255,255,255,0.35)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Subtotal</span>
               <span style={{color:"rgba(255,255,255,0.6)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>${baseCost}.00</span>
             </div>
             {appliedCode && (
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
-                <span style={{color:"#1fbb7b",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Discount ({appliedCode.code})</span>
-                <span style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>−${discountAmt}.00</span>
+                <span style={{color:"#3B82F6",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Discount ({appliedCode.code})</span>
+                <span style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>−${discountAmt}.00</span>
               </div>
             )}
             <div style={{display:"flex",justifyContent:"space-between",marginBottom:8}}>
@@ -7796,7 +7803,7 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
               <span style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Total due today</span>
               <div style={{textAlign:"right"}}>
                 {appliedCode && <div style={{color:"rgba(255,255,255,0.3)",fontSize:11,fontFamily:"'Inter',sans-serif",textDecoration:"line-through"}}>${baseCost}.00</div>}
-                <span style={{color:"#1fbb7b",fontSize:17,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${totalCost}.00</span>
+                <span style={{color:"#3B82F6",fontSize:17,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${totalCost}.00</span>
               </div>
             </div>
           </div>
@@ -7807,10 +7814,10 @@ function PropPurchaseFlow({ onClose, onPurchase, balance, existingCount=0 }) {
             </div>
           )}
 
-          <button onClick={handlePay} disabled={!canAfford} style={{width:"100%",height:52,borderRadius:99,background:canAfford?selected.color:"#213743",border:"none",color:canAfford?"#000":"#213743",fontSize:15,fontWeight:900,cursor:canAfford?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+          <button onClick={handlePay} disabled={!canAfford} style={{width:"100%",height:52,borderRadius:99,background:canAfford?selected.color:"#1A2D4A",border:"none",color:canAfford?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:canAfford?"pointer":"default",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
             {canAfford?"🚀 Pay $"+(totalCost)+" & Start":"Add funds to continue"}
           </button>
-          <p style={{color:"#213743",fontSize:10,fontFamily:"'Inter',sans-serif",textAlign:"center",marginTop:10}}>Simulated capital · Real payouts · 90% profit split</p>
+          <p style={{color:"#1A2D4A",fontSize:10,fontFamily:"'Inter',sans-serif",textAlign:"center",marginTop:10}}>Simulated capital · Real payouts · 90% profit split</p>
         </>)}
       </div>
     </div>
@@ -7859,14 +7866,14 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
     ? stats.pnl >= tier.profitTarget && stats.activeDays >= tier.minDays && consistencyOk
     : stats.activeDays >= tier.minDays; // Direct accounts
 
-  const GaugeMeter = ({value, max, label, color="#1fbb7b", unit="%", danger=false}) => {
+  const GaugeMeter = ({value, max, label, color="#3B82F6", unit="%", danger=false}) => {
     const pct = Math.min(100, Math.max(0,(value/max)*100));
-    const c   = danger ? (pct>75?"#f93d3d":pct>50?"#F4C430":"#1fbb7b") : color;
+    const c   = danger ? (pct>75?"#f93d3d":pct>50?"#F4C430":"#3B82F6") : color;
     return (
-      <div style={{background:"#1A2C38",borderRadius:14,border:"1px solid "+(danger&&pct>75?"rgba(249,61,61,0.133)":"#213743"),padding:"12px 8px",textAlign:"center"}}>
+      <div style={{background:"#0F2040",borderRadius:14,border:"1px solid "+(danger&&pct>75?"rgba(249,61,61,0.133)":"#1A2D4A"),padding:"12px 8px",textAlign:"center"}}>
         <div style={{position:"relative",width:72,height:72,margin:"0 auto 8px"}}>
           <svg viewBox="0 0 72 72" style={{transform:"rotate(-90deg)"}}>
-            <circle cx="36" cy="36" r="28" fill="none" stroke="#213743" strokeWidth="7"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1A2D4A" strokeWidth="7"/>
             <circle cx="36" cy="36" r="28" fill="none" stroke={c} strokeWidth="7"
               strokeDasharray={(pct*1.76)+" 176"} strokeLinecap="round"/>
           </svg>
@@ -7882,19 +7889,19 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
 
   return (
     <>
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
-      <div style={{display:"flex",alignItems:"center",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
+      <div style={{display:"flex",alignItems:"center",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         <div style={{flex:1}}><OverlayHeader title="📊 Challenge Dashboard" onBack={onClose}/></div>
-        {onAddAccount && <button onClick={onAddAccount} style={{background:"rgba(31,187,123,0.1)",border:"1px solid rgba(31,187,123,0.25)",borderRadius:12,color:"#1fbb7b",fontSize:11,fontWeight:700,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginRight:14,whiteSpace:"nowrap",flexShrink:0}}>+ Account</button>}
+        {onAddAccount && <button onClick={onAddAccount} style={{background:"rgba(59,130,246,0.1)",border:"1px solid rgba(59,130,246,0.25)",borderRadius:12,color:"#3B82F6",fontSize:11,fontWeight:700,padding:"6px 12px",cursor:"pointer",fontFamily:"'Inter',sans-serif",marginRight:14,whiteSpace:"nowrap",flexShrink:0}}>+ Account</button>}
       </div>
 
       {/* Status banner */}
-      <div style={{background:passed?"linear-gradient(135deg,#1A2C38,#1A2C38)":"linear-gradient(135deg,#100E06,#1A2C38)",borderBottom:"1px solid "+(passed?"rgba(31,187,123,0.133)":"rgba(244,196,48,0.133)"),padding:"12px 16px",flexShrink:0}}>
+      <div style={{background:passed?"linear-gradient(135deg,#0F2040,#0F2040)":"linear-gradient(135deg,#100E06,#0F2040)",borderBottom:"1px solid "+(passed?"rgba(59,130,246,0.133)":"rgba(244,196,48,0.133)"),padding:"12px 16px",flexShrink:0}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
           <div style={{display:"flex",alignItems:"center",gap:8}}>
             <span style={{color:tier.color,fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{tier.tier} · {tier.label}</span>
-            {passed && <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(31,187,123,0.267)",borderRadius:20,padding:"3px 10px"}}>
-              <span style={{color:"#1fbb7b",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✅ TARGET MET</span>
+            {passed && <div style={{background:"rgba(20,158,99,0.15)",border:"1px solid rgba(59,130,246,0.267)",borderRadius:20,padding:"3px 10px"}}>
+              <span style={{color:"#3B82F6",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>✅ TARGET MET</span>
             </div>
             }
           </div>
@@ -7904,15 +7911,15 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           </div>
           }
         </div>
-        <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+        <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
           <div style={{height:"100%",width:(Math.min(100,(daysPassed/(tier.days||30))*100))+"%",background:"linear-gradient(90deg,#2F805A,#F4C430)",borderRadius:99,transition:"width 0.6s"}}/>
         </div>
       </div>
 
       {/* Sub tabs */}
-      <div style={{display:"flex",background:"#0F212E",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+      <div style={{display:"flex",background:"#0A1628",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         {[["overview","Overview"],["positions","Positions"],["rules","Rules"]].map(([id,label])=>(
-          <button key={id} onClick={()=>setTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(tab===id?"#1fbb7b":"transparent"),color:tab===id?"#1fbb7b":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,padding:"11px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1}}>
+          <button key={id} onClick={()=>setTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(tab===id?"#3B82F6":"transparent"),color:tab===id?"#3B82F6":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,padding:"11px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1}}>
             {label.toUpperCase()}
           </button>
         ))}
@@ -7923,18 +7930,18 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           {/* Gauges — profit progress, loss used, active days */}
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:16}}>
             {tier.profitTarget
-              ? <GaugeMeter value={Math.max(0,stats.pnl)} max={tier.profitTarget} label="PROFIT" color={pnlPct>=100?"#1fbb7b":"#00E5FF"} unit="$"/>
-              : <GaugeMeter value={stats.activeDays} max={tier.minDays} label="ACTIVE DAYS" color="#1fbb7b" unit="d"/>
+              ? <GaugeMeter value={Math.max(0,stats.pnl)} max={tier.profitTarget} label="PROFIT" color={pnlPct>=100?"#3B82F6":"#00E5FF"} unit="$"/>
+              : <GaugeMeter value={stats.activeDays} max={tier.minDays} label="ACTIVE DAYS" color="#3B82F6" unit="d"/>
             }
             <GaugeMeter value={Math.round(lossUsed)} max={tier.maxLoss} label="LOSS USED" color="#f93d3d" danger={true} unit="$"/>
             <GaugeMeter value={stats.activeDays} max={tier.minDays} label="ACTIVE DAYS" color="#7c4dcc" unit="d"/>
           </div>
 
           {/* Live P&L banner */}
-          <div style={{background:totalPnl>=0?"rgba(31,187,123,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(totalPnl>=0?"rgba(31,187,123,0.3)":"rgba(249,61,61,0.3)"),borderRadius:14,padding:"14px 16px",marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+          <div style={{background:totalPnl>=0?"rgba(59,130,246,0.12)":"rgba(249,61,61,0.1)",border:"1px solid "+(totalPnl>=0?"rgba(59,130,246,0.3)":"rgba(249,61,61,0.3)"),borderRadius:14,padding:"14px 16px",marginBottom:12,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
             <div>
               <div style={{color:"rgba(255,255,255,0.45)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:4}}>LIVE NET P&L</div>
-              <div style={{color:totalPnl>=0?"#1fbb7b":"#f93d3d",fontSize:30,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>
+              <div style={{color:totalPnl>=0?"#3B82F6":"#f93d3d",fontSize:30,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>
                 {totalPnl>=0?"+":"-"}${Math.abs(totalPnl).toFixed(2)}
               </div>
             </div>
@@ -7945,12 +7952,12 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           </div>
 
           {/* P&L summary */}
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
             <SectionLabel>P&L SUMMARY</SectionLabel>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginTop:8}}>
               {[
-                ["Account Balance","$"+Math.max(0, tier.balance + totalPnl).toLocaleString(), totalPnl>=0?"#1fbb7b":totalPnl<0?"#f93d3d":"#c8dae8"],
-                ["Net P&L",(totalPnl>=0?"+":"-")+"$"+Math.abs(totalPnl).toFixed(2),totalPnl>=0?"#1fbb7b":"#f93d3d"],
+                ["Account Balance","$"+Math.max(0, tier.balance + totalPnl).toLocaleString(), totalPnl>=0?"#3B82F6":totalPnl<0?"#f93d3d":"#c8dae8"],
+                ["Net P&L",(totalPnl>=0?"+":"-")+"$"+Math.abs(totalPnl).toFixed(2),totalPnl>=0?"#3B82F6":"#f93d3d"],
                 ["Starting Balance","$"+(tier.balance.toLocaleString()),"rgba(255,255,255,0.32)"],
                 ["Max Drawdown","$"+(tier.maxLoss.toLocaleString()),"#f93d3d"],
                 ["Max Bet","$"+(tier.maxBet),"#c8dae8"],
@@ -7965,15 +7972,15 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           </div>
 
           {/* Loss meter */}
-          <div style={{background:"#1A2C38",borderRadius:14,border:"1px solid "+(lossUsedPct>75?"rgba(249,61,61,0.2)":"#213743"),padding:"14px 16px",marginBottom:14}}>
+          <div style={{background:"#0F2040",borderRadius:14,border:"1px solid "+(lossUsedPct>75?"rgba(249,61,61,0.2)":"#1A2D4A"),padding:"14px 16px",marginBottom:14}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
               <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>⚠️ Max Loss Meter</span>
-              <span style={{color:lossUsedPct>75?"#f93d3d":lossUsedPct>50?"#F4C430":"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>
+              <span style={{color:lossUsedPct>75?"#f93d3d":lossUsedPct>50?"#F4C430":"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",fontWeight:700}}>
                 {lossUsedPct>75?"🔴 DANGER":lossUsedPct>50?"🟡 CAUTION":"🟢 SAFE"}
               </span>
             </div>
-            <div style={{height:8,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:6}}>
-              <div style={{height:"100%",width:(Math.min(100,lossUsedPct))+"%",background:lossUsedPct>75?"#f93d3d":lossUsedPct>50?"#F4C430":"#1fbb7b",borderRadius:99,transition:"width 0.6s"}}/>
+            <div style={{height:8,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:6}}>
+              <div style={{height:"100%",width:(Math.min(100,lossUsedPct))+"%",background:lossUsedPct>75?"#f93d3d":lossUsedPct>50?"#F4C430":"#3B82F6",borderRadius:99,transition:"width 0.6s"}}/>
             </div>
             <div style={{display:"flex",justifyContent:"space-between"}}>
               <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>
@@ -7986,14 +7993,14 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           </div>
 
           {/* Streak */}
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
               <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>🔥 Profit Streak</span>
               <span style={{color:"#F4C430",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>4 days</span>
             </div>
             <div style={{display:"flex",gap:4}}>
               {["M","T","W","T","F","S","S"].map((d,i)=>(
-                <div key={i} style={{flex:1,height:28,borderRadius:6,background:i<4?"rgba(244,196,48,0.2)":"#213743",border:"1px solid "+(i<4?"rgba(244,196,48,0.267)":"#1A2C38"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:i<4?11:9,color:i<4?"#F4C430":"#213743"}}>
+                <div key={i} style={{flex:1,height:28,borderRadius:6,background:i<4?"rgba(244,196,48,0.2)":"#1A2D4A",border:"1px solid "+(i<4?"rgba(244,196,48,0.267)":"#0F2040"),display:"flex",alignItems:"center",justifyContent:"center",fontSize:i<4?11:9,color:i<4?"#F4C430":"#1A2D4A"}}>
                   {i<4?"🔥":d}
                 </div>
               ))}
@@ -8013,28 +8020,28 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
           )}
 
           {passed && (
-            <div style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:16,border:"2px solid #1fbb7b",padding:16,marginBottom:14}}>
-              <div style={{color:"#1fbb7b",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>🎯 Challenge Target Met!</div>
+            <div style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:16,border:"2px solid #3B82F6",padding:16,marginBottom:14}}>
+              <div style={{color:"#3B82F6",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>🎯 Challenge Target Met!</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:12}}>You've hit all requirements. Claim your funded account now.</div>
-              <button onClick={onClaim} style={{width:"100%",height:44,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+              <button onClick={onClaim} style={{width:"100%",height:44,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                 🚀 Claim Funded Account
               </button>
             </div>
           )}
 
-          <button onClick={onOpenPropLeaderboard} style={{width:"100%",height:44,borderRadius:12,background:"#1A2C38",color:"rgba(255,255,255,0.42)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8}}>
+          <button onClick={onOpenPropLeaderboard} style={{width:"100%",height:44,borderRadius:12,background:"#0F2040",color:"rgba(255,255,255,0.42)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8}}>
             🏆 View Prop Leaderboard →
           </button>
-          <button onClick={onOpenAnalytics} style={{width:"100%",height:44,borderRadius:12,background:"#1A2C38",color:"#00E5FF",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+          <button onClick={onOpenAnalytics} style={{width:"100%",height:44,borderRadius:12,background:"#0F2040",color:"#00E5FF",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
             📈 View Performance Analytics →
           </button>
         </>)}
 
         {tab==="positions" && (<>
           {/* Open / Closed sub-tabs */}
-          <div style={{display:"flex",background:"#1A2C38",borderRadius:12,padding:3,marginBottom:16,gap:2}}>
+          <div style={{display:"flex",background:"#0F2040",borderRadius:12,padding:3,marginBottom:16,gap:2}}>
             {[["open","Open ("+openBets.length+")"],["closed","Closed ("+closedBets.length+")"]].map(([id,label])=>(
-              <button key={id} onClick={()=>setPosTab(id)} style={{flex:1,background:posTab===id?"#1fbb7b":"transparent",border:"none",borderRadius:9,color:posTab===id?"#000":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,padding:"8px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+              <button key={id} onClick={()=>setPosTab(id)} style={{flex:1,background:posTab===id?"#3B82F6":"transparent",border:"none",borderRadius:9,color:posTab===id?"#000":"rgba(255,255,255,0.32)",fontSize:12,fontWeight:700,padding:"8px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
                 {label}
               </button>
             ))}
@@ -8053,20 +8060,20 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
               const betShares  = bet.shares > 0 ? bet.shares : (bet.sharePrice > 0 ? (bet.stake||1)/bet.sharePrice : (bet.stake||1)/0.5);
               const currValue  = parseFloat((betShares * currPrice).toFixed(2));
               const unrealised = parseFloat((currValue - (bet.stake||1)).toFixed(2));
-              const unrColor   = unrealised >= 0 ? "#1fbb7b" : "#f93d3d";
+              const unrColor   = unrealised >= 0 ? "#3B82F6" : "#f93d3d";
               return (
-                <div key={i} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:8,border:"1px solid rgba(31,187,123,0.12)"}}>
+                <div key={i} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:8,border:"1px solid rgba(59,130,246,0.12)"}}>
                   {/* Market title — clickable */}
                   <div onClick={()=>pred && setOpenMarketDetail(pred)} style={{marginBottom:10,cursor:pred?"pointer":"default"}}>
                     <div style={{color:"#c8dae8",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",lineHeight:1.3,marginBottom:6,overflow:"hidden",display:"-webkit-box",WebkitLineClamp:2,WebkitBoxOrient:"vertical"}}>
                       {bet.title || pred?.title || bet.predId}
                     </div>
                     <div style={{display:"flex",gap:6,alignItems:"center"}}>
-                      <div style={{background:bet.pos==="YES"?"rgba(31,187,123,0.15)":"rgba(249,61,61,0.15)",border:"1px solid "+(bet.pos==="YES"?"rgba(31,187,123,0.4)":"rgba(249,61,61,0.4)"),borderRadius:20,padding:"2px 8px"}}>
-                        <span style={{color:bet.pos==="YES"?"#1fbb7b":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet.pos}</span>
+                      <div style={{background:bet.pos==="YES"?"rgba(34,197,94,0.15)":"rgba(249,61,61,0.15)",border:"1px solid "+(bet.pos==="YES"?"rgba(34,197,94,0.4)":"rgba(249,61,61,0.4)"),borderRadius:20,padding:"2px 8px"}}>
+                        <span style={{color:bet.pos==="YES"?"#22C55E":"#f93d3d",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{bet.pos}</span>
                       </div>
                       <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{betShares.toFixed(2)} shares @ ${(bet.sharePrice||0.5).toFixed(3)}</span>
-                      {pred && <span style={{color:"rgba(31,187,123,0.5)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>tap to view ›</span>}
+                      {pred && <span style={{color:"rgba(59,130,246,0.5)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>tap to view ›</span>}
                     </div>
                   </div>
                   {/* P&L row */}
@@ -8082,7 +8089,7 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
                     </div>
                   </div>
                   {/* Probability bar */}
-                  <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:8}}>
+                  <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:8}}>
                     <div style={{height:"100%",width:currYesPct+"%",background:"linear-gradient(90deg,#2F805A,#00c9a7)",borderRadius:99,transition:"width 0.5s"}}/>
                   </div>
                   {/* Sell button */}
@@ -8103,7 +8110,7 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
             ) : closedBets.map((bet,i) => {
               const pnl = bet.pnlDelta||0;
               return (
-                <div key={i} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:6,opacity:0.85,border:"1px solid "+(bet.won?"rgba(31,187,123,0.15)":"rgba(249,61,61,0.1)")}}>
+                <div key={i} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:6,opacity:0.85,border:"1px solid "+(bet.won?"rgba(59,130,246,0.15)":"rgba(249,61,61,0.1)")}}>
                   <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
                     <div style={{flex:1,minWidth:0,marginRight:8}}>
                       <div style={{color:"rgba(255,255,255,0.42)",fontSize:11,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>
@@ -8112,8 +8119,8 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
                       <div style={{color:"rgba(255,255,255,0.25)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:2}}>{bet.pos} · ${(bet.stake||0).toFixed(2)}</div>
                     </div>
                     <div style={{textAlign:"right",flexShrink:0}}>
-                      <div style={{color:bet.soldEarly?"#F4C430":bet.won?"#1fbb7b":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}>{bet.soldEarly?"📤 SOLD":bet.won?"✓ WON":"✗ LOST"}</div>
-                      <div style={{color:pnl>=0?"#1fbb7b":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{pnl>=0?"+":"-"}${Math.abs(pnl).toFixed(2)}</div>
+                      <div style={{color:bet.soldEarly?"#F4C430":bet.won?"#3B82F6":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}>{bet.soldEarly?"📤 SOLD":bet.won?"✓ WON":"✗ LOST"}</div>
+                      <div style={{color:pnl>=0?"#3B82F6":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{pnl>=0?"+":"-"}${Math.abs(pnl).toFixed(2)}</div>
                     </div>
                   </div>
                 </div>
@@ -8132,7 +8139,7 @@ function PropChallengeDashboard({ onClose, propAccount, votes, dynamicMarkets=[]
            ["⚖️","Consistency Rule","No single market may account for more than "+(tier.consistency)+"% of your total challenge profit. Spreads risk across multiple predictions."],
            ["🚫","Manipulation","Exploiting extreme odds (<5% or >95%), coordinated betting, copy trading from external sources, or running multiple accounts for the same trade is prohibited."],
           ].map(([icon,title,desc])=>(
-            <div key={title} style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:8,display:"flex",gap:12}}>
+            <div key={title} style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:8,display:"flex",gap:12}}>
               <span style={{fontSize:20,flexShrink:0}}>{icon}</span>
               <div>
                 <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:4}}>{title}</div>
@@ -8218,18 +8225,18 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
             </div>
           </div>
         )}
-        <div style={{background:"linear-gradient(135deg,#0F212E,#1A2C38)",border:"1px solid rgba(31,187,123,0.133)",borderRadius:14,padding:"14px 16px",marginBottom:20}}>
+        <div style={{background:"linear-gradient(135deg,#0A1628,#0F2040)",border:"1px solid rgba(59,130,246,0.133)",borderRadius:14,padding:"14px 16px",marginBottom:20}}>
           {[["Available profit","$"+(pnl.toFixed(2))],["Your split ("+(isFirstPayout?"100":splitPct)+"%)","$"+(amount.toFixed(2))],["Processing","Within 24 hours"]].map(([l,v])=>(
             <div key={l} style={{display:"flex",justifyContent:"space-between",padding:"5px 0"}}>
               <span style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>{l}</span>
-              <span style={{color:"#1fbb7b",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v}</span>
+              <span style={{color:"#3B82F6",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{v}</span>
             </div>
           ))}
         </div>
 
         <div style={{color:"rgba(255,255,255,0.22)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:12}}>SELECT WITHDRAWAL METHOD</div>
         {METHODS.map(m=>(
-          <button key={m.id} onClick={()=>setMethod(m.id)} style={{width:"100%",background:method===m.id?(m.color)+"12":"#1A2C38",border:"2px solid "+(method===m.id?m.color:"#213743"),borderRadius:16,padding:"16px",marginBottom:10,cursor:"pointer",display:"flex",alignItems:"center",gap:14,textAlign:"left",transition:"all 0.2s"}}>
+          <button key={m.id} onClick={()=>setMethod(m.id)} style={{width:"100%",background:method===m.id?(m.color)+"12":"#0F2040",border:"2px solid "+(method===m.id?m.color:"#1A2D4A"),borderRadius:16,padding:"16px",marginBottom:10,cursor:"pointer",display:"flex",alignItems:"center",gap:14,textAlign:"left",transition:"all 0.2s"}}>
             <div style={{width:48,height:48,borderRadius:14,background:(m.color)+"15",border:"1px solid "+(m.color)+"33",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>{m.icon}</div>
             <div style={{flex:1}}>
               <div style={{color:"#FFFFFF",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:3}}>{m.label}</div>
@@ -8247,7 +8254,7 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
           <div style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif",lineHeight:1.5}}>Identity verification required by financial regulations. Takes ~2 minutes.</div>
         </div>
 
-        <button onClick={()=>{ if(method) setStep("kyc"); }} disabled={!method} style={{width:"100%",height:52,borderRadius:99,background:method?"#1fbb7b":"#213743",border:"none",color:method?"#000":"#213743",fontSize:15,fontWeight:900,cursor:method?"pointer":"not-allowed",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
+        <button onClick={()=>{ if(method) setStep("kyc"); }} disabled={!method} style={{width:"100%",height:52,borderRadius:99,background:method?"#3B82F6":"#1A2D4A",border:"none",color:method?"#000":"#1A2D4A",fontSize:15,fontWeight:900,cursor:method?"pointer":"not-allowed",fontFamily:"'Inter',sans-serif",transition:"all 0.2s"}}>
           Continue to Verification →
         </button>
       </div>
@@ -8264,12 +8271,12 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
         {/* Progress */}
         <div style={{display:"flex",gap:6,marginBottom:20}}>
           {KYC_STEPS.map((_,i)=>(
-            <div key={i} style={{flex:1,height:3,borderRadius:99,background:i<=kycStep?"#1fbb7b":"#213743",transition:"background 0.3s"}}/>
+            <div key={i} style={{flex:1,height:3,borderRadius:99,background:i<=kycStep?"#3B82F6":"#1A2D4A",transition:"background 0.3s"}}/>
           ))}
         </div>
 
         <div style={{display:"flex",alignItems:"center",gap:12,marginBottom:16}}>
-          <div style={{width:44,height:44,borderRadius:12,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>{cur.icon}</div>
+          <div style={{width:44,height:44,borderRadius:12,background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22}}>{cur.icon}</div>
           <div>
             <div style={{color:"#FFFFFF",fontSize:16,fontWeight:800,fontFamily:"'Inter',sans-serif"}}>{cur.title}</div>
             <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginTop:1}}>Step {kycStep+1} of {KYC_STEPS.length}</div>
@@ -8282,20 +8289,20 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
             <div style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif",letterSpacing:1,marginBottom:6}}>{f.label.toUpperCase()}</div>
             {f.type==="select" ? (
               <select value={formData[f.name]||""} onChange={e=>setFormData(d=>({...d,[f.name]:e.target.value}))}
-                style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:10,padding:"12px 14px",color:formData[f.name]?"#fff":"rgba(255,255,255,0.22)",fontSize:13,fontFamily:"'Inter',sans-serif",outline:"none",cursor:"pointer"}}>
+                style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:10,padding:"12px 14px",color:formData[f.name]?"#fff":"rgba(255,255,255,0.22)",fontSize:13,fontFamily:"'Inter',sans-serif",outline:"none",cursor:"pointer"}}>
                 <option value="">Select...</option>
                 {f.options.map(o=><option key={o} value={o}>{o}</option>)}
               </select>
             ) : (
               <input type={f.type} value={formData[f.name]||""} onChange={e=>setFormData(d=>({...d,[f.name]:e.target.value}))} placeholder={f.placeholder||""}
-                style={{width:"100%",background:"#1A2C38",border:"1px solid #213743",borderRadius:10,padding:"12px 14px",color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
+                style={{width:"100%",background:"#0F2040",border:"1px solid #1A2D4A",borderRadius:10,padding:"12px 14px",color:"#FFFFFF",fontSize:13,fontFamily:"'Inter',sans-serif",outline:"none"}}/>
             )}
           </div>
         ))}
 
         {/* Selfie step mock */}
         {cur.icon==="🤳" && (
-          <div style={{border:"2px dashed #213743",borderRadius:16,padding:"32px 16px",textAlign:"center",marginBottom:16,cursor:"pointer",background:"#1A2C38"}} onClick={()=>{ setUploading(true); setTimeout(()=>setUploading(false),1500); }}>
+          <div style={{border:"2px dashed #1A2D4A",borderRadius:16,padding:"32px 16px",textAlign:"center",marginBottom:16,cursor:"pointer",background:"#0F2040"}} onClick={()=>{ setUploading(true); setTimeout(()=>setUploading(false),1500); }}>
             {uploading ? (
               <div>
                 <div style={{fontSize:32,marginBottom:8}}>⏳</div>
@@ -8313,9 +8320,9 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
 
         <div style={{display:"flex",gap:10}}>
           {kycStep>0 && (
-            <button onClick={()=>setKycStep(k=>k-1)} style={{flex:1,height:50,borderRadius:99,background:"#1A2C38",border:"1px solid #213743",color:"#6a8090",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Back</button>
+            <button onClick={()=>setKycStep(k=>k-1)} style={{flex:1,height:50,borderRadius:99,background:"#0F2040",border:"1px solid #1A2D4A",color:"#6a8090",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>← Back</button>
           )}
-          <button onClick={()=>{ if(isLast) setStep("done"); else setKycStep(k=>k+1); }} style={{flex:2,height:50,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+          <button onClick={()=>{ if(isLast) setStep("done"); else setKycStep(k=>k+1); }} style={{flex:2,height:50,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
             {isLast?"Submit & Request Payout →":"Continue →"}
           </button>
         </div>
@@ -8327,17 +8334,17 @@ function WithdrawalFlow({ amount, splitPct, pnl, onDone, isFirstPayout=false }) 
   const selMethod = METHODS.find(m=>m.id===method);
   return (
     <div style={{textAlign:"center",padding:"20px 0"}}>
-      <div style={{width:80,height:80,borderRadius:"50%",background:"rgba(20,158,99,0.15)",border:"2px solid #1fbb7b",display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 16px"}}>✓</div>
-      <div style={{color:"#1fbb7b",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Withdrawal Requested!</div>
+      <div style={{width:80,height:80,borderRadius:"50%",background:"rgba(20,158,99,0.15)",border:"2px solid #3B82F6",display:"flex",alignItems:"center",justifyContent:"center",fontSize:36,margin:"0 auto 16px"}}>✓</div>
+      <div style={{color:"#3B82F6",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Withdrawal Requested!</div>
       <div style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.6,marginBottom:6}}>
         ${amount.toFixed(2)} via {selMethod?.label}
       </div>
       <div style={{color:"rgba(255,255,255,0.25)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:24}}>{selMethod?.sub}</div>
-      <div style={{background:"#0F212E",border:"1px solid rgba(31,187,123,0.133)",borderRadius:12,padding:"14px",marginBottom:24}}>
-        <div style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:4}}>REFERENCE NUMBER</div>
+      <div style={{background:"#0A1628",border:"1px solid rgba(59,130,246,0.133)",borderRadius:12,padding:"14px",marginBottom:24}}>
+        <div style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:4}}>REFERENCE NUMBER</div>
         <div style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>WD-{Date.now().toString(36).toUpperCase()}</div>
       </div>
-      <button onClick={onDone} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"14px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
+      <button onClick={onDone} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:14,fontWeight:900,padding:"14px 40px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>Done</button>
     </div>
   );
 }
@@ -8353,7 +8360,7 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
   const toElite   = Math.max(0,6-payouts);
   // Real P&L from resolved bets
   const realPnl   = propAccount?.pnl || 0;
-  const pnlColor  = realPnl >= 0 ? "#1fbb7b" : "#f93d3d";
+  const pnlColor  = realPnl >= 0 ? "#3B82F6" : "#f93d3d";
   // Drawdown warning
   const drawdown  = Math.max(0, -(realPnl));
   const drawdownPct = tier ? (drawdown / tier.maxLoss) * 100 : 0;
@@ -8362,25 +8369,25 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
   const [payoutAmount, setPayoutAmount] = useState(0);
 
   const TxRow = ({icon,label,amount,date,positive}) => (
-    <div style={{display:"flex",alignItems:"center",gap:12,padding:"11px 0",borderBottom:"1px solid #1A2C38"}}>
-      <div style={{width:36,height:36,borderRadius:"50%",background:"#1A2C38",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{icon}</div>
+    <div style={{display:"flex",alignItems:"center",gap:12,padding:"11px 0",borderBottom:"1px solid #0F2040"}}>
+      <div style={{width:36,height:36,borderRadius:"50%",background:"#0F2040",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{icon}</div>
       <div style={{flex:1}}>
         <div style={{color:"rgba(255,255,255,0.72)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>{label}</div>
         <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:1}}>{date}</div>
       </div>
-      <div style={{color:positive?"#1fbb7b":"#f93d3d",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{positive?"+":""}{amount}</div>
+      <div style={{color:positive?"#3B82F6":"#f93d3d",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{positive?"+":""}{amount}</div>
     </div>
   );
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="💰 Funded Account" onBack={onClose}/>
 
       {/* Hero */}
-      <div style={{background:"linear-gradient(160deg,#1A2C38,#090F14)",padding:"20px 16px 16px",flexShrink:0,borderBottom:"1px solid #1A2C38"}}>
+      <div style={{background:"linear-gradient(160deg,#0F2040,#090F14)",padding:"20px 16px 16px",flexShrink:0,borderBottom:"1px solid #0F2040"}}>
         <div style={{display:"flex",gap:8,marginBottom:12}}>
-          <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:20,padding:"3px 10px"}}>
-            <span style={{color:"#1fbb7b",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>FUNDED ✓</span>
+          <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:20,padding:"3px 10px"}}>
+            <span style={{color:"#3B82F6",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>FUNDED ✓</span>
           </div>
           <div style={{background:"rgba(244,196,48,0.1)",border:"1px solid rgba(244,196,48,0.2)",borderRadius:20,padding:"3px 10px"}}>
             <span style={{color:"#F4C430",fontSize:10,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{splitPct}% SPLIT</span>
@@ -8390,11 +8397,11 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
           </div>
           }
         </div>
-        <div style={{color:scaledBal>=startBal?"#1fbb7b":"#f93d3d",fontSize:40,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>${scaledBal.toFixed(2)}</div>
+        <div style={{color:scaledBal>=startBal?"#3B82F6":"#f93d3d",fontSize:40,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>${scaledBal.toFixed(2)}</div>
         <div style={{color:"rgba(255,255,255,0.42)",fontSize:12,fontFamily:"'Inter',sans-serif",marginBottom:16}}>FUNDED BALANCE</div>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:8,marginBottom:16}}>
           {[[(realPnl>=0?"+":"")+realPnl.toFixed(2),"Net P&L",pnlColor],[(stats.accuracy)+"%","Accuracy","#fff"],[payouts+" paid","Payouts","#F4C430"]].map(([v,l,c])=>(
-            <div key={l} style={{background:"rgba(15,33,46,0.55)",borderRadius:10,padding:"10px 8px",textAlign:"center"}}>
+            <div key={l} style={{background:"rgba(10,22,40,0.55)",borderRadius:10,padding:"10px 8px",textAlign:"center"}}>
               <div style={{color:c,fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1}}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:3}}>{l.toUpperCase()}</div>
             </div>
@@ -8416,12 +8423,12 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
       <div style={{flex:1,overflowY:"auto",padding:"16px 16px 80px"}}>
         {/* Scale-up */}
         <SectionLabel>SCALE-UP PROGRESS</SectionLabel>
-        <div style={{background:"#1A2C38",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
+        <div style={{background:"#0F2040",borderRadius:14,padding:"14px 16px",marginBottom:14}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:8}}>
             <span style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>Payouts to PredictElite</span>
             <span style={{color:"#F4C430",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{payouts}/6</span>
           </div>
-          <div style={{height:6,background:"#213743",borderRadius:99,overflow:"hidden",marginBottom:6}}>
+          <div style={{height:6,background:"#1A2D4A",borderRadius:99,overflow:"hidden",marginBottom:6}}>
             <div style={{height:"100%",width:((payouts/6)*100)+"%",background:"linear-gradient(90deg,#2F805A,#F4C430)",borderRadius:99,transition:"width 0.6s"}}/>
           </div>
           <div style={{display:"flex",justifyContent:"space-between"}}>
@@ -8434,10 +8441,10 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
         <SectionLabel>BALANCE MILESTONES</SectionLabel>
         <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:8,marginBottom:14,scrollbarWidth:"none"}}>
           {[["Start","$5K",true],["+1","$7.5K",payouts>=1],["+2","$10K",payouts>=2],["+3","$15K",payouts>=3],["+5","$25K",payouts>=5],["+6","$50K",payouts>=6]].map(([lbl,bal,done],i)=>(
-            <div key={i} style={{flexShrink:0,width:70,background:done?"rgba(31,187,123,0.08)":"#1A2C38",border:"1px solid "+(done?"rgba(31,187,123,0.2)":"#213743"),borderRadius:12,padding:"10px 6px",textAlign:"center"}}>
-              <div style={{color:done?"#1fbb7b":"#213743",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{bal}</div>
+            <div key={i} style={{flexShrink:0,width:70,background:done?"rgba(59,130,246,0.08)":"#0F2040",border:"1px solid "+(done?"rgba(59,130,246,0.2)":"#1A2D4A"),borderRadius:12,padding:"10px 6px",textAlign:"center"}}>
+              <div style={{color:done?"#3B82F6":"#1A2D4A",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{bal}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",marginTop:2}}>{lbl}</div>
-              {done && <div style={{color:"#1fbb7b",fontSize:10,marginTop:2}}>✓</div>}
+              {done && <div style={{color:"#3B82F6",fontSize:10,marginTop:2}}>✓</div>}
             </div>
           ))}
         </div>
@@ -8449,14 +8456,14 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
         <TxRow icon="💰" label="Payout #1 — 75% split" amount="+$310.00" date="Feb 7, 2026" positive={true}/>
         <TxRow icon="🎯" label="Challenge fee — PredictTest $5K" amount="-$59.00" date="Jan 31, 2026" positive={false}/>
 
-        <div style={{height:1,background:"#1A2C38",margin:"16px 0"}}/>
+        <div style={{height:1,background:"#0F2040",margin:"16px 0"}}/>
 
         {/* Actions */}
-        <button onClick={onOpenAnalytics} style={{width:"100%",height:46,borderRadius:12,background:"#1A2C38",border:"1px solid rgba(0,229,255,0.2)",color:"#00E5FF",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+        <button onClick={onOpenAnalytics} style={{width:"100%",height:46,borderRadius:12,background:"#0F2040",border:"1px solid rgba(0,229,255,0.2)",color:"#00E5FF",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
           📈 Performance Analytics
         </button>
         {toElite===0 && (
-          <button onClick={onGraduate} style={{width:"100%",height:46,borderRadius:12,background:"linear-gradient(135deg,#1a1500,#1A2C38)",border:"1px solid rgba(244,196,48,0.267)",color:"#F4C430",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+          <button onClick={onGraduate} style={{width:"100%",height:46,borderRadius:12,background:"linear-gradient(135deg,#1a1500,#0F2040)",border:"1px solid rgba(244,196,48,0.267)",color:"#F4C430",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8,display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
             🌟 Graduate to PredictLive →
           </button>
         )}
@@ -8486,13 +8493,13 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
       )}
 
       {payDone && (
-        <div style={{position:"absolute",inset:0,zIndex:200,background:"rgba(15,33,46,0.9)",display:"flex",alignItems:"center",justifyContent:"center"}}>
-          <div style={{background:"#1A2C38",borderRadius:24,padding:"32px 24px",textAlign:"center",width:"80%",border:"1px solid rgba(31,187,123,0.2)"}}>
+        <div style={{position:"absolute",inset:0,zIndex:200,background:"rgba(10,22,40,0.9)",display:"flex",alignItems:"center",justifyContent:"center"}}>
+          <div style={{background:"#0F2040",borderRadius:24,padding:"32px 24px",textAlign:"center",width:"80%",border:"1px solid rgba(59,130,246,0.2)"}}>
             <div style={{fontSize:56,marginBottom:12}}>💰</div>
-            <div style={{color:"#1fbb7b",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Payout Requested!</div>
+            <div style={{color:"#3B82F6",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Payout Requested!</div>
             <div style={{color:"#F4C430",fontSize:28,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>${payoutAmount.toFixed(2)}</div>
             <div style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:20,lineHeight:1.5}}>Funds arrive within 24 hours.<br/>Your P&L has been reset for the next cycle.</div>
-            <button onClick={()=>setPayDone(false)} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:13,fontWeight:900,padding:"12px 32px",cursor:"pointer"}}>Done</button>
+            <button onClick={()=>setPayDone(false)} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:13,fontWeight:900,padding:"12px 32px",cursor:"pointer"}}>Done</button>
           </div>
         </div>
       )}
@@ -8505,15 +8512,15 @@ function PropFundedDashboard({ onClose, propAccount, votes, onOpenAnalytics, onB
 // ─────────────────────────────────────────────────────────────────────────────
 function PropLeaderboard({ onClose }) {
   const [period, setPeriod] = useState("monthly");
-  const tierColors = {"PredictLive":"#F4C430","PredictElite":"#7c4dcc","Funded":"#1fbb7b"};
+  const tierColors = {"PredictLive":"#F4C430","PredictElite":"#7c4dcc","Funded":"#3B82F6"};
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="🏆 Prop Leaderboard" onBack={onClose}/>
 
-      <div style={{padding:"12px 16px",background:"#0F212E",borderBottom:"1px solid #1A2C38",flexShrink:0,display:"flex",gap:8}}>
+      <div style={{padding:"12px 16px",background:"#0A1628",borderBottom:"1px solid #0F2040",flexShrink:0,display:"flex",gap:8}}>
         {["weekly","monthly","alltime"].map(p=>(
-          <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#1fbb7b":"#213743",border:"none",borderRadius:20,color:period===p?"#000":"rgba(255,255,255,0.22)",fontSize:10,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,textTransform:"uppercase",transition:"all 0.2s"}}>
+          <button key={p} onClick={()=>setPeriod(p)} style={{background:period===p?"#3B82F6":"#1A2D4A",border:"none",borderRadius:20,color:period===p?"#000":"rgba(255,255,255,0.22)",fontSize:10,fontWeight:700,padding:"6px 14px",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1,textTransform:"uppercase",transition:"all 0.2s"}}>
             {p==="alltime"?"ALL TIME":p.toUpperCase()}
           </button>
         ))}
@@ -8528,7 +8535,7 @@ function PropLeaderboard({ onClose }) {
               <div key={r.user} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:4}}>
                 <div style={{width:38,height:38,borderRadius:"50%",background:r.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:17}}>{r.avatar}</div>
                 <div style={{fontSize:9,color:"#6a8090",fontFamily:"'Inter',sans-serif",textAlign:"center"}}>@{r.user.slice(0,9)}</div>
-                <div style={{width:"100%",height:hs[i],background:i===1?"linear-gradient(180deg,#2F805A,#2d5c41)":"#1A2C38",border:"1px solid "+(i===1?"rgba(31,187,123,0.267)":"#213743"),borderRadius:"8px 8px 0 0",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:2}}>
+                <div style={{width:"100%",height:hs[i],background:i===1?"linear-gradient(180deg,#2F805A,#2d5c41)":"#0F2040",border:"1px solid "+(i===1?"rgba(59,130,246,0.267)":"#1A2D4A"),borderRadius:"8px 8px 0 0",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:2}}>
                   <span style={{fontSize:18}}>{medals[i]}</span>
                   <span style={{color:"#FFFFFF",fontSize:11,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${r.profit.toLocaleString()}</span>
                 </div>
@@ -8539,25 +8546,25 @@ function PropLeaderboard({ onClose }) {
 
         {/* Full list */}
         {PROP_LEADERBOARD.map((r,i)=>(
-          <div key={r.rank} style={{background:r.isMe?"#1A2C38":"#1A2C38",borderRadius:14,border:r.isMe?"1px solid rgba(31,187,123,0.2)":"1px solid #213743",padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
-            <div style={{width:26,textAlign:"center",color:["#F4C430","rgba(255,255,255,0.62)","#C97A28"][i]||"#213743",fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:i<3?16:12}}>
+          <div key={r.rank} style={{background:r.isMe?"#0F2040":"#0F2040",borderRadius:14,border:r.isMe?"1px solid rgba(59,130,246,0.2)":"1px solid #1A2D4A",padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
+            <div style={{width:26,textAlign:"center",color:["#F4C430","rgba(255,255,255,0.62)","#C97A28"][i]||"#1A2D4A",fontFamily:"'Inter',sans-serif",fontWeight:700,fontSize:i<3?16:12}}>
               {i<3?["🥇","🥈","🥉"][i]:r.rank}
             </div>
             <div style={{width:36,height:36,borderRadius:"50%",background:r.color,display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>{r.avatar}</div>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:"flex",alignItems:"center",gap:6}}>
-                <span style={{color:r.isMe?"#1fbb7b":"#fff",fontWeight:700,fontSize:13,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
-                {r.isMe&&<Badge color="#1fbb7b">YOU</Badge>}
+                <span style={{color:r.isMe?"#3B82F6":"#fff",fontWeight:700,fontSize:13,fontFamily:"'Inter',sans-serif"}}>@{r.user}</span>
+                {r.isMe&&<Badge color="#3B82F6">YOU</Badge>}
               </div>
               <div style={{display:"flex",gap:6,marginTop:3,alignItems:"center"}}>
-                <div style={{background:(tierColors[r.tier]||"#213743")+"22",border:"1px solid "+(tierColors[r.tier]||"#213743")+"44",borderRadius:99,padding:"1px 7px"}}>
+                <div style={{background:(tierColors[r.tier]||"#1A2D4A")+"22",border:"1px solid "+(tierColors[r.tier]||"#1A2D4A")+"44",borderRadius:99,padding:"1px 7px"}}>
                   <span style={{color:tierColors[r.tier]||"rgba(255,255,255,0.42)",fontSize:8,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{r.tier.toUpperCase()}</span>
                 </div>
                 <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{r.accuracy}% · {r.payouts} payouts</span>
               </div>
             </div>
             <div style={{textAlign:"right"}}>
-              <div style={{color:"#1fbb7b",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${r.profit.toLocaleString()}</div>
+              <div style={{color:"#3B82F6",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${r.profit.toLocaleString()}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>EARNED</div>
             </div>
           </div>
@@ -8649,31 +8656,31 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
   const finalPnl = pnlCurve[pnlCurve.length-1] || 0;
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="📈 Performance Analytics" onBack={onClose}/>
       <div style={{flex:1,overflowY:"auto",padding:"16px 16px 80px"}}>
 
         {/* ── Overview stats ── */}
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:20}}>
           {[
-            {l:"Composite Score", v:compositeScore+" / 100", c: compositeScore>=70?"#1fbb7b":compositeScore>=50?"#F4C430":"#f93d3d"},
+            {l:"Composite Score", v:compositeScore+" / 100", c: compositeScore>=70?"#3B82F6":compositeScore>=50?"#F4C430":"#f93d3d"},
             {l:"Profit Factor",   v:profitFactor+"x",         c:"#c8dae8"},
-            {l:"Win Rate",        v:stats.accuracy+"%",       c: stats.accuracy>=60?"#1fbb7b":"#F4C430"},
-            {l:"Grade",           v:grade,                    c: isTopGrade?"#1fbb7b":"#F4C430", glow: isTopGrade},
+            {l:"Win Rate",        v:stats.accuracy+"%",       c: stats.accuracy>=60?"#3B82F6":"#F4C430"},
+            {l:"Grade",           v:grade,                    c: isTopGrade?"#3B82F6":"#F4C430", glow: isTopGrade},
           ].map(({l,v,c,glow})=>(
             <div key={l} style={{
-              background: glow ? "linear-gradient(135deg,rgba(31,187,123,0.12),rgba(31,187,123,0.08))" : "#1A2C38",
+              background: glow ? "linear-gradient(135deg,rgba(59,130,246,0.12),rgba(59,130,246,0.08))" : "#0F2040",
               borderRadius:14, padding:"16px 12px", textAlign:"center",
-              border: glow ? "1px solid rgba(31,187,123,0.4)" : "1px solid #213743",
-              boxShadow: glow ? "0 0 24px rgba(31,187,123,0.15)" : "none",
+              border: glow ? "1px solid rgba(59,130,246,0.4)" : "1px solid #1A2D4A",
+              boxShadow: glow ? "0 0 24px rgba(59,130,246,0.15)" : "none",
               position:"relative", overflow:"hidden",
             }}>
-              {glow && <div style={{position:"absolute",inset:0,background:"radial-gradient(circle at 50% 0%,rgba(31,187,123,0.1),transparent 70%)",pointerEvents:"none"}}/>}
+              {glow && <div style={{position:"absolute",inset:0,background:"radial-gradient(circle at 50% 0%,rgba(59,130,246,0.1),transparent 70%)",pointerEvents:"none"}}/>}
               <div style={{color:c,fontSize:glow?28:22,fontWeight:900,fontFamily:"'Inter',sans-serif",lineHeight:1,marginBottom:4,
-                textShadow: glow ? "0 0 20px rgba(31,187,123,0.8)" : "none",
+                textShadow: glow ? "0 0 20px rgba(59,130,246,0.8)" : "none",
               }}>{v}</div>
               <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1}}>{l.toUpperCase()}</div>
-              {glow && <div style={{color:"rgba(31,187,123,0.6)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:4}}>🔥 Elite Trader</div>}
+              {glow && <div style={{color:"rgba(59,130,246,0.6)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:4}}>🔥 Elite Trader</div>}
             </div>
           ))}
         </div>
@@ -8681,27 +8688,27 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
         {/* ── P&L Curve ── */}
         <SectionLabel>P&L CURVE</SectionLabel>
         {pnlCurve.length > 1 ? (
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"14px",marginBottom:20}}>
-            <FullChart data={pnlCurve} color={finalPnl>=0?"#1fbb7b":"#f93d3d"} isLive={false}/>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"14px",marginBottom:20}}>
+            <FullChart data={pnlCurve} color={finalPnl>=0?"#3B82F6":"#f93d3d"} isLive={false}/>
             <div style={{display:"flex",justifyContent:"space-between",marginTop:8}}>
               <span style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>Start</span>
-              <span style={{color:finalPnl>=0?"#1fbb7b":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
+              <span style={{color:finalPnl>=0?"#3B82F6":"#f93d3d",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>
                 {finalPnl>=0?"+":""}{finalPnl.toFixed(2)} total P&L
               </span>
             </div>
           </div>
         ) : (
-          <div style={{background:"#1A2C38",borderRadius:14,padding:"20px",marginBottom:20,textAlign:"center",color:"rgba(255,255,255,0.2)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Place bets to see your P&L curve</div>
+          <div style={{background:"#0F2040",borderRadius:14,padding:"20px",marginBottom:20,textAlign:"center",color:"rgba(255,255,255,0.2)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>Place bets to see your P&L curve</div>
         )}
 
         {/* ── Calibration ── */}
         <SectionLabel>CALIBRATION CHART</SectionLabel>
-        <div style={{background:"#1A2C38",borderRadius:14,padding:"16px",marginBottom:20}}>
+        <div style={{background:"#0F2040",borderRadius:14,padding:"16px",marginBottom:20}}>
           <div style={{color:"rgba(255,255,255,0.35)",fontSize:11,fontFamily:"'Inter',sans-serif",marginBottom:14}}>Your actual win rate vs expected by odds band</div>
           {calibration.map(({band,expected,actual,count})=>{
             const hasData = actual !== null;
             const diff    = hasData ? actual - expected : 0;
-            const barColor = !hasData ? "#213743" : diff >= 10 ? "#1fbb7b" : diff >= 0 ? "#1fbb7b" : diff >= -10 ? "#F4C430" : "#f93d3d";
+            const barColor = !hasData ? "#1A2D4A" : diff >= 10 ? "#3B82F6" : diff >= 0 ? "#3B82F6" : diff >= -10 ? "#F4C430" : "#f93d3d";
             return (
               <div key={band} style={{marginBottom:14}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:6}}>
@@ -8718,7 +8725,7 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
                     )}
                   </div>
                 </div>
-                <div style={{height:6,background:"#213743",borderRadius:99,position:"relative"}}>
+                <div style={{height:6,background:"#1A2D4A",borderRadius:99,position:"relative"}}>
                   {/* Expected line */}
                   <div style={{position:"absolute",top:0,left:0,height:"100%",width:expected+"%",background:"rgba(255,255,255,0.08)",borderRadius:99}}/>
                   {/* Actual bar */}
@@ -8739,9 +8746,9 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
             <div key={cat} style={{marginBottom:12}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}>
                 <span style={{color:"#c8dae8",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{cat}</span>
-                <span style={{color:acc>=60?"#1fbb7b":acc>=50?"#F4C430":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{acc}% · {pct}% of vol</span>
+                <span style={{color:acc>=60?"#3B82F6":acc>=50?"#F4C430":"#f93d3d",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{acc}% · {pct}% of vol</span>
               </div>
-              <div style={{height:6,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+              <div style={{height:6,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
                 <div style={{height:"100%",width:acc+"%",background:color,borderRadius:99}}/>
               </div>
             </div>
@@ -8753,14 +8760,14 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
         {bestBets.length === 0
           ? <div style={{color:"rgba(255,255,255,0.2)",fontSize:12,fontFamily:"'Inter',sans-serif",padding:"12px 0",marginBottom:16}}>No winning bets yet</div>
           : bestBets.map((e,i)=>(
-            <div key={i} style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:8,display:"flex",gap:10,alignItems:"center",border:"1px solid rgba(31,187,123,0.1)"}}>
-              <div style={{width:24,height:24,borderRadius:8,background:"rgba(20,158,99,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:"#1fbb7b",flexShrink:0}}>#{i+1}</div>
+            <div key={i} style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:8,display:"flex",gap:10,alignItems:"center",border:"1px solid rgba(59,130,246,0.1)"}}>
+              <div style={{width:24,height:24,borderRadius:8,background:"rgba(20,158,99,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:"#3B82F6",flexShrink:0}}>#{i+1}</div>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{color:"#c8dae8",fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{e.title || e.market?.title || e.id}</div>
                 <div style={{color:"rgba(255,255,255,0.3)",fontSize:10,fontFamily:"'Inter',sans-serif",marginTop:2}}>{e.v.pos} · {e.entryPct}% odds · ${(e.v.amount||1).toFixed(2)} staked</div>
               </div>
               <div style={{textAlign:"right",flexShrink:0}}>
-                <div style={{color:"#1fbb7b",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>+${e.pnl.toFixed(2)}</div>
+                <div style={{color:"#3B82F6",fontSize:14,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>+${e.pnl.toFixed(2)}</div>
                 <div style={{color:"rgba(255,255,255,0.25)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>{e.shares.toFixed(1)} shares</div>
               </div>
             </div>
@@ -8772,7 +8779,7 @@ function PropAnalytics({ onClose, votes, resolvedBets, propAccount }) {
         {worstBets.length === 0
           ? <div style={{color:"rgba(255,255,255,0.2)",fontSize:12,fontFamily:"'Inter',sans-serif",padding:"12px 0",marginBottom:16}}>No losing bets yet</div>
           : worstBets.map((e,i)=>(
-            <div key={i} style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:8,display:"flex",gap:10,alignItems:"center",border:"1px solid rgba(249,61,61,0.1)"}}>
+            <div key={i} style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:8,display:"flex",gap:10,alignItems:"center",border:"1px solid rgba(249,61,61,0.1)"}}>
               <div style={{width:24,height:24,borderRadius:8,background:"rgba(249,61,61,0.15)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:700,color:"#f93d3d",flexShrink:0}}>#{i+1}</div>
               <div style={{flex:1,minWidth:0}}>
                 <div style={{color:"#c8dae8",fontSize:12,fontWeight:600,fontFamily:"'Inter',sans-serif",overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{e.title || e.market?.title || e.id}</div>
@@ -8815,13 +8822,13 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
   const active   = (propAccounts||[]).filter(a=>a.status!=="breached");
   const totalPnl = (propAccounts||[]).reduce((s,a)=>s+(a.pnl||0),0);
 
-  const statusColor = a => a.funded?"#1fbb7b":a.status==="breached"?"#f93d3d":"#F4C430";
+  const statusColor = a => a.funded?"#3B82F6":a.status==="breached"?"#f93d3d":"#F4C430";
   const statusLabel = a => a.funded?"FUNDED":a.status==="breached"?"BREACHED":"EVALUATING";
   const tierOf = a => PROP_TIERS.find(t=>t.id===a.tierId);
   const displayAccounts = acctTab==="active" ? active : breached;
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="Accounts" onBack={onClose} icon={
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
           <path d="M3 7a2 2 0 012-2h4l2 2h8a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V7z" stroke="#FFFFFF" strokeWidth="1.7" strokeLinejoin="round"/>
@@ -8829,15 +8836,15 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
       }/>
 
       {/* Summary bar */}
-      <div style={{background:"linear-gradient(135deg,#0F212E,#090F14)",borderBottom:"1px solid #1A2C38",padding:"14px 16px",flexShrink:0}}>
+      <div style={{background:"linear-gradient(135deg,#0A1628,#090F14)",borderBottom:"1px solid #0F2040",padding:"14px 16px",flexShrink:0}}>
         <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr 1fr",gap:8}}>
           {[
             [(propAccounts||[]).length,"/"+(MAX_ACCOUNTS),"ACCOUNTS","#fff"],
-            [funded.length,"","FUNDED","#1fbb7b"],
+            [funded.length,"","FUNDED","#3B82F6"],
             [breached.length,"","BREACHED","#f93d3d"],
-            [(totalPnl>=0?"+":"")+"$"+(Math.abs(totalPnl).toFixed(0)),"","TOTAL P&L",totalPnl>=0?"#1fbb7b":"#f93d3d"],
+            [(totalPnl>=0?"+":"")+"$"+(Math.abs(totalPnl).toFixed(0)),"","TOTAL P&L",totalPnl>=0?"#3B82F6":"#f93d3d"],
           ].map(([v,sub,l,c],i)=>(
-            <div key={i} style={{textAlign:"center",background:"rgba(15,33,46,0.45)",borderRadius:10,padding:"10px 6px"}}>
+            <div key={i} style={{textAlign:"center",background:"rgba(10,22,40,0.45)",borderRadius:10,padding:"10px 6px"}}>
               <div style={{display:"flex",alignItems:"baseline",justifyContent:"center",gap:1}}>
                 <span style={{color:c,fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{v}</span>
                 {sub&&<span style={{color:"rgba(255,255,255,0.2)",fontSize:11,fontFamily:"'Inter',sans-serif"}}>{sub}</span>}
@@ -8850,7 +8857,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
 
       {/* Trading account selector */}
       {(propAccounts||[]).filter(a=>a.status!=="breached").length > 1 && onSetActiveAccount && (
-        <div style={{padding:"10px 16px",borderBottom:"1px solid rgba(255,255,255,0.06)",background:"rgba(31,187,123,0.04)",flexShrink:0}}>
+        <div style={{padding:"10px 16px",borderBottom:"1px solid rgba(255,255,255,0.06)",background:"rgba(59,130,246,0.04)",flexShrink:0}}>
           <div style={{color:"rgba(255,255,255,0.4)",fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:1.5,marginBottom:6}}>TRADING ON</div>
           <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
             {(propAccounts||[]).filter(a=>a.status!=="breached").map(acct=>{
@@ -8858,7 +8865,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
               const isActive = activeAccountId ? acct.id===activeAccountId : acct.isLeader || acct.status==="funded" || acct.status==="active";
               return (
                 <button key={acct.id} onClick={()=>onSetActiveAccount(acct.id)}
-                  style={{background:isActive?"rgba(31,187,123,0.15)":"rgba(255,255,255,0.05)",border:"1px solid "+(isActive?"rgba(31,187,123,0.5)":"rgba(255,255,255,0.1)"),borderRadius:10,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",fontSize:10,fontWeight:isActive?700:500,color:isActive?"#1fbb7b":"rgba(255,255,255,0.4)"}}>
+                  style={{background:isActive?"rgba(59,130,246,0.15)":"rgba(255,255,255,0.05)",border:"1px solid "+(isActive?"rgba(59,130,246,0.5)":"rgba(255,255,255,0.1)"),borderRadius:10,padding:"5px 10px",cursor:"pointer",fontFamily:"'Inter',sans-serif",fontSize:10,fontWeight:isActive?700:500,color:isActive?"#3B82F6":"rgba(255,255,255,0.4)"}}>
                   {t?.label||"Account"} {acct.isLeader?"👑":acct.funded?"⭐":""}
                 </button>
               );
@@ -8873,11 +8880,11 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
           <button key={id} onClick={()=>setAcctTab(id)}
             style={{flex:1,background:"none",border:"none",padding:"10px 0",cursor:"pointer",
               fontFamily:"'Inter',sans-serif",fontSize:11,fontWeight:acctTab===id?700:500,
-              color:acctTab===id?(id==="breached"?"#f93d3d":"#1fbb7b"):"rgba(255,255,255,0.35)",
+              color:acctTab===id?(id==="breached"?"#f93d3d":"#3B82F6"):"rgba(255,255,255,0.35)",
               display:"flex",flexDirection:"column",alignItems:"center",gap:4,transition:"color 0.15s"}}>
             <span>{label}</span>
             <div style={{width:acctTab===id?20:0,height:2,borderRadius:99,
-              background:id==="breached"?"#f93d3d":"#1fbb7b",
+              background:id==="breached"?"#f93d3d":"#3B82F6",
               transition:"width 0.2s cubic-bezier(0.4,0,0.2,1)"}}/>
           </button>
         ))}
@@ -8887,7 +8894,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
 
         {/* Copy trader CTA */}
         {(propAccounts||[]).length > 1 && (
-          <div onClick={onOpenCopyTrader} style={{background:"linear-gradient(135deg,#1A2C38,#1A2C38)",borderRadius:16,border:"1px solid rgba(124,77,204,0.2)",padding:"14px 16px",marginBottom:16,cursor:"pointer",display:"flex",alignItems:"center",gap:12}}>
+          <div onClick={onOpenCopyTrader} style={{background:"linear-gradient(135deg,#0F2040,#0F2040)",borderRadius:16,border:"1px solid rgba(124,77,204,0.2)",padding:"14px 16px",marginBottom:16,cursor:"pointer",display:"flex",alignItems:"center",gap:12}}>
             <div style={{width:44,height:44,borderRadius:12,background:"rgba(124,77,204,0.15)",border:"1px solid rgba(124,77,204,0.2)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,flexShrink:0}}>🔗</div>
             <div style={{flex:1}}>
               <div style={{color:"#FFFFFF",fontSize:14,fontWeight:800,fontFamily:"'Inter',sans-serif",marginBottom:2}}>Copy Trader — Stack Profits</div>
@@ -8919,7 +8926,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
             const lossBar  = Math.min(100,(lossUsed/t.maxLoss)*100);
             const pnlBar   = t.profitTarget ? Math.min(100,Math.max(0,(acctLivePnl/t.profitTarget)*100)) : 0;
             return (
-              <div key={acct.id} style={{background:"#1A2C38",borderRadius:18,border:"1px solid "+(statusColor(acct))+"22",padding:"14px 16px",marginBottom:12,position:"relative"}}>
+              <div key={acct.id} style={{background:"#0F2040",borderRadius:18,border:"1px solid "+(statusColor(acct))+"22",padding:"14px 16px",marginBottom:12,position:"relative"}}>
                 {acct.isLeader && (
                   <div style={{position:"absolute",top:-8,left:14,background:"#7c4dcc",borderRadius:99,padding:"2px 10px"}}>
                     <span style={{color:"#FFFFFF",fontSize:9,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>👑 LEAD ACCOUNT</span>
@@ -8936,7 +8943,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
                     <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>ACC #{acct.id?.slice(-4)||i+1} · {t.consistency}% CONSISTENCY · ${t.maxBet} MAX BET</div>
                   </div>
                   <div style={{textAlign:"right"}}>
-                    <div style={{color:livePnl(acct)>=0?"#1fbb7b":"#f93d3d",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>
+                    <div style={{color:livePnl(acct)>=0?"#3B82F6":"#f93d3d",fontSize:16,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>
                       {livePnl(acct)>=0?"+":""}${Math.abs(livePnl(acct)).toFixed(2)}
                     </div>
                     <div style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>NET P&L</div>
@@ -8950,7 +8957,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
                       <span style={{color:"#00E5FF",fontSize:9,fontFamily:"'Inter',sans-serif"}}>PROFIT PROGRESS</span>
                       <span style={{color:"#00E5FF",fontSize:9,fontFamily:"'Inter',sans-serif"}}>${Math.max(0,acct.pnl||0).toFixed(0)} / ${t.profitTarget.toLocaleString()}</span>
                     </div>
-                    <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden"}}>
+                    <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
                       <div style={{height:"100%",width:(pnlBar)+"%",background:"#00E5FF",borderRadius:99}}/>
                     </div>
                   </div>
@@ -8960,13 +8967,13 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
                     <span style={{color:lossBar>75?"#f93d3d":lossBar>50?"#F4C430":"rgba(255,255,255,0.32)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>LOSS USED</span>
                     <span style={{color:lossBar>75?"#f93d3d":lossBar>50?"#F4C430":"rgba(255,255,255,0.32)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>${lossUsed.toFixed(0)} / ${t.maxLoss.toLocaleString()}</span>
                   </div>
-                  <div style={{height:4,background:"#213743",borderRadius:99,overflow:"hidden"}}>
-                    <div style={{height:"100%",width:(lossBar)+"%",background:lossBar>75?"#f93d3d":lossBar>50?"#F4C430":"#1fbb7b",borderRadius:99}}/>
+                  <div style={{height:4,background:"#1A2D4A",borderRadius:99,overflow:"hidden"}}>
+                    <div style={{height:"100%",width:(lossBar)+"%",background:lossBar>75?"#f93d3d":lossBar>50?"#F4C430":"#3B82F6",borderRadius:99}}/>
                   </div>
                 </div>
 
                 <div style={{display:"flex",gap:8}}>
-                  <button onClick={()=>onOpenAccount(acct)} style={{flex:1,height:36,borderRadius:10,background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.133)",color:"#1fbb7b",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+                  <button onClick={()=>onOpenAccount(acct)} style={{flex:1,height:36,borderRadius:10,background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.133)",color:"#3B82F6",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
                     View Dashboard
                   </button>
                   <button onClick={()=>onCloseAccount(acct.id)} style={{height:36,padding:"0 12px",borderRadius:10,background:"none",border:"1px solid rgba(249,61,61,0.133)",color:"#f93d3d",fontSize:11,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",opacity:0.6}}>
@@ -8980,7 +8987,7 @@ function PropAccountsManager({ onClose, propAccounts, onOpenAccount, onAddAccoun
 
         {/* Add account button */}
         {(propAccounts||[]).length < MAX_ACCOUNTS && (
-          <button onClick={onAddAccount} style={{width:"100%",height:56,borderRadius:16,background:"rgba(20,158,99,0.06)",border:"2px dashed rgba(31,187,123,0.2)",color:"#1fbb7b",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
+          <button onClick={onAddAccount} style={{width:"100%",height:56,borderRadius:16,background:"rgba(20,158,99,0.06)",border:"2px dashed rgba(59,130,246,0.2)",color:"#3B82F6",fontSize:14,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif",display:"flex",alignItems:"center",justifyContent:"center",gap:8}}>
             <span style={{fontSize:20}}>+</span> Add Account ({(propAccounts||[]).length}/{MAX_ACCOUNTS})
           </button>
         )}
@@ -9011,18 +9018,18 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
   ];
 
   return (
-    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0F212E"}}>
+    <div style={{height:"100%",display:"flex",flexDirection:"column",background:"#0A1628"}}>
       <OverlayHeader title="Copy Trader" onBack={onClose}/>
 
       {/* Status banner */}
-      <div style={{background:leader?"linear-gradient(135deg,#1A2C38,#090F14)":"linear-gradient(135deg,#1a1a00,#090F14)",borderBottom:"1px solid #1A2C38",padding:"14px 16px",flexShrink:0}}>
+      <div style={{background:leader?"linear-gradient(135deg,#0F2040,#090F14)":"linear-gradient(135deg,#1a1a00,#090F14)",borderBottom:"1px solid #0F2040",padding:"14px 16px",flexShrink:0}}>
         {leader ? (<>
           <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:6}}>
             <div style={{background:"rgba(124,77,204,0.15)",border:"1px solid rgba(124,77,204,0.2)",borderRadius:20,padding:"3px 10px"}}>
               <span style={{color:"#7c4dcc",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>👑 COPY TRADER ACTIVE</span>
             </div>
-            <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:20,padding:"3px 10px"}}>
-              <span style={{color:"#1fbb7b",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{followers.length} FOLLOWING</span>
+            <div style={{background:"rgba(20,158,99,0.12)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:20,padding:"3px 10px"}}>
+              <span style={{color:"#3B82F6",fontSize:9,fontWeight:700,fontFamily:"'Inter',sans-serif"}}>{followers.length} FOLLOWING</span>
             </div>
           </div>
           <div style={{color:"#FFFFFF",fontSize:14,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:2}}>
@@ -9040,7 +9047,7 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
       </div>
 
       {/* Tabs */}
-      <div style={{display:"flex",background:"#0F212E",borderBottom:"1px solid #1A2C38",flexShrink:0}}>
+      <div style={{display:"flex",background:"#0A1628",borderBottom:"1px solid #0F2040",flexShrink:0}}>
         {[["setup","Setup"],["log","Copy Log"],["how","How It Works"]].map(([id,label])=>(
           <button key={id} onClick={()=>setActiveTab(id)} style={{flex:1,background:"none",border:"none",borderBottom:"2px solid "+(activeTab===id?"#7c4dcc":"transparent"),color:activeTab===id?"#7c4dcc":"rgba(255,255,255,0.22)",fontSize:11,fontWeight:700,padding:"11px 0",cursor:"pointer",fontFamily:"'Inter',sans-serif",letterSpacing:1}}>
             {label.toUpperCase()}
@@ -9062,7 +9069,7 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
             const t = tierOf(acct); if (!t) return null;
             const isLead = acct.isLeader;
             return (
-              <div key={acct.id||i} style={{background:isLead?"rgba(124,77,204,0.08)":"#1A2C38",borderRadius:16,border:"2px solid "+(isLead?"#7c4dcc":"#213743"),padding:"14px 16px",marginBottom:10,position:"relative"}}>
+              <div key={acct.id||i} style={{background:isLead?"rgba(124,77,204,0.08)":"#0F2040",borderRadius:16,border:"2px solid "+(isLead?"#7c4dcc":"#1A2D4A"),padding:"14px 16px",marginBottom:10,position:"relative"}}>
                 {isLead && <div style={{position:"absolute",top:-8,right:14,background:"#7c4dcc",borderRadius:99,padding:"2px 10px"}}><span style={{color:"#FFFFFF",fontSize:9,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>👑 LEAD</span></div>}
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
                   <div>
@@ -9070,7 +9077,7 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
                     <div style={{color:"rgba(255,255,255,0.25)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>{acct.funded?"FUNDED":"EVALUATING"} · ${t.maxBet} MAX BET</div>
                   </div>
                   <div style={{textAlign:"right"}}>
-                    <div style={{color:acct.pnl>=0?"#1fbb7b":"#f93d3d",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{acct.pnl>=0?"+":""}${Math.abs(acct.pnl||0).toFixed(0)}</div>
+                    <div style={{color:acct.pnl>=0?"#3B82F6":"#f93d3d",fontSize:15,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{acct.pnl>=0?"+":""}${Math.abs(acct.pnl||0).toFixed(0)}</div>
                     <div style={{color:"rgba(255,255,255,0.42)",fontSize:8,fontFamily:"'Inter',sans-serif"}}>P&L</div>
                   </div>
                 </div>
@@ -9086,22 +9093,22 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
 
           {leader && (<>
             <SectionLabel>📡 FOLLOWER ACCOUNTS</SectionLabel>
-            <div style={{background:"rgba(20,158,99,0.05)",border:"1px solid rgba(31,187,123,0.133)",borderRadius:12,padding:"10px 12px",marginBottom:12}}>
-              <span style={{color:"#1fbb7b",fontSize:11,fontFamily:"'Inter',sans-serif"}}>
+            <div style={{background:"rgba(20,158,99,0.05)",border:"1px solid rgba(59,130,246,0.133)",borderRadius:12,padding:"10px 12px",marginBottom:12}}>
+              <span style={{color:"#3B82F6",fontSize:11,fontFamily:"'Inter',sans-serif"}}>
                 Toggle which accounts follow the lead. Bets are capped at each account's max bet size.
               </span>
             </div>
             {(propAccounts||[]).filter(a=>!a.isLeader).map((acct,i)=>{
               const t = tierOf(acct); if (!t) return null;
               return (
-                <div key={acct.id||i} style={{background:"#1A2C38",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
+                <div key={acct.id||i} style={{background:"#0F2040",borderRadius:14,padding:"12px 14px",marginBottom:8,display:"flex",alignItems:"center",gap:12}}>
                   <div style={{flex:1}}>
                     <div style={{color:"#FFFFFF",fontSize:13,fontWeight:700,fontFamily:"'Inter',sans-serif",marginBottom:1}}>{t.tier} · {t.label}</div>
                     <div style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>${t.maxBet} max bet · {acct.funded?"Funded":"Evaluating"}</div>
                   </div>
                   {/* Toggle switch */}
-                  <div onClick={()=>onToggleCopy(acct.id)} style={{width:44,height:24,borderRadius:99,background:acct.copyEnabled?"#1fbb7b":"#213743",border:"1px solid "+(acct.copyEnabled?"#1fbb7b":"#213743"),cursor:"pointer",position:"relative",transition:"all 0.2s",flexShrink:0}}>
-                    <div style={{position:"absolute",top:3,left:acct.copyEnabled?22:3,width:16,height:16,borderRadius:"50%",background:"#fff",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(15,33,46,0.45)"}}/>
+                  <div onClick={()=>onToggleCopy(acct.id)} style={{width:44,height:24,borderRadius:99,background:acct.copyEnabled?"#3B82F6":"#1A2D4A",border:"1px solid "+(acct.copyEnabled?"#3B82F6":"#1A2D4A"),cursor:"pointer",position:"relative",transition:"all 0.2s",flexShrink:0}}>
+                    <div style={{position:"absolute",top:3,left:acct.copyEnabled?22:3,width:16,height:16,borderRadius:"50%",background:"#fff",transition:"left 0.2s",boxShadow:"0 1px 4px rgba(10,22,40,0.45)"}}/>
                   </div>
                 </div>
               );
@@ -9113,19 +9120,19 @@ function PropCopyTrader({ onClose, propAccounts, onSetLeader, onToggleCopy }) {
           <SectionLabel>RECENT COPY TRADES</SectionLabel>
           {leader ? (
             COPY_LOG.map((log,i)=>(
-              <div key={i} style={{background:"#1A2C38",borderRadius:12,padding:"12px 14px",marginBottom:8}}>
+              <div key={i} style={{background:"#0F2040",borderRadius:12,padding:"12px 14px",marginBottom:8}}>
                 <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",marginBottom:6}}>
                   <div style={{flex:1,fontSize:12,fontFamily:"'Inter',sans-serif",color:"rgba(255,255,255,0.72)",fontWeight:600,lineHeight:1.3,marginRight:8}}>{log.market}</div>
                   <div style={{textAlign:"right",flexShrink:0}}>
-                    <div style={{color:log.result.includes("+")?"#1fbb7b":"#f93d3d",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{log.result}</div>
+                    <div style={{color:log.result.includes("+")?"#3B82F6":"#f93d3d",fontSize:13,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>{log.result}</div>
                   </div>
                 </div>
                 <div style={{display:"flex",gap:8,alignItems:"center"}}>
-                  <div style={{background:"#213743",borderRadius:99,padding:"2px 8px"}}>
+                  <div style={{background:"#1A2D4A",borderRadius:99,padding:"2px 8px"}}>
                     <span style={{color:"rgba(255,255,255,0.42)",fontSize:9,fontFamily:"'Inter',sans-serif"}}>{log.pos}</span>
                   </div>
                   <span style={{color:"rgba(255,255,255,0.2)",fontSize:10,fontFamily:"'Inter',sans-serif"}}>📡 Copied to {log.accounts} accounts</span>
-                  <span style={{color:"#213743",fontSize:10,fontFamily:"'Inter',sans-serif",marginLeft:"auto"}}>{log.time}</span>
+                  <span style={{color:"#1A2D4A",fontSize:10,fontFamily:"'Inter',sans-serif",marginLeft:"auto"}}>{log.time}</span>
                 </div>
               </div>
             ))
@@ -9169,11 +9176,11 @@ function PropBreachModal({ onClose, propAccount, onReset }) {
 
   if (step==="done") return (
     <div style={{position:"absolute",inset:0,zIndex:300,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
-      <div style={{background:"#1A2C38",borderRadius:24,padding:"32px 24px",textAlign:"center",width:"100%",maxWidth:320,border:"1px solid rgba(31,187,123,0.2)"}}>
+      <div style={{background:"#0F2040",borderRadius:24,padding:"32px 24px",textAlign:"center",width:"100%",maxWidth:320,border:"1px solid rgba(59,130,246,0.2)"}}>
         <div style={{fontSize:56,marginBottom:12}}>🔄</div>
-        <div style={{color:"#1fbb7b",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Account Reset!</div>
+        <div style={{color:"#3B82F6",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:6}}>Account Reset!</div>
         <div style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:20,lineHeight:1.5}}>Your {tier.tier} account has been reset. New challenge starts now.</div>
-        <button onClick={()=>{onReset();onClose();}} style={{background:"#1fbb7b",border:"none",borderRadius:99,color:"#fff",fontSize:13,fontWeight:900,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+        <button onClick={()=>{onReset();onClose();}} style={{background:"#3B82F6",border:"none",borderRadius:99,color:"#fff",fontSize:13,fontWeight:900,padding:"12px 32px",cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
           Start New Challenge →
         </button>
       </div>
@@ -9182,7 +9189,7 @@ function PropBreachModal({ onClose, propAccount, onReset }) {
 
   return (
     <div style={{position:"absolute",inset:0,zIndex:300,background:"rgba(0,0,0,0.92)",display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
-      <div style={{background:"#1A2C38",borderRadius:24,padding:"24px",width:"100%",maxWidth:340,border:"2px solid rgba(249,61,61,0.2)"}}>
+      <div style={{background:"#0F2040",borderRadius:24,padding:"24px",width:"100%",maxWidth:340,border:"2px solid rgba(249,61,61,0.2)"}}>
         {step==="breach" ? (<>
           <div style={{textAlign:"center",marginBottom:20}}>
             <div style={{fontSize:52,marginBottom:8}}>⚠️</div>
@@ -9198,7 +9205,7 @@ function PropBreachModal({ onClose, propAccount, onReset }) {
             ))}
           </div>
           <div style={{display:"flex",gap:10}}>
-            <button onClick={onClose} style={{flex:1,height:44,borderRadius:99,background:"#213743",border:"1px solid #213743",color:"rgba(255,255,255,0.42)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+            <button onClick={onClose} style={{flex:1,height:44,borderRadius:99,background:"#1A2D4A",border:"1px solid #1A2D4A",color:"rgba(255,255,255,0.42)",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
               Close
             </button>
             <button onClick={()=>setStep("reset")} style={{flex:2,height:44,borderRadius:99,background:"rgba(249,61,61,0.1)",border:"1px solid rgba(249,61,61,0.267)",color:"#f93d3d",fontSize:13,fontWeight:700,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
@@ -9211,7 +9218,7 @@ function PropBreachModal({ onClose, propAccount, onReset }) {
             <div style={{color:"#FFFFFF",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:4}}>Reset Account</div>
             <div style={{color:"rgba(255,255,255,0.32)",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.5}}>Pay the reset fee to start a fresh challenge on the same tier.</div>
           </div>
-          <div style={{background:"#213743",borderRadius:12,padding:"12px 14px",marginBottom:16}}>
+          <div style={{background:"#1A2D4A",borderRadius:12,padding:"12px 14px",marginBottom:16}}>
             {[[(tier.tier)+" Reset Fee","$"+(resetFee)+".00"],["New funded balance","$"+(tier.balance.toLocaleString())],["Accuracy target",(tier.target)+"%"]].map(([l,v])=>(
               <div key={l} style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
                 <span style={{color:"rgba(255,255,255,0.32)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{l}</span>
@@ -9219,10 +9226,10 @@ function PropBreachModal({ onClose, propAccount, onReset }) {
               </div>
             ))}
           </div>
-          <button onClick={()=>setStep("done")} style={{width:"100%",height:48,borderRadius:99,background:"#1fbb7b",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8}}>
+          <button onClick={()=>setStep("done")} style={{width:"100%",height:48,borderRadius:99,background:"#3B82F6",border:"none",color:"#fff",fontSize:14,fontWeight:900,cursor:"pointer",fontFamily:"'Inter',sans-serif",marginBottom:8}}>
             Pay ${resetFee} & Reset →
           </button>
-          <button onClick={()=>setStep("breach")} style={{width:"100%",height:40,borderRadius:99,background:"none",border:"1px solid #213743",color:"rgba(255,255,255,0.32)",fontSize:12,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
+          <button onClick={()=>setStep("breach")} style={{width:"100%",height:40,borderRadius:99,background:"none",border:"1px solid #1A2D4A",color:"rgba(255,255,255,0.32)",fontSize:12,cursor:"pointer",fontFamily:"'Inter',sans-serif"}}>
             ← Back
           </button>
         </>)}
@@ -9253,7 +9260,7 @@ function PropGraduationModal({ onClose, propAccount }) {
       subtitle:"Real capital. Real payouts.",
       body:"Your simulated profits translate to a starting PredictLive balance (up to $5,000). You'll trade with actual capital and keep 90% of all profits indefinitely.",
       cta:"View My Starting Balance →",
-      color:"#1fbb7b",
+      color:"#3B82F6",
     },
     {
       icon:"📋",
@@ -9278,10 +9285,10 @@ function PropGraduationModal({ onClose, propAccount }) {
 
   return (
     <div style={{position:"absolute",inset:0,zIndex:300,background:"rgba(0,0,0,0.95)",display:"flex",alignItems:"center",justifyContent:"center",padding:24}}>
-      <div style={{background:"#1A2C38",borderRadius:24,padding:"32px 24px",width:"100%",maxWidth:340,border:"1px solid "+(s.color)+"33",textAlign:"center",position:"relative"}}>
+      <div style={{background:"#0F2040",borderRadius:24,padding:"32px 24px",width:"100%",maxWidth:340,border:"1px solid "+(s.color)+"33",textAlign:"center",position:"relative"}}>
         {/* Progress */}
         <div style={{display:"flex",gap:6,marginBottom:24,justifyContent:"center"}}>
-          {steps.map((_,i)=><div key={i} style={{width:i===step?28:7,height:7,borderRadius:99,background:i<=step?s.color:"#213743",transition:"all 0.3s"}}/>)}
+          {steps.map((_,i)=><div key={i} style={{width:i===step?28:7,height:7,borderRadius:99,background:i<=step?s.color:"#1A2D4A",transition:"all 0.3s"}}/>)}
         </div>
 
         <div style={{fontSize:64,marginBottom:16,animation:"popIn 0.4s ease"}}>{s.icon}</div>
@@ -9290,7 +9297,7 @@ function PropGraduationModal({ onClose, propAccount }) {
         <p style={{color:"#6a8090",fontSize:13,fontFamily:"'Inter',sans-serif",lineHeight:1.6,marginBottom:24}}>{s.body}</p>
 
         {step===1 && (
-          <div style={{background:"rgba(15,33,46,0.55)",borderRadius:14,padding:"14px",marginBottom:20,border:"1px solid "+(s.color)+"22"}}>
+          <div style={{background:"rgba(10,22,40,0.55)",borderRadius:14,padding:"14px",marginBottom:20,border:"1px solid "+(s.color)+"22"}}>
             {[["Sim profits earned","$1,840.00"],["Transfer cap","$5,000"],["Starting balance","$1,840.00"],["Profit split","90%"]].map(([l,v])=>(
               <div key={l} style={{display:"flex",justifyContent:"space-between",marginBottom:6}}>
                 <span style={{color:"rgba(255,255,255,0.22)",fontSize:12,fontFamily:"'Inter',sans-serif"}}>{l}</span>
@@ -9546,7 +9553,7 @@ function PropBreachScreen({ acct, tier, onReset, onClose }) {
   const [showPayment, setShowPayment] = useState(false);
 
   return showPayment ? (
-    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0F212E",display:"flex",flexDirection:"column"}}>
+    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0A1628",display:"flex",flexDirection:"column"}}>
       <div style={{display:"flex",alignItems:"center",gap:12,padding:"14px 16px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
         <button onClick={()=>setShowPayment(false)} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
           <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
@@ -9564,7 +9571,7 @@ function PropBreachScreen({ acct, tier, onReset, onClose }) {
       </div>
     </div>
   ) : (
-    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0F212E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
+    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0A1628",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
       <div style={{fontSize:64,marginBottom:16}}>💥</div>
       <h2 style={{color:"#f93d3d",fontSize:26,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8,textAlign:"center"}}>Account Breached</h2>
       <p style={{color:"rgba(255,255,255,0.4)",fontSize:14,fontFamily:"'Inter',sans-serif",textAlign:"center",marginBottom:32,lineHeight:1.6}}>
@@ -9589,7 +9596,7 @@ function PropBreachScreen({ acct, tier, onReset, onClose }) {
         ))}
       </div>
 
-      <button onClick={()=>setShowPayment(true)} style={{width:"100%",maxWidth:340,height:52,borderRadius:14,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer",marginBottom:12,position:"relative"}}>
+      <button onClick={()=>setShowPayment(true)} style={{width:"100%",maxWidth:340,height:52,borderRadius:14,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer",marginBottom:12,position:"relative"}}>
         {resetDiscount && <span style={{position:"absolute",top:-10,right:12,background:"#F4C430",color:"#000",fontSize:10,fontWeight:900,borderRadius:99,padding:"2px 8px"}}>20% OFF</span>}
         Reset Challenge — ${resetFee}
         {resetDiscount && <span style={{fontSize:11,opacity:0.7,marginLeft:6,textDecoration:"line-through"}}>${tier?.price}</span>}
@@ -9660,9 +9667,9 @@ function PaymentModal({ amount, description, buttonLabel="Pay Now", onSuccess, o
   if (step === "success") return (
     <div style={{padding:"40px 24px",textAlign:"center"}}>
       <div style={{fontSize:56,marginBottom:16}}>✅</div>
-      <div style={{color:"#1fbb7b",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8}}>Payment Successful</div>
+      <div style={{color:"#3B82F6",fontSize:20,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8}}>Payment Successful</div>
       <div style={{color:"rgba(255,255,255,0.4)",fontSize:13,fontFamily:"'Inter',sans-serif",marginBottom:28}}>${amount.toFixed(2)} charged successfully</div>
-      <button onClick={onSuccess} style={{width:"100%",height:50,borderRadius:14,background:"#1fbb7b",border:"none",color:"#fff",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>
+      <button onClick={onSuccess} style={{width:"100%",height:50,borderRadius:14,background:"#3B82F6",border:"none",color:"#fff",fontSize:15,fontWeight:700,fontFamily:"'Inter',sans-serif",cursor:"pointer"}}>
         Continue →
       </button>
     </div>
@@ -9671,7 +9678,7 @@ function PaymentModal({ amount, description, buttonLabel="Pay Now", onSuccess, o
   return (
     <div>
       {/* Order summary */}
-      <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(31,187,123,0.2)",borderRadius:14,padding:"14px 16px",marginBottom:20}}>
+      <div style={{background:"rgba(20,158,99,0.08)",border:"1px solid rgba(59,130,246,0.2)",borderRadius:14,padding:"14px 16px",marginBottom:20}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <span style={{color:"rgba(255,255,255,0.5)",fontSize:13,fontFamily:"'Inter',sans-serif"}}>{description}</span>
           <span style={{color:"#F4C430",fontSize:18,fontWeight:900,fontFamily:"'Inter',sans-serif"}}>${amount.toFixed(2)}</span>
@@ -9723,7 +9730,7 @@ function PropPassScreen({ acct, tier, onActivate, onClose }) {
   const [showPayment, setShowPayment] = useState(false);
 
   return showPayment ? (
-    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0F212E",display:"flex",flexDirection:"column"}}>
+    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0A1628",display:"flex",flexDirection:"column"}}>
       <div style={{display:"flex",alignItems:"center",gap:12,padding:"14px 16px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
         <button onClick={()=>setShowPayment(false)} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
           <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
@@ -9741,7 +9748,7 @@ function PropPassScreen({ acct, tier, onActivate, onClose }) {
       </div>
     </div>
   ) : (
-    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0F212E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
+    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0A1628",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
       <div style={{fontSize:64,marginBottom:16,animation:"pulse 1.5s infinite"}}>🏆</div>
       <h2 style={{color:"#F4C430",fontSize:26,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8,textAlign:"center"}}>Challenge Passed!</h2>
       <p style={{color:"rgba(255,255,255,0.5)",fontSize:14,fontFamily:"'Inter',sans-serif",textAlign:"center",marginBottom:32,lineHeight:1.6}}>
@@ -9787,7 +9794,7 @@ function PropRebillScreen({ acct, tier, onRebill, onClose }) {
   const [showPayment, setShowPayment] = useState(false);
 
   return showPayment ? (
-    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0F212E",display:"flex",flexDirection:"column"}}>
+    <div style={{position:"fixed",inset:0,zIndex:401,background:"#0A1628",display:"flex",flexDirection:"column"}}>
       <div style={{display:"flex",alignItems:"center",gap:12,padding:"14px 16px",borderBottom:"1px solid rgba(255,255,255,0.08)"}}>
         <button onClick={()=>setShowPayment(false)} style={{width:36,height:36,borderRadius:12,background:"rgba(255,255,255,0.12)",border:"1px solid rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",cursor:"pointer"}}>
           <span style={{fontSize:20,lineHeight:1,color:"#FFFFFF",fontWeight:300}}>‹</span>
@@ -9805,7 +9812,7 @@ function PropRebillScreen({ acct, tier, onRebill, onClose }) {
       </div>
     </div>
   ) : (
-    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0F212E",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
+    <div style={{position:"fixed",inset:0,zIndex:400,background:"#0A1628",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",padding:24}}>
       <div style={{fontSize:64,marginBottom:16}}>📅</div>
       <h2 style={{color:"#F4C430",fontSize:24,fontWeight:900,fontFamily:"'Inter',sans-serif",marginBottom:8,textAlign:"center"}}>28-Day Window Ended</h2>
       <p style={{color:"rgba(255,255,255,0.4)",fontSize:14,fontFamily:"'Inter',sans-serif",textAlign:"center",marginBottom:32,lineHeight:1.6}}>
@@ -10333,7 +10340,7 @@ export default function App() {
 
   // Show loading while checking auth
   if (authLoading) return (
-    <div style={{position:"fixed",inset:0,background:"#0F212E",display:"flex",alignItems:"center",justifyContent:"center"}}>
+    <div style={{position:"fixed",inset:0,background:"#0A1628",display:"flex",alignItems:"center",justifyContent:"center"}}>
       <div style={{color:"rgba(255,255,255,0.3)",fontSize:14,fontFamily:"'Inter',sans-serif"}}>Loading…</div>
     </div>
   );
@@ -10345,7 +10352,7 @@ export default function App() {
   if (!onboarded) return (
     <>
       <style>{GLOBAL_CSS}</style>
-      <div style={{width:"100vw",height:"100vh",maxWidth:430,margin:"0 auto",background:"#0F212E"}}>
+      <div style={{width:"100vw",height:"100vh",maxWidth:430,margin:"0 auto",background:"#0A1628"}}>
         <OnboardingPage onDone={()=>setOnboarded(true)}/>
       </div>
     </>
@@ -10422,26 +10429,34 @@ export default function App() {
         {/* LIVE TICKER — markets only (feed is full-screen, no ticker needed there) */}
         {tab==="markets" && !overlay && <LiveTicker votes={votes} onVote={handleVote} balance={balance} watchlist={watchlist} onToggleWatch={handleToggleWatch}/>}
 
-        {/* TOP UTILITY BAR — hidden on home tab so Feed is full-screen */}
+        {/* TOP UTILITY BAR — Polymarket style header */}
         {tab!=="home" && (
-          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px 9px",background:"#0F212E",borderBottom:"1px solid rgba(255,255,255,0.07)",flexShrink:0,zIndex:250}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",padding:"10px 14px 10px",background:"#070F1E",borderBottom:"1px solid #1E3A5F",flexShrink:0,zIndex:250}}>
             {/* Logo + brand */}
             <div style={{display:"flex",alignItems:"center",gap:8,flexShrink:0}}>
-              <div style={{width:28,height:28,background:"linear-gradient(135deg,#1fbb7b,#149e63)",borderRadius:8,display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,boxShadow:"0 2px 8px rgba(31,187,123,0.4)"}}>⚡</div>
-              <span style={{color:"#FFFFFF",fontWeight:800,fontSize:15,fontFamily:"'Inter',sans-serif",letterSpacing:-0.3}}>PredictSwipe</span>
+              <div style={{width:30,height:30,background:"linear-gradient(135deg,#3B82F6,#1D6ED8)",borderRadius:10,display:"flex",alignItems:"center",justifyContent:"center",fontSize:15,boxShadow:"0 2px 12px rgba(59,130,246,0.5)"}}>⚡</div>
+              <span style={{color:"#FFFFFF",fontWeight:800,fontSize:16,fontFamily:"'Inter',sans-serif",letterSpacing:-0.5}}>PredictSwipe</span>
             </div>
-            {/* Right side */}
+            {/* Right side — Polymarket style: notif + outlined wallet + filled blue search */}
             <div style={{display:"flex",gap:6,alignItems:"center",minWidth:0}}>
-              <button onClick={()=>setShowSearch(true)} style={{background:"#213743",border:"1px solid rgba(255,255,255,0.08)",borderRadius:8,padding:"6px 10px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,height:32}}>
-                <span style={{fontSize:14,lineHeight:1,color:"rgba(255,255,255,0.7)"}}>⌕</span>
+              <button onClick={()=>{setShowNotifs(true);setNotifCount(0);}} style={{background:"transparent",border:"1px solid #1E3A5F",borderRadius:8,padding:"6px 8px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",flexShrink:0,height:34,width:34}}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke="rgba(255,255,255,0.65)" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                {notifCount>0&&<span style={{position:"absolute",top:-3,right:-3,width:15,height:15,borderRadius:"50%",background:"#EF4444",color:"#fff",fontSize:8,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,border:"2px solid #070F1E"}}>{notifCount}</span>}
               </button>
-              <button onClick={()=>{setShowNotifs(true);setNotifCount(0);}} style={{background:"#213743",border:"1px solid rgba(255,255,255,0.08)",borderRadius:8,padding:"6px 10px",cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",position:"relative",flexShrink:0,height:32}}>
-                <span style={{fontSize:13,lineHeight:1}}>🔔</span>
-                {notifCount>0&&<span style={{position:"absolute",top:-4,right:-4,width:16,height:16,borderRadius:"50%",background:"#f93d3d",color:"#fff",fontSize:8,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:800,border:"2px solid #0F212E"}}>{notifCount}</span>}
+              <button onClick={()=>setShowWallet(true)} style={{background:"transparent",border:"1px solid #1E3A5F",borderRadius:8,padding:"6px 10px",cursor:"pointer",display:"flex",alignItems:"center",gap:4,flexShrink:0,height:34}}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 6H3a2 2 0 00-2 2v8a2 2 0 002 2h18a2 2 0 002-2V8a2 2 0 00-2-2z" stroke="rgba(255,255,255,0.55)" strokeWidth="1.7"/>
+                  <circle cx="17" cy="12" r="1.5" fill="rgba(255,255,255,0.55)"/>
+                </svg>
+                <span style={{color:"rgba(255,255,255,0.85)",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap"}}>${balance.toFixed(2)}</span>
               </button>
-              <button onClick={()=>setShowWallet(true)} style={{background:"#213743",border:"1px solid rgba(31,187,123,0.3)",borderRadius:8,padding:"6px 11px",cursor:"pointer",display:"flex",alignItems:"center",gap:5,flexShrink:0,height:32}}>
-                <div style={{width:6,height:6,borderRadius:"50%",background:"#1fbb7b",boxShadow:"0 0 6px rgba(31,187,123,0.8)",flexShrink:0}}/>
-                <span style={{color:"#1fbb7b",fontSize:12,fontWeight:700,fontFamily:"'Inter',sans-serif",whiteSpace:"nowrap"}}>${balance.toFixed(2)}</span>
+              <button onClick={()=>setShowSearch(true)} style={{background:"#3B82F6",border:"none",borderRadius:8,padding:"6px 10px",cursor:"pointer",display:"flex",alignItems:"center",gap:4,flexShrink:0,height:34,boxShadow:"0 2px 8px rgba(59,130,246,0.4)"}}>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+                  <circle cx="11" cy="11" r="7" stroke="#fff" strokeWidth="2"/>
+                  <path d="M21 21l-4.35-4.35" stroke="#fff" strokeWidth="2" strokeLinecap="round"/>
+                </svg>
               </button>
             </div>
           </div>
@@ -10486,33 +10501,40 @@ export default function App() {
           {tab==="create"    && <CreatePageV2 onClose={()=>setTab("home")} onPublish={()=>{ setToast({icon:"🚀",label:"Market Published!",desc:"Your prediction is now live"}); setTab("home"); }}/>}
         </div>
 
-        {/* BOTTOM NAV — SwiftUI SF Symbol style */}
-        {/* BOTTOM NAV — Stake style: deep navy, teal active accent */}
-        <div style={{display:"flex",background:"#0F212E",borderTop:"1px solid rgba(255,255,255,0.07)",flexShrink:0,padding:"5px 0 18px",position:"relative",zIndex:200}}>
+        {/* BOTTOM NAV — Polymarket style: dark footer, blue active accent */}
+        <div style={{display:"flex",background:"#070F1E",borderTop:"1px solid #1E3A5F",flexShrink:0,padding:"6px 0 20px",position:"relative",zIndex:200}}>
           {[
             { id:"home", label:"Home",
-              icon: (on) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z" stroke={on?"#1fbb7b":"rgba(255,255,255,0.38)"} strokeWidth="1.6" strokeLinejoin="round" fill={on?"rgba(31,187,123,0.15)":"none"}/>
-                <path d="M9 21V13h6v8" stroke={on?"#1fbb7b":"rgba(255,255,255,0.38)"} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              icon: (on) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H5a1 1 0 01-1-1V9.5z" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} strokeLinejoin="round" fill={on?"rgba(59,130,246,0.18)":"none"}/>
+                <path d="M9 21V13h6v8" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             },
             { id:"markets", label:"Markets",
-              icon: (on) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" stroke={on?"#1fbb7b":"rgba(255,255,255,0.38)"} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+              icon: (on) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="3" width="7" height="7" rx="1.5" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} fill={on?"rgba(59,130,246,0.18)":"none"}/>
+                <rect x="14" y="3" width="7" height="7" rx="1.5" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} fill={on?"rgba(59,130,246,0.18)":"none"}/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} fill={on?"rgba(59,130,246,0.18)":"none"}/>
+                <rect x="14" y="14" width="7" height="7" rx="1.5" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} fill={on?"rgba(59,130,246,0.18)":"none"}/>
               </svg>
             },
             { id:"prop", label: anyFunded?"FUNDED":(propAccounts||[]).length>0?"ACTIVE":"Prop",
               isProp: true,
-              icon: (on) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="6" width="18" height="13" rx="2" stroke="#F4C430" strokeWidth="1.6" fill="rgba(244,196,48,0.1)"/>
-                <path d="M3 10h18" stroke="#F4C430" strokeWidth="1.3" strokeDasharray="2 2"/>
-                <text x="12" y="18" textAnchor="middle" fontSize="7" fontWeight="800" fontFamily="'Inter',sans-serif" fill="#F4C430">PROP</text>
+              icon: (on) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <rect x="3" y="6" width="18" height="13" rx="2.5" stroke="#F4C430" strokeWidth="1.8" fill="rgba(244,196,48,0.1)"/>
+                <path d="M3 10.5h18" stroke="#F4C430" strokeWidth="1.2" strokeDasharray="2 2"/>
+                <text x="12" y="18.5" textAnchor="middle" fontSize="7" fontWeight="800" fontFamily="'Inter',sans-serif" fill="#F4C430">PROP</text>
+              </svg>
+            },
+            { id:"ranking", label:"Ranking",
+              icon: (on) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d="M18 20V10M12 20V4M6 20v-6" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             },
             { id:"profile", label:"Profile",
-              icon: (on) => <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="8" r="4" stroke={on?"#1fbb7b":"rgba(255,255,255,0.38)"} strokeWidth="1.6" fill={on?"rgba(31,187,123,0.15)":"none"}/>
-                <path d="M4 20c0-3.86 3.58-7 8-7s8 3.14 8 7" stroke={on?"#1fbb7b":"rgba(255,255,255,0.38)"} strokeWidth="1.6" strokeLinecap="round"/>
+              icon: (on) => <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="8" r="4" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} fill={on?"rgba(59,130,246,0.18)":"none"}/>
+                <path d="M4 20c0-3.86 3.58-7 8-7s8 3.14 8 7" stroke={on?"#3B82F6":"rgba(255,255,255,0.35)"} strokeWidth={on?2:1.5} strokeLinecap="round"/>
               </svg>
             },
           ].map(n=>(
@@ -10534,20 +10556,20 @@ export default function App() {
                   setTab(n.id);
                 }
               }}
-              style={{flex:1,background:"transparent",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,padding:"6px 0",position:"relative",transition:"opacity 0.15s"}}>
-              {/* Active tab indicator bar at top */}
+              style={{flex:1,background:"transparent",border:"none",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,padding:"8px 0 0",position:"relative",transition:"opacity 0.15s"}}>
+              {/* Active glow dot at top */}
               {(!n.isProp && tab===n.id) && (
-                <div style={{position:"absolute",top:0,left:"30%",right:"30%",height:2,borderRadius:"0 0 2px 2px",background:"#1fbb7b",boxShadow:"0 0 8px rgba(31,187,123,0.6)"}}/>
+                <div style={{position:"absolute",top:0,left:"50%",transform:"translateX(-50%)",width:20,height:3,borderRadius:"0 0 4px 4px",background:"#3B82F6",boxShadow:"0 2px 8px rgba(59,130,246,0.7)"}}/>
               )}
               {n.icon(n.isProp ? true : tab===n.id)}
               <span style={{
-                fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:0.5,transition:"color 0.2s",textTransform:"uppercase",
-                fontWeight: n.isProp ? 800 : tab===n.id ? 700 : 500,
-                color: n.isProp ? "#F4C430" : tab===n.id ? "#1fbb7b" : "rgba(255,255,255,0.38)",
+                fontSize:9,fontFamily:"'Inter',sans-serif",letterSpacing:0.4,transition:"color 0.2s",
+                fontWeight: n.isProp ? 800 : tab===n.id ? 700 : 400,
+                color: n.isProp ? "#F4C430" : tab===n.id ? "#3B82F6" : "rgba(255,255,255,0.35)",
               }}>{n.label}</span>
-              {n.id==="profile"&&notifCount>0&&tab!=="profile"&&<div style={{position:"absolute",top:4,right:"20%",width:7,height:7,borderRadius:"50%",background:"#f93d3d",border:"1.5px solid #0F212E"}}/>}
-              {n.id==="markets"&&watchlist.length>0&&<div style={{position:"absolute",top:4,right:"16%",width:7,height:7,borderRadius:"50%",background:"#1fbb7b",border:"1.5px solid #0F212E"}}/>}
-              {n.isProp&&anyFunded&&<div style={{position:"absolute",top:4,right:"20%",width:7,height:7,borderRadius:"50%",background:"#1fbb7b",border:"1.5px solid #0F212E"}}/>}
+              {n.id==="profile"&&notifCount>0&&tab!=="profile"&&<div style={{position:"absolute",top:6,right:"18%",width:7,height:7,borderRadius:"50%",background:"#EF4444",border:"2px solid #070F1E"}}/>}
+              {n.id==="markets"&&watchlist.length>0&&<div style={{position:"absolute",top:6,right:"14%",width:7,height:7,borderRadius:"50%",background:"#3B82F6",border:"2px solid #070F1E"}}/>}
+              {n.isProp&&anyFunded&&<div style={{position:"absolute",top:6,right:"18%",width:7,height:7,borderRadius:"50%",background:"#22C55E",border:"2px solid #070F1E"}}/>}
             </button>
           ))}
         </div>
@@ -10562,13 +10584,13 @@ export default function App() {
               </button>
               <button onClick={()=>{setShowNotifs(true);setNotifCount(0);}} style={{background:"rgba(0,0,0,0.6)",backdropFilter:"blur(10px)",border:"1px solid rgba(255,255,255,0.1)",borderRadius:20,width:30,height:30,cursor:"pointer",display:"flex",alignItems:"center",justifyContent:"center",position:"relative"}}>
                 <span style={{fontSize:12,lineHeight:1}}>🔔</span>
-                {notifCount>0&&<span style={{position:"absolute",top:-3,right:-3,width:14,height:14,borderRadius:"50%",background:"#f93d3d",color:"#fff",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,border:"1px solid #0F212E"}}>{notifCount}</span>}
+                {notifCount>0&&<span style={{position:"absolute",top:-3,right:-3,width:14,height:14,borderRadius:"50%",background:"#f93d3d",color:"#fff",fontSize:7,display:"flex",alignItems:"center",justifyContent:"center",fontWeight:700,border:"1px solid #0A1628"}}>{notifCount}</span>}
               </button>
             </div>}
 
             {overlay==="feed" && (
               <div style={{flex:1,overflow:"hidden",position:"relative"}}>
-                <button onClick={()=>setShowFeed(false)} style={{position:"absolute",top:16,left:16,zIndex:100,background:"rgba(15,33,46,0.72)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,color:"#FFFFFF",fontSize:13,padding:"6px 14px",cursor:"pointer",backdropFilter:"blur(4px)",fontFamily:"'Inter',sans-serif"}}>← Back</button>
+                <button onClick={()=>setShowFeed(false)} style={{position:"absolute",top:16,left:16,zIndex:100,background:"rgba(10,22,40,0.72)",border:"1px solid rgba(255,255,255,0.2)",borderRadius:20,color:"#FFFFFF",fontSize:13,padding:"6px 14px",cursor:"pointer",backdropFilter:"blur(4px)",fontFamily:"'Inter',sans-serif"}}>← Back</button>
                 <Feed votes={votes} onVote={handleVote} following={following} onFollow={handleFollow} balance={balance} watchlist={watchlist} onToggleWatch={handleToggleWatch}/>
               </div>
             )}
@@ -10881,24 +10903,25 @@ export default function App() {
 }
 
 const GLOBAL_CSS=`
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
-  body{background:#0F212E;color:#FFFFFF;font-family:'Inter',sans-serif;overflow:hidden;}
+  body{background:#0A1628;color:#FFFFFF;font-family:'Inter',sans-serif;overflow:hidden;}
   ::-webkit-scrollbar{width:0;height:0;}
-  button{transition:transform 0.12s,background 0.15s,box-shadow 0.15s;}
-  button:active{transform:scale(0.93);}
+  button{transition:transform 0.12s,background 0.18s,box-shadow 0.18s,opacity 0.18s;}
+  button:active{transform:scale(0.95);}
   input,textarea,select{color-scheme:dark;}
-  input[type=range]{height:4px;cursor:pointer;accent-color:#1fbb7b;}
+  input[type=range]{height:4px;cursor:pointer;accent-color:#3B82F6;}
   img{-webkit-user-drag:none;}
-  ::placeholder{color:rgba(255,255,255,0.3);}
-  @keyframes stakeGlow{0%,100%{box-shadow:0 0 0 0 rgba(31,187,123,0);}50%{box-shadow:0 0 16px 4px rgba(31,187,123,0.3);}}
-  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  ::placeholder{color:rgba(255,255,255,0.25);}
+  @keyframes polyGlow{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}50%{box-shadow:0 0 20px 6px rgba(59,130,246,0.25);}}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
   @keyframes popIn{from{transform:scale(0.3);opacity:0}to{transform:scale(1);opacity:1}}
   @keyframes slideDown{from{transform:translateX(-50%) translateY(-120%);opacity:0}to{transform:translateX(-50%) translateY(0);opacity:1}}
-  @keyframes propGlow{0%,80%,100%{box-shadow:0 0 0 0 rgba(244,196,48,0);}40%{box-shadow:0 0 18px 6px rgba(244,196,48,0.25);}}
+  @keyframes propGlow{0%,80%,100%{box-shadow:0 0 0 0 rgba(244,196,48,0);}40%{box-shadow:0 0 18px 6px rgba(244,196,48,0.2);}}
   @keyframes flashSweep{0%{opacity:0;transform:translateX(-100%)}20%{opacity:1}80%{opacity:0.6}100%{opacity:0;transform:translateX(100%)}}
-  @keyframes dangerpulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(249,61,61,0.7);}50%{opacity:0.75;box-shadow:0 0 0 8px rgba(249,61,61,0);}100%{opacity:1;box-shadow:0 0 0 0 rgba(249,61,61,0);}}
+  @keyframes dangerpulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,0.7);}50%{opacity:0.75;box-shadow:0 0 0 8px rgba(239,68,68,0);}100%{opacity:1;box-shadow:0 0 0 0 rgba(239,68,68,0);}}
+  @keyframes blueGlow{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}50%{box-shadow:0 0 16px 4px rgba(59,130,246,0.3);}}
 `;
 
 const GLOBAL_CSS_LIGHT=`
